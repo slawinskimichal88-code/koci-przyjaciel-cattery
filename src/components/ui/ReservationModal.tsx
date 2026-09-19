@@ -43,10 +43,11 @@ export default function ReservationModal({
     setErrorMsg("");
 
     try {
-      const res = await fetch("/api/reservation", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          type: "reservation",
           name,
           email,
           phone,
