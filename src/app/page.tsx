@@ -4,9 +4,9 @@ import React, { useState } from "react";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
-import KittenReservationBar from "@/components/sections/KittenReservationBar";
 import EnclosureSection from "@/components/sections/EnclosureSection";
 import AboutSection from "@/components/sections/AboutSection";
+import ScaleComparisonSection from "@/components/sections/ScaleComparisonSection";
 import KittensSection from "@/components/sections/KittensSection";
 import KnowledgeBaseTeaser from "@/components/sections/KnowledgeBaseTeaser";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -51,20 +51,17 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ② PASEK REZERWACJI KOCIĄT: Bezpośrednia widoczność statusu hodowli i miniatur kociąt */}
-        <KittenReservationBar
-          lang={lang}
-          onOpenReservation={(kittenName) => handleOpenReservation(kittenName)}
-        />
-
-        {/* ③ WYBIEG & WOLIERA: Flagowy scrollytelling Apple iPhone 16 Pro (pnie 3.2m, zero klatek) */}
+        {/* ② WYBIEG & WOLIERA: Flagowy scrollytelling Apple iPhone 16 Pro (pnie 3.2m, zero klatek) */}
         <EnclosureSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ④ O HODOWLI: Domowa filozofia, życie w salonie, FIFe / FPL */}
+        {/* ③ O HODOWLI: Domowa filozofia, życie w salonie, FIFe / FPL */}
         <AboutSection lang={lang} />
+
+        {/* ④ PORÓWNANIE KOTY VS PSY: Interaktywna skala wielkości, anatomia, rysiowe uszy, kuweta vs spacery */}
+        <ScaleComparisonSection lang={lang} />
 
         {/* ⑤ KOCIĘTA: Aktualnie dostępne kocięta do rezerwacji z odnośnikiem do pełnej zakładki /kocieta */}
         <KittensSection

@@ -240,18 +240,18 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={badgeRef}
-          className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+          className="absolute inset-0 pt-24 sm:pt-28 md:pt-32 pb-16 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
           style={{ opacity: 1, transform: "translateY(0px) scale(1)", willChange: "opacity, transform" }}
         >
           <div className="flex flex-col items-center pointer-events-auto animate-hero-logo">
             
-            {/* Monumentalne logo z poświatą */}
-            <div className="relative mb-6 sm:mb-8 group">
+            {/* Monumentalne logo z poświatą - z marginesem bezpieczeństwa pod menubarem */}
+            <div className="relative mb-5 sm:mb-6 group">
               {/* Dynamiczna łuna ambient glow */}
-              <div className="absolute -inset-8 bg-gradient-to-tr from-white/10 via-white/25 to-transparent rounded-full blur-3xl opacity-70 animate-pulse pointer-events-none" />
+              <div className="absolute -inset-6 bg-gradient-to-tr from-white/10 via-white/25 to-transparent rounded-full blur-3xl opacity-70 animate-pulse pointer-events-none" />
               
               {/* Główny pierścień z kryształowym logo */}
-              <div className="relative w-44 h-44 sm:w-56 sm:h-56 md:w-68 md:h-68 lg:w-76 lg:h-76 rounded-full p-2 bg-gradient-to-b from-white/35 via-white/10 to-transparent shadow-[0_0_80px_rgba(255,255,255,0.22)] backdrop-blur-md transition-transform duration-700 hover:scale-105">
+              <div className="relative w-36 h-36 sm:w-44 sm:h-44 md:w-52 md:h-52 lg:w-60 lg:h-60 rounded-full p-2 bg-gradient-to-b from-white/35 via-white/10 to-transparent shadow-[0_0_80px_rgba(255,255,255,0.22)] backdrop-blur-md transition-transform duration-700 hover:scale-105">
                 <div className="relative w-full h-full rounded-full overflow-hidden border border-white/50 shadow-2xl bg-black">
                   <Image
                     src="/logo.png"

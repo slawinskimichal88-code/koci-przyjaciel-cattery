@@ -19,7 +19,7 @@ export default function Footer({ lang = "PL" }: FooterProps) {
       items: [
         { label: lang === "PL" ? "Strona Główna" : "Home", href: "/" },
         { label: lang === "PL" ? "Kocięta & Mioty" : "Kittens & Litters", href: "/kocieta" },
-        { label: lang === "PL" ? "Wybieg & Dom" : "Enclosure & Home", href: "/#wybieg" },
+        { label: lang === "PL" ? "Baza Wiedzy" : "Knowledge Base", href: "/baza-wiedzy" },
         { label: lang === "PL" ? "O hodowli" : "About Us", href: "/#o-nas" },
         { label: lang === "PL" ? "Kontakt & Wizyty" : "Contact & Visit", href: "/kontakt" },
       ],

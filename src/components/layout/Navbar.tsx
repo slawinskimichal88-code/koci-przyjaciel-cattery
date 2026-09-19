@@ -27,7 +27,6 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
   const navItems = [
     { href: "/",            label: lang === "PL" ? "Główna"       : "Home"        },
     { href: "/kocieta",     label: lang === "PL" ? "Kocięta"      : "Kittens"     },
-    { href: "/#wybieg",     label: lang === "PL" ? "Wybieg"       : "Enclosure"   },
     { href: "/baza-wiedzy", label: lang === "PL" ? "Baza wiedzy"  : "Knowledge"   },
     { href: "/#o-nas",      label: lang === "PL" ? "O nas"        : "About"       },
     { href: "/kontakt",     label: lang === "PL" ? "Kontakt"      : "Contact"     },
@@ -44,32 +43,32 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "py-2 sm:py-3 bg-black/85 backdrop-blur-2xl border-b border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.8)]"
-            : "py-3 sm:py-5 bg-gradient-to-b from-black/90 via-black/40 to-transparent"
+            ? "py-2 sm:py-2.5 bg-black/90 backdrop-blur-2xl border-b border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.85)]"
+            : "py-3 sm:py-4 bg-gradient-to-b from-black/95 via-black/50 to-transparent"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
 
-          {/* Logo & Nazwa */}
-          <Link href="/" className="flex items-center gap-3 group shrink-0">
+          {/* Logo & Nazwa - Wyraźnie powiększone i wyraziste */}
+          <Link href="/" className="flex items-center gap-3.5 group shrink-0">
             <div
-              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:border-white transition-all duration-300 shrink-0"
-              style={{ position: "relative", width: 40, height: 40 }}
+              className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.25)] group-hover:border-white group-hover:shadow-[0_0_25px_rgba(255,255,255,0.45)] transition-all duration-300 shrink-0 bg-black"
+              style={{ position: "relative", width: 56, height: 56 }}
             >
               <Image
                 src="/logo.png"
                 alt="Koci Przyjaciel PL"
-                width={40}
-                height={40}
+                width={56}
+                height={56}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 priority
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-base sm:text-lg font-heading font-medium text-white group-hover:text-white/90 transition-colors tracking-wide leading-tight whitespace-nowrap">
-                Koci Przyjaciel <span className="text-xs text-amber-300 font-serif font-light italic">*PL</span>
+              <span className="text-lg sm:text-xl font-heading font-semibold text-white group-hover:text-amber-200 transition-colors tracking-wide leading-tight whitespace-nowrap">
+                Koci Przyjaciel <span className="text-xs sm:text-sm text-amber-300 font-serif font-light italic">*PL</span>
               </span>
-              <span className="text-[10px] font-ui uppercase tracking-[0.25em] text-zinc-400 leading-none">
+              <span className="text-[11px] font-ui uppercase tracking-[0.25em] text-zinc-300 font-medium leading-none mt-1">
                 FIFe · FPL · Wrocław
               </span>
             </div>
