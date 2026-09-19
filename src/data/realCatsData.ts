@@ -12,6 +12,7 @@ export interface CatPhoto {
 
 export const REAL_LOGO = '/logo.webp';
 export const REAL_FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=100063684877717';
+export const REAL_INSTAGRAM_URL = 'https://www.instagram.com/koci_przyjaciel_pl'; // Placeholder gotowy na docelowy link
 export const REAL_PHONE = '698 837 525';
 export const REAL_PHONE_RAW = '+48698837525';
 export const REAL_LOCATION = 'Wrocław i okolice, Dolny Śląsk';

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { REAL_FACEBOOK_URL } from "@/data/realCatsData";
 
 interface AboutSectionProps {
@@ -59,23 +60,32 @@ export default function AboutSection({ lang }: AboutSectionProps) {
                 ? "Nasze koty żyją z nami — w salonie, z dziećmi, z psem. Zero klatek. Zero boksów. Posiadamy wyłącznie własne reproduktory, co gwarantuje 100% kontrolę genetyczną."
                 : "Our cats live freely in our home — no cages, no pens. With children, with our dog. We own our own studs, guaranteeing full genetic control."}
             </p>
-            <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-ui font-semibold text-black/50 hover:text-black transition-colors tracking-wider uppercase"
-            >
-              <span>Facebook</span>
-              <span>→</span>
-            </a>
+            <div className="pt-2 flex flex-wrap items-center gap-4">
+              <Link
+                href="/o-nas"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-black text-white text-xs font-ui font-semibold uppercase tracking-wider hover:bg-black/80 transition-all shadow-md"
+              >
+                <span>{lang === "PL" ? "Poznaj naszą historię" : "Explore Our Story"}</span>
+                <span>→</span>
+              </Link>
+              <a
+                href={REAL_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-black/15 text-xs font-ui font-semibold text-black/70 hover:text-black hover:border-black transition-all tracking-wider uppercase"
+              >
+                <span>Facebook (26k+)</span>
+                <span>↗</span>
+              </a>
+            </div>
           </div>
 
           {/* Stats — duże liczby jak Apple */}
           <div className="reveal reveal-delay-2 space-y-10">
             {[
-              { num: "25 395", label: lang === "PL" ? "Polubień na Facebooku" : "Facebook Followers" },
-              { num: "100+", label: lang === "PL" ? "Kociąt w dobrych domach" : "Kittens in loving homes" },
-              { num: "10+", label: lang === "PL" ? "Lat doświadczenia" : "Years of experience" },
+              { num: "26 000+", label: lang === "PL" ? "Społeczność na Facebooku" : "Facebook Community" },
+              { num: "100+", label: lang === "PL" ? "Kociąt w kochających domach" : "Kittens in loving homes" },
+              { num: "10+", label: lang === "PL" ? "Lat doświadczenia felinologicznego" : "Years of experience" },
             ].map((stat, i) => (
               <div key={i} className={`reveal reveal-delay-${i + 1} border-t border-black/10 pt-6`}>
                 <div

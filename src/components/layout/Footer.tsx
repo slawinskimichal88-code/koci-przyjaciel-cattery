@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_LOCATION } from "@/data/realCatsData";
+import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_INSTAGRAM_URL, REAL_LOCATION } from "@/data/realCatsData";
 
 interface FooterProps {
   lang?: "PL" | "EN";
@@ -18,9 +18,9 @@ export default function Footer({ lang = "PL" }: FooterProps) {
       title: lang === "PL" ? "Główne Zakładki" : "Main Navigation",
       items: [
         { label: lang === "PL" ? "Strona Główna" : "Home", href: "/" },
+        { label: lang === "PL" ? "O hodowli" : "About Us", href: "/o-nas" },
         { label: lang === "PL" ? "Kocięta & Mioty" : "Kittens & Litters", href: "/kocieta" },
         { label: lang === "PL" ? "Baza Wiedzy" : "Knowledge Base", href: "/baza-wiedzy" },
-        { label: lang === "PL" ? "O hodowli" : "About Us", href: "/#o-nas" },
         { label: lang === "PL" ? "Kontakt & Wizyty" : "Contact & Visit", href: "/kontakt" },
       ],
     },
@@ -40,7 +40,8 @@ export default function Footer({ lang = "PL" }: FooterProps) {
         { label: "FIFe / Felis Polonia (FPL)", href: "/kocieta#rodowod" },
         { label: "Badania Laboklin N/N", href: "/baza-wiedzy#zdrowie" },
         { label: "Profilaktyka Echo Doppler", href: "/baza-wiedzy#zdrowie" },
-        { label: "Społeczność Facebook (25k)", href: REAL_FACEBOOK_URL, isExternal: true },
+        { label: "Społeczność Facebook (26k+)", href: REAL_FACEBOOK_URL, isExternal: true },
+        { label: "Instagram @koci_przyjaciel_pl", href: REAL_INSTAGRAM_URL, isExternal: true },
       ],
     },
   ];
@@ -133,9 +134,17 @@ export default function Footer({ lang = "PL" }: FooterProps) {
               href={REAL_FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-zinc-300 hover:text-white transition-colors font-medium"
+              className="text-zinc-300 hover:text-white transition-colors font-medium flex items-center gap-1"
             >
               Facebook ↗
+            </a>
+            <a
+              href={REAL_INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-zinc-300 hover:text-white transition-colors font-medium flex items-center gap-1"
+            >
+              Instagram ↗
             </a>
           </div>
         </div>

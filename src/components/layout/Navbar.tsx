@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Sparkles, Phone } from "lucide-react";
-import { REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
+import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_INSTAGRAM_URL } from "@/data/realCatsData";
 
 interface NavbarProps {
   lang: "PL" | "EN";
@@ -26,16 +27,15 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
 
   const navItems = [
     { href: "/",            label: lang === "PL" ? "Główna"       : "Home"        },
+    { href: "/o-nas",       label: lang === "PL" ? "O nas"        : "About"       },
     { href: "/kocieta",     label: lang === "PL" ? "Kocięta"      : "Kittens"     },
     { href: "/baza-wiedzy", label: lang === "PL" ? "Baza wiedzy"  : "Knowledge"   },
-    { href: "/#o-nas",      label: lang === "PL" ? "O nas"        : "About"       },
     { href: "/kontakt",     label: lang === "PL" ? "Kontakt"      : "Contact"     },
   ];
 
   const isLinkActive = (href: string) => {
     if (href === "/") return pathname === "/";
-    if (href.startsWith("/#")) return false;
-    return pathname.startsWith(href);
+    return pathname === href || pathname.startsWith(href + "/");
   };
 
   return (
@@ -75,14 +75,14 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
           </Link>
 
           {/* Desktop Nav: Wyraziste, nowoczesne linki (14-15px, czytelne, z hover pill) */}
-          <nav className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#161618]/80 backdrop-blur-xl border border-white/10 shadow-inner">
+          <nav className="hidden lg:flex items-center gap-1 px-2.5 py-1.5 rounded-full bg-[#161618]/80 backdrop-blur-xl border border-white/10 shadow-inner">
             {navItems.map((item) => {
               const active = isLinkActive(item.href);
               return (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`relative px-4 py-2 rounded-full text-[14px] font-body transition-all duration-200 whitespace-nowrap ${
+                  className={`relative px-3.5 py-2 rounded-full text-[14px] font-body transition-all duration-200 whitespace-nowrap ${
                     active
                       ? "bg-white text-black font-semibold shadow-sm"
                       : "text-zinc-300 hover:text-white hover:bg-white/10 font-medium"
@@ -94,12 +94,36 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             })}
           </nav>
 
-          {/* Prawa strona: Przełącznik języka + Przycisk Rezerwacji */}
-          <div className="hidden md:flex items-center gap-3 shrink-0">
+          {/* Prawa strona: Social media + Przełącznik języka + Telefon + Rezerwacja */}
+          <div className="hidden md:flex items-center gap-2 sm:gap-3 shrink-0">
+            {/* Social Media Loga (Facebook + Instagram) */}
+            <div className="flex items-center gap-1.5 pr-1 border-r border-white/10">
+              <a
+                href={REAL_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition-all group"
+                aria-label="Facebook Koci Przyjaciel *PL"
+                title="Facebook (26k+ fanów)"
+              >
+                <FacebookIcon className="w-4 h-4 text-[#1877F2] group-hover:scale-110 transition-transform" />
+              </a>
+              <a
+                href={REAL_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition-all group"
+                aria-label="Instagram Koci Przyjaciel *PL"
+                title="Instagram"
+              >
+                <InstagramIcon className="w-4 h-4 text-[#E4405F] group-hover:scale-110 transition-transform" />
+              </a>
+            </div>
+
             {/* Przełącznik języka */}
             <button
               onClick={() => setLang(lang === "PL" ? "EN" : "PL")}
-              className="px-3 py-1.5 rounded-full text-xs font-mono font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 transition-all cursor-pointer"
+              className="px-2.5 py-1.5 rounded-full text-xs font-mono font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 transition-all cursor-pointer"
               title="Zmień język / Change language"
             >
               {lang === "PL" ? "EN" : "PL"}
@@ -108,7 +132,7 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             {/* Szybki telefon */}
             <a
               href={`tel:${REAL_PHONE_RAW}`}
-              className="hidden xl:flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-body font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 transition-all"
+              className="hidden xl:flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-body font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 transition-all"
             >
               <Phone className="w-3.5 h-3.5 text-zinc-400" />
               <span>{REAL_PHONE}</span>
@@ -117,7 +141,7 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             {/* Główny przycisk Rezerwacja z pulsującym statusem */}
             <button
               onClick={onOpenReservation}
-              className="relative group px-5 py-2.5 rounded-full bg-white text-black font-body text-xs sm:text-[13px] font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.35)] transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+              className="relative group px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white text-black font-body text-xs sm:text-[13px] font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.35)] transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
             >
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
               <span>{lang === "PL" ? "Rezerwuj" : "Reserve"}</span>
@@ -192,6 +216,28 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               <Phone className="w-4 h-4 text-zinc-300" />
               <span>{REAL_PHONE}</span>
             </a>
+
+            {/* Social Media Linki w Menu Mobilnym */}
+            <div className="flex items-center justify-center gap-3 pt-2">
+              <a
+                href={REAL_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-body text-zinc-300 hover:text-white"
+              >
+                <FacebookIcon className="w-4 h-4 text-[#1877F2]" />
+                <span>Facebook (26k+)</span>
+              </a>
+              <a
+                href={REAL_INSTAGRAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-white/5 border border-white/10 text-xs font-body text-zinc-300 hover:text-white"
+              >
+                <InstagramIcon className="w-4 h-4 text-[#E4405F]" />
+                <span>Instagram</span>
+              </a>
+            </div>
           </div>
 
         </div>
