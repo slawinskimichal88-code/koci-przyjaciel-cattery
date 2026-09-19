@@ -37,8 +37,8 @@ export default function Footer({ lang = "PL", setLang }: FooterProps) {
 
           {/* Logo + tagline */}
           <div className="flex items-center gap-4">
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-black/10 shrink-0">
-              <Image src={REAL_LOGO} alt="Koci Przyjaciel PL" fill className="object-cover grayscale" />
+            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-black/10 shrink-0" style={{ position: "relative", width: 40, height: 40 }}>
+              <Image src={REAL_LOGO} alt="Koci Przyjaciel PL" width={40} height={40} className="w-full h-full object-cover grayscale" />
             </div>
             <div>
               <p className="text-sm font-heading font-medium text-black">Koci Przyjaciel *PL</p>

@@ -64,8 +64,8 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
 
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group shrink-0">
-            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-white/30 shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300">
-              <Image src="/logo.png" alt="Koci Przyjaciel PL" fill className="object-cover" priority />
+            <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-white/30 shrink-0 shadow-md group-hover:scale-105 transition-transform duration-300" style={{ position: "relative", width: 36, height: 36 }}>
+              <Image src="/logo.png" alt="Koci Przyjaciel PL" width={36} height={36} className="w-full h-full object-cover" priority />
             </div>
             <span className="text-sm sm:text-base font-heading font-medium text-white group-hover:text-white/80 transition-colors tracking-wide whitespace-nowrap">
               Koci Przyjaciel
