@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
@@ -11,34 +11,38 @@ import {
   Heart,
   ShieldCheck,
   Home,
-  Sparkles,
   Award,
   Sun,
   Stethoscope,
-  CheckCircle2,
   ArrowRight,
   Phone,
-  Play,
   Volume2,
   VolumeX,
   Camera,
-  Layers,
   Scale,
-  Activity,
 } from "lucide-react";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL } from "@/data/realCatsData";
-import {
-  BREEDING_QUEENS,
-  BREEDING_STUDS,
-  ENCLOSURE_PHOTOS,
-} from "@/data/breedingCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
+import AnimatedBentoGrid from "@/components/gallery/AnimatedBentoGrid";
 import BentoGallery from "@/components/gallery/BentoGallery";
 
 export default function AboutPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
   const [isReservationOpen, setIsReservationOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<"all" | "hodowla" | "wybieg" | "matki" | "kocury">("all");
   const [isMuted, setIsMuted] = useState(true);
+
+  // Filtered collections of real photos for dedicated sections
+  const wybiegPhotos = useMemo(() => {
+    return ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg");
+  }, []);
+
+  const matkiPhotos = useMemo(() => {
+    return ALL_AGA_PHOTOS.filter((p) => p.category === "matki");
+  }, []);
+
+  const kocuryPhotos = useMemo(() => {
+    return ALL_AGA_PHOTOS.filter((p) => p.category === "kocury");
+  }, []);
 
   const pillars = [
     {
@@ -137,7 +141,7 @@ export default function AboutPage() {
               href="#matki"
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"
             >
-              <span>👑</span>
+              <span>🌸</span>
               <span>{lang === "PL" ? "Matki (Kotki)" : "Queens"}</span>
             </a>
             <a
@@ -152,7 +156,7 @@ export default function AboutPage() {
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/30 text-amber-200 transition-all flex items-center gap-1.5"
             >
               <span>📸</span>
-              <span>{lang === "PL" ? "Galeria Bento" : "Bento Gallery"}</span>
+              <span>{lang === "PL" ? "Pełna Galeria Bento" : "Bento Gallery"}</span>
             </a>
           </div>
         </section>
@@ -326,65 +330,48 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Galeria zdjęć z wybiegu (Gotowa na kolejne zdjęcia) */}
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-2">
-                <Camera className="w-4 h-4 text-amber-300" />
-                <h3 className="text-xl font-heading font-medium text-white">
-                  Galeria zdjęć z wybiegu i ogrodu
+          {/* Dedykowany Bento Grid dla wybiegu z autentycznymi zdjęciami */}
+          <div className="pt-4">
+            <AnimatedBentoGrid
+              photos={wybiegPhotos}
+              lang={lang}
+              itemsPerSet={7}
+              badge={lang === "PL" ? "FOTOGRAFIE Z WYBIEGU" : "ENCLOSURE PHOTOS"}
+              title={
+                <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                  {lang === "PL" ? "Kadry z życia na wybiegu" : "Moments from the enclosure"}
                 </h3>
-              </div>
-              <span className="text-xs font-mono text-zinc-400">
-                Stale dodajemy nowe ujęcia
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {ENCLOSURE_PHOTOS.map((photo, i) => (
-                <div
-                  key={i}
-                  className="group relative rounded-2xl overflow-hidden border border-white/10 bg-[#121215] aspect-[4/3]"
-                >
-                  <Image
-                    src={photo.src}
-                    alt={photo.caption}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-5">
-                    <span className="text-[10px] font-mono uppercase tracking-wider text-amber-300 mb-1">
-                      {photo.tag}
-                    </span>
-                    <p className="text-xs sm:text-sm text-white font-medium">
-                      {photo.caption}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
+              }
+              subtitle={
+                <p>
+                  {lang === "PL"
+                    ? "Prawdziwe ujęcia z bezpiecznej woliery ogrodowej. Kliknij dowolne zdjęcie, by powiększyć je płynną animacją."
+                    : "Authentic photos from our garden run. Click to expand."}
+                </p>
+              }
+            />
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 3: MATKI HODOWLANE (#matki)
+            CZYSTA I AUTENTYCZNA PREZENTACJA BEZ WYMYŚLONYCH OPISÓW
         ═══════════════════════════════════════════════════════════════ */}
         <section id="matki" className="max-w-6xl mx-auto px-6 sm:px-10 mb-28 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
             <span className="text-xs font-mono uppercase tracking-[0.3em] text-rose-400 font-semibold">
-              03 · KOTKI HODOWLANE
+              03 · KOTKI HODOWLANE (MATKI)
             </span>
             <div className="h-[1px] flex-1 bg-white/10" />
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
               <h2 className="text-3xl sm:text-4xl font-heading font-light">
                 Matki: <span className="font-semibold italic">Nasze królowe</span>.
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 font-body max-w-2xl mt-2 font-light">
-                Zdrowe, opiekuńcze i czułe kotki. Każda z nich posiada udokumentowane badania echokardiograficzne serca (Echo Doppler) oraz profil DNA N/N.
+              <p className="text-sm sm:text-base text-zinc-300 font-body max-w-2xl mt-2 font-light leading-relaxed">
+                Zdrowe, opiekuńcze i czułe kotki hodowlane. Każda z nich posiada udokumentowane badania echokardiograficzne serca (Echo Doppler) oraz certyfikowany profil DNA w laboratorium Laboklin (HCM, PKD, SMA N/N).
               </p>
             </div>
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono shrink-0">
@@ -393,93 +380,30 @@ export default function AboutPage() {
             </span>
           </div>
 
-          {/* Siatka Kart Matek */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {BREEDING_QUEENS.map((queen) => (
-              <div
-                key={queen.id}
-                className="group rounded-3xl bg-[#121215] border border-white/10 hover:border-rose-400/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-lg hover:shadow-2xl"
-              >
-                <div>
-                  {/* Zdjęcie Kotki */}
-                  <div className="relative aspect-[4/5] w-full overflow-hidden bg-black">
-                    <Image
-                      src={queen.src}
-                      alt={queen.name}
-                      fill
-                      loading="eager"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#121215] via-transparent to-transparent" />
-                    
-                    <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
-                      <span className="px-2.5 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-[10px] font-mono text-rose-300">
-                        ♀ Kotka
-                      </span>
-                      {queen.title && (
-                        <span className="px-2.5 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-500/40 text-[10px] font-mono text-amber-300">
-                          {queen.title}
-                        </span>
-                      )}
-                    </div>
-
-                    {queen.weight && (
-                      <div className="absolute bottom-3 right-3 px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono text-white">
-                        Waga: {queen.weight}
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Informacje o Kotce */}
-                  <div className="p-6">
-                    <h3 className="text-xl font-heading font-medium text-white mb-1">
-                      {queen.name}
-                    </h3>
-                    <p className="text-xs font-mono text-amber-300 mb-3">
-                      {queen.ems} · {queen.colorName}
-                    </p>
-
-                    <p className="text-xs sm:text-sm text-zinc-400 font-body font-light leading-relaxed mb-4">
-                      {queen.description}
-                    </p>
-
-                    {/* Tagi i Cechy */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {queen.badges.map((b, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2 py-0.5 rounded-md bg-white/[0.04] border border-white/10 text-[10px] font-ui text-zinc-300"
-                        >
-                          {b}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Panel Badań Zdrowotnych */}
-                <div className="p-4 mx-6 mb-6 rounded-2xl bg-white/[0.03] border border-white/10 text-[11px] font-mono space-y-1.5">
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-500">HCM Doppler:</span>
-                    <span className="text-emerald-400 font-semibold">{queen.tests.hcm}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-500">PKD DNA:</span>
-                    <span className="text-emerald-400">{queen.tests.pkd}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-500">SMA DNA:</span>
-                    <span className="text-emerald-400">{queen.tests.sma}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Dedykowany Bento Grid dla Matek - 27 autentycznych zdjęć w układzie Bento bez ściany zdjęć */}
+          <AnimatedBentoGrid
+            photos={matkiPhotos}
+            lang={lang}
+            itemsPerSet={7}
+            badge={lang === "PL" ? "AUTENTYCZNE KADRY · MATKI HODOWLANE" : "BREEDING QUEENS PHOTOS"}
+            title={
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                {lang === "PL" ? "Galeria kadrów naszych kotek" : "Queens photo showcase"}
+              </h3>
+            }
+            subtitle={
+              <p>
+                {lang === "PL"
+                  ? "Prawdziwe fotografie z codziennego życia naszych matek w domu i ogrodzie. Przeglądaj w zrównoważonych zestawach Bento z płynną animacją."
+                  : "Authentic moments of our breeding queens in our home."}
+              </p>
+            }
+          />
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 4: KOCURY HODOWLANE (#kocury)
+            CZYSTA I AUTENTYCZNA PREZENTACJA BEZ WYMYŚLONYCH OPISÓW
         ═══════════════════════════════════════════════════════════════ */}
         <section id="kocury" className="max-w-6xl mx-auto px-6 sm:px-10 mb-28 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
@@ -489,110 +413,44 @@ export default function AboutPage() {
             <div className="h-[1px] flex-1 bg-white/10" />
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
             <div>
               <h2 className="text-3xl sm:text-4xl font-heading font-light">
-                Kocury: <span className="font-semibold italic">Nasi potężni ojcowie</span>.
+                Kocury: <span className="font-semibold italic">Potęga i łagodne serce</span>.
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 font-body max-w-2xl mt-2 font-light">
-                Potężna sylwetka psa, rysie pędzle na uszach, majestat i gołębie serce. Samce o wadze dochodzącej do 12 kg, które uwielbiają przytulanie.
+              <p className="text-sm sm:text-base text-zinc-300 font-body max-w-2xl mt-2 font-light leading-relaxed">
+                Mocny kościec, majestat, rysie pędzle na uszach i zrównoważony charakter. Samce o potężnej sylwetce, które uwielbiają przytulanie i życie wśród domowników. Pełny profil badań kardiologicznych i genetycznych N/N.
               </p>
             </div>
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono shrink-0">
               <Scale className="w-4 h-4" />
-              <span>Waga do 12 kg</span>
+              <span>Waga do 12 kg · Echo Doppler N/N</span>
             </span>
           </div>
 
-          {/* Siatka Kart Kocurów */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {BREEDING_STUDS.map((stud) => (
-              <div
-                key={stud.id}
-                className="group rounded-3xl bg-[#121215] border border-white/10 hover:border-amber-400/40 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-2xl"
-              >
-                <div>
-                  {/* Zdjęcie Kocura */}
-                  <div className="relative aspect-[16/11] w-full overflow-hidden bg-black">
-                    <Image
-                      src={stud.src}
-                      alt={stud.name}
-                      fill
-                      loading="eager"
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#121215] via-transparent to-transparent" />
-
-                    <div className="absolute top-4 left-4 flex flex-wrap gap-2">
-                      <span className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-white/15 text-xs font-mono text-amber-300">
-                        ♂ Kocur
-                      </span>
-                      {stud.title && (
-                        <span className="px-3 py-1 rounded-full bg-amber-500/20 backdrop-blur-md border border-amber-500/40 text-xs font-mono text-amber-300">
-                          {stud.title}
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="absolute bottom-4 right-4 px-3.5 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-amber-400/30 text-xs font-mono text-amber-200 font-bold">
-                      {stud.weight}
-                    </div>
-                  </div>
-
-                  {/* Informacje o Kocurze */}
-                  <div className="p-7">
-                    <h3 className="text-2xl font-heading font-medium text-white mb-1.5">
-                      {stud.name}
-                    </h3>
-                    <p className="text-xs font-mono text-amber-300 mb-4">
-                      {stud.ems} · {stud.colorName}
-                    </p>
-
-                    <p className="text-sm text-zinc-300 font-body font-light leading-relaxed mb-5">
-                      {stud.description}
-                    </p>
-
-                    {/* Tagi i Cechy */}
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {stud.badges.map((b, idx) => (
-                        <span
-                          key={idx}
-                          className="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/10 text-xs font-ui text-zinc-300"
-                        >
-                          {b}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Panel Badań Zdrowotnych */}
-                <div className="p-5 mx-7 mb-7 rounded-2xl bg-white/[0.03] border border-white/10 text-xs font-mono space-y-2">
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-400">Echo Doppler (serce):</span>
-                    <span className="text-emerald-400 font-semibold">{stud.tests.hcm}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-400">PKD DNA (nerki):</span>
-                    <span className="text-emerald-400">{stud.tests.pkd}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-400">SMA DNA (zanik mięśni):</span>
-                    <span className="text-emerald-400">{stud.tests.sma}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-zinc-300">
-                    <span className="text-zinc-400">Wirusy FIV / FeLV:</span>
-                    <span className="text-emerald-400">{stud.tests.fivFelv}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          {/* Dedykowany Bento Grid dla Kocurów - 51 autentycznych zdjęć w układzie Bento bez ściany zdjęć */}
+          <AnimatedBentoGrid
+            photos={kocuryPhotos}
+            lang={lang}
+            itemsPerSet={7}
+            badge={lang === "PL" ? "AUTENTYCZNE KADRY · KOCURY HODOWLANE" : "BREEDING STUDS PHOTOS"}
+            title={
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                {lang === "PL" ? "Galeria kadrów naszych kocurów" : "Studs photo showcase"}
+              </h3>
+            }
+            subtitle={
+              <p>
+                {lang === "PL"
+                  ? "Prawdziwe fotografie reproduktorów z naszej hodowli. Przeglądaj kolejne zestawy Bento z animacją w stylu Apple."
+                  : "Authentic photographs of our studs. Browse sets with smooth animations."}
+              </p>
+            }
+          />
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
-            SEKCJA 5: BENTO GRID ZDJĘĆ Z HODOWLI (#galeria)
+            SEKCJA 5: PEŁNE ARCHIWUM WSZYSTKICH FOLDERÓW (#galeria)
         ═══════════════════════════════════════════════════════════════ */}
         <BentoGallery lang={lang} />
 
