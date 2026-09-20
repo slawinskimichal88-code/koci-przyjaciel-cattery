@@ -67,8 +67,9 @@ export default function EnclosureSection({
       outEnd: number
     ) => {
       const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
-      const initialY = isMobile ? 18 : 36;
-      const outY = isMobile ? -14 : -28;
+      // Na mobile wygaszanie jest czyste i w miejscu (0px), by wykluczyć nachodzenie na wideo
+      const initialY = isMobile ? 0 : 36;
+      const outY = isMobile ? 0 : -28;
       if (p < inStart) return initialY;
       if (p < inEnd) {
         const t = (p - inStart) / (inEnd - inStart);
@@ -121,11 +122,8 @@ export default function EnclosureSection({
 
           phoneWrap.style.transform = `translate3d(${offsetX}vw, 0, 0) scale(${scale})`;
         } else {
-          // Mobile: Telefon subtelnie dopasowany w centrum
-          const t = Math.min(1, p / 0.22);
-          const translateY = lerp(0, -8, t);
-          const scale = lerp(1.0, 0.98, t);
-          phoneWrap.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+          // Mobile: Telefon stabilny, bez przesuwania w pionie, by nie nachodzić na tekst
+          phoneWrap.style.transform = "translate3d(0, 0, 0)";
         }
       }
 
@@ -137,7 +135,7 @@ export default function EnclosureSection({
         if (p > 0.03) {
           const t = Math.min(1, (p - 0.03) / 0.14);
           op = 1 - t;
-          ty = -t * 35;
+          ty = isDesktop ? -t * 35 : -t * 10;
         }
         intro.style.opacity = String(op);
         intro.style.transform = `translate3d(0, ${ty}px, 0)`;
@@ -208,7 +206,7 @@ export default function EnclosureSection({
         {/* ── STAGE 0: TYTUŁ OTWIERAJĄCY (Czysty Apple, u góry z bezpiecznym marginesem) ── */}
         <div
           ref={introRef}
-          className="absolute top-8 sm:top-12 lg:top-14 left-1/2 -translate-x-1/2 z-30 text-center w-full max-w-3xl px-6 pointer-events-none will-change-transform"
+          className="absolute top-[84px] sm:top-14 lg:top-14 left-1/2 -translate-x-1/2 z-30 text-center w-full max-w-3xl px-6 pointer-events-none will-change-transform"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-ui uppercase tracking-[0.25em] text-white/90 font-medium mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -239,15 +237,15 @@ export default function EnclosureSection({
         </div>
 
         {/* ── GŁÓWNA SCENA SCROLLYTELLINGU APPLE (2 Kolumny z bezpiecznym marginesem) ── */}
-        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between relative z-10 pt-10 pb-14 sm:pt-14 sm:pb-12 lg:py-0 gap-3 sm:gap-6 lg:gap-0">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 pt-20 sm:pt-24 lg:pt-0 gap-7 sm:gap-8 lg:gap-0">
 
           {/* ── LEWA KOLUMNA: CZYSTA TYPOGRAFIA APPLE (ZERO KWADRATÓW, ZERO RAMEK) ── */}
-          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[210px] sm:h-[290px] lg:h-[440px] flex items-center">
+          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[185px] sm:h-[270px] lg:h-[440px] flex items-start sm:items-center">
 
             {/* 01. WYBIEG OGRODOWY */}
             <div
               ref={textBlock1Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
@@ -268,7 +266,7 @@ export default function EnclosureSection({
                 </h3>
               </div>
 
-              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                 {lang === "PL"
                   ? "Koty mają dostęp do bezpiecznego ogrodu i wybiegu przez cały rok. Mogą oddychać świeżym powietrzem, obserwować ptaki i biegać, kiedy tylko mają na to ochotę."
                   : "Our cats have access to a safe garden and outdoor run all year round. They can breathe fresh air, watch birds and run whenever they feel like it."}
@@ -287,7 +285,7 @@ export default function EnclosureSection({
             {/* 02. ŻYCIE W DOMU */}
             <div
               ref={textBlock2Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
@@ -308,7 +306,7 @@ export default function EnclosureSection({
                 </h3>
               </div>
 
-              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                 {lang === "PL"
                   ? "Nasze koty są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i towarzyszą nam przy codziennych czynnościach. Dzięki temu kociaki wyrastają na spokojne i przyjazne koty."
                   : "Our cats are part of our family. They sit on the sofa, sleep in beds and join us in daily activities. This is why kittens grow up to be calm, friendly cats."}
@@ -328,7 +326,7 @@ export default function EnclosureSection({
             {/* 03. ZDROWE OD URODZENIA */}
             <div
               ref={textBlock3Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
@@ -349,7 +347,7 @@ export default function EnclosureSection({
                 </h3>
               </div>
 
-              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
                 {lang === "PL"
                   ? "Każdy kociak odchodzi z hodowli z książeczką zdrowia, szczepieniami i dokumentami potwierdzającymi, że jego rodzice są zdrowi — w tym badaniami serca i testami genetycznymi."
                   : "Every kitten leaves with a health book, vaccinations and documents confirming that its parents are healthy — including heart checks and genetic tests."}
@@ -375,7 +373,7 @@ export default function EnclosureSection({
               className="w-full will-change-transform transition-transform duration-75 ease-out relative"
             >
               {/* Obudowa iPhone 16 Pro (Tytanowa ramka, zaokrąglone narożniki, Dynamic Island) */}
-              <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[480px] lg:max-w-[680px] p-[6px] sm:p-[10px] rounded-[26px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
+              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[480px] lg:max-w-[680px] p-[6px] sm:p-[10px] rounded-[26px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
                 
                 {/* Wewnętrzna krawędź ekranu Super Retina XDR */}
                 <div className="relative w-full aspect-[16/9] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-black">
