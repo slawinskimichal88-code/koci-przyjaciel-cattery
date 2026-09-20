@@ -51,7 +51,7 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ② WYBIEG & WOLIERA: Flagowy scrollytelling Apple iPhone 16 Pro (pnie 3.2m, zero klatek) */}
+        {/* ② WYBIEG: Scrollytelling Apple iPhone — filozofia wybiegu, życie w domu, zero klatek */}
         <EnclosureSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}

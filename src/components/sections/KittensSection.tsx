@@ -15,37 +15,37 @@ const KITTENS = [
     id: "luna",
     name: "Luna *PL",
     gender: "female" as const,
-    color: "Czarny srebrzysty klasyczny",
+    color: "Czarny klasycznie pręgowany (MCO n 22)",
     status: "available" as const,
     image: "/images/cats/cat_07.webp",
-    desc: "Czuła, odważna kotka o jedwabistej szacie.",
+    desc: "Czuła, odważna kotka o jedwabistej szacie i wspaniałym, otwartym charakterze.",
   },
   {
     id: "leo",
     name: "Leo *PL",
     gender: "male" as const,
-    color: "Rudy pręgowany",
+    color: "Czarny srebrzysty klasyczny (MCO ns 22)",
     status: "available" as const,
     image: "/images/cats/cat_08.webp",
-    desc: "Prawdziwy mały lew. Szeroki pyszczek, mocne łapy.",
+    desc: "Prawdziwy mały lew z potężnymi pędzlami na uszach i masywną budową łap.",
   },
   {
     id: "arthur",
     name: "Arthur *PL",
     gender: "male" as const,
-    color: "Czarny klasyczny pręgowany",
+    color: "Czarny dymny (MCO ns)",
     status: "reserved" as const,
-    image: "/images/cats/cat_09.webp",
-    desc: "Wybitny profil anatomiczny. Znalazł dom w Warszawie.",
+    image: "/images/cats/cat_18.webp",
+    desc: "Wybitny profil anatomiczny i głębokie spojrzenie. Znalazł kochający dom.",
   },
   {
-    id: "amber",
-    name: "Amber *PL",
+    id: "yuki",
+    name: "Yuki *PL",
     gender: "female" as const,
-    color: "Srebrzysty szylkret z białym",
+    color: "Śnieżnobiały solid (MCO w 62)",
     status: "available" as const,
     image: "/images/cats/cat_10.webp",
-    desc: "Wyjątkowe umaszczenie, miękki charakter.",
+    desc: "Aksamitna biała szata, bursztynowe oczy i niezwykle przytulaśna natura.",
   },
 ];
 
@@ -85,7 +85,7 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
                 src={k.image}
                 alt={k.name}
                 fill
-                className="object-cover object-top grayscale"
+                className="object-cover object-[50%_20%]"
                 sizes="50vw"
               />
             </div>

@@ -29,7 +29,7 @@ const ANCESTORS: Ancestor[] = [
     ems: "MCO ns 22 (Czarny srebrzysty pręgowany)",
     weight: "11.4 kg",
     hcm: "N/N Clear (Echo Doppler Certyfikat)",
-    image: "/images/cats/cat_03.webp",
+    image: "/images/cats/cat_34.webp",
     generation: 1,
   },
   {
@@ -40,7 +40,7 @@ const ANCESTORS: Ancestor[] = [
     ems: "MCO ns 22",
     weight: "12.2 kg",
     hcm: "N/N Clear",
-    image: "/images/cats/cat_01.webp",
+    image: "/images/matki/matka_07.webp",
     generation: 2,
   },
   {
@@ -48,7 +48,7 @@ const ANCESTORS: Ancestor[] = [
     name: "GIC. Freya Silver Mist *PL",
     role: { PL: "Babcia (Linia Ojczysta)", EN: "Grandmother (Sire Line)" },
     title: "Grand International Champion",
-    ems: "MCO fs 22",
+    ems: "MCO a (Niebieski solid)",
     weight: "7.8 kg",
     hcm: "N/N Clear",
     image: "/images/matki/matka_01.webp",
@@ -62,7 +62,7 @@ const ANCESTORS: Ancestor[] = [
     ems: "MCO n 22",
     weight: "12.8 kg",
     hcm: "N/N Clear",
-    image: "/images/cats/cat_06.webp",
+    image: "/images/matki/matka_06.webp",
     generation: 3,
   },
   {
@@ -70,10 +70,10 @@ const ANCESTORS: Ancestor[] = [
     name: "EC. Astrid White Diamond",
     role: { PL: "Prababcia (Skandynawska Linia)", EN: "Great-Grandmother (Nordic Line)" },
     title: "Europa Champion",
-    ems: "MCO w 62",
+    ems: "MCO w 62 (Biały solid)",
     weight: "8.1 kg",
     hcm: "N/N Clear / BAER Test Obustronny",
-    image: "/images/matki/matka_02.webp",
+    image: "/images/matki/matka_03.webp",
     generation: 3,
   },
 ];
@@ -132,7 +132,7 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
                         src={item.image}
                         alt={item.name}
                         fill
-                        className="object-cover grayscale group-hover:grayscale-0 transition-all duration-300"
+                        className="object-cover group-hover:scale-110 transition-all duration-300"
                       />
                     </div>
                     <div>

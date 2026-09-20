@@ -1059,250 +1059,233 @@ export const GALLERY_PHOTOS: CatPhoto[] = [
   }
 ];
 
-// Best featured photos for specific sections
-export const HERO_CATS = [
+// Best featured photos for specific sections — ręcznie wyselekcjonowane najlepsze ujęcia
+export const HERO_CATS: CatPhoto[] = [
   {
-    "id": "cat-1",
-    "src": "/images/cats/cat_01.webp",
-    "width": 960,
-    "height": 1419,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #1",
-    "originalFile": "649500621_1432601955327726_208871247220136105_n.jpg"
+    id: "cat-18",
+    src: "/images/cats/cat_18.webp",
+    width: 945,
+    height: 1273,
+    aspect: "portrait",
+    category: "kocury",
+    title: "Oficjalny portret z logo hodowli Koci Przyjaciel *PL",
+    originalFile: "763824266_1373352564937763_2477423128490293300_n.jfif"
   },
   {
-    "id": "cat-2",
-    "src": "/images/cats/cat_02.webp",
-    "width": 936,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "kotki",
-    "title": "Maine Coon Koci Przyjaciel #2",
-    "originalFile": "660689252_1448416450412943_5143909756840844051_n.jpg"
+    id: "cat-24",
+    src: "/images/cats/cat_24.webp",
+    width: 828,
+    height: 2048,
+    aspect: "portrait",
+    category: "kocury",
+    title: "Czułość i bliskość — zachód słońca nad jeziorem",
+    originalFile: "776383533_2279970752774885_3304953370405976235_n.jfif"
   },
   {
-    "id": "cat-3",
-    "src": "/images/cats/cat_03.webp",
-    "width": 1400,
-    "height": 1867,
-    "aspect": "portrait",
-    "category": "kocury",
-    "title": "Maine Coon Koci Przyjaciel #3",
-    "originalFile": "685089260_1467210485200206_6510983724358534318_n.jpg"
+    id: "cat-9",
+    src: "/images/cats/cat_09.webp",
+    width: 1122,
+    height: 1402,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Mama i kociak — spokój w domowym zaciszu",
+    originalFile: "724478291_1928902547811841_8031055588732586395_n.jfif"
   },
   {
-    "id": "cat-4",
-    "src": "/images/cats/cat_04.webp",
-    "width": 1265,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "kociaki",
-    "title": "Maine Coon Koci Przyjaciel #4",
-    "originalFile": "690319330_1474618344459420_1777968680353564477_n.jpg"
+    id: "matka-3",
+    src: "/images/matki/matka_03.webp",
+    width: 1400,
+    height: 1874,
+    aspect: "portrait",
+    category: "matki",
+    title: "Biały majestat — kotka o potężnej lwiej kryzie",
+    originalFile: "625164041_1396437738944148_8776568149697568292_n.jpg"
   },
   {
-    "id": "cat-5",
-    "src": "/images/cats/cat_05.webp",
-    "width": 900,
-    "height": 2000,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #5",
-    "originalFile": "714765429_1749245882730310_151820564721031938_n.jfif"
+    id: "cat-34",
+    src: "/images/cats/cat_34.webp",
+    width: 1200,
+    height: 1600,
+    aspect: "portrait",
+    category: "kocury",
+    title: "Srebrzysty kocur z imponującymi pędzlami na uszach",
+    originalFile: "WhatsApp Image 2026-09-08 at 21.31.55 (1).jpeg"
   },
   {
-    "id": "cat-6",
-    "src": "/images/cats/cat_06.webp",
-    "width": 900,
-    "height": 2000,
-    "aspect": "portrait",
-    "category": "kocury",
-    "title": "Maine Coon Koci Przyjaciel #6",
-    "originalFile": "719427568_2016989679697328_4499652836225709481_n.jfif"
+    id: "matka-7",
+    src: "/images/matki/matka_07.webp",
+    width: 1400,
+    height: 1867,
+    aspect: "portrait",
+    category: "kocury",
+    title: "Prawdziwy gigant — ponad metr długości ciała",
+    originalFile: "WhatsApp Image 2026-09-08 at 20.32.40.jpeg"
   }
 ];
-export const KITTEN_FEATURED = [
+
+export const KITTEN_FEATURED: CatPhoto[] = [
   {
-    "id": "cat-7",
-    "src": "/images/cats/cat_07.webp",
-    "width": 1400,
-    "height": 1867,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #7",
-    "originalFile": "720873993_1505815184673069_1493065021927276779_n.jpg"
+    id: "cat-7",
+    src: "/images/cats/cat_07.webp",
+    width: 1400,
+    height: 1867,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Luna *PL — klasycznie pręgowana kotka",
+    originalFile: "720873993_1505815184673069_1493065021927276779_n.jpg"
   },
   {
-    "id": "cat-8",
-    "src": "/images/cats/cat_08.webp",
-    "width": 1082,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "kociaki",
-    "title": "Maine Coon Koci Przyjaciel #8",
-    "originalFile": "723014325_27555283504160519_7969630077930721971_n.jfif"
+    id: "cat-8",
+    src: "/images/cats/cat_08.webp",
+    width: 1082,
+    height: 2048,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Leo *PL — srebrzysty klasyczny pręgowany",
+    originalFile: "723014325_27555283504160519_7969630077930721971_n.jfif"
   },
   {
-    "id": "cat-9",
-    "src": "/images/cats/cat_09.webp",
-    "width": 1122,
-    "height": 1402,
-    "aspect": "portrait",
-    "category": "kocury",
-    "title": "Maine Coon Koci Przyjaciel #9",
-    "originalFile": "724478291_1928902547811841_8031055588732586395_n.jfif"
+    id: "cat-10",
+    src: "/images/cats/cat_10.webp",
+    width: 1400,
+    height: 1867,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Yuki *PL — śnieżnobiały kociak o bursztynowych oczach",
+    originalFile: "741613631_2032060597429356_7478638894326214150_n.jfif"
   },
   {
-    "id": "cat-10",
-    "src": "/images/cats/cat_10.webp",
-    "width": 1400,
-    "height": 1867,
-    "aspect": "portrait",
-    "category": "kotki",
-    "title": "Maine Coon Koci Przyjaciel #10",
-    "originalFile": "741613631_2032060597429356_7478638894326214150_n.jfif"
+    id: "cat-30",
+    src: "/images/cats/cat_30.webp",
+    width: 1080,
+    height: 1920,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Kacper *PL — biały maluch o potężnych łapkach",
+    originalFile: "WhatsApp Image 2026-09-08 at 21.31.58 (2).jpeg"
   },
   {
-    "id": "cat-11",
-    "src": "/images/cats/cat_11.webp",
-    "width": 1400,
-    "height": 1867,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #11",
-    "originalFile": "744184748_1529952655592655_5406760095867920810_n.jpg"
+    id: "cat-17",
+    src: "/images/cats/cat_17.webp",
+    width: 1218,
+    height: 2048,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Arthur *PL — czarny dymny z wybitnym profilem",
+    originalFile: "755373924_1005889849009186_1303801791014137452_n.jfif"
   },
   {
-    "id": "cat-12",
-    "src": "/images/cats/cat_12.webp",
-    "width": 1400,
-    "height": 2019,
-    "aspect": "portrait",
-    "category": "kociaki",
-    "title": "Maine Coon Koci Przyjaciel #12",
-    "originalFile": "745282786_1532258165362104_7679269006485921657_n.jpg"
-  },
-  {
-    "id": "cat-13",
-    "src": "/images/cats/cat_13.webp",
-    "width": 1155,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #13",
-    "originalFile": "746842944_1371451868242248_1024092881375184952_n.jfif"
-  },
-  {
-    "id": "cat-14",
-    "src": "/images/cats/cat_14.webp",
-    "width": 1400,
-    "height": 1867,
-    "aspect": "portrait",
-    "category": "kotki",
-    "title": "Maine Coon Koci Przyjaciel #14",
-    "originalFile": "747450354_1532790155308905_58084607483412629_n.jpg"
+    id: "cat-20",
+    src: "/images/cats/cat_20.webp",
+    width: 1208,
+    height: 1599,
+    aspect: "portrait",
+    category: "kociaki",
+    title: "Maja *PL — szylkretowa kotka podczas zabawy na kanapie",
+    originalFile: "773756787_1680127929749018_1564117352974330138_n.jfif"
   }
 ];
-export const HOME_LIFE_FEATURED = [
+
+export const HOME_LIFE_FEATURED: CatPhoto[] = [
   {
-    "id": "cat-15",
-    "src": "/images/cats/cat_15.webp",
-    "width": 1400,
-    "height": 1400,
-    "aspect": "square",
-    "category": "kocury",
-    "title": "Maine Coon Koci Przyjaciel #15",
-    "originalFile": "748499667_2544211222665274_6218615925522146374_n.jfif"
+    id: "cat-27",
+    src: "/images/cats/cat_27.webp",
+    width: 1920,
+    height: 1080,
+    aspect: "landscape",
+    category: "zycie_w_domu",
+    title: "100% socjalizacja z dziećmi — rodzina w ogrodzie",
+    originalFile: "WhatsApp Image 2026-09-08 at 21.31.57.jpeg"
   },
   {
-    "id": "cat-16",
-    "src": "/images/cats/cat_16.webp",
-    "width": 1400,
-    "height": 1867,
-    "aspect": "portrait",
-    "category": "kociaki",
-    "title": "Maine Coon Koci Przyjaciel #16",
-    "originalFile": "753881024_1540647987856455_1951074540958120944_n.jpg"
+    id: "cat-26",
+    src: "/images/cats/cat_26.webp",
+    width: 1440,
+    height: 1920,
+    aspect: "portrait",
+    category: "zycie_w_domu",
+    title: "Zaufanie i spokój — kociak w ramionach nowego opiekuna",
+    originalFile: "WhatsApp Image 2026-09-08 at 21.31.56 (1).jpeg"
   },
   {
-    "id": "cat-17",
-    "src": "/images/cats/cat_17.webp",
-    "width": 1218,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #17",
-    "originalFile": "755373924_1005889849009186_1303801791014137452_n.jfif"
+    id: "cat-11",
+    src: "/images/cats/cat_11.webp",
+    width: 1400,
+    height: 1867,
+    aspect: "portrait",
+    category: "zycie_w_domu",
+    title: "Czysta miłość — czułość od pierwszych dni",
+    originalFile: "744184748_1529952655592655_5406760095867920810_n.jpg"
   },
   {
-    "id": "cat-18",
-    "src": "/images/cats/cat_18.webp",
-    "width": 945,
-    "height": 1273,
-    "aspect": "portrait",
-    "category": "kocury",
-    "title": "Maine Coon Koci Przyjaciel #18",
-    "originalFile": "763824266_1373352564937763_2477423128490293300_n.jfif"
+    id: "cat-15",
+    src: "/images/cats/cat_15.webp",
+    width: 1400,
+    height: 1400,
+    aspect: "square",
+    category: "zycie_w_domu",
+    title: "Maine Coon na desce SUP — miłość do wody w praktyce",
+    originalFile: "748499667_2544211222665274_6218615925522146374_n.jfif"
   },
   {
-    "id": "cat-19",
-    "src": "/images/cats/cat_19.webp",
-    "width": 1152,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #19",
-    "originalFile": "766748056_1552536800000907_6447494146509324601_n.jpg"
+    id: "cat-28",
+    src: "/images/cats/cat_28.webp",
+    width: 1080,
+    height: 1920,
+    aspect: "portrait",
+    category: "zycie_w_domu",
+    title: "Królewska wyprawka dla każdego opuszczającego hodowlę kociaka",
+    originalFile: "WhatsApp Image 2026-09-08 at 21.31.58.jpeg"
   },
   {
-    "id": "cat-20",
-    "src": "/images/cats/cat_20.webp",
-    "width": 1208,
-    "height": 1599,
-    "aspect": "portrait",
-    "category": "kociaki",
-    "title": "Maine Coon Koci Przyjaciel #20",
-    "originalFile": "773756787_1680127929749018_1564117352974330138_n.jfif"
+    id: "cat-32",
+    src: "/images/cats/cat_32.webp",
+    width: 1080,
+    height: 1920,
+    aspect: "portrait",
+    category: "zycie_w_domu",
+    title: "Certyfikowany rodowód Felis Polonia (FPL / FIFe)",
+    originalFile: "WhatsApp Image 2026-09-08 at 21.31.59 (1).jpeg"
   },
   {
-    "id": "cat-21",
-    "src": "/images/cats/cat_21.webp",
-    "width": 1400,
-    "height": 1301,
-    "aspect": "landscape",
-    "category": "kocury",
-    "title": "Maine Coon Koci Przyjaciel #21",
-    "originalFile": "774595458_1527868458616948_6675842402311077191_n.jfif"
+    id: "matka-2",
+    src: "/images/matki/matka_02.webp",
+    width: 1400,
+    height: 1050,
+    aspect: "landscape",
+    category: "zycie_w_domu",
+    title: "Harmonia w domu — kociak i królik na wspólnym dywanie",
+    originalFile: "623268085_1393878742533381_3081836477528235974_n.jpg"
   },
   {
-    "id": "cat-22",
-    "src": "/images/cats/cat_22.webp",
-    "width": 752,
-    "height": 1500,
-    "aspect": "portrait",
-    "category": "kotki",
-    "title": "Maine Coon Koci Przyjaciel #22",
-    "originalFile": "774835839_1392038789784851_895114201758346589_n.jfif"
+    id: "matka-5",
+    src: "/images/matki/matka_05.webp",
+    width: 1080,
+    height: 1080,
+    aspect: "square",
+    category: "zycie_w_domu",
+    title: "Relaks w salonie — 40 cm pióropusz ogona",
+    originalFile: "626803895_1396437725610816_7297301571543465292_n.jpg"
   },
   {
-    "id": "cat-23",
-    "src": "/images/cats/cat_23.webp",
-    "width": 1400,
-    "height": 1050,
-    "aspect": "landscape",
-    "category": "zycie_w_domu",
-    "title": "Maine Coon Koci Przyjaciel #23",
-    "originalFile": "774888187_28043726958628777_7446868748821696128_n.jfif"
+    id: "cat-6",
+    src: "/images/cats/cat_06.webp",
+    width: 900,
+    height: 2000,
+    aspect: "portrait",
+    category: "zycie_w_domu",
+    title: "Słoneczny wybieg ogrodowy i pies w tle",
+    originalFile: "719427568_2016989679697328_4499652836225709481_n.jfif"
   },
   {
-    "id": "cat-24",
-    "src": "/images/cats/cat_24.webp",
-    "width": 828,
-    "height": 2048,
-    "aspect": "portrait",
-    "category": "kociaki",
-    "title": "Maine Coon Koci Przyjaciel #24",
-    "originalFile": "776383533_2279970752774885_3304953370405976235_n.jfif"
+    id: "cat-19",
+    src: "/images/cats/cat_19.webp",
+    width: 1152,
+    height: 2048,
+    aspect: "portrait",
+    category: "zycie_w_domu",
+    title: "Łagodny olbrzym odpoczywający na kolanach w ogrodzie",
+    originalFile: "766748056_1552536800000907_6447494146509324601_n.jpg"
   }
 ];
+

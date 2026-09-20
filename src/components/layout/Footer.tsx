@@ -80,7 +80,7 @@ export default function Footer({ lang = "PL" }: FooterProps) {
 
             <p className="text-xs text-zinc-400 font-body font-light leading-relaxed">
               {lang === "PL"
-                ? "Certyfikowana domowa hodowla kotów rasy Maine Coon. Życie w salonie z dziećmi i psem, naturalna woliera zewnętrzna, 100% czystość genetyczna."
+                ? "Certyfikowana domowa hodowla kotów rasy Maine Coon. Życie w salonie z dziećmi i psem, bezpieczny wybieg ogrodowy, 100% czystość genetyczna."
                 : "Certified home cattery of Maine Coon cats in Wrocław. Free home life with kids and dog, outdoor aviary, 100% genetic health."}
             </p>
           </div>

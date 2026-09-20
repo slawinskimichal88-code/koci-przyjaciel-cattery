@@ -282,10 +282,10 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
 
             {/* Podtytuł */}
             <p className="text-sm sm:text-lg md:text-xl font-body text-white/75 max-w-lg mx-auto leading-relaxed">
-              Certyfikowana hodowla kotów rasy Maine Coon.
+              Hodowla kotów Maine Coon we Wrocławiu.
               <br />
               <span className="text-xs sm:text-sm text-white/50 tracking-widest uppercase font-ui block mt-1">
-                Monolityczny majestat · Koty o sercu psa
+                Wychowujemy kociaki z miłością · od 10 lat
               </span>
             </p>
           </div>
@@ -312,14 +312,14 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
-            Rasa
+            Rasa Maine Coon
           </span>
           <h2
             className="font-heading font-light text-white leading-[0.9] tracking-tight mb-6"
             style={{ fontSize: "clamp(3rem, 9vw, 8rem)" }}
           >
-            Łagodny<br />
-            <span className="font-semibold">Olbrzym</span>
+            Największy<br />
+            <span className="font-semibold">kot domowy</span>
           </h2>
           <div className="flex items-baseline gap-3 mb-4">
             <span
@@ -331,7 +331,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
             <span className="text-2xl font-body text-white/50">kg</span>
           </div>
           <p className="text-base sm:text-lg font-body text-white/55 max-w-sm leading-relaxed">
-            Masa, majestat i anielska łagodność.
+            Maine Coon to jeden z największych kotów na świecie — duży, miękki i niezwykle przyjazny człowiekowi.
           </p>
         </div>
 
@@ -344,22 +344,22 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
-            Wychowanie
+            Jak żyją nasze koty
           </span>
           <h2
             className="font-heading font-light text-white leading-[0.9] tracking-tight mb-8"
             style={{ fontSize: "clamp(3rem, 9vw, 8rem)" }}
           >
-            Zero<br />
-            <span className="font-semibold">klatek.</span>
+            Jak
+            <br />
+            <span className="font-semibold">w rodzinie.</span>
           </h2>
           <p className="text-base sm:text-lg font-body text-white/55 max-w-sm leading-relaxed mb-6">
-            Nasz salon. Nasze dzieci. Nasz pies.
-            Od pierwszego dnia.
+            Nasze koty mieszkają razem z nami — w salonie, sypialni, przy stole. Wychowują się z dziećmi i z psem, dzięki czemu są spokojne i ufają ludziom od pierwszych dni życia.
           </p>
           <div className="flex items-center gap-3">
             <div className="h-[1px] w-6 bg-white/20" />
-            <span className="text-sm font-ui text-white/30 tracking-wider">25 395 rodzin na Facebooku</span>
+            <span className="text-sm font-ui text-white/30 tracking-wider">26 000+ fanów na Facebooku</span>
           </div>
         </div>
 
@@ -378,12 +378,11 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
             className="font-heading font-light text-white leading-[0.95] tracking-tight mb-8"
             style={{ fontSize: "clamp(2.5rem, 7vw, 6.5rem)" }}
           >
-            HCM · SMA · PKD<br />
-            <span className="font-semibold">N/N.</span>
+            Zdrowe<br />
+            <span className="font-semibold">od urodzenia.</span>
           </h2>
           <p className="text-base sm:text-lg font-body text-white/55 max-w-sm leading-relaxed">
-            Wszystkie koty reprodukcyjne mają certyfikowane
-            badania DNA i Echo doppler serca.
+            Każdy nasz kociak pochodzi od rodziców z potwierdzonymi badaniami serca i genetycznymi — żeby trafił do Ciebie zdrowy i bez ukrytych chorób dziedzicznych.
           </p>
         </div>
 
@@ -396,14 +395,14 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
-            Twój kociak
+            Weź kociaka
           </span>
           <h2
             className="font-heading font-light text-white leading-[0.9] tracking-tight mb-10"
             style={{ fontSize: "clamp(3rem, 9vw, 8rem)" }}
           >
-            Zarezerwuj<br />
-            <span className="font-semibold">przyjaciela.</span>
+            Znajdź swojego<br />
+            <span className="font-semibold">kociaka.</span>
           </h2>
 
           <div className="flex flex-wrap items-center gap-4">

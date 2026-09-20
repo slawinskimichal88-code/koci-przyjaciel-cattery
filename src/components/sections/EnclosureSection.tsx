@@ -141,7 +141,7 @@ export default function EnclosureSection({
         intro.style.pointerEvents = op > 0.1 ? "auto" : "none";
       }
 
-      // ── 3. CECHA 01: ARCHITEKTURA WSPINACZKOWA (3.2m) ─────────────
+      // ── 3. CECHA 01: ZEWNĘTRZNY WYBIEG ─────────────────────────────
       // Wejście od razu po przesunięciu telefonu, szerokie okno pełnej jasności
       const b1 = textBlock1Ref.current;
       if (b1) {
@@ -209,28 +209,28 @@ export default function EnclosureSection({
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-ui uppercase tracking-[0.25em] text-white/90 font-medium mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            {lang === "PL" ? "Środowisko Życia Kotów" : "Living Environment"}
+            {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
           </div>
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-light text-white tracking-tight leading-[1.04]">
             {lang === "PL" ? (
               <>
-                Wolność w sercu natury.<br />
+                Nasz dom<br />
                 <span className="font-normal text-[#86868b]">
-                  Nasz wybieg i dom.
+                  to ich dom.
                 </span>
               </>
             ) : (
               <>
-                Freedom in nature.<br />
+                Our home<br />
                 <span className="font-normal text-[#86868b]">
-                  Our enclosure & home.
+                  is their home.
                 </span>
               </>
             )}
           </h2>
 
           <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-ui uppercase tracking-[0.25em] text-[#86868b]">
-            <span>{lang === "PL" ? "Przewiń, aby odkryć detale" : "Scroll to explore"}</span>
+            <span>{lang === "PL" ? "Przewiń, aby zobaczyć więcej" : "Scroll to explore"}</span>
             <ChevronDown className="w-3.5 h-3.5 text-[#86868b] animate-bounce" />
           </div>
         </div>
@@ -241,25 +241,25 @@ export default function EnclosureSection({
           {/* ── LEWA KOLUMNA: CZYSTA TYPOGRAFIA APPLE (ZERO KWADRATÓW, ZERO RAMEK) ── */}
           <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[440px] flex items-center">
 
-            {/* 01. ARCHITEKTURA WSPINACZKOWA (3.2m) */}
+            {/* 01. WYBIEG OGRODOWY */}
             <div
               ref={textBlock1Ref}
               className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
-                  01 / {lang === "PL" ? "ARCHITEKTURA WSPINACZKOWA" : "VERTICAL HABITAT"}
+                  01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
                 </p>
                 <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
                   {lang === "PL" ? (
                     <>
-                      Pnie prawdziwych drzew.<br />
-                      <span className="text-[#86868b]">Aż 3.2 metra w górę.</span>
+                      Wychodzą na<br />
+                      <span className="text-[#86868b]">dwór kiedy chcą.</span>
                     </>
                   ) : (
                     <>
-                      Real tree trunks.<br />
-                      <span className="text-[#86868b]">Up to 3.2 meters high.</span>
+                      They go outside<br />
+                      <span className="text-[#86868b]">whenever they want.</span>
                     </>
                   )}
                 </h3>
@@ -267,40 +267,39 @@ export default function EnclosureSection({
 
               <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
                 {lang === "PL"
-                  ? "Maine Coon to kot leśny o potężnym szkielecie. W naszej wolierze dębowe pnie i podniebne trasy ze sznurem sizalowym 14mm pozwalają mu rozwijać naturalną zwinność oraz chronią stawy."
-                  : "Maine Coons are forest giants with massive bone structures. In our enclosure, natural oak trunks and 14mm nautical sisal lines foster agile climbing and lifelong joint health."}
+                  ? "Koty mają dostęp do bezpiecznego ogrodu i wybiegu przez cały rok. Mogą oddychać świeżym powietrzem, obserwować ptaki i biegać, kiedy tylko mają na to ochotę."
+                  : "Our cats have access to a safe garden and outdoor run all year round. They can breathe fresh air, watch birds and run whenever they feel like it."}
               </p>
 
-              {/* Apple Spec Metric (Czysta cyfra bez ramki) */}
               <div className="pt-6 border-t border-white/10">
                 <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight mb-2">
-                  3.2 m
+                  365 dni
                 </div>
                 <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Wysokość wspinaczki pod zadaszeniem" : "Vertical climbing altitude"}
+                  {lang === "PL" ? "Dostęp do ogrodu przez cały rok" : "Year-round garden access"}
                 </p>
               </div>
             </div>
 
-            {/* 02. ŚWIEŻE POWIETRZE (365 DNI) */}
+            {/* 02. ŻYCIE W DOMU */}
             <div
               ref={textBlock2Ref}
               className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
-                  02 / {lang === "PL" ? "CAŁOROCZNY MIKROKLIMAT" : "NATURAL HABITAT"}
+                  02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
                 </p>
                 <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
                   {lang === "PL" ? (
                     <>
-                      Świeże powietrze.<br />
-                      <span className="text-[#86868b]">365 dni w roku.</span>
+                      Śpią w łóżku,<br />
+                      <span className="text-[#86868b]">bawią się w salonie.</span>
                     </>
                   ) : (
                     <>
-                      Crisp fresh air.<br />
-                      <span className="text-[#86868b]">365 days a year.</span>
+                      Sleep in bed,<br />
+                      <span className="text-[#86868b]">play in the living room.</span>
                     </>
                   )}
                 </h3>
@@ -308,49 +307,8 @@ export default function EnclosureSection({
 
               <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
                 {lang === "PL"
-                  ? "Koty mają stały dostęp do woliery przez ocieplane tunele. Czują powiew wiatru, słyszą śpiew ptaków i korzystają z naturalnego słońca, co stymuluje syntezę witaminy D i gwarantuje lśniące futro."
-                  : "Cats have unrestricted outdoor access through insulated corridors. Feeling the breeze, wild birds, and natural sunlight stimulates vitamin D synthesis and yields a dense, lustrous coat."}
-              </p>
-
-              {/* Apple Spec Metric */}
-              <div className="pt-6 border-t border-white/10">
-                <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight mb-2">
-                  365 dni
-                </div>
-                <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Całoroczny biorytm i żelazna odporność" : "All-year outdoor access & vitality"}
-                </p>
-              </div>
-            </div>
-
-            {/* 03. PANCERNA SIATKA & ZERO KLATEK (100%) */}
-            <div
-              ref={textBlock3Ref}
-              className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
-            >
-              <div>
-                <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
-                  03 / {lang === "PL" ? "BEZPIECZEŃSTWO & DOM" : "SECURITY & INTEGRATION"}
-                </p>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
-                  {lang === "PL" ? (
-                    <>
-                      Pancerna siatka.<br />
-                      <span className="text-[#86868b]">I zero klatek.</span>
-                    </>
-                  ) : (
-                    <>
-                      Reinforced steel.<br />
-                      <span className="text-[#86868b]">And zero cages.</span>
-                    </>
-                  )}
-                </h3>
-              </div>
-
-              <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
-                {lang === "PL"
-                  ? "Szczelna, atestowana stalowa woliera chroni przed ucieczką i drapieżnikami. W naszej hodowli nie ma klatek — koty śpią z nami w łóżkach, żyją w salonie z dziećmi i psem, opuszczając dom w 100% zsocjalizowane."
-                  : "Certified stainless steel mesh shields against escape and wild predators. Zero cages — cats share our beds and live in the living room with children and dog, 100% socialized."}
+                  ? "Nasze koty są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i towarzyszą nam przy codziennych czynnościach. Dzięki temu kociaki wyrastają na spokojne, przyjazne koty, które świetnie odnajdują się w nowym domu."
+                  : "Our cats are part of our family. They sit on the sofa, sleep in beds and join us in daily activities. This is why kittens grow up to be calm, friendly cats that settle well in a new home."}
               </p>
 
               {/* Apple Spec Metric */}
@@ -359,7 +317,48 @@ export default function EnclosureSection({
                   100%
                 </div>
                 <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Bezpieczeństwo & socjalizacja domowa" : "Certified secure & family-bonded"}
+                  {lang === "PL" ? "Kociaków wychowywanych razem z rodziną" : "Kittens raised as part of the family"}
+                </p>
+              </div>
+            </div>
+
+            {/* 03. ZDROWE OD URODZENIA */}
+            <div
+              ref={textBlock3Ref}
+              className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+            >
+              <div>
+                <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
+                  03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
+                </p>
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
+                  {lang === "PL" ? (
+                    <>
+                      Przebadane<br />
+                      <span className="text-[#86868b]">i gotowe na Ciebie.</span>
+                    </>
+                  ) : (
+                    <>
+                      Tested<br />
+                      <span className="text-[#86868b]">and ready for you.</span>
+                    </>
+                  )}
+                </h3>
+              </div>
+
+              <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
+                {lang === "PL"
+                  ? "Każdy kociak odchodzi z hodowli z książeczką zdrowia, szczepieniami i dokumentami potwierdzającymi, że jego rodzice są zdrowi — w tym badaniami serca i testami genetycznymi."
+                  : "Every kitten leaves with a health book, vaccinations and documents confirming that its parents are healthy — including heart checks and genetic tests."}
+              </p>
+
+              {/* Apple Spec Metric */}
+              <div className="pt-6 border-t border-white/10">
+                <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight mb-2">
+                  100+
+                </div>
+                <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
+                  {lang === "PL" ? "Szczęśliwych domów w całej Polsce" : "Happy homes across Poland"}
                 </p>
               </div>
             </div>

@@ -9,8 +9,8 @@ interface ParentsSectionProps {
 }
 
 export default function ParentsSection({ lang }: ParentsSectionProps) {
-  const mama = MATKI_PHOTOS[0]?.src || "/images/cats/cat_01.webp";
-  const tata = GALLERY_PHOTOS[20]?.src || "/images/cats/cat_21.webp";
+  const mama = "/images/matki/matka_01.webp";
+  const tata = "/images/cats/cat_34.webp";
 
   return (
     <section id="rodzice" className="bg-[#0A0A0A] text-white overflow-hidden">
@@ -36,14 +36,14 @@ export default function ParentsSection({ lang }: ParentsSectionProps) {
         <div className="relative group" style={{ minHeight: "clamp(350px, 50vw, 650px)" }}>
           <Image
             src={mama}
-            alt="Mama — kotka hodowlana Maine Coon"
+            alt="Mama — kotka hodowlana Maine Coon Koci Przyjaciel *PL"
             fill
-            className="object-cover object-top grayscale brightness-75 group-hover:brightness-90 group-hover:grayscale-[80%] transition-all duration-700"
+            className="object-cover object-[50%_20%] group-hover:scale-105 transition-all duration-700"
             sizes="50vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
           <div className="absolute bottom-8 left-8">
-            <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">♀ Mama</span>
+            <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-[#C8973B] font-bold block mb-2">♀ Mama</span>
             <div
               className="font-heading font-light text-white"
               style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)" }}
@@ -51,8 +51,8 @@ export default function ParentsSection({ lang }: ParentsSectionProps) {
               Matka hodowlana
             </div>
             <div className="mt-4 space-y-1">
-              {["HCM Echo: Negatywna", "DNA SMA: N/N", "DNA PKD: N/N", "Rodowód FIFe 5 pokoleń"].map((cert, i) => (
-                <p key={i} className="text-xs font-ui text-white/45 tracking-wider">{cert}</p>
+              {["Niebieski solid (Blue solid)", "HCM Echo Doppler: Prawidłowe", "DNA SMA / PKD: N/N (Czyste)", "Rodowód FIFe 5 pokoleń"].map((cert, i) => (
+                <p key={i} className="text-xs font-ui text-white/70 tracking-wider font-medium">{cert}</p>
               ))}
             </div>
           </div>
@@ -62,14 +62,14 @@ export default function ParentsSection({ lang }: ParentsSectionProps) {
         <div className="relative group" style={{ minHeight: "clamp(350px, 50vw, 650px)" }}>
           <Image
             src={tata}
-            alt="Tata — kocur hodowlany Maine Coon"
+            alt="Tata — kocur hodowlany reproduktor Maine Coon Koci Przyjaciel *PL"
             fill
-            className="object-cover object-top grayscale brightness-75 group-hover:brightness-90 group-hover:grayscale-[80%] transition-all duration-700"
+            className="object-cover object-[50%_20%] group-hover:scale-105 transition-all duration-700"
             sizes="50vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
           <div className="absolute bottom-8 left-8">
-            <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">♂ Tata</span>
+            <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-[#C8973B] font-bold block mb-2">♂ Tata</span>
             <div
               className="font-heading font-light text-white"
               style={{ fontSize: "clamp(1.8rem, 3.5vw, 3rem)" }}
@@ -77,8 +77,8 @@ export default function ParentsSection({ lang }: ParentsSectionProps) {
               Własny reproduktor
             </div>
             <div className="mt-4 space-y-1">
-              {["HCM Echo: Negatywny", "DNA HCM1-A31P: N/N", "DNA SMA: N/N", "Waga: 10+ kg"].map((cert, i) => (
-                <p key={i} className="text-xs font-ui text-white/45 tracking-wider">{cert}</p>
+              {["Czarny srebrzysty klasyczny (MCO ns 22)", "HCM Echo Doppler: Negatywny", "DNA HCM1 / SMA: N/N", "Waga: 11+ kg · Wybitny profil"].map((cert, i) => (
+                <p key={i} className="text-xs font-ui text-white/70 tracking-wider font-medium">{cert}</p>
               ))}
             </div>
           </div>

@@ -37,11 +37,11 @@ export default function AboutPage() {
     },
     {
       icon: Sun,
-      title: lang === "PL" ? "Całoroczna woliera 3.2m" : "Year-round 3.2m Aviary",
+      title: lang === "PL" ? "Bezpieczny wybieg ogrodowy" : "Safe Outdoor Garden Run",
       desc:
         lang === "PL"
-          ? "Stworzyliśmy wybieg z naturalnymi pniami dębu i ocieplanymi tunelami, gdzie koty bezpiecznie korzystają ze słońca i świeżego powietrza przez 365 dni."
-          : "Custom outdoor enclosure with 3.2m oak climbing trunks and heated tunnels for safe outdoor enrichment 365 days a year.",
+          ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszowanego wybiegu ogrodowego, gdzie mogą wspinać się, obserwować naturę i korzystać ze świeżego powietrza. Żadnych boksów, żadnych izolacji."
+          : "Cats have year-round access to a safe, covered garden enclosure where they can climb, explore nature, and enjoy fresh air. No kennels, no isolation.",
     },
     {
       icon: Stethoscope,
@@ -62,12 +62,12 @@ export default function AboutPage() {
   ];
 
   const galleryImages = [
-    { src: "/images/cats/cat_01.webp", caption: "Nasz salon — codzienne chwile bliskości" },
-    { src: "/images/cats/cat_06.webp", caption: "Spokój i socjalizacja od pierwszych tygodni" },
-    { src: "/images/cats/cat_08.webp", caption: "Majestatyczne pędzle i spojrzenie łagodnego giganta" },
-    { src: "/images/cats/cat_11.webp", caption: "Zabawa na drapakach i pniach dębowych" },
-    { src: "/images/cats/cat_15.webp", caption: "Czystość, jedwabista szata i zrównoważony charakter" },
-    { src: "/images/cats/cat_19.webp", caption: "Więź z opiekunem — kot o sercu i oddaniu psa" },
+    { src: "/images/cats/cat_09.webp", caption: "Mama z kociakiem — spokój i domowe ciepło" },
+    { src: "/images/cats/cat_27.webp", caption: "100% socjalizacji — od małego przyzwyczajone do dzieci" },
+    { src: "/images/cats/cat_15.webp", caption: "Fascynacja wodą — wyprawa na desce SUP po jeziorze" },
+    { src: "/images/cats/cat_32.webp", caption: "Certyfikowany 5-pokoleniowy rodowód FIFe / FPL" },
+    { src: "/images/cats/cat_20.webp", caption: "Zabawa na kanapie — życie w salonie bez klatek" },
+    { src: "/images/cats/cat_28.webp", caption: "Królewska wyprawka dla każdego opuszczającego hodowlę malucha" },
   ];
 
   return (
@@ -108,8 +108,8 @@ export default function AboutPage() {
 
           <p className="text-base sm:text-lg text-zinc-300 font-body max-w-3xl mx-auto font-light leading-relaxed mb-10">
             {lang === "PL"
-              ? "Nie prowadzimy masowej hodowli w piwnicach czy wolierach zewnętrznych bez kontaktu z człowiekiem. Nasze Maine Coony to członkowie naszej rodziny, którzy od pierwszego oddechu dorastają przy dzieciach, psie i codziennych dźwiękach domowego życia."
-              : "We don't run a mass cattery in kennels. Our Maine Coons are cherished family members raised from day one with children, dogs, and everyday household warmth."}
+              ? "Nie prowadzimy masowej produkcji kociąt. Jesteśmy małą, domową hodowlą — nasze Maine Coony to członkowie naszej rodziny, którzy od pierwszego oddechu dorastają przy dzieciach, psie i codziennych dźwiękach domowego życia."
+              : "We are a small, family home cattery. Our Maine Coons are cherished family members raised from day one with children, dogs, and everyday household warmth."}
           </p>
         </section>
 
@@ -117,16 +117,16 @@ export default function AboutPage() {
         <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-24">
           <div className="relative w-full h-[360px] sm:h-[480px] md:h-[560px] rounded-3xl overflow-hidden border border-white/15 shadow-2xl">
             <Image
-              src="/images/cats/cat_01.webp"
-              alt="Hodowla Kotów Maine Coon Koci Przyjaciel *PL"
+              src="/images/cats/cat_18.webp"
+              alt="Hodowla Kotów Maine Coon Koci Przyjaciel *PL Wrocław"
               fill
-              className="object-cover object-top"
+              className="object-cover object-[50%_25%]"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
             <div className="absolute bottom-6 sm:bottom-10 left-6 sm:left-10 max-w-lg">
               <span className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-mono text-amber-300 mb-3 inline-block">
-                DOMOWE ŚRODOWISKO
+                DOMOWE ŚRODOWISKO & CERTYFIKAT
               </span>
               <p className="text-xl sm:text-2xl font-heading font-medium text-white leading-snug">
                 „Prawdziwy charakter kota kształtuje się w miłości i bezpieczeństwie, a nie za kratami boksów.”

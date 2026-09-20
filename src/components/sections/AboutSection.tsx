@@ -22,11 +22,10 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           className="font-heading font-light text-black leading-[0.9] tracking-tight"
           style={{ fontSize: "clamp(2.8rem, 7vw, 6.5rem)" }}
         >
-          Pasja,{" "}
+          Kochamy to,{" "}
           <span className="font-semibold italic">
-            którą dzielimy
+            co robimy.
           </span>
-          <br />od lat.
         </h2>
       </div>
 
@@ -34,13 +33,13 @@ export default function AboutSection({ lang }: AboutSectionProps) {
       <div className="reveal w-full" style={{ height: "clamp(300px, 55vw, 680px)" }}>
         <div className="relative w-full h-full">
           <Image
-            src="/images/cats/cat_01.webp"
-            alt="Hodowla Koci Przyjaciel PL — Maine Coon"
+            src="/images/cats/cat_24.webp"
+            alt="Hodowla Koci Przyjaciel PL — bliskość i miłość do kotów Maine Coon"
             fill
-            className="object-cover object-top grayscale"
+            className="object-cover object-[50%_20%]"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-white/90 via-transparent to-transparent" />
         </div>
       </div>
 
@@ -52,13 +51,13 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           <div className="reveal space-y-5">
             <p className="text-base sm:text-lg font-body text-black/70 leading-relaxed">
               {lang === "PL"
-                ? "Koci Przyjaciel *PL to domowa hodowla wielkich kotów Maine Coon zarejestrowana w Polskiej Federacji Felinologicznej «Felis Polonia» (FPL), działającej pod auspicjami FIFe."
-                : "Koci Przyjaciel *PL is a dedicated home cattery of majestic Maine Coons registered with Felis Polonia (FPL) under the auspices of FIFe."}
+                ? "Jesteśmy małą, rodzinną hodowlą kotów Maine Coon z Wrocławia. Nie prowadzimy masowej produkcji kociaków — mamy kilka miotów w roku i każde kociątko traktujemy jak członka rodziny."
+                : "We are a small, family home cattery of Maine Coon cats from Wroclaw. We don't mass-produce kittens — we have a few litters a year and treat every kitten as a family member."}
             </p>
             <p className="text-base sm:text-lg font-body text-black/70 leading-relaxed">
               {lang === "PL"
-                ? "Nasze koty żyją z nami — w salonie, z dziećmi, z psem. Zero klatek. Zero boksów. Posiadamy wyłącznie własne reproduktory, co gwarantuje 100% kontrolę genetyczną."
-                : "Our cats live freely in our home — no cages, no pens. With children, with our dog. We own our own studs, guaranteeing full genetic control."}
+                ? "Nasze koty żyją razem z nami w domu — bawią się z dziećmi, drzemią na kanapie i wychodzą do ogrodu. Dzięki temu kociaki, które do Was trafiają, są otwarte na ludzi i gotowe na życie w nowym domu."
+                : "Our cats live with us at home — they play with children, nap on the sofa and go outside to the garden. Thanks to this, kittens that come to you are open to people and ready for life in a new home."}
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-4">
               <Link
@@ -83,9 +82,9 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           {/* Stats — duże liczby jak Apple */}
           <div className="reveal reveal-delay-2 space-y-10">
             {[
-              { num: "26 000+", label: lang === "PL" ? "Społeczność na Facebooku" : "Facebook Community" },
-              { num: "100+", label: lang === "PL" ? "Kociąt w kochających domach" : "Kittens in loving homes" },
-              { num: "10+", label: lang === "PL" ? "Lat doświadczenia felinologicznego" : "Years of experience" },
+              { num: "26 000+", label: lang === "PL" ? "Osób obserwuje nas na Facebooku" : "Facebook followers" },
+              { num: "100+", label: lang === "PL" ? "Kociaków trafiło do dobrych domów" : "Kittens in loving homes" },
+              { num: "10+", label: lang === "PL" ? "Lat dowodzimy, że to można robić pięknie" : "Years of experience" },
             ].map((stat, i) => (
               <div key={i} className={`reveal reveal-delay-${i + 1} border-t border-black/10 pt-6`}>
                 <div

@@ -23,7 +23,7 @@ interface TestimonialItem {
 const TESTIMONIALS_DATA: TestimonialItem[] = [
   {
     id: "leo",
-    photo: "/images/cats/cat_03.webp",
+    photo: "/images/cats/cat_26.webp",
     catName: "Leo z Kociego Przyjaciela *PL",
     author: "Karolina & Piotr",
     city: "Warszawa",
@@ -36,7 +36,7 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
   },
   {
     id: "zuzia",
-    photo: "/images/cats/cat_05.webp",
+    photo: "/images/cats/cat_19.webp",
     catName: "Zuzia z Kociego Przyjaciela *PL",
     author: "Agnieszka & Michał",
     city: "Wrocław",
@@ -49,9 +49,9 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
   },
   {
     id: "thor",
-    photo: "/images/cats/cat_09.webp",
+    photo: "/images/cats/cat_27.webp",
     catName: "Thor z Kociego Przyjaciela *PL",
-    author: "Tomasz & Magdalena",
+    author: "Tomasz & Magdalena z synkiem",
     city: "Kraków",
     weight: "11.2 kg",
     timeSinceAdoption: "1.5 roku po adopcji",
@@ -75,7 +75,7 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
   },
   {
     id: "shadow",
-    photo: "/images/cats/cat_16.webp",
+    photo: "/images/cats/cat_18.webp",
     catName: "Shadow z Kociego Przyjaciela *PL",
     author: "Katarzyna",
     city: "Gdańsk",
@@ -88,16 +88,16 @@ const TESTIMONIALS_DATA: TestimonialItem[] = [
   },
   {
     id: "apollo",
-    photo: "/images/cats/cat_21.webp",
+    photo: "/images/cats/cat_32.webp",
     catName: "Apollo z Kociego Przyjaciela *PL",
     author: "Robert & Ewa",
     city: "Katowice",
     weight: "10.8 kg",
     timeSinceAdoption: "2 lata po adopcji",
     textPL:
-      "Kiedy przyjechaliśmy do hodowli we Wrocławiu, zobaczyliśmy koty swobodnie biegające po salonie i ogromnym tarasie z pniami dębowymi. Zero zapachów, zero klatek. Wiedzieliśmy od razu, że to właśnie stąd chcemy mieć naszego kociego syna.",
+      "Kiedy przyjechaliśmy do hodowli we Wrocławiu, zobaczyliśmy koty swobodnie biegające po salonie i bezpiecznym wybiegu ogrodowym. Oficjalny rodowód FPL odebraliśmy na miejscu. Zero zapachów, zero klatek — prawdziwa pasja.",
     textEN:
-      "When we visited the cattery in Wrocław, we saw cats roaming freely in the living room and huge oak terrace. No cages, spotless clean. We knew immediately this was the only place for us.",
+      "When we visited the cattery in Wrocław, we saw cats roaming freely in the living room and garden run. Clean official FPL pedigree provided. No cages, spotless clean.",
   },
 ];
 

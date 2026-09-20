@@ -12,38 +12,38 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
   const cards = [
     {
       icon: Scale,
-      tag: lang === "PL" ? "ANATOMIA & SKALA" : "ANATOMY & SCALE",
-      title: lang === "PL" ? "Majestat do 12 kg" : "Majesty up to 12 kg",
+      tag: lang === "PL" ? "WIELKOŚĆ I WYGLĄD" : "SIZE & APPEARANCE",
+      title: lang === "PL" ? "Jak duże są Maine Coony?" : "How big are Maine Coons?",
       desc: lang === "PL" 
-        ? "Ciało o długości 120 cm, pędzelki rysi na uszach i puszysty pióropusz ogona. Zobacz interaktywne porównanie z psem Beagle i kotem europejskim."
-        : "120 cm length, lynx tips, and full plumage tail. Explore the interactive scale comparison with Beagle and domestic cat.",
+        ? "Dorosły samiec może ważyć nawet 12 kg i mieć ponad metr długości. To jeden z największych kotów domowych na świecie — zobaczysz jak wypadają przy porównaniu z psem."
+        : "An adult male can weigh up to 12 kg and be over a metre long. One of the largest domestic cats in the world — see how they compare to a dog.",
       href: "/baza-wiedzy#porownanie",
     },
     {
       icon: HeartPulse,
-      tag: lang === "PL" ? "ZDROWIE & GENETYKA" : "HEALTH & GENETICS",
-      title: lang === "PL" ? "Echo Doppler serca & DNA" : "Heart Doppler & DNA",
+      tag: lang === "PL" ? "ZDROWIE" : "HEALTH",
+      title: lang === "PL" ? "Jakie badania robimy kotom?" : "What health tests do we do?",
       desc: lang === "PL"
-        ? "Regularne certyfikowane echo serca pod kątem HCM oraz badania genetyczne SMA i PKD z wynikiem N/N (Laboklin). 100% gwarancja czystej linii."
-        : "Certified HCM echocardiography and genetic tests for SMA and PKD (N/N Laboklin). Full genetic safety guarantee.",
+        ? "Przed sprzedaniem kociaka sprawdzamy, czy jego rodzice są zdrowi — badamy serce, wykonujemy testy genetyczne. Wyniki każdego badania pokazujemy kupującemu."
+        : "Before selling a kitten we check that its parents are healthy — we test the heart and run genetic tests. We show every buyer the results of every test.",
       href: "/baza-wiedzy#zdrowie",
     },
     {
       icon: Utensils,
-      tag: lang === "PL" ? "ŻYWIENIE & DIETA" : "NUTRITION & BARF",
-      title: lang === "PL" ? "BARF i karmy bezzbożowe" : "BARF & Grain-free",
+      tag: lang === "PL" ? "ŻYWIENIE" : "NUTRITION",
+      title: lang === "PL" ? "Co jedzą Maine Coony?" : "What do Maine Coons eat?",
       desc: lang === "PL"
-        ? "Maine Coon to bezwzględny mięsożerca. Poznaj zasady komponowania zbilansowanej diety wysokomięsnej dla prawidłowego rozwoju kośćca."
-        : "Maine Coons are obligate carnivores. Discover the nutritional principles of high-meat diets for strong skeletal growth.",
+        ? "Maine Coon potrzebuje dużo białka — najlepiej sprawdza się wysokiej jakości karma mokra lub dieta mięsna. Podpowiemy jak ułożyć jadłospis, żeby kot był zdrowy przez lata."
+        : "Maine Coon needs a lot of protein — high quality wet food or a meat-based diet works best. We will tell you how to plan a menu that keeps your cat healthy for years.",
       href: "/baza-wiedzy#kalkulator",
     },
     {
       icon: Coins,
-      tag: lang === "PL" ? "EKONOMIA OPIEKI" : "COST CALCULATOR",
-      title: lang === "PL" ? "Kalkulator utrzymania" : "Maintenance Calculator",
+      tag: lang === "PL" ? "KOSZTY" : "COSTS",
+      title: lang === "PL" ? "Ile kosztuje Maine Coon miesięcznie?" : "How much does a Maine Coon cost monthly?",
       desc: lang === "PL"
-        ? "Przejrzysta kalkulacja comiesięcznych kosztów: mięso, żwirek kukurydziany, suplementy i rezerwa weterynaryjna. Zero ukrytych niespodzianek."
-        : "Transparent monthly cost calculation: meat, litter, supplements, and veterinary reserve. Zero surprises.",
+        ? "Karma, żwirek, szczepienia, weterynarz — pomoglimy wyliczyć realne miesięczne koszty posiadania kota tej rasy, bez ukrytych niespodzianek."
+        : "Food, litter, vaccinations, vet — we help you calculate the real monthly cost of owning this breed, with no hidden surprises.",
       href: "/baza-wiedzy#kalkulator",
     },
   ];
@@ -71,19 +71,19 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
           >
             {lang === "PL" ? (
               <>
-                Baza Wiedzy o <span className="font-semibold italic">Maine Coon</span>.
+                Wszystko co chcesz wiedzieć o <span className="font-semibold italic">Maine Coon</span>.
               </>
             ) : (
               <>
-                Maine Coon <span className="font-semibold italic">Knowledge Base</span>.
+                Everything you want to know about <span className="font-semibold italic">Maine Coon</span>.
               </>
             )}
           </h2>
 
           <p className="text-base sm:text-lg text-zinc-400 font-body leading-relaxed max-w-2xl mx-auto font-light">
             {lang === "PL"
-              ? "Zebraliśmy 14 lat doświadczenia hodowlanego w przejrzystej bazie wiedzy. Poznaj specyfikę rasy, wymiary, profilaktykę genetyczną i realne koszty życia z kotem."
-              : "We compiled 14 years of cattery experience into a clear guide. Explore breed standards, health testing, dimensions, and real monthly care costs."}
+              ? "Zebraliśmy w jednym miejscu odpowiedzi na pytania, które zadaje prawie każdy zanim zdecyduje się na kocią. Jak duże wyrastają? Co jedzą? Ile kosztuje utrzymanie? Jak się zachowują?"
+              : "We gathered in one place the answers to questions that almost everyone asks before deciding on a kitten. How big do they grow? What do they eat? How much does keeping them cost? How do they behave?"}
           </p>
         </div>
 

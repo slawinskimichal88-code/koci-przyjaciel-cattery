@@ -11,68 +11,68 @@ const TESTS = [
   {
     code: "HCM",
     icon: HeartPulse,
-    title: { PL: "Kardiomiopatia Przerostowa", EN: "Hypertrophic Cardiomyopathy" },
-    status: { PL: "N/N Czyste (DNA + Echo Doppler)", EN: "N/N Clear (DNA + Echo Doppler)" },
+    title: { PL: "Badanie serca", EN: "Heart Screening" },
+    status: { PL: "Wynik: Zdrowe", EN: "Result: Clear" },
     desc: {
-      PL: "Najgroźniejsza genetyczna choroba serca u kotów. Wszyscy nasi rodzice posiadają profil DNA N/N oraz regularne, certyfikowane badanie echo serca z dopplerem.",
-      EN: "The most critical genetic heart condition in cats. All our breeding cats hold N/N DNA status and regular certified Doppler echocardiography.",
+      PL: "Maine Coony są podatne na chorobę serca (kardiomiopatię). Wszystkie nasze koty hodowlane mają regularne badanie echokardiograficzne serca wykonywane przez kardiologa weterynaryjnego.",
+      EN: "Maine Coons are prone to heart disease (cardiomyopathy). All our breeding cats have regular echocardiographic heart checks done by a veterinary cardiologist.",
     },
-    badge: { PL: "Kardiologia", EN: "Cardiology" },
+    badge: { PL: "Serce", EN: "Heart" },
   },
   {
     code: "SMA",
     icon: Dna,
-    title: { PL: "Rdzeniowy Zanik Mięśni", EN: "Spinal Muscular Atrophy" },
-    status: { PL: "N/N Wolny (Certyfikat Laboklin)", EN: "N/N Clear (Laboklin Certified)" },
+    title: { PL: "Badanie genów", EN: "Genetic Testing" },
+    status: { PL: "Wynik: Zdrowe", EN: "Result: Clear" },
     desc: {
-      PL: "Choroba neuronów ruchowych prowadząca do osłabienia mięśni. Całe stado hodowlane Koci Przyjaciel jest w 100% wolne od nosicielstwa wadliwego genu LIX1.",
-      EN: "Motor neuron disease causing muscle atrophy. Our entire breeding stock is 100% certified free of the mutated LIX1 gene.",
+      PL: "Robimy testy DNA sprawdzające czy kot nie nosi genów chorob dziedzicznych. To jedyny sposób, żeby mieć pewność, że kociak nie zachoruje na nie w przyszłości.",
+      EN: "We do DNA tests to check that the cat does not carry genes for hereditary diseases. It is the only way to ensure the kitten won't develop them in the future.",
     },
-    badge: { PL: "Genetyka DNA", EN: "DNA Genetics" },
+    badge: { PL: "Genetyka", EN: "Genetics" },
   },
   {
     code: "PKD",
     icon: Activity,
-    title: { PL: "Wielotorbielowatość Nerek", EN: "Polycystic Kidney Disease" },
-    status: { PL: "N/N Wolny od Torbieli", EN: "N/N Cyst-Free" },
+    title: { PL: "Nerki i narządy wewnętrzne", EN: "Kidneys & Internal Organs" },
+    status: { PL: "Wynik: Zdrowe", EN: "Result: Clear" },
     desc: {
-      PL: "Wrodzona wada nerek. Wszystkie nasze koty posiadają negatywne testy genetyczne oraz profilaktyczne badania ultrasonograficzne nerek.",
-      EN: "Congenital renal disorder. All our cats have certified negative DNA panels and preventative ultrasound examinations.",
+      PL: "Sprawdzamy także nerki naszych kotów za pomocą testów genetycznych i badań USG. To ważne, bo niektóre rasy mogą być podatne na wrodzone choroby nerek.",
+      EN: "We also check our cats' kidneys through genetic tests and ultrasound scans. Important, as some breeds can be prone to congenital kidney diseases.",
     },
-    badge: { PL: "Nefrologia", EN: "Nephrology" },
+    badge: { PL: "Nerki", EN: "Kidneys" },
   },
   {
     code: "FeLV / FIV",
     icon: ShieldCheck,
-    title: { PL: "Białaczka & Wirus Niedoboru", EN: "Feline Leukemia & Immunodeficiency" },
-    status: { PL: "Ujemny / Negative (-)", EN: "Negative (-)" },
+    title: { PL: "Zamknięta hodowla", EN: "Closed Cattery" },
+    status: { PL: "Brak kontaktu z obcymi zwierzętami", EN: "No outside animal contact" },
     desc: {
-      PL: "Wirusy upośledzające układ odpornościowy. Nasza hodowla jest stadem zamkniętym — zero kontaktu z przypadkowymi zwierzętami i zero ryzyka infekcji.",
-      EN: "Immunosuppressive feline viruses. Our cattery is strictly closed — zero outside breeding risk and certified negative pathogen status.",
+      PL: "Nasze koty nie mają kontaktu z obcymi zwierzętami. To prosta, ale skuteczna zasada, która chroni je przed chorobami zakaźnymi.",
+      EN: "Our cats have no contact with outside animals. A simple but effective rule that protects them from infectious diseases.",
     },
-    badge: { PL: "Wirusologia", EN: "Virology" },
+    badge: { PL: "Bezpieczeństwo", EN: "Safety" },
   },
   {
     code: "BAER",
     icon: Stethoscope,
-    title: { PL: "Testy Słuchowe BAER", EN: "BAER Hearing Screening" },
-    status: { PL: "100% Słuch Obustronny", EN: "100% Bilateral Hearing" },
+    title: { PL: "Badanie słuchu", EN: "Hearing Test" },
+    status: { PL: "Słuch prawidłowy", EN: "Normal hearing" },
     desc: {
-      PL: "Dla kotów o umaszczeniu z dominacją bieli wykonujemy badanie potencjałów wywołanych pnia mózgu, gwarantując idealny słuch obustronny.",
-      EN: "Brainstem auditory evoked response tests for white-dominant coats, ensuring certified bilateral hearing with zero genetic impairment.",
+      PL: "U kotów z dużą ilością bieli w umaszczeniu sprawdzamy słuch specjalistycznym testem. Dzięki temu mamy pewność, że kociak słyszy prawidłowo.",
+      EN: "For cats with a lot of white in their coat we check hearing with a specialist test. This ensures the kitten hears correctly.",
     },
-    badge: { PL: "Audiologia", EN: "Audiology" },
+    badge: { PL: "Słuch", EN: "Hearing" },
   },
   {
-    code: "FIFe / FPL",
+    code: "Rodowód",
     icon: FileCheck,
-    title: { PL: "5-Pokoleniowy Rodowód", EN: "5-Generation Pedigree" },
-    status: { PL: "100% Autentyczność FPL", EN: "100% Authentic FPL" },
+    title: { PL: "Oficjalny rodowód", EN: "Official Pedigree" },
+    status: { PL: "Potwierdzony przez FIFe / FPL", EN: "Certified by FIFe / FPL" },
     desc: {
-      PL: "Oficjalny rodowód Felis Polonia honorowany przez wszystkie federacje felinologiczne na świecie. Brak luk genealogicznych i zerowy współczynnik inbreedu.",
-      EN: "Official Felis Polonia pedigree recognized globally under FIFe. Zero undocumented lineage and proven genetic diversity.",
+      PL: "Każde kocię dostaje oficjalny dokument rodowodowy potwierdzający, skąd pochodzi i jacy są jego pradziadkowie. To dowód na to, że to prawdziwy Maine Coon.",
+      EN: "Every kitten receives an official pedigree document proving its origin and ancestry. Proof that it is a genuine Maine Coon.",
     },
-    badge: { PL: "Genealogia", EN: "Genealogy" },
+    badge: { PL: "Rodowód", EN: "Pedigree" },
   },
 ];
 
@@ -89,13 +89,13 @@ export default function HealthSection({ lang }: HealthSectionProps) {
           className="font-heading font-light text-black leading-[0.9] tracking-tight"
           style={{ fontSize: "clamp(2.8rem, 7vw, 6.5rem)" }}
         >
-          Zdrowie i genetyka.<br />
-          <span className="font-semibold italic">Czyste linie DNA.</span>
+          Zdrowie naszych kotów.<br />
+          <span className="font-semibold italic">Nie zostawiamy nic przypadkowi.</span>
         </h2>
         <p className="mt-8 text-base sm:text-lg font-body text-black/70 max-w-2xl leading-relaxed">
           {lang === "PL"
-            ? "Wybierając nowego członka rodziny na kilkanaście lat, fundamentem musi być bezwzględna transparentność medyczna. Wyniki badań wszystkich naszych kotów hodowlanych są zawsze do wglądu przyszłych opiekunów."
-            : "When choosing a feline companion for 15+ years, uncompromising medical transparency is paramount. All certified health documents and DNA results are fully disclosed to future owners."}
+            ? "Zanim kociak trafi do Ciebie, jego rodzice mają za sobą pełne badania — serce, geny, słuch. Pokazujemy wyniki każdemu przyszłemu właścicielowi. Żadnych tajemnic, żadnych niespodzianek."
+            : "Before a kitten comes to you, its parents have undergone full health checks — heart, genes, hearing. We share all results with every future owner. No secrets, no surprises."}
         </p>
       </div>
 
@@ -147,26 +147,26 @@ export default function HealthSection({ lang }: HealthSectionProps) {
         <div className="reveal border-t border-black/10 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
             <div className="text-2xl sm:text-3xl font-heading font-semibold text-black mb-1">
-              Laboklin Germany
+              Laboklin
             </div>
             <p className="text-xs font-ui uppercase tracking-widest text-black/40">
-              {lang === "PL" ? "Akredytowane laboratorium DNA" : "Accredited DNA Laboratory"}
+              {lang === "PL" ? "Niemieckie laboratorium genetyczne" : "German genetics laboratory"}
             </p>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-heading font-semibold text-black mb-1">
-              Echo Doppler
+              Echo serca
             </div>
             <p className="text-xs font-ui uppercase tracking-widest text-black/40">
-              {lang === "PL" ? "Cykliczna kontrola kardiologiczna" : "Periodic Cardiology Screening"}
+              {lang === "PL" ? "Regularne badanie kardiologiczne" : "Regular cardiology screening"}
             </p>
           </div>
           <div>
             <div className="text-2xl sm:text-3xl font-heading font-semibold text-black mb-1">
-              100% N/N
+              Zdrowe linie
             </div>
             <p className="text-xs font-ui uppercase tracking-widest text-black/40">
-              {lang === "PL" ? "Status wolny od mutacji genetycznych" : "Mutation-Free Genetic Status"}
+              {lang === "PL" ? "Potwierdzone dokumentami dla każdego" : "Certified documents for everyone"}
             </p>
           </div>
         </div>

@@ -43,25 +43,28 @@ export default function BreedSection({ lang }: BreedSectionProps) {
         >
           Maine Coon.{" "}
           <br />
-          <span className="font-semibold italic">Łagodny Gigant.</span>
+          <span className="font-semibold italic">Dlaczego go pokochasz.</span>
         </h2>
       </div>
 
-      {/* ── Full-bleed zdjęcie ─────────────────────────────────── */}
-      <div className="reveal w-full" style={{ height: "clamp(280px, 50vw, 620px)" }}>
+      {/* ── Full-bleed zdjęcie — Majestat rasy w plenerze ─────────────────── */}
+      <div className="reveal w-full" style={{ height: "clamp(320px, 55vw, 650px)" }}>
         <div className="relative w-full h-full">
           <Image
-            src="/images/cats/cat_03.webp"
-            alt="Maine Coon — Koci Przyjaciel PL"
+            src="/images/cats/cat_23.webp"
+            alt="Majestatyczny Maine Coon z hodowli Koci Przyjaciel *PL w pełnym wymiarze"
             fill
-            className="object-cover object-[50%_20%] grayscale brightness-75"
+            className="object-cover object-[50%_35%]"
             sizes="100vw"
           />
-          {/* Overlay z napisem */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
-          <div className="absolute bottom-8 left-6 sm:left-10 lg:left-16">
-            <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40">
+          {/* Subtelny overlay z napisem */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+          <div className="absolute bottom-8 left-6 sm:left-10 lg:left-16 flex items-center gap-3">
+            <span className="px-3.5 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] font-ui uppercase tracking-[0.3em] text-[#C8973B] font-bold">
               FIFe Standard · MCO
+            </span>
+            <span className="text-xs font-body text-white/80 hidden sm:inline-block">
+              Potężna sylwetka, puszysty ogon i łagodny wzrok
             </span>
           </div>
         </div>
@@ -99,12 +102,12 @@ export default function BreedSection({ lang }: BreedSectionProps) {
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-5">
             {[
-              lang === "PL" ? "Psi temperament" : "Dog-like temperament",
-              lang === "PL" ? "Przyjazny dzieciom" : "Great with children",
-              lang === "PL" ? "Tolerancja psów" : "Dog-friendly",
-              lang === "PL" ? "Inteligencja" : "High intelligence",
-              lang === "PL" ? "Łagodna łagodność" : "Gentle nature",
-              lang === "PL" ? "Zbieranie zabawek" : "Fetches toys",
+              lang === "PL" ? "Kocha ludzi jak pies" : "Loves people like a dog",
+              lang === "PL" ? "świetny z dziećmi" : "Great with children",
+              lang === "PL" ? "Tolerancyjny wobec psów" : "Dog-friendly",
+              lang === "PL" ? "Bardzo mądry" : "Very intelligent",
+              lang === "PL" ? "Niezwykła łagodność" : "Gentle nature",
+              lang === "PL" ? "Przynosi zabawki jak retriever" : "Fetches toys like a retriever",
             ].map((trait, i) => (
               <div key={i} className={`reveal reveal-delay-${i + 1} flex items-center gap-3 py-3 border-b border-white/5`}>
                 <div className="w-1 h-1 rounded-full bg-white/30 shrink-0" />

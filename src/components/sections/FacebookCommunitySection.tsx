@@ -11,7 +11,15 @@ interface FacebookCommunitySectionProps {
 }
 
 export default function FacebookCommunitySection({ lang }: FacebookCommunitySectionProps) {
-  const communityPhotos = GALLERY_PHOTOS.slice(6, 12);
+  // Starannie dobrane autentyczne zdjęcia od rodzin i ze społeczności
+  const communityPhotos = [
+    { id: "comm-1", src: "/images/cats/cat_27.webp", title: "Rodzina z synkiem i kotkiem w ogrodzie" },
+    { id: "comm-2", src: "/images/cats/cat_26.webp", title: "Kociak w bezpiecznych ramionach nowego opiekuna" },
+    { id: "comm-3", src: "/images/cats/cat_11.webp", title: "Czuły buziak od nowej rodziny" },
+    { id: "comm-4", src: "/images/cats/cat_15.webp", title: "Maine Coon na desce SUP — miłość do wody" },
+    { id: "comm-5", src: "/images/cats/cat_24.webp", title: "Czułość o zachodzie słońca nad jeziorem" },
+    { id: "comm-6", src: "/images/cats/cat_20.webp", title: "Radosna zabawa z maskotką na kanapie" },
+  ];
   const [followerCount, setFollowerCount] = useState<string>("26 400+");
   const [isLive, setIsLive] = useState<boolean>(false);
 
@@ -131,7 +139,7 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               </div>
 
               <p className="text-sm text-zinc-300 font-body mb-8 leading-relaxed">
-                Krótkie formy wideo w formacie 4K, zbliżenia na rysiowe pędzle uszu, zabawy w wolierze i backstage z życia hodowli.
+                Krótkie formy wideo w formacie 4K, zbliżenia na rysiowe pędzle uszu, zabawy na wybiegu i backstage z życia hodowli.
               </p>
             </div>
 
