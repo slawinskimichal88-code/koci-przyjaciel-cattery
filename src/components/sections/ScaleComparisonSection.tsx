@@ -377,10 +377,10 @@ export default function ScaleComparisonSection({
   lang = "PL",
   compact = false,
 }: ScaleComparisonSectionProps) {
-  // Stan: która cecha jest otwarta (null = brak aktywnej cechy, czysty widok)
-  const [activeFeatureId, setActiveFeatureId] = useState<string | null>("ears");
+  // Stan: w trybie kompaktowym nie otwieramy kart z kwadratami
+  const [activeFeatureId, setActiveFeatureId] = useState<string | null>(compact ? null : "ears");
   const [hoveredHotspotId, setHoveredHotspotId] = useState<string | null>(null);
-  const [showRulerLines, setShowRulerLines] = useState<boolean>(false);
+  const [showRulerLines, setShowRulerLines] = useState<boolean>(true);
 
   const activeFeature = CHARACTERISTIC_FEATURES.find((f) => f.id === activeFeatureId) || null;
   const currentFeatureIdx = activeFeature
@@ -388,6 +388,7 @@ export default function ScaleComparisonSection({
     : -1;
 
   const handleOpenFeature = (featureId: string) => {
+    if (compact) return;
     setActiveFeatureId(featureId);
   };
 
@@ -430,7 +431,7 @@ export default function ScaleComparisonSection({
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-5">
             <Crosshair className="w-3.5 h-3.5 text-white/70 animate-spin-slow" />
             <span className="text-[10px] sm:text-[11px] font-ui uppercase tracking-[0.35em] text-white/80 font-semibold">
-              Interaktywne Studio Porównawcze · Skala 1:1
+              {compact ? "SKALA 1:1 · PORÓWNANIE GABARYTÓW" : "Interaktywne Studio Porównawcze · Skala 1:1"}
             </span>
           </div>
 
@@ -441,58 +442,63 @@ export default function ScaleComparisonSection({
             Maine Coon vs Kot Domowy vs Pies.
             <br />
             <span className="font-semibold italic text-white/95">
-              Klikaj kropki na zwierzętach.
+              {compact ? "Wzrost psa w ciele kota." : "Klikaj kropki na zwierzętach."}
             </span>
           </h2>
 
           <p className="text-sm sm:text-base font-body text-white/65 leading-relaxed max-w-2xl mx-auto">
-            Najedź lub kliknij dowolną pulsującą kropkę na zdjęciu, aby otworzyć interaktywną kartę
-            i sprawdzić, czym Maine Coon różni się od psa i zwykłego kota w codziennym życiu.
+            {compact
+              ? "Porównanie skali rzeczywistej: w kłębie dorosły Maine Coon osiąga 38 cm — dokładnie tyle samo co pies rasy Beagle, przewyższając zwykłego kota domowego o 14 cm."
+              : "Najedź lub kliknij dowolną pulsującą kropkę na zdjęciu, aby otworzyć interaktywną kartę i sprawdzić, czym Maine Coon różni się od psa i zwykłego kota w codziennym życiu."}
           </p>
         </div>
 
-        {/* ── Szybki Pasek Apple Pills — Wybór Cechy ─────────────────── */}
-        <div className="flex items-center justify-center gap-2 mb-6 flex-wrap reveal">
-          {CHARACTERISTIC_FEATURES.map((feat) => {
-            const isSelected = activeFeatureId === feat.id;
-            return (
-              <button
-                key={feat.id}
-                onClick={() => handleOpenFeature(feat.id)}
-                className={`px-3.5 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${
-                  isSelected
-                    ? "bg-white text-black font-bold shadow-[0_0_25px_rgba(255,255,255,0.4)] scale-105"
-                    : "bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20"
-                }`}
-              >
-                <span className="text-sm">{feat.icon}</span>
-                <span>{feat.name}</span>
-              </button>
-            );
-          })}
+        {/* ── Szybki Pasek Apple Pills — Wybór Cechy (TYLKO w pełnej Bazie Wiedzy) ── */}
+        {!compact && (
+          <div className="flex items-center justify-center gap-2 mb-6 flex-wrap reveal">
+            {CHARACTERISTIC_FEATURES.map((feat) => {
+              const isSelected = activeFeatureId === feat.id;
+              return (
+                <button
+                  key={feat.id}
+                  onClick={() => handleOpenFeature(feat.id)}
+                  className={`px-3.5 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${
+                    isSelected
+                      ? "bg-white text-black font-bold shadow-[0_0_25px_rgba(255,255,255,0.4)] scale-105"
+                      : "bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20"
+                  }`}
+                >
+                  <span className="text-sm">{feat.icon}</span>
+                  <span>{feat.name}</span>
+                </button>
+              );
+            })}
 
-          <button
-            onClick={() => setShowRulerLines(!showRulerLines)}
-            className={`px-3.5 py-2 rounded-full text-xs font-ui uppercase tracking-wider border transition-all cursor-pointer flex items-center gap-1.5 ${
-              showRulerLines
-                ? "bg-white/15 border-white/30 text-white"
-                : "bg-transparent border-white/10 text-white/40 hover:text-white"
-            }`}
-          >
-            <Ruler className="w-3.5 h-3.5" />
-            <span>Linie wzrostu: {showRulerLines ? "Wł." : "Wył."}</span>
-          </button>
-        </div>
+            <button
+              onClick={() => setShowRulerLines(!showRulerLines)}
+              className={`px-3.5 py-2 rounded-full text-xs font-ui uppercase tracking-wider border transition-all cursor-pointer flex items-center gap-1.5 ${
+                showRulerLines
+                  ? "bg-white/15 border-white/30 text-white"
+                  : "bg-transparent border-white/10 text-white/40 hover:text-white"
+              }`}
+            >
+              <Ruler className="w-3.5 h-3.5" />
+              <span>Linie wzrostu: {showRulerLines ? "Wł." : "Wył."}</span>
+            </button>
+          </div>
+        )}
 
         {/* ── GŁÓWNA SCENA INTERAKTYWNA: Apple Canvas ze Wskaźnikami ──── */}
-        <div className="relative rounded-3xl border border-white/15 bg-black overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] reveal mb-12">
+        <div className="relative rounded-3xl border border-white/15 bg-black overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] reveal mb-8">
           
           {/* Pasek statusu u góry sceny */}
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] backdrop-blur-md flex items-center justify-between flex-wrap gap-2 text-xs font-ui">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-white/80">
-                {activeFeature ? (
+              <span className="text-white/80 font-mono text-[11px]">
+                {compact ? (
+                  <>Skala 1:1: Kot Domowy (24 cm) · Maine Coon (38 cm) · Pies Beagle (38 cm)</>
+                ) : activeFeature ? (
                   <>
                     Wybrana cecha: <strong className="text-white">{activeFeature.icon} {activeFeature.name}</strong>
                   </>
@@ -505,7 +511,15 @@ export default function ScaleComparisonSection({
               </span>
             </div>
 
-            {activeFeature && (
+            {compact ? (
+              <Link
+                href="/baza-wiedzy#porownanie"
+                className="text-amber-400 hover:text-amber-300 font-mono text-[11px] flex items-center gap-1 transition-colors"
+              >
+                <span>Baza Wiedzy</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            ) : activeFeature ? (
               <button
                 onClick={handleCloseFeature}
                 className="px-2.5 py-1 rounded-full bg-white/10 hover:bg-white/20 text-white/70 hover:text-white transition-all cursor-pointer flex items-center gap-1 text-[11px]"
@@ -513,7 +527,7 @@ export default function ScaleComparisonSection({
                 <X className="w-3 h-3" />
                 <span>Zamknij podgląd [✕]</span>
               </button>
-            )}
+            ) : null}
           </div>
 
           {/* Obszar Zdjęcia z Kropkami */}
@@ -554,17 +568,18 @@ export default function ScaleComparisonSection({
               </div>
             )}
 
-            {/* ── WSZYSTKIE INTERAKTYWNE KROPKI NA ZWIERZĘTACH (BEZ STAŁYCH ETYKIET!) ── */}
-            {ALL_HOTSPOTS.map((hotspot) => {
-              const isSelected = activeFeatureId === hotspot.featureId;
-              const isHovered = hoveredHotspotId === hotspot.id;
+            {/* ── WSZYSTKIE INTERAKTYWNE KROPKI NA ZWIERZĘTACH (TYLKO W PEŁNEJ BAZIE WIEDZY) ── */}
+            {!compact &&
+              ALL_HOTSPOTS.map((hotspot) => {
+                const isSelected = activeFeatureId === hotspot.featureId;
+                const isHovered = hoveredHotspotId === hotspot.id;
 
-              return (
-                <div
-                  key={hotspot.id}
-                  style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
-                  className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
-                >
+                return (
+                  <div
+                    key={hotspot.id}
+                    style={{ left: `${hotspot.x}%`, top: `${hotspot.y}%` }}
+                    className="absolute z-20 -translate-x-1/2 -translate-y-1/2"
+                  >
                   <button
                     onClick={() => handleOpenFeature(hotspot.featureId)}
                     onMouseEnter={() => setHoveredHotspotId(hotspot.id)}
@@ -622,8 +637,8 @@ export default function ScaleComparisonSection({
             })}
           </div>
 
-          {/* ── WYSKAKUJĄCA KARTA APPLE HUD (PO KLIKNIĘCIU KROPKI) ───────── */}
-          {activeFeature && (
+          {/* ── WYSKAKUJĄCA KARTA APPLE HUD (PO KLIKNIĘCIU KROPKI - TYLKO W PEŁNEJ BAZIE WIEDZY) ── */}
+          {!compact && activeFeature && (
             <div className="border-t border-white/15 bg-gradient-to-b from-white/[0.04] to-black/95 p-5 sm:p-7 backdrop-blur-2xl transition-all duration-300 animate-in fade-in zoom-in-95">
               
               {/* Nagłówek Otwartej Karty */}
@@ -770,79 +785,28 @@ export default function ScaleComparisonSection({
 
         {/* ── PODSUMOWANIE / BENTO GRID ─────────────────────────────────── */}
         {compact ? (
-          /* Widok kompaktowy na Stronie Głównej: Pigułka wiedzy + hiperłącze do Bazy Wiedzy */
-          <div className="reveal">
-            <div className="p-8 sm:p-12 rounded-3xl border border-white/15 bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-black/80 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                
-                {/* 3 kluczowe metryki w pigułkach */}
-                <div className="lg:col-span-7 space-y-6">
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-mono uppercase tracking-wider text-amber-300">
-                    <BookOpen className="w-3.5 h-3.5 text-amber-400" />
-                    <span>{lang === "PL" ? "Kluczowe Parametry Skali 1:1" : "1:1 Scale Key Metrics"}</span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-heading font-medium text-white leading-tight">
-                    {lang === "PL"
-                      ? "Format małego psa w ciele dostojnego kota kanapowego."
-                      : "The format of a dog in the body of a magnificent cat."}
-                  </h3>
-
-                  <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-2">
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-                      <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-0.5">120 cm</div>
-                      <div className="text-[10px] sm:text-xs font-ui text-white/50 uppercase tracking-wider">
-                        {lang === "PL" ? "Długość z ogonem" : "Length with tail"}
-                      </div>
-                    </div>
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-                      <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-0.5">11.5 kg</div>
-                      <div className="text-[10px] sm:text-xs font-ui text-white/50 uppercase tracking-wider">
-                        {lang === "PL" ? "Waga kocura" : "Adult male weight"}
-                      </div>
-                    </div>
-                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
-                      <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-0.5">38 cm</div>
-                      <div className="text-[10px] sm:text-xs font-ui text-white/50 uppercase tracking-wider">
-                        {lang === "PL" ? "Kłąb (= Beagle)" : "Withers (= Beagle)"}
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="text-xs sm:text-sm font-body text-white/70 leading-relaxed">
-                    {lang === "PL"
-                      ? "Maine Coon łączy oddanie i inteligencję psa (aportuje, wita w drzwiach, uwielbia wodę) z wygodą posiadania kota (brak spacerów o świcie w ulewie, 100% czystości w kuwecie)."
-                      : "Maine Coon combines dog loyalty and intelligence with feline indoor comfort."}
-                  </p>
-                </div>
-
-                {/* Przyciski CTA i przejście do Bazy Wiedzy */}
-                <div className="lg:col-span-5 flex flex-col items-stretch gap-4 bg-black/50 p-6 sm:p-8 rounded-2xl border border-white/10">
-                  <div className="text-xs font-mono uppercase tracking-widest text-white/40 mb-1">
-                    {lang === "PL" ? "Chcesz poznać wszystkie szczegóły?" : "Want full details?"}
-                  </div>
-                  <p className="text-sm font-heading font-light text-white/90 mb-2">
-                    {lang === "PL"
-                      ? "Zobacz wyczerpujące zestawienie 6 obszarów anatomicznych, zachowań w wodzie i higieny w Bazie Wiedzy."
-                      : "Explore all 6 anatomical areas, water behaviors, and hygiene differences in our Knowledge Base."}
-                  </p>
-
-                  <Link
-                    href="/baza-wiedzy#porownanie"
-                    className="w-full py-3.5 px-6 rounded-full bg-white text-black font-ui uppercase tracking-wider text-xs font-bold hover:bg-white/85 transition-all text-center flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(255,255,255,0.2)]"
-                  >
-                    <span>{lang === "PL" ? "Pełne Porównanie w Bazie Wiedzy" : "Full Comparison in Knowledge Base"}</span>
-                    <ArrowRight className="w-4 h-4 text-black" />
-                  </Link>
-
-                  <a
-                    href="#kocieta"
-                    className="w-full py-3 px-6 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white font-ui uppercase tracking-wider text-xs font-medium transition-all text-center"
-                  >
-                    {lang === "PL" ? "Zobacz Dostępne Kocięta" : "View Available Kittens"}
-                  </a>
-                </div>
-
+          /* Widok czysty na Stronie Głównej: Tylko hiperłącze do Bazy Wiedzy, ZERO kwadratów! */
+          <div className="text-center pt-4 pb-4 reveal">
+            <div className="max-w-2xl mx-auto space-y-4">
+              <p className="text-sm sm:text-base font-body text-white/75 leading-relaxed font-light">
+                {lang === "PL"
+                  ? "Maine Coon osiąga w kłębie 38 cm — dokładnie tyle samo co dorosły pies rasy Beagle. Łączy oddanie i inteligencję psa z komfortem i czystością kota domowego."
+                  : "At the withers, an adult Maine Coon reaches 38 cm — exactly the same scale as a Beagle."}
+              </p>
+              <div className="pt-2 flex flex-wrap items-center justify-center gap-4">
+                <Link
+                  href="/baza-wiedzy#porownanie"
+                  className="px-8 py-4 rounded-full bg-white text-black font-ui uppercase tracking-wider text-xs font-bold hover:bg-white/85 transition-all shadow-[0_10px_35px_rgba(255,255,255,0.2)] flex items-center gap-2 cursor-pointer"
+                >
+                  <span>{lang === "PL" ? "Zobacz pełne porównanie z psem w Bazie Wiedzy" : "See Full Comparison in Knowledge Base"}</span>
+                  <ArrowRight className="w-4 h-4 text-black" />
+                </Link>
+                <a
+                  href="#kocieta"
+                  className="px-6 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui uppercase tracking-wider text-xs font-medium transition-all"
+                >
+                  {lang === "PL" ? "Dostępne Kocięta" : "Available Kittens"}
+                </a>
               </div>
             </div>
           </div>

@@ -382,48 +382,53 @@ export default function EnclosureSection({
             </div>
           </div>
 
-          {/* Układ 2-kolumnowy desktop */}
-          <div className="w-full max-w-[1440px] mx-auto px-12 lg:px-16 h-full flex flex-row items-center justify-between relative z-10">
+          {/* Układ 2-kolumnowy desktop (Przestronny, szeroki układ Apple Pro) */}
+          <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-12 xl:px-16 h-full flex flex-row items-center justify-between gap-10 xl:gap-16 relative z-10">
             
-            {/* Lewa kolumna: teksty desktop */}
-            <div className="w-[44%] max-w-[500px] z-20 relative h-[440px] flex items-center">
+            {/* Lewa kolumna: szeroki, elegancki blok tekstowy (Koniec z wąskim paskiem z boku!) */}
+            <div className="w-[50%] xl:w-[52%] max-w-[680px] z-20 relative h-[480px] flex items-center">
               
               {/* 01. Wybieg */}
               <div
                 ref={textBlock1Ref}
-                className="opacity-0 will-change-transform space-y-4 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
               >
                 <div>
                   <p className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold mb-2">
-                    01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
+                    01 / {lang === "PL" ? "OGRÓD I ZADASZONY WYBIEG" : "GARDEN & OUTDOOR RUN"}
                   </p>
-                  <h3 className="text-5xl font-heading font-light text-white leading-tight tracking-tight">
+                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
                     {lang === "PL" ? (
-                      <>Wychodzą na<br /> <span className="text-[#86868b]">dwór kiedy chcą.</span></>
+                      <>Wychodzą na świeże powietrze, <span className="text-[#86868b]">kiedy tylko chcą.</span></>
                     ) : (
-                      <>They go outside<br /> <span className="text-[#86868b]">whenever they want.</span></>
+                      <>They go outside freely, <span className="text-[#86868b]">whenever they want.</span></>
                     )}
                   </h3>
                 </div>
-                <p className="text-lg font-body text-[#ceced2] leading-relaxed font-light">
+                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
                   {lang === "PL"
-                    ? "Koty mają dostęp do bezpiecznego ogrodu i wybiegu przez cały rok. Mogą oddychać świeżym powietrzem, obserwować ptaki i biegać, kiedy tylko mają na to ochotę."
-                    : "Our cats have access to a safe garden and outdoor run all year round. They can breathe fresh air, watch birds and run whenever they feel like it."}
+                    ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i swobodnie biegają na wolności bez krat i klatek."
+                    : "Our cats have year-round access to a safe, covered garden run. They breathe fresh air, watch nature and run freely without cages."}
                 </p>
-                <div className="mt-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
-                  <div className="text-7xl font-heading font-extralight text-white leading-none tracking-tight">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
+                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
                     365 dni
                   </div>
-                  <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] text-right">
-                    {lang === "PL" ? "Dostęp do ogrodu przez cały rok" : "Year-round garden access"}
-                  </p>
+                  <div className="border-l border-white/10 pl-5">
+                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
+                      {lang === "PL" ? "Całoroczny wybieg ogrodowy" : "Year-round garden access"}
+                    </p>
+                    <p className="text-xs text-white/60 font-light">
+                      {lang === "PL" ? "Bezpieczny, zadaszony, dostępny z salonu" : "Covered, safe, directly accessible"}
+                    </p>
+                  </div>
                 </div>
                 <div className="pt-2">
                   <Link
                     href="/o-nas#wybieg"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
                   >
-                    <span>{lang === "PL" ? "Zobacz galerię wybiegu w O nas" : "View enclosure in About"}</span>
+                    <span>{lang === "PL" ? "Zobacz pełną galerię wybiegu w zakładce O nas" : "View full enclosure gallery in About"}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
                   </Link>
                 </div>
@@ -432,64 +437,92 @@ export default function EnclosureSection({
               {/* 02. Dom */}
               <div
                 ref={textBlock2Ref}
-                className="opacity-0 will-change-transform space-y-4 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
               >
                 <div>
                   <p className="text-xs font-mono uppercase tracking-[0.25em] text-emerald-400 font-semibold mb-2">
-                    02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
+                    02 / {lang === "PL" ? "ŻYCIE W DOMU Z RODZINĄ" : "HOME LIFE WITH FAMILY"}
                   </p>
-                  <h3 className="text-5xl font-heading font-light text-white leading-tight tracking-tight">
+                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
                     {lang === "PL" ? (
-                      <>Śpią w łóżku,<br /> <span className="text-[#86868b]">bawią się w salonie.</span></>
+                      <>Śpią w łóżkach, <span className="text-[#86868b]">odpoczywają w salonie.</span></>
                     ) : (
-                      <>Sleep in bed,<br /> <span className="text-[#86868b]">play in the living room.</span></>
+                      <>Sleep in bed, <span className="text-[#86868b]">relax in the living room.</span></>
                     )}
                   </h3>
                 </div>
-                <p className="text-lg font-body text-[#ceced2] leading-relaxed font-light">
+                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
                   {lang === "PL"
-                    ? "Nasze koty są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i towarzyszą nam przy codziennych czynnościach. Dzięki temu kociaki wyrastają na spokojne i przyjazne koty."
-                    : "Our cats are part of our family. They sit on the sofa, sleep in beds and join us in daily activities. This is why kittens grow up to be calm, friendly cats."}
+                    ? "Nasze koty są pełnoprawnymi członkami rodziny. Spędzają dzień na kanapie, towarzyszą nam przy codziennych posiłkach i wychowują się z naszymi dziećmi oraz psem."
+                    : "Our cats are family members. They sit on the sofa, join family routines, and grow up alongside our children and dog."}
                 </p>
-                <div className="mt-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
-                  <div className="text-7xl font-heading font-extralight text-white leading-none tracking-tight">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
+                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
                     100%
                   </div>
-                  <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] text-right">
-                    {lang === "PL" ? "Kociaków z rodziną" : "Raised with family"}
-                  </p>
+                  <div className="border-l border-white/10 pl-5">
+                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
+                      {lang === "PL" ? "Domowa socjalizacja w salonie" : "Living room socialization"}
+                    </p>
+                    <p className="text-xs text-white/60 font-light">
+                      {lang === "PL" ? "Kocięta ufne, zrównoważone i odważne" : "Kittens confident and affectionate"}
+                    </p>
+                  </div>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    href="/o-nas#hodowla"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
+                  >
+                    <span>{lang === "PL" ? "Poznaj naszą hodowlę w zakładce O nas" : "Meet our cattery in About"}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
+                  </Link>
                 </div>
               </div>
 
               {/* 03. Zdrowie */}
               <div
                 ref={textBlock3Ref}
-                className="opacity-0 will-change-transform space-y-4 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
               >
                 <div>
                   <p className="text-xs font-mono uppercase tracking-[0.25em] text-blue-400 font-semibold mb-2">
                     03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
                   </p>
-                  <h3 className="text-5xl font-heading font-light text-white leading-tight tracking-tight">
+                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
                     {lang === "PL" ? (
-                      <>Przebadane<br /> <span className="text-[#86868b]">i gotowe na Ciebie.</span></>
+                      <>Certyfikowane badania <span className="text-[#86868b]">i spokój na lata.</span></>
                     ) : (
-                      <>Tested<br /> <span className="text-[#86868b]">and ready for you.</span></>
+                      <>Certified health checks <span className="text-[#86868b]">and peace of mind.</span></>
                     )}
                   </h3>
                 </div>
-                <p className="text-lg font-body text-[#ceced2] leading-relaxed font-light">
+                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
                   {lang === "PL"
-                    ? "Każdy kociak odchodzi z hodowli z książeczką zdrowia, szczepieniami i dokumentami potwierdzającymi, że jego rodzice są zdrowi — w tym badaniami serca i testami genetycznymi."
-                    : "Every kitten leaves with a health book, vaccinations and documents confirming that its parents are healthy — including heart checks and genetic tests."}
+                    ? "Każdy kociak opuszcza hodowlę z rodowodem FIFe/FPL, książeczką zdrowia, mikroczipem oraz kompletem szczepień. Rodzice posiadają aktualne echo serca Doppler i ujemne testy genetyczne."
+                    : "Every kitten leaves with FIFe/FPL pedigree, health book, microchip and vaccinations. Parents tested with Doppler heart echo and genetic DNA panels."}
                 </p>
-                <div className="mt-4 p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
-                  <div className="text-7xl font-heading font-extralight text-white leading-none tracking-tight">
+                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
+                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
                     100+
                   </div>
-                  <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] text-right">
-                    {lang === "PL" ? "Szczęśliwych domów" : "Happy homes across Poland"}
-                  </p>
+                  <div className="border-l border-white/10 pl-5">
+                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
+                      {lang === "PL" ? "Zadowolonych rodzin w Polsce" : "Happy families in Poland"}
+                    </p>
+                    <p className="text-xs text-white/60 font-light">
+                      {lang === "PL" ? "Dożywotnie wsparcie hodowcy" : "Lifelong breeder support"}
+                    </p>
+                  </div>
+                </div>
+                <div className="pt-2">
+                  <Link
+                    href="/baza-wiedzy#zdrowie"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
+                  >
+                    <span>{lang === "PL" ? "Zobacz badania i profilaktykę w Bazie Wiedzy" : "See health tests in Knowledge Base"}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
+                  </Link>
                 </div>
               </div>
 

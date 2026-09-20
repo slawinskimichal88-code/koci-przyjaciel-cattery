@@ -128,75 +128,67 @@ export default function BreederSection({
               <span>{lang === "PL" ? "Domowa, Certyfikowana Felinologia" : "Family Certified Felinology"}</span>
             </div>
 
+            {/* Osobisty, zwięzły opis w stylu Apple Keynote (Zero ścian tekstu) */}
             <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight">
               {lang === "PL" ? (
                 <>
-                  Każde kocię traktuję jak{" "}
-                  <span className="font-semibold text-white">członka rodziny.</span>
+                  Hodowla z sercem i pasją.{" "}
+                  <span className="font-semibold text-white">Życie bez klatek.</span>
                 </>
               ) : (
                 <>
-                  Every kitten is raised as{" "}
-                  <span className="font-semibold text-white">a cherished family member.</span>
+                  Breeding with heart.{" "}
+                  <span className="font-semibold text-white">Cage-free living.</span>
                 </>
               )}
             </h3>
 
-            <div className="space-y-4 text-sm sm:text-base text-zinc-300 font-body leading-relaxed font-light">
-              <p>
-                {lang === "PL"
-                  ? "Moja przygoda z rasą Maine Coon zaczęła się z czystej miłości do ich niezwykłego, niemal psiego usposobienia i bajkowego wyglądu. Prowadzę małą, w 100% domową hodowlę zrzeszoną w Cat Club Wrocław, należącym do Polskiej Federacji Felinologicznej (Felis Polonia / FIFe)."
-                  : "My journey with Maine Coons began out of pure love for their gentle, dog-like nature and magnificent look. I run a 100% domestic cattery registered in Cat Club Wrocław (FPL / FIFe)."}
-              </p>
-              <p>
-                {lang === "PL"
-                  ? "W naszym domu nie ma klatek, piwnic ani zamkniętych boksów. Koty śpią z nami w łóżkach, odpoczywają na kanapie w salonie, uczestniczą w obiedzie i zabawie z dziećmi oraz psem. Dzięki temu kociaki, które opuszczają naszą hodowlę, są odważne, stabilne emocjonalnie, ufne wobec ludzi i przyzwyczajone do wszystkich dźwięków domowego ogniska."
-                  : "There are no cages or kennels here. Our cats live in our living room with our family, children, and dog. Every kitten leaves emotionally confident, friendly, and well-socialized."}
-              </p>
-              <p>
-                {lang === "PL"
-                  ? "Rygorystycznie dbam o zdrowie: wszystkie koty hodowlane przechodzą regularne badania echokardiograficzne serca (Echo Doppler) u certyfikowanych kardiologów oraz pełne testy DNA w Laboklin (HCM, PKD, SMA N/N). Z każdym nowym opiekunem utrzymuję stały kontakt — służę radą i wsparciem na każdym etapie życia kota."
-                  : "Health is non-negotiable: regular Doppler echocardiography and certified Laboklin DNA testing (HCM, PKD, SMA N/N). I remain available to all adopters for lifelong support."}
-              </p>
-            </div>
+            <p className="text-lg sm:text-xl font-heading font-light text-amber-200/95 italic leading-snug">
+              {lang === "PL"
+                ? "„Hodowla to dla nas nie biznes — to domowe ciepło, pasja i bezgraniczna miłość do rasy Maine Coon.”"
+                : "“Breeding is not a business for us — it's household warmth, passion and unconditional love.”"}
+            </p>
 
-            {/* Pigułki Zaufania */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-2">
+            <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed font-light">
+              {lang === "PL"
+                ? "Od ponad dekady prowadzimy małą, w 100% domową hodowlę we Wrocławiu zrzeszoną w Cat Club Wrocław (FPL / FIFe). Nasze koty żyją razem z nami w salonie, śpią w łóżkach i wychowują się z dziećmi oraz psem — bez klatek i bez kompromisów."
+                : "For over a decade we run a 100% domestic cattery in Wrocław (FPL / FIFe). Our cats live in our living room with our kids and dog — no cages and no compromises."}
+            </p>
+
+            {/* 3 Kluczowe Plakietki Zaufania */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
               {[
-                { icon: Home, label: lang === "PL" ? "Salon, zero klatek" : "Living room, no cages" },
-                { icon: Stethoscope, label: lang === "PL" ? "Echo Doppler HCM N/N" : "Doppler Echo HCM N/N" },
+                { icon: Home, label: lang === "PL" ? "Salon · Zero klatek" : "Living room · No cages" },
+                { icon: Stethoscope, label: lang === "PL" ? "Echo serca & DNA N/N" : "Echo Doppler & DNA N/N" },
                 { icon: Award, label: lang === "PL" ? "Rodowód FIFe / FPL" : "FIFe / FPL Pedigree" },
-                { icon: ShieldCheck, label: lang === "PL" ? "Bezpieczny wybieg" : "Safe Enclosure" },
-                { icon: Heart, label: lang === "PL" ? "Wychowane z dziećmi" : "Raised with Kids" },
-                { icon: CheckCircle2, label: lang === "PL" ? "Stały kontakt i pomoc" : "Lifelong Support" },
               ].map((pill, i) => {
                 const Icon = pill.icon;
                 return (
                   <div
                     key={i}
-                    className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 flex items-center gap-2 text-xs font-ui text-zinc-300"
+                    className="p-3 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-2.5 text-xs font-ui text-zinc-200"
                   >
-                    <Icon className="w-3.5 h-3.5 text-amber-300 shrink-0" />
-                    <span className="truncate">{pill.label}</span>
+                    <Icon className="w-4 h-4 text-amber-300 shrink-0" />
+                    <span className="font-medium">{pill.label}</span>
                   </div>
                 );
               })}
             </div>
 
-            {/* Przyciski i Linki Akcji */}
-            <div className="pt-4 flex flex-wrap items-center gap-3.5">
+            {/* Przyciski i Hiperłącze do O Nas */}
+            <div className="pt-3 flex flex-wrap items-center gap-3.5">
               <Link
                 href="/o-nas"
-                className="px-6 py-3 rounded-full bg-white text-black font-ui text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-lg"
+                className="px-7 py-3.5 rounded-full bg-white text-black font-ui text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all flex items-center gap-2 shadow-lg hover:scale-105 cursor-pointer"
               >
-                <span>{lang === "PL" ? "Poznaj naszą hodowlę, wybieg i stado" : "Explore our cattery & cats"}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <span>{lang === "PL" ? "Poznaj naszą hodowlę i stado w O nas" : "Meet our cattery in About"}</span>
+                <ArrowRight className="w-4 h-4" />
               </Link>
 
               {onOpenReservation && (
                 <button
                   onClick={onOpenReservation}
-                  className="px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui text-xs font-medium uppercase tracking-wider transition-all cursor-pointer"
+                  className="px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui text-xs font-medium uppercase tracking-wider transition-all cursor-pointer"
                 >
                   {lang === "PL" ? "Zapytaj o kociaka" : "Inquire about kittens"}
                 </button>
@@ -206,7 +198,7 @@ export default function BreederSection({
                 href={REAL_FACEBOOK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-3 rounded-full bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 text-blue-300 font-ui text-xs font-medium transition-all"
+                className="px-4 py-3.5 rounded-full bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 text-blue-300 font-ui text-xs font-medium transition-all"
               >
                 Facebook (26k+) ↗
               </a>
