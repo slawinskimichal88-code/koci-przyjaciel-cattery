@@ -46,8 +46,15 @@ export default function FluidBentoCell({
   const trackSize = doubled.length * 100;
   const childSize = 100 / doubled.length;
 
+  // Sprawdzamy czy kafelek zajmuje 2 wiersze
+  const isTwoRows = className.includes("row-span-2");
+  const minHeightPx = isTwoRows ? 420 : 210;
+
   return (
-    <div className={`group relative overflow-hidden rounded-[2rem] bg-gray-900 border border-white/10 shadow-xl ${className}`}>
+    <div
+      className={`group relative overflow-hidden rounded-[2rem] bg-gray-900 border border-white/10 shadow-xl w-full h-full ${className}`}
+      style={{ minHeight: `${minHeightPx}px` }}
+    >
       <motion.div
         className={`flex ${isVertical ? "flex-col" : "flex-row"} absolute top-0 left-0`}
         style={{
@@ -74,7 +81,7 @@ export default function FluidBentoCell({
           return (
             <div 
               key={idx} 
-              className="relative overflow-hidden cursor-pointer"
+              className="relative h-full w-full overflow-hidden cursor-pointer flex-shrink-0"
               style={{
                 width: isVertical ? "100%" : `${childSize}%`,
                 height: isVertical ? `${childSize}%` : "100%",
@@ -88,7 +95,6 @@ export default function FluidBentoCell({
                 decoding="async"
                 className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
-              {/* Delikatny gradient podkreślający głębię */}
               <div className="absolute inset-0 bg-black/15 pointer-events-none" />
             </div>
           );

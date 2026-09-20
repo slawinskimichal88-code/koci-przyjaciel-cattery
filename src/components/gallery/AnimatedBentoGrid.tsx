@@ -176,14 +176,17 @@ export default function AnimatedBentoGrid({
         </div>
       )}
 
-      {/* ── BENTO GRID CONTAINER (Mobile: 2 cols 180px, Desktop: 4 cols 240px) ── */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[180px] md:auto-rows-[240px]">
+      {/* ── BENTO GRID CONTAINER (Gwarantowana wysokość dla każdego kafelka) ── */}
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-4 md:h-[700px] lg:h-[760px]"
+        style={{ gridAutoRows: "minmax(210px, auto)" }}
+      >
         {/* 1. Large Main Tile - slowly pans left */}
         <FluidBentoCell
           images={cellPools[0]}
           direction="horizontal"
           speed={35}
-          className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
+          className="col-span-1 sm:col-span-2 row-span-2 md:col-span-2 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
@@ -219,7 +222,7 @@ export default function AnimatedBentoGrid({
           images={cellPools[4]}
           direction="reverse-horizontal"
           speed={40}
-          className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
+          className="col-span-1 sm:col-span-2 row-span-1 md:col-span-4 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
       </div>
