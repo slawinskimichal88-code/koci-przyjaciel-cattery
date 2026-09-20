@@ -153,23 +153,12 @@ export default function EnclosureSection({
         // ═══════════════════════════════════════════════════════════════
         const phoneWrap = phoneWrapperRef.current;
         if (phoneWrap) {
-          let offsetX = -23.5;
-          let scale = 1.12;
-
-          if (p <= 0.06) {
-            offsetX = -23.5;
-            scale = 1.12;
-          } else if (p <= 0.22) {
-            const t = (p - 0.06) / 0.16;
-            const ease = 1 - Math.pow(1 - t, 3);
-            offsetX = lerp(-23.5, 0, ease);
-            scale = lerp(1.12, 1.0, ease);
-          } else {
-            offsetX = 0;
-            scale = 1.0;
+          let scale = 1.0;
+          if (p <= 0.18) {
+            const t = p / 0.18;
+            scale = lerp(1.04, 1.0, t * (2 - t));
           }
-
-          phoneWrap.style.transform = `translate3d(${offsetX}vw, 0, 0) scale(${scale})`;
+          phoneWrap.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
         }
 
         // Tytuł intro desktop
@@ -385,8 +374,8 @@ export default function EnclosureSection({
           {/* Układ 2-kolumnowy desktop (Przestronny, szeroki układ Apple Pro) */}
           <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-12 xl:px-16 h-full flex flex-row items-center justify-between gap-10 xl:gap-16 relative z-10">
             
-            {/* Lewa kolumna: szeroki, elegancki blok tekstowy (Koniec z wąskim paskiem z boku!) */}
-            <div className="w-[50%] xl:w-[52%] max-w-[680px] z-20 relative h-[480px] flex items-center">
+            {/* Lewa kolumna: szeroki, niesztywny blok tekstowy - NIGDY NIE ZWĘŻA SIĘ (shrink-0)! */}
+            <div className="flex-1 w-1/2 min-w-[500px] max-w-[660px] shrink-0 z-20 relative h-[520px] flex items-center">
               
               {/* 01. Wybieg */}
               <div
@@ -529,7 +518,7 @@ export default function EnclosureSection({
             </div>
 
             {/* Prawa kolumna: obudowa iPhone 16 Pro desktop */}
-            <div className="w-[52%] max-w-[720px] z-10 flex justify-end">
+            <div className="flex-1 w-1/2 min-w-[500px] max-w-[680px] shrink-0 z-10 flex justify-end">
               <div
                 ref={phoneWrapperRef}
                 className="w-full will-change-transform transition-transform duration-75 ease-out relative flex justify-center"
