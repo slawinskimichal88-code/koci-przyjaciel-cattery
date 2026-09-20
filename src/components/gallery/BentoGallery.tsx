@@ -3,18 +3,31 @@
 import React, { useState } from "react";
 import { ALL_AGA_PHOTOS, AGA_CATEGORIES } from "@/data/agaGalleryData";
 import AnimatedBentoGrid from "@/components/gallery/AnimatedBentoGrid";
-import { FolderKanban } from "lucide-react";
 
 interface BentoGalleryProps {
   lang: "PL" | "EN";
-  initialCategory?: string;
+  activeCategory?: string;
+  onCategoryChange?: (category: string) => void;
 }
 
-export default function BentoGallery({ lang, initialCategory = "all" }: BentoGalleryProps) {
-  const [activeCategory, setActiveCategory] = useState<string>(initialCategory);
+export default function BentoGallery({
+  lang,
+  activeCategory: controlledCategory,
+  onCategoryChange: controlledOnChange,
+}: BentoGalleryProps) {
+  const [internalCategory, setInternalCategory] = useState<string>("all");
+
+  const currentCategory = controlledCategory !== undefined ? controlledCategory : internalCategory;
+  const handleCategoryChange = (catId: string) => {
+    if (controlledOnChange) {
+      controlledOnChange(catId);
+    } else {
+      setInternalCategory(catId);
+    }
+  };
 
   return (
-    <section id="galeria" className="relative bg-[#070709] text-white py-24 sm:py-32 overflow-hidden border-t border-white/10">
+    <section id="galeria" className="relative bg-[#070709] text-white pt-12 sm:pt-16 pb-20 sm:pb-28 overflow-hidden border-t border-white/10 scroll-mt-20">
       {/* Ambient background blur */}
       <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-amber-500/[0.04] rounded-full blur-[180px] pointer-events-none" />
 
@@ -22,10 +35,11 @@ export default function BentoGallery({ lang, initialCategory = "all" }: BentoGal
         <AnimatedBentoGrid
           photos={ALL_AGA_PHOTOS}
           categories={AGA_CATEGORIES as unknown as { id: string; label: string }[]}
-          activeCategory={activeCategory}
-          onCategoryChange={(catId) => setActiveCategory(catId)}
+          activeCategory={currentCategory}
+          onCategoryChange={handleCategoryChange}
           lang={lang}
           itemsPerSet={7}
+          cycleInterval={4500}
           badge={lang === "PL" ? "ARCHIWUM HODOWLI · BENTO GRID" : "CATTERY ARCHIVE · BENTO GRID"}
           title={
             <h2
@@ -36,14 +50,14 @@ export default function BentoGallery({ lang, initialCategory = "all" }: BentoGal
                 <>
                   Zdjęcia z hodowli.<br />
                   <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
-                    Ułożone według folderów bez ściany zdjęć.
+                    Ułożone według folderów w płynnym ruchu.
                   </span>
                 </>
               ) : (
                 <>
                   Cattery archive.<br />
                   <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
-                    Organized by folders without photo clutter.
+                    Organized by folders in dynamic motion.
                   </span>
                 </>
               )}
@@ -52,8 +66,8 @@ export default function BentoGallery({ lang, initialCategory = "all" }: BentoGal
           subtitle={
             <p>
               {lang === "PL"
-                ? `Kompletne archiwum ${ALL_AGA_PHOTOS.length} fotografii podzielone na asymetryczne zestawy Bento (styl Apple & SVGator). Zmień folder poniżej lub przeglądaj zestawy strzałkami.`
-                : `Complete archive of ${ALL_AGA_PHOTOS.length} photos presented in dynamic Bento sets. Select a folder or browse sets with controls below.`}
+                ? `Kompletne archiwum ${ALL_AGA_PHOTOS.length} fotografii w jednym ruchomym interfejsie Bento. Wybierz folder poniżej lub obserwuj płynny pokaz kadrów.`
+                : `Complete archive of ${ALL_AGA_PHOTOS.length} photos in an active animated Bento interface. Select a folder below or watch the dynamic showcase.`}
             </p>
           }
         />
