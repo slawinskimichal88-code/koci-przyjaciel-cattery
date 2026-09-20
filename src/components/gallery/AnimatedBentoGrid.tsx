@@ -39,13 +39,13 @@ export default function AnimatedBentoGrid({
     return photos.filter((p) => p.category === activeCategory);
   }, [photos, activeCategory]);
 
-  // Rozdzielenie zdjęć na 6 kafelków Bento dla niezależnego, zróżnicowanego ruchu
+  // Rozdzielenie zdjęć na 5 kafelków Bento dla niezależnego, ciągłego ruchu taśmy
   const cellPools = useMemo(() => {
-    if (filteredPhotos.length === 0) return [[], [], [], [], [], []];
+    if (filteredPhotos.length === 0) return [[], [], [], [], []];
 
-    const pools: BentoImageItem[][] = [[], [], [], [], [], []];
+    const pools: BentoImageItem[][] = [[], [], [], [], []];
     filteredPhotos.forEach((photo, idx) => {
-      pools[idx % pools.length].push({
+      pools[idx % 5].push({
         id: photo.id,
         src: photo.src,
         title: photo.title,
@@ -53,18 +53,21 @@ export default function AnimatedBentoGrid({
       });
     });
 
-    // Upewnij się, że każdy kafelek ma przypisane zdjęcia
-    return pools.map((pool, idx) => {
-      if (pool.length > 0) return pool;
-      const fallback = filteredPhotos[idx % filteredPhotos.length];
-      return [
-        {
-          id: fallback.id,
-          src: fallback.src,
-          title: fallback.title,
-          categoryLabel: fallback.categoryLabel,
-        },
-      ];
+    // Upewnij się, że każdy kafelek ma co najmniej 3 zdjęcia w puli dla płynnej pętli
+    return pools.map((pool, pIdx) => {
+      let result = [...pool];
+      let i = 0;
+      while (result.length < 3 && filteredPhotos.length > 0) {
+        const item = filteredPhotos[(pIdx + i) % filteredPhotos.length];
+        result.push({
+          id: `${item.id}-pad-${i}`,
+          src: item.src,
+          title: item.title,
+          categoryLabel: item.categoryLabel,
+        });
+        i++;
+      }
+      return result;
     });
   }, [filteredPhotos]);
 
@@ -173,59 +176,50 @@ export default function AnimatedBentoGrid({
         </div>
       )}
 
-      {/* ── HARMONIJNA SIATKA BENTO (BEZ PASKÓW I SZTUCZNYCH PĘKNIĘĆ) ──── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-3.5 sm:gap-4 md:h-[680px] lg:h-[740px]">
-        {/* Kafelek 1: Duży Hero 2x2 — płynie w górę */}
+      {/* ── BENTO GRID: KAFELKI Z NIEKOŃCZĄCĄ SIĘ TAŚMĄ ──────────────── */}
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[240px]">
+        {/* Poziomy - w lewo */}
         <FluidBentoCell
           images={cellPools[0]}
-          direction="vertical"
-          speed={4.2}
-          className="min-h-[280px] sm:min-h-[340px] md:min-h-0 sm:col-span-2 md:col-span-2 md:row-span-2"
+          direction="horizontal"
+          speed={25}
+          className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* Kafelek 2: Pionowy 1x2 — płynie w dół */}
+        {/* Pionowy - w dół */}
         <FluidBentoCell
           images={cellPools[1]}
           direction="reverse-vertical"
-          speed={4.8}
-          className="min-h-[260px] sm:min-h-[300px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-2"
+          speed={18}
+          className="col-span-1 row-span-2 md:col-span-1 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* Kafelek 3: Mały kwadrat 1x1 — płynie w lewo */}
+        {/* Pionowy - w górę */}
         <FluidBentoCell
           images={cellPools[2]}
-          direction="horizontal"
-          speed={3.6}
-          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-1"
+          direction="vertical"
+          speed={10}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* Kafelek 4: Mały kwadrat 1x1 — płynie w prawo */}
+        {/* Poziomy - w prawo */}
         <FluidBentoCell
           images={cellPools[3]}
           direction="reverse-horizontal"
-          speed={4.0}
-          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-1"
+          speed={12}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* Kafelek 5: Panoramiczny kafelek 2x1 na dole po lewej — płynie w górę */}
+        {/* Poziomy pas na dole - w prawo */}
         <FluidBentoCell
           images={cellPools[4]}
-          direction="vertical"
-          speed={4.5}
-          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-2 md:row-span-1"
-          onPhotoClick={setSelectedPhoto}
-        />
-
-        {/* Kafelek 6: Panoramiczny kafelek 2x1 na dole po prawej — płynie w dół */}
-        <FluidBentoCell
-          images={cellPools[5]}
-          direction="reverse-vertical"
-          speed={5.0}
-          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-2 md:row-span-1"
+          direction="reverse-horizontal"
+          speed={20}
+          className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
       </div>

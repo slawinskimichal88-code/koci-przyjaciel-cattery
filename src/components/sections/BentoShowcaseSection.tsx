@@ -150,7 +150,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               <FluidBentoCell
                 images={pools[0]}
                 direction="vertical"
-                speed={4.2}
+                speed={22}
                 onPhotoClick={setSelectedPhoto}
                 className="sm:row-span-2 min-h-[260px] sm:min-h-0"
               />
@@ -159,7 +159,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               <FluidBentoCell
                 images={pools[1]}
                 direction="horizontal"
-                speed={3.8}
+                speed={14}
                 onPhotoClick={setSelectedPhoto}
                 className="sm:row-span-1 min-h-[200px] sm:min-h-0"
               />
@@ -168,7 +168,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               <FluidBentoCell
                 images={pools[2]}
                 direction="reverse-vertical"
-                speed={4.6}
+                speed={18}
                 onPhotoClick={setSelectedPhoto}
                 className="sm:row-span-1 min-h-[200px] sm:min-h-0"
               />
