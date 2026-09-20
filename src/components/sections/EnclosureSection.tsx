@@ -66,17 +66,20 @@ export default function EnclosureSection({
       outStart: number,
       outEnd: number
     ) => {
-      if (p < inStart) return 36;
+      const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
+      const initialY = isMobile ? 18 : 36;
+      const outY = isMobile ? -14 : -28;
+      if (p < inStart) return initialY;
       if (p < inEnd) {
         const t = (p - inStart) / (inEnd - inStart);
-        return lerp(36, 0, t * t * (3 - 2 * t));
+        return lerp(initialY, 0, t * t * (3 - 2 * t));
       }
       if (p < outStart) return 0;
       if (p < outEnd) {
         const t = (p - outStart) / (outEnd - outStart);
-        return lerp(0, -28, t * t * (3 - 2 * t));
+        return lerp(0, outY, t * t * (3 - 2 * t));
       }
-      return -28;
+      return outY;
     };
 
     let rafId: number;
@@ -118,10 +121,10 @@ export default function EnclosureSection({
 
           phoneWrap.style.transform = `translate3d(${offsetX}vw, 0, 0) scale(${scale})`;
         } else {
-          // Mobile: Telefon u góry ekranu
+          // Mobile: Telefon subtelnie dopasowany w centrum
           const t = Math.min(1, p / 0.22);
-          const translateY = lerp(0, -25, t);
-          const scale = lerp(1.0, 0.96, t);
+          const translateY = lerp(0, -8, t);
+          const scale = lerp(1.0, 0.98, t);
           phoneWrap.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
         }
       }
@@ -236,21 +239,21 @@ export default function EnclosureSection({
         </div>
 
         {/* ── GŁÓWNA SCENA SCROLLYTELLINGU APPLE (2 Kolumny z bezpiecznym marginesem) ── */}
-        <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-between relative z-10">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-center lg:justify-between relative z-10 pt-10 pb-14 sm:pt-14 sm:pb-12 lg:py-0 gap-3 sm:gap-6 lg:gap-0">
 
           {/* ── LEWA KOLUMNA: CZYSTA TYPOGRAFIA APPLE (ZERO KWADRATÓW, ZERO RAMEK) ── */}
-          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[440px] flex items-center">
+          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[210px] sm:h-[290px] lg:h-[440px] flex items-center">
 
             {/* 01. WYBIEG OGRODOWY */}
             <div
               ref={textBlock1Ref}
-              className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
             >
               <div>
-                <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
+                <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
                   01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
                 </p>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
+                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.12] sm:leading-[1.08] tracking-tight">
                   {lang === "PL" ? (
                     <>
                       Wychodzą na<br />
@@ -265,17 +268,17 @@ export default function EnclosureSection({
                 </h3>
               </div>
 
-              <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
                 {lang === "PL"
                   ? "Koty mają dostęp do bezpiecznego ogrodu i wybiegu przez cały rok. Mogą oddychać świeżym powietrzem, obserwować ptaki i biegać, kiedy tylko mają na to ochotę."
                   : "Our cats have access to a safe garden and outdoor run all year round. They can breathe fresh air, watch birds and run whenever they feel like it."}
               </p>
 
-              <div className="pt-6 border-t border-white/10">
-                <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight mb-2">
+              <div className="pt-2 sm:pt-6 border-t border-white/10 flex items-baseline justify-between sm:block">
+                <div className="text-3xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight sm:mb-2">
                   365 dni
                 </div>
-                <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
+                <p className="text-[11px] sm:text-xs font-ui uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#86868b]">
                   {lang === "PL" ? "Dostęp do ogrodu przez cały rok" : "Year-round garden access"}
                 </p>
               </div>
@@ -284,13 +287,13 @@ export default function EnclosureSection({
             {/* 02. ŻYCIE W DOMU */}
             <div
               ref={textBlock2Ref}
-              className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
             >
               <div>
-                <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
+                <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
                   02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
                 </p>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
+                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.12] sm:leading-[1.08] tracking-tight">
                   {lang === "PL" ? (
                     <>
                       Śpią w łóżku,<br />
@@ -305,19 +308,19 @@ export default function EnclosureSection({
                 </h3>
               </div>
 
-              <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
                 {lang === "PL"
-                  ? "Nasze koty są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i towarzyszą nam przy codziennych czynnościach. Dzięki temu kociaki wyrastają na spokojne, przyjazne koty, które świetnie odnajdują się w nowym domu."
-                  : "Our cats are part of our family. They sit on the sofa, sleep in beds and join us in daily activities. This is why kittens grow up to be calm, friendly cats that settle well in a new home."}
+                  ? "Nasze koty są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i towarzyszą nam przy codziennych czynnościach. Dzięki temu kociaki wyrastają na spokojne i przyjazne koty."
+                  : "Our cats are part of our family. They sit on the sofa, sleep in beds and join us in daily activities. This is why kittens grow up to be calm, friendly cats."}
               </p>
 
               {/* Apple Spec Metric */}
-              <div className="pt-6 border-t border-white/10">
-                <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight mb-2">
+              <div className="pt-2 sm:pt-6 border-t border-white/10 flex items-baseline justify-between sm:block">
+                <div className="text-3xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight sm:mb-2">
                   100%
                 </div>
-                <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Kociaków wychowywanych razem z rodziną" : "Kittens raised as part of the family"}
+                <p className="text-[11px] sm:text-xs font-ui uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#86868b]">
+                  {lang === "PL" ? "Kociaków z rodziną" : "Raised with family"}
                 </p>
               </div>
             </div>
@@ -325,13 +328,13 @@ export default function EnclosureSection({
             {/* 03. ZDROWE OD URODZENIA */}
             <div
               ref={textBlock3Ref}
-              className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
             >
               <div>
-                <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-3">
+                <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
                   03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
                 </p>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.08] tracking-tight">
+                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.12] sm:leading-[1.08] tracking-tight">
                   {lang === "PL" ? (
                     <>
                       Przebadane<br />
@@ -346,19 +349,19 @@ export default function EnclosureSection({
                 </h3>
               </div>
 
-              <p className="text-base sm:text-lg font-body text-[#ceced2] leading-relaxed font-light">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-3 sm:line-clamp-none">
                 {lang === "PL"
                   ? "Każdy kociak odchodzi z hodowli z książeczką zdrowia, szczepieniami i dokumentami potwierdzającymi, że jego rodzice są zdrowi — w tym badaniami serca i testami genetycznymi."
                   : "Every kitten leaves with a health book, vaccinations and documents confirming that its parents are healthy — including heart checks and genetic tests."}
               </p>
 
               {/* Apple Spec Metric */}
-              <div className="pt-6 border-t border-white/10">
-                <div className="text-5xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight mb-2">
+              <div className="pt-2 sm:pt-6 border-t border-white/10 flex items-baseline justify-between sm:block">
+                <div className="text-3xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight sm:mb-2">
                   100+
                 </div>
-                <p className="text-xs font-ui uppercase tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Szczęśliwych domów w całej Polsce" : "Happy homes across Poland"}
+                <p className="text-[11px] sm:text-xs font-ui uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#86868b]">
+                  {lang === "PL" ? "Szczęśliwych domów" : "Happy homes across Poland"}
                 </p>
               </div>
             </div>
@@ -372,10 +375,10 @@ export default function EnclosureSection({
               className="w-full will-change-transform transition-transform duration-75 ease-out relative"
             >
               {/* Obudowa iPhone 16 Pro (Tytanowa ramka, zaokrąglone narożniki, Dynamic Island) */}
-              <div className="relative mx-auto w-full max-w-[680px] p-[8px] sm:p-[10px] rounded-[36px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_30px_100px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.1)]">
+              <div className="relative mx-auto w-full max-w-[340px] sm:max-w-[480px] lg:max-w-[680px] p-[6px] sm:p-[10px] rounded-[26px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
                 
                 {/* Wewnętrzna krawędź ekranu Super Retina XDR */}
-                <div className="relative w-full aspect-[16/9] rounded-[28px] sm:rounded-[36px] overflow-hidden bg-black">
+                <div className="relative w-full aspect-[16/9] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-black">
                   
                   {/* Wideo w pętli bez kontrolek */}
                   <video
@@ -415,7 +418,7 @@ export default function EnclosureSection({
         </div>
 
         {/* ── DOLNY SEGMENTOWY WSKAŹNIK POSTĘPU APPLE (3 segmenty jak na apple.com) ── */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+        <div className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-3">
           {[1, 2, 3].map((step) => {
             // Oblicz postęp każdego segmentu od 0 do 100%
             let fillPercent = 0;
@@ -433,7 +436,7 @@ export default function EnclosureSection({
             return (
               <div
                 key={step}
-                className="w-16 sm:w-24 h-[2px] bg-white/20 rounded-full overflow-hidden"
+                className="w-12 sm:w-24 h-[2px] bg-white/20 rounded-full overflow-hidden"
               >
                 <div
                   className="h-full bg-white transition-all duration-75 ease-out"
