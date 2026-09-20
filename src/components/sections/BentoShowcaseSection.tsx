@@ -1,126 +1,54 @@
 "use client";
 
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  ArrowRight,
-  ChevronLeft,
-  ChevronRight,
-  Maximize2,
-  X,
-  Play,
-  Pause,
-  Sparkles,
-  ShieldCheck,
-  Home,
-  Sun,
-} from "lucide-react";
-import { ALL_AGA_PHOTOS, GalleryPhotoItem } from "@/data/agaGalleryData";
+import { ArrowRight, X, Sparkles, ShieldCheck, Home, Sun } from "lucide-react";
+import AnimatedBentoCell, { BentoImageItem } from "@/components/gallery/AnimatedBentoCell";
+import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
 
 interface BentoShowcaseSectionProps {
   lang: "PL" | "EN";
 }
 
 export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps) {
-  const [currentSetIndex, setCurrentSetIndex] = useState(0);
-  const [selectedPhoto, setSelectedPhoto] = useState<GalleryPhotoItem | null>(null);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState<BentoImageItem | null>(null);
 
-  // Curated diverse sets across key folders (wybieg, kocury, matki, mlode, w-domu)
-  // Each set contains 4 photos arranged in an asymmetrical dynamic spread
-  const photoSets = useMemo(() => {
+  // Partition photos into 4 diverse pools across key categories for continuous vertical sliding
+  const pools = useMemo(() => {
     const wybieg = ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg");
     const kocury = ALL_AGA_PHOTOS.filter((p) => p.category === "kocury");
     const matki = ALL_AGA_PHOTOS.filter((p) => p.category === "matki");
     const mlode = ALL_AGA_PHOTOS.filter((p) => p.category === "mlode");
     const wDomu = ALL_AGA_PHOTOS.filter((p) => p.category === "w-domu");
 
-    return [
-      // Zestaw 1: Wybieg & Dom
-      [
-        wybieg[0] || ALL_AGA_PHOTOS[0],
-        kocury[0] || ALL_AGA_PHOTOS[1],
-        matki[0] || ALL_AGA_PHOTOS[2],
-        wDomu[0] || ALL_AGA_PHOTOS[3],
-      ],
-      // Zestaw 2: Matki & Kocięta
-      [
-        matki[1] || ALL_AGA_PHOTOS[4],
-        mlode[0] || ALL_AGA_PHOTOS[5],
-        wybieg[1] || ALL_AGA_PHOTOS[6],
-        kocury[1] || ALL_AGA_PHOTOS[7],
-      ],
-      // Zestaw 3: Kocury & Relaks
-      [
-        kocury[2] || ALL_AGA_PHOTOS[8],
-        wDomu[1] || ALL_AGA_PHOTOS[9],
-        mlode[1] || ALL_AGA_PHOTOS[10],
-        wybieg[2] || ALL_AGA_PHOTOS[11],
-      ],
-      // Zestaw 4: Maluchy w salonie
-      [
-        mlode[2] || ALL_AGA_PHOTOS[12],
-        matki[2] || ALL_AGA_PHOTOS[13],
-        kocury[3] || ALL_AGA_PHOTOS[14],
-        wDomu[2] || ALL_AGA_PHOTOS[15],
-      ],
-    ];
-  }, []);
+    const pool1: BentoImageItem[] = [];
+    const pool2: BentoImageItem[] = [];
+    const pool3: BentoImageItem[] = [];
+    const pool4: BentoImageItem[] = [];
 
-  const totalSets = photoSets.length;
-  const currentSet = photoSets[currentSetIndex];
-
-  const handleNextSet = useCallback(() => {
-    setCurrentSetIndex((prev) => (prev + 1) % totalSets);
-  }, [totalSets]);
-
-  const handlePrevSet = useCallback(() => {
-    setCurrentSetIndex((prev) => (prev - 1 + totalSets) % totalSets);
-  }, [totalSets]);
-
-  // Continuous auto-sliding (przesuwana sekcja)
-  useEffect(() => {
-    if (!isAutoPlay || isHovered || selectedPhoto) return;
-    const interval = setInterval(() => {
-      handleNextSet();
-    }, 4800);
-    return () => clearInterval(interval);
-  }, [isAutoPlay, isHovered, selectedPhoto, handleNextSet]);
-
-  // Keyboard navigation for modal
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (!selectedPhoto) return;
-      if (e.key === "Escape") setSelectedPhoto(null);
-    };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [selectedPhoto]);
-
-  // Lock scroll when modal is open
-  useEffect(() => {
-    if (selectedPhoto) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+    // Distribute photos to each pool
+    for (let i = 0; i < Math.max(wybieg.length, kocury.length, matki.length, mlode.length, wDomu.length); i++) {
+      if (wybieg[i]) pool1.push({ id: wybieg[i].id, src: wybieg[i].src, title: wybieg[i].title, categoryLabel: wybieg[i].categoryLabel });
+      if (kocury[i]) pool2.push({ id: kocury[i].id, src: kocury[i].src, title: kocury[i].title, categoryLabel: kocury[i].categoryLabel });
+      if (matki[i]) pool3.push({ id: matki[i].id, src: matki[i].src, title: matki[i].title, categoryLabel: matki[i].categoryLabel });
+      if (mlode[i]) pool4.push({ id: mlode[i].id, src: mlode[i].src, title: mlode[i].title, categoryLabel: mlode[i].categoryLabel });
+      if (wDomu[i]) pool1.push({ id: wDomu[i].id, src: wDomu[i].src, title: wDomu[i].title, categoryLabel: wDomu[i].categoryLabel });
     }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [selectedPhoto]);
+
+    return [pool1, pool2, pool3, pool4];
+  }, []);
 
   return (
     <section id="galeria-showcase" className="relative bg-[#09090B] text-white py-20 sm:py-28 overflow-hidden border-t border-white/10">
-      {/* Ambient background glow */}
+      {/* Ambient glow */}
       <div className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[600px] h-[400px] bg-amber-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* ── PODZIAŁ PÓŁ NA PÓŁ (50% TEKST / 50% PRZESUWANE ZDJĘCIA) ───── */}
+        {/* ── PODZIAŁ PÓŁ NA PÓŁ (50% TEKST / 50% DYNAMICZNIE PRZESUWANE ZDJĘCIA) ───── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* LEWA POŁOWA: ELEGANCKI TEKST I WYRÓŻNIKI (50%) */}
+          {/* LEWA STRONA: TEKST I WYRÓŻNIKI (50%) */}
           <div className="lg:col-span-5 flex flex-col justify-center text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono uppercase tracking-[0.25em] text-amber-300/90 mb-4 self-start shadow-sm">
               <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
@@ -154,7 +82,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
                 : "We are a small family cattery. Our Maine Coons are cherished family members living freely in our home and enjoying our secure outdoor garden run."}
             </p>
 
-            {/* 3 Kluczowe Wyróżniki */}
+            {/* 3 Wyróżniki */}
             <div className="space-y-3 mb-8">
               <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/10">
                 <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
@@ -199,7 +127,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               </div>
             </div>
 
-            {/* Przyciski Akcji */}
+            {/* Przyciski CTA */}
             <div className="flex flex-wrap items-center gap-3.5">
               <Link
                 href="/o-nas#galeria"
@@ -217,170 +145,30 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
             </div>
           </div>
 
-          {/* PRAWA POŁOWA: PRZESUWANA SEKCJA ZE ZDJĘCIAMI (50%) */}
-          <div
-            className="lg:col-span-7 relative"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-          >
-            {/* Pasek nawigacji przesuwanych zestawów */}
-            <div className="flex items-center justify-between gap-3 mb-3 px-1 text-xs font-mono text-zinc-400">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-amber-300 font-semibold">
-                  {lang === "PL" ? "Zestaw kadrów" : "Photo set"} {currentSetIndex + 1} / {totalSets}
-                </span>
-              </div>
+          {/* PRAWA STRONA: PRZESUWAJĄCE SIĘ KAFELKI BENTO (50%) */}
+          <div className="lg:col-span-7 relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 md:h-[580px] lg:h-[620px]">
+              {/* Kafelek 1: Duży pionowy (zajmuje 2 wiersze na sm+) */}
+              <AnimatedBentoCell
+                images={pools[0]}
+                onPhotoClick={setSelectedPhoto}
+                className="min-h-[260px] sm:min-h-0 sm:row-span-2"
+              />
 
-              <div className="flex items-center gap-2">
-                {/* Pauza / Odtwarzanie */}
-                <button
-                  onClick={() => setIsAutoPlay(!isAutoPlay)}
-                  className={`p-1.5 rounded-full border transition-all cursor-pointer ${
-                    isAutoPlay
-                      ? "bg-amber-400/15 text-amber-200 border-amber-400/30"
-                      : "bg-white/5 text-zinc-400 border-white/10 hover:bg-white/10 hover:text-white"
-                  }`}
-                  title={isAutoPlay ? "Wstrzymaj ruch" : "Wznów ruch"}
-                >
-                  {isAutoPlay ? <Pause className="w-3 h-3 text-amber-300" /> : <Play className="w-3 h-3 text-zinc-400" />}
-                </button>
+              {/* Kafelek 2: Górny kwadrat */}
+              <AnimatedBentoCell
+                images={pools[1]}
+                onPhotoClick={setSelectedPhoto}
+                className="min-h-[200px] sm:min-h-0 sm:row-span-1"
+              />
 
-                {/* Strzałki nawigacji */}
-                <div className="flex items-center gap-1 bg-white/5 rounded-full border border-white/10 p-0.5">
-                  <button
-                    onClick={handlePrevSet}
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                    title={lang === "PL" ? "Poprzedni" : "Previous"}
-                  >
-                    <ChevronLeft className="w-3.5 h-3.5" />
-                  </button>
-                  <div className="flex items-center gap-1 px-1.5">
-                    {photoSets.map((_, idx) => (
-                      <button
-                        key={idx}
-                        onClick={() => setCurrentSetIndex(idx)}
-                        className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                          idx === currentSetIndex ? "w-4 bg-amber-400" : "w-1.5 bg-white/20 hover:bg-white/40"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <button
-                    onClick={handleNextSet}
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                    title={lang === "PL" ? "Następny" : "Next"}
-                  >
-                    <ChevronRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
+              {/* Kafelek 3: Dolny kwadrat */}
+              <AnimatedBentoCell
+                images={pools[2]}
+                onPhotoClick={setSelectedPhoto}
+                className="min-h-[200px] sm:min-h-0 sm:row-span-1"
+              />
             </div>
-
-            {/* Płynna przesuwana kompozycja 4 zdjęć */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`home-set-${currentSetIndex}`}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.45, ease: "easeInOut" }}
-                className="grid grid-cols-2 sm:grid-cols-3 gap-3.5 sm:gap-4 p-3.5 sm:p-4 rounded-3xl bg-[#101013]/95 border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.7)] backdrop-blur-md"
-              >
-                {/* Karta 1: Duża pionowa (2 kolumny na mobile, 2 rzędy na desktopie) */}
-                <div
-                  onClick={() => setSelectedPhoto(currentSet[0])}
-                  className="col-span-2 sm:col-span-2 sm:row-span-2 min-h-[260px] sm:min-h-[380px] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-black/70 border border-white/10 shadow-md hover:shadow-2xl hover:border-amber-400/60 transition-all duration-300"
-                >
-                  <motion.img
-                    src={currentSet[0].src}
-                    alt={currentSet[0].title || "Zdjęcie hodowli"}
-                    animate={{ scale: [1, 1.045, 1] }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-                  />
-                  {currentSet[0].categoryLabel && (
-                    <div className="absolute top-3 left-3 z-10 pointer-events-none">
-                      <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono text-zinc-200">
-                        {currentSet[0].categoryLabel}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute top-3 right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <div className="w-8 h-8 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-lg">
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Karta 2: Kwadrat górny prawy */}
-                <div
-                  onClick={() => setSelectedPhoto(currentSet[1])}
-                  className="col-span-1 min-h-[170px] sm:min-h-[180px] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-black/70 border border-white/10 shadow-md hover:shadow-2xl hover:border-amber-400/60 transition-all duration-300"
-                >
-                  <motion.img
-                    src={currentSet[1].src}
-                    alt={currentSet[1].title || "Zdjęcie hodowli"}
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-                  />
-                  {currentSet[1].categoryLabel && (
-                    <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
-                      <span className="px-2.5 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[9px] font-mono text-zinc-200">
-                        {currentSet[1].categoryLabel.split(" ")[0]}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Karta 3: Kwadrat dolny prawy */}
-                <div
-                  onClick={() => setSelectedPhoto(currentSet[2])}
-                  className="col-span-1 min-h-[170px] sm:min-h-[180px] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-black/70 border border-white/10 shadow-md hover:shadow-2xl hover:border-amber-400/60 transition-all duration-300"
-                >
-                  <motion.img
-                    src={currentSet[2].src}
-                    alt={currentSet[2].title || "Zdjęcie hodowli"}
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-                  />
-                  {currentSet[2].categoryLabel && (
-                    <div className="absolute top-2.5 left-2.5 z-10 pointer-events-none">
-                      <span className="px-2.5 py-0.5 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[9px] font-mono text-zinc-200">
-                        {currentSet[2].categoryLabel.split(" ")[0]}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                </div>
-
-                {/* Karta 4: Dolna panorama (pełna szerokość siatki) */}
-                <div
-                  onClick={() => setSelectedPhoto(currentSet[3])}
-                  className="col-span-2 sm:col-span-3 min-h-[160px] sm:min-h-[180px] group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-black/70 border border-white/10 shadow-md hover:shadow-2xl hover:border-amber-400/60 transition-all duration-300"
-                >
-                  <motion.img
-                    src={currentSet[3].src}
-                    alt={currentSet[3].title || "Zdjęcie hodowli"}
-                    animate={{ scale: [1, 1.04, 1] }}
-                    transition={{ duration: 8.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
-                  />
-                  {currentSet[3].categoryLabel && (
-                    <div className="absolute top-3 left-3 z-10 pointer-events-none">
-                      <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[10px] font-mono text-zinc-200">
-                        {currentSet[3].categoryLabel}
-                      </span>
-                    </div>
-                  )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-                </div>
-              </motion.div>
-            </AnimatePresence>
           </div>
 
         </div>

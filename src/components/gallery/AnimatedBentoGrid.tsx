@@ -1,16 +1,9 @@
 "use client";
 
-import React, { useState, useMemo, useEffect, useCallback } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Maximize2,
-  X,
-  Play,
-  Pause,
-  Sparkles,
-} from "lucide-react";
+import React, { useState, useMemo, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, X, Sparkles } from "lucide-react";
+import AnimatedBentoCell, { BentoImageItem } from "@/components/gallery/AnimatedBentoCell";
 import { GalleryPhotoItem } from "@/data/agaGalleryData";
 
 interface AnimatedBentoGridProps {
@@ -22,10 +15,8 @@ interface AnimatedBentoGridProps {
   activeCategory?: string;
   onCategoryChange?: (categoryId: string) => void;
   lang?: "PL" | "EN";
-  itemsPerSet?: number; // 7 photos per set
   id?: string;
   headerRight?: React.ReactNode;
-  cycleInterval?: number; // ms per auto-cycle, default 4500ms
 }
 
 export default function AnimatedBentoGrid({
@@ -37,15 +28,10 @@ export default function AnimatedBentoGrid({
   activeCategory = "all",
   onCategoryChange,
   lang = "PL",
-  itemsPerSet = 7,
   id,
   headerRight,
-  cycleInterval = 4500,
 }: AnimatedBentoGridProps) {
-  const [currentSetIndex, setCurrentSetIndex] = useState(0);
-  const [selectedPhoto, setSelectedPhoto] = useState<GalleryPhotoItem | null>(null);
-  const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const [isHovered, setIsHovered] = useState(false);
+  const [selectedPhoto, setSelectedPhoto] = useState<BentoImageItem | null>(null);
 
   // Filter photos based on activeCategory
   const filteredPhotos = useMemo(() => {
@@ -53,65 +39,68 @@ export default function AnimatedBentoGrid({
     return photos.filter((p) => p.category === activeCategory);
   }, [photos, activeCategory]);
 
-  // Total sets in the current category
-  const totalSets = Math.max(1, Math.ceil(filteredPhotos.length / itemsPerSet));
+  // Distribute photos across 6 Bento cells for continuous independent sliding
+  const cellPools = useMemo(() => {
+    if (filteredPhotos.length === 0) return [[], [], [], [], [], []];
 
-  // Reset to first set whenever active category changes
-  useEffect(() => {
-    setCurrentSetIndex(0);
-  }, [activeCategory]);
+    const pools: BentoImageItem[][] = [[], [], [], [], [], []];
+    filteredPhotos.forEach((photo, idx) => {
+      pools[idx % pools.length].push({
+        id: photo.id,
+        src: photo.src,
+        title: photo.title,
+        categoryLabel: photo.categoryLabel,
+      });
+    });
 
-  // Clamp currentSetIndex if category changes
-  useEffect(() => {
-    if (currentSetIndex >= totalSets) {
-      setCurrentSetIndex(0);
-    }
-  }, [currentSetIndex, totalSets]);
+    // Ensure every pool has at least 1 photo
+    return pools.map((pool, idx) => {
+      if (pool.length > 0) return pool;
+      const fallback = filteredPhotos[idx % filteredPhotos.length];
+      return [
+        {
+          id: fallback.id,
+          src: fallback.src,
+          title: fallback.title,
+          categoryLabel: fallback.categoryLabel,
+        },
+      ];
+    });
+  }, [filteredPhotos]);
 
-  // Current slice of photos to display
-  const currentSetPhotos = useMemo(() => {
-    const start = currentSetIndex * itemsPerSet;
-    return filteredPhotos.slice(start, start + itemsPerSet);
-  }, [filteredPhotos, currentSetIndex, itemsPerSet]);
-
-  const handleNextSet = useCallback(() => {
-    setCurrentSetIndex((prev) => (prev + 1) % totalSets);
-  }, [totalSets]);
-
-  const handlePrevSet = useCallback(() => {
-    setCurrentSetIndex((prev) => (prev - 1 + totalSets) % totalSets);
-  }, [totalSets]);
-
-  // Continuous auto-animation (ruchome kafelki)
-  useEffect(() => {
-    if (!isAutoPlay || isHovered || selectedPhoto || totalSets <= 1) return;
-    const timer = setInterval(() => {
-      handleNextSet();
-    }, cycleInterval);
-    return () => clearInterval(timer);
-  }, [isAutoPlay, isHovered, selectedPhoto, totalSets, handleNextSet, cycleInterval]);
-
-  // Selected photo modal navigation
+  // Modal navigation
   const selectedIndex = useMemo(() => {
     if (!selectedPhoto) return -1;
-    return filteredPhotos.findIndex((p) => p.id === selectedPhoto.id);
+    return filteredPhotos.findIndex((p) => p.src === selectedPhoto.src);
   }, [selectedPhoto, filteredPhotos]);
 
   const handleModalNext = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (selectedIndex === -1 || filteredPhotos.length === 0) return;
     const nextIdx = (selectedIndex + 1) % filteredPhotos.length;
-    setSelectedPhoto(filteredPhotos[nextIdx]);
+    const next = filteredPhotos[nextIdx];
+    setSelectedPhoto({
+      id: next.id,
+      src: next.src,
+      title: next.title,
+      categoryLabel: next.categoryLabel,
+    });
   };
 
   const handleModalPrev = (e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
     if (selectedIndex === -1 || filteredPhotos.length === 0) return;
     const prevIdx = (selectedIndex - 1 + filteredPhotos.length) % filteredPhotos.length;
-    setSelectedPhoto(filteredPhotos[prevIdx]);
+    const prev = filteredPhotos[prevIdx];
+    setSelectedPhoto({
+      id: prev.id,
+      src: prev.src,
+      title: prev.title,
+      categoryLabel: prev.categoryLabel,
+    });
   };
 
-  // Keyboard navigation
+  // Keyboard navigation for modal
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (!selectedPhoto) return;
@@ -123,7 +112,7 @@ export default function AnimatedBentoGrid({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedPhoto, selectedIndex, filteredPhotos]);
 
-  // Prevent body scroll when modal is open
+  // Lock scroll when modal is open
   useEffect(() => {
     if (selectedPhoto) {
       document.body.style.overflow = "hidden";
@@ -134,73 +123,6 @@ export default function AnimatedBentoGrid({
       document.body.style.overflow = "";
     };
   }, [selectedPhoto]);
-
-  // Asymmetrical Bento Slot Geometry
-  const getBentoSpanClass = (slotIndex: number, totalInSet: number) => {
-    if (totalInSet === 1) {
-      return "col-span-2 sm:col-span-3 lg:col-span-4 min-h-[340px] sm:min-h-[440px]";
-    }
-    if (totalInSet === 2) {
-      return "col-span-1 sm:col-span-1 lg:col-span-2 min-h-[280px] sm:min-h-[380px]";
-    }
-    if (totalInSet <= 4) {
-      if (slotIndex === 0) {
-        return "col-span-2 sm:col-span-2 lg:col-span-2 min-h-[280px] sm:min-h-[360px]";
-      }
-      return "col-span-1 sm:col-span-1 lg:col-span-1 min-h-[200px] sm:min-h-[240px]";
-    }
-
-    switch (slotIndex) {
-      case 0:
-        return "col-span-2 sm:col-span-2 lg:col-span-2 row-span-2 min-h-[300px] sm:min-h-[420px]";
-      case 1:
-        return "col-span-1 sm:col-span-1 lg:col-span-1 row-span-2 min-h-[300px] sm:min-h-[420px]";
-      case 2:
-        return "col-span-1 sm:col-span-1 lg:col-span-1 row-span-1 min-h-[180px] sm:min-h-[200px]";
-      case 3:
-        return "col-span-1 sm:col-span-1 lg:col-span-1 row-span-1 min-h-[180px] sm:min-h-[200px]";
-      case 4:
-        return "col-span-2 sm:col-span-2 lg:col-span-2 row-span-1 min-h-[190px] sm:min-h-[210px]";
-      case 5:
-        return "col-span-1 sm:col-span-1 lg:col-span-1 row-span-1 min-h-[190px] sm:min-h-[210px]";
-      case 6:
-        return "col-span-1 sm:col-span-1 lg:col-span-1 row-span-1 min-h-[190px] sm:min-h-[210px]";
-      default:
-        return "col-span-1 row-span-1 min-h-[180px]";
-    }
-  };
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.06,
-        delayChildren: 0.03,
-      },
-    },
-    exit: {
-      opacity: 0,
-      transition: {
-        duration: 0.25,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 18, scale: 0.94 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 320,
-        damping: 24,
-      },
-    },
-  };
 
   return (
     <div id={id} className="w-full relative">
@@ -231,14 +153,14 @@ export default function AnimatedBentoGrid({
 
       {/* ── CATEGORY TABS ─────────────────────────────────────────────── */}
       {categories && categories.length > 0 && onCategoryChange && (
-        <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mb-6">
+        <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mb-6 sm:mb-8">
           {categories.map((cat) => {
             const isActive = activeCategory === cat.id;
             return (
               <button
                 key={cat.id}
                 onClick={() => onCategoryChange(cat.id)}
-                className={`px-3.5 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
+                className={`px-4 py-2 rounded-full text-xs font-mono uppercase tracking-wider transition-all duration-200 cursor-pointer flex items-center gap-1.5 ${
                   isActive
                     ? "bg-amber-400 text-black font-bold shadow-[0_0_20px_rgba(251,191,36,0.35)] scale-105"
                     : "bg-white/5 hover:bg-white/10 text-zinc-300 hover:text-white border border-white/10"
@@ -251,175 +173,56 @@ export default function AnimatedBentoGrid({
         </div>
       )}
 
-      {/* ── CONTROLS BAR: SET NAVIGATOR + PROGRESS BAR ─────────────────── */}
-      {totalSets > 1 && (
-        <div className="flex items-center justify-between gap-4 mb-4 px-1 flex-wrap">
-          <div className="flex items-center gap-3 text-xs font-mono text-zinc-400">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-              <span className="text-amber-300 font-semibold">
-                {lang === "PL" ? "Zestaw" : "Set"} {currentSetIndex + 1} / {totalSets}
-              </span>
-            </div>
+      {/* ── ASYMMETRICAL ANIMATED BENTO GRID (KAFELKI SAMOCZYNNIE PRZESUWAJĄ SIĘ W GÓRĘ I W DÓŁ) ── */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-3.5 sm:gap-4 md:h-[700px] lg:h-[760px]">
+        {/* Kafelek 1: Duży Hero 2x2 */}
+        <AnimatedBentoCell
+          images={cellPools[0]}
+          onPhotoClick={setSelectedPhoto}
+          className="min-h-[280px] sm:min-h-[340px] md:min-h-0 sm:col-span-2 md:col-span-2 md:row-span-2"
+        />
 
-            {/* Animated Cycle Progress Bar */}
-            {isAutoPlay && !isHovered && totalSets > 1 && (
-              <div className="hidden sm:flex items-center gap-1.5 pl-2">
-                <span className="text-[10px] uppercase text-zinc-500 font-mono">Auto:</span>
-                <div className="w-16 h-1 bg-white/10 rounded-full overflow-hidden">
-                  <motion.div
-                    key={`progress-${currentSetIndex}`}
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: cycleInterval / 1000, ease: "linear" }}
-                    className="h-full bg-amber-400"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+        {/* Kafelek 2: Pionowy Tall 1x2 */}
+        <AnimatedBentoCell
+          images={cellPools[1]}
+          onPhotoClick={setSelectedPhoto}
+          className="min-h-[260px] sm:min-h-[300px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-2"
+        />
 
-          <div className="flex items-center gap-2">
-            {/* Autoplay Play/Pause Toggle */}
-            <button
-              onClick={() => setIsAutoPlay(!isAutoPlay)}
-              className={`px-3 py-1.5 rounded-full text-[11px] font-mono flex items-center gap-1.5 transition-all cursor-pointer border ${
-                isAutoPlay
-                  ? "bg-amber-400/15 text-amber-200 border-amber-400/30"
-                  : "bg-white/5 text-zinc-400 border-white/10 hover:bg-white/10 hover:text-white"
-              }`}
-              title={
-                isAutoPlay
-                  ? lang === "PL"
-                    ? "Wstrzymaj ruch"
-                    : "Pause motion"
-                  : lang === "PL"
-                  ? "Włącz ruch"
-                  : "Resume motion"
-              }
-            >
-              {isAutoPlay ? (
-                <>
-                  <Pause className="w-3 h-3 text-amber-300" />
-                  <span>{lang === "PL" ? "W ruchu" : "Playing"}</span>
-                </>
-              ) : (
-                <>
-                  <Play className="w-3 h-3 text-zinc-400" />
-                  <span>{lang === "PL" ? "Start" : "Play"}</span>
-                </>
-              )}
-            </button>
+        {/* Kafelek 3: Mały kwadrat górny prawy 1x1 */}
+        <AnimatedBentoCell
+          images={cellPools[2]}
+          onPhotoClick={setSelectedPhoto}
+          className="min-h-[190px] sm:min-h-[200px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-1"
+        />
 
-            {/* Set Arrow Navigation */}
-            <div className="flex items-center gap-1 bg-white/5 rounded-full border border-white/10 p-0.5">
-              <button
-                onClick={handlePrevSet}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                title={lang === "PL" ? "Poprzedni zestaw" : "Previous set"}
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-              </button>
-              <div className="flex items-center gap-1 px-1.5">
-                {Array.from({ length: Math.min(totalSets, 7) }).map((_, dotIdx) => (
-                  <button
-                    key={dotIdx}
-                    onClick={() => setCurrentSetIndex(dotIdx)}
-                    className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                      dotIdx === currentSetIndex
-                        ? "w-4 bg-amber-400"
-                        : "w-1.5 bg-white/20 hover:bg-white/40"
-                    }`}
-                  />
-                ))}
-              </div>
-              <button
-                onClick={handleNextSet}
-                className="w-7 h-7 rounded-full flex items-center justify-center text-zinc-300 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
-                title={lang === "PL" ? "Następny zestaw" : "Next set"}
-              >
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+        {/* Kafelek 4: Mały kwadrat środkowy prawy 1x1 */}
+        <AnimatedBentoCell
+          images={cellPools[3]}
+          onPhotoClick={setSelectedPhoto}
+          className="min-h-[190px] sm:min-h-[200px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-1"
+        />
 
-      {/* ── ANIMATED BENTO CONTAINER ──────────────────────────────────── */}
-      <div
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        className="relative"
-      >
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={`bento-set-${activeCategory}-${currentSetIndex}`}
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 p-3 sm:p-4 rounded-3xl bg-[#101013]/95 border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.7)] backdrop-blur-md"
-          >
-            {currentSetPhotos.map((photo, slotIndex) => {
-              const spanClass = getBentoSpanClass(slotIndex, currentSetPhotos.length);
+        {/* Kafelek 5: Panoramiczny kafelek dolny lewy 2x1 */}
+        <AnimatedBentoCell
+          images={cellPools[4]}
+          onPhotoClick={setSelectedPhoto}
+          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-2 md:row-span-1"
+        />
 
-              return (
-                <motion.div
-                  key={photo.id}
-                  variants={itemVariants}
-                  layoutId={`bento-tile-${photo.id}`}
-                  onClick={() => setSelectedPhoto(photo)}
-                  className={`group relative rounded-2xl sm:rounded-3xl overflow-hidden cursor-pointer bg-black/70 border border-white/10 shadow-md hover:shadow-2xl hover:border-amber-400/60 transition-all duration-300 ${spanClass}`}
-                  whileHover={{ scale: 1.018 }}
-                  transition={{ type: "spring", stiffness: 350, damping: 28 }}
-                >
-                  {/* Zdjęcie z ciągłą, subtelną animacją oddechu / Ken Burns */}
-                  <motion.img
-                    layoutId={`bento-img-${photo.id}`}
-                    src={photo.src}
-                    alt={photo.title || "Zdjęcie z hodowli Koci Przyjaciel"}
-                    loading={slotIndex < 4 ? "eager" : "lazy"}
-                    animate={{
-                      scale: [1, 1.045, 1],
-                    }}
-                    transition={{
-                      duration: 7 + (slotIndex % 3) * 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 ease-out pointer-events-none"
-                  />
-
-                  {/* Subtelny badge kategorii */}
-                  {photo.categoryLabel && (
-                    <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10 pointer-events-none">
-                      <span className="px-2.5 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] font-mono text-zinc-200 shadow-sm">
-                        {photo.categoryLabel.split(" ")[0]} {photo.categoryLabel.split(" ")[1] || ""}
-                      </span>
-                    </div>
-                  )}
-
-                  {/* Ikona rozszerzenia (Apple Expand on Hover) */}
-                  <div className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="w-8 h-8 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center text-white shadow-lg">
-                      <Maximize2 className="w-3.5 h-3.5" />
-                    </div>
-                  </div>
-
-                  {/* Delikatne podświetlenie */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-                </motion.div>
-              );
-            })}
-          </motion.div>
-        </AnimatePresence>
+        {/* Kafelek 6: Panoramiczny kafelek dolny prawy 2x1 */}
+        <AnimatedBentoCell
+          images={cellPools[5]}
+          onPhotoClick={setSelectedPhoto}
+          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-2 md:row-span-1"
+        />
       </div>
 
-      {/* ── APPLE SHARED LAYOUT FULLSCREEN MODAL ───────────────────────── */}
+      {/* ── PEŁNOEKRANOWY LIGHTBOX APPLE MODAL ───────────────────────── */}
       <AnimatePresence>
         {selectedPhoto && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-10 pointer-events-auto">
-            {/* Tło przyciemniające i rozmywające (Apple Backdrop Blur) */}
+            {/* Tło rozmywające */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -446,16 +249,17 @@ export default function AnimatedBentoGrid({
               <ChevronRight className="w-6 h-6" />
             </button>
 
-            {/* Powiększający się kafelek z siatki (Shared Layout layoutId) */}
+            {/* Powiększone zdjęcie */}
             <motion.div
-              layoutId={`bento-tile-${selectedPhoto.id}`}
+              initial={{ opacity: 0, scale: 0.94 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.94 }}
+              transition={{ type: "spring", stiffness: 320, damping: 28 }}
               className="relative z-10 max-w-5xl max-h-[90vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] bg-black border border-white/20 flex flex-col items-center justify-center cursor-default"
-              transition={{ type: "spring", stiffness: 320, damping: 30 }}
             >
-              <motion.img
-                layoutId={`bento-img-${selectedPhoto.id}`}
+              <img
                 src={selectedPhoto.src}
-                alt={selectedPhoto.title || "Powiększone zdjęcie hodowli"}
+                alt={selectedPhoto.title || "Powiększone zdjęcie"}
                 className="w-auto h-auto max-w-full max-h-[82vh] object-contain rounded-2xl sm:rounded-3xl"
               />
 
