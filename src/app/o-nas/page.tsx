@@ -399,6 +399,7 @@ export default function AboutPage() {
                       src={queen.src}
                       alt={queen.name}
                       fill
+                      loading="eager"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
@@ -509,6 +510,7 @@ export default function AboutPage() {
                       src={stud.src}
                       alt={stud.name}
                       fill
+                      loading="eager"
                       className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />
