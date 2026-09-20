@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Maximize2 } from "lucide-react";
 
 export interface BentoImageItem {
@@ -11,11 +11,17 @@ export interface BentoImageItem {
   categoryLabel?: string;
 }
 
+export type FluidDirection =
+  | "vertical"
+  | "horizontal"
+  | "reverse-vertical"
+  | "reverse-horizontal";
+
 interface FluidBentoCellProps {
   images: (string | BentoImageItem)[];
   className?: string;
-  direction?: "vertical" | "horizontal" | "reverse-vertical" | "reverse-horizontal";
-  speed?: number; // Czas w sekundach na pełen obrót pętli
+  direction?: FluidDirection;
+  speed?: number; // Czas w sekundach między przejściami (np. 3.5s - 5s)
   onPhotoClick?: (item: BentoImageItem) => void;
   badge?: string;
 }
@@ -24,78 +30,91 @@ export default function FluidBentoCell({
   images,
   className = "",
   direction = "vertical",
-  speed = 15,
+  speed = 4,
   onPhotoClick,
   badge,
 }: FluidBentoCellProps) {
-  if (!images || images.length === 0) return null;
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Normalizacja do tablicy obiektów
-  const normalized: BentoImageItem[] = images.map((item, idx) => {
-    if (typeof item === "string") {
-      return { id: `img-${idx}`, src: item };
-    }
-    return item;
-  });
+  // Normalizacja do tablicy obiektów BentoImageItem
+  const normalized: BentoImageItem[] = useMemo(() => {
+    if (!images || images.length === 0) return [];
+    return images.map((item, idx) => {
+      if (typeof item === "string") {
+        return { id: `img-${idx}`, src: item };
+      }
+      return item;
+    });
+  }, [images]);
 
-  // Upewnijmy się, że w liście są co najmniej 3 zdjęcia przed zdublowaniem
-  let baseList = [...normalized];
-  if (baseList.length === 1) {
-    baseList = [baseList[0], baseList[0], baseList[0]];
-  } else if (baseList.length === 2) {
-    baseList = [baseList[0], baseList[1], baseList[0], baseList[1]];
+  // Cykliczne, płynne przesuwanie zdjęć z lekką asynchronicznością
+  useEffect(() => {
+    if (normalized.length <= 1) return;
+
+    // Asynchroniczny odstęp czasowy, aby kafelki w siatce nie zmieniały się w tym samym ułamku sekundy
+    const delay = Math.max(2800, (speed + (Math.random() * 1.4 - 0.7)) * 1000);
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % normalized.length);
+    }, delay);
+
+    return () => clearInterval(interval);
+  }, [normalized.length, speed]);
+
+  if (normalized.length === 0) return null;
+
+  const currentPhoto = normalized[currentIndex % normalized.length];
+
+  // Warianty ruchu w zależności od kierunku kafelka
+  let initialVariant = { y: "100%", x: "0%", opacity: 0.85 };
+  let exitVariant = { y: "-100%", x: "0%", opacity: 0.85 };
+
+  if (direction === "reverse-vertical") {
+    // Płynie z góry do dołu
+    initialVariant = { y: "-100%", x: "0%", opacity: 0.85 };
+    exitVariant = { y: "100%", x: "0%", opacity: 0.85 };
+  } else if (direction === "horizontal") {
+    // Płynie z prawej do lewej
+    initialVariant = { x: "100%", y: "0%", opacity: 0.85 };
+    exitVariant = { x: "-100%", y: "0%", opacity: 0.85 };
+  } else if (direction === "reverse-horizontal") {
+    // Płynie z lewej do prawej
+    initialVariant = { x: "-100%", y: "0%", opacity: 0.85 };
+    exitVariant = { x: "100%", y: "0%", opacity: 0.85 };
   }
-
-  // Trik na płynną, nieskończoną pętlę: podwajamy tablicę zdjęć
-  const duplicatedImages = [...baseList, ...baseList];
-
-  // Konfiguracja kierunków ruchu
-  const isVertical = direction.includes("vertical");
-  const isReverse = direction.includes("reverse");
-
-  // Definiujemy skąd dokąd ma płynąć taśma
-  const startPos = isReverse ? "-50%" : "0%";
-  const endPos = isReverse ? "0%" : "-50%";
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-3xl bg-[#111114] border border-white/10 hover:border-amber-400/50 shadow-lg transition-all duration-300 ${className}`}
+      onClick={() => onPhotoClick && onPhotoClick(currentPhoto)}
+      className={`group relative overflow-hidden rounded-3xl bg-[#111114] border border-white/10 hover:border-amber-400/60 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer select-none ${className}`}
     >
-      <motion.div
-        className={`flex h-full w-full ${isVertical ? "flex-col" : "flex-row"}`}
-        animate={{
-          y: isVertical ? [startPos, endPos] : 0,
-          x: !isVertical ? [startPos, endPos] : 0,
-        }}
-        transition={{
-          repeat: Infinity,
-          ease: "linear",
-          duration: speed,
-        }}
-      >
-        {duplicatedImages.map((photo, idx) => (
-          <div
-            key={idx}
-            onClick={() => onPhotoClick && onPhotoClick(photo)}
-            className="h-full w-full flex-shrink-0 relative cursor-pointer overflow-hidden"
-          >
-            <img
-              src={photo.src}
-              alt={photo.title || "Galeria Koci Przyjaciel"}
-              loading="eager"
-              decoding="async"
-              className="h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 pointer-events-none" />
-          </div>
-        ))}
-      </motion.div>
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.div
+          key={`${currentPhoto.src}-${currentIndex}`}
+          initial={initialVariant}
+          animate={{ y: "0%", x: "0%", opacity: 1 }}
+          exit={exitVariant}
+          transition={{
+            duration: 0.95,
+            ease: [0.25, 1, 0.5, 1], // Maślana krzywa Apple / Bezier — bez szarpnięć
+          }}
+          className="absolute inset-0 w-full h-full"
+        >
+          <img
+            src={currentPhoto.src}
+            alt={currentPhoto.title || "Zdjęcie z hodowli Koci Przyjaciel"}
+            loading="eager"
+            decoding="async"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/15 pointer-events-none" />
+        </motion.div>
+      </AnimatePresence>
 
       {/* Subtelny badge kategorii */}
-      {(badge || normalized[0]?.categoryLabel) && (
+      {(badge || currentPhoto.categoryLabel) && (
         <div className="absolute top-3.5 left-3.5 z-10 pointer-events-none">
           <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-mono text-zinc-200 shadow-md">
-            {badge || normalized[0]?.categoryLabel}
+            {badge || currentPhoto.categoryLabel}
           </span>
         </div>
       )}

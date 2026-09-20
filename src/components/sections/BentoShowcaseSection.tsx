@@ -150,27 +150,27 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               <FluidBentoCell
                 images={pools[0]}
                 direction="vertical"
-                speed={22}
+                speed={4.2}
                 onPhotoClick={setSelectedPhoto}
-                className="sm:row-span-2"
+                className="sm:row-span-2 min-h-[260px] sm:min-h-0"
               />
 
-              {/* Kafelek 2: Górny kwadrat (płynie w prawo) */}
+              {/* Kafelek 2: Górny kwadrat (płynie w lewo) */}
               <FluidBentoCell
                 images={pools[1]}
-                direction="reverse-horizontal"
-                speed={16}
+                direction="horizontal"
+                speed={3.8}
                 onPhotoClick={setSelectedPhoto}
-                className="sm:row-span-1"
+                className="sm:row-span-1 min-h-[200px] sm:min-h-0"
               />
 
               {/* Kafelek 3: Dolny kwadrat (płynie w dół) */}
               <FluidBentoCell
                 images={pools[2]}
                 direction="reverse-vertical"
-                speed={19}
+                speed={4.6}
                 onPhotoClick={setSelectedPhoto}
-                className="sm:row-span-1"
+                className="sm:row-span-1 min-h-[200px] sm:min-h-0"
               />
             </div>
           </div>
