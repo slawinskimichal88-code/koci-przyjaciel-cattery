@@ -15,7 +15,7 @@ export default function EnclosureSection({
   const phoneWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Warstwy tekstowe Apple (Czysta typografia — ZERO kwadratów, ZERO ramek, ZERO kart)
+  // Warstwy tekstowe Apple
   const introRef = useRef<HTMLDivElement>(null);
   const textBlock1Ref = useRef<HTMLDivElement>(null);
   const textBlock2Ref = useRef<HTMLDivElement>(null);
@@ -76,7 +76,7 @@ export default function EnclosureSection({
       outEnd: number
     ) => {
       const isMobile = typeof window !== "undefined" && window.innerWidth < 1024;
-      // Na mobile wygaszanie jest czyste i w miejscu (0px), by wykluczyć nachodzenie na wideo
+      // Na mobile brak pionowych przesunięć, by wykluczyć jakiekolwiek nachodzenie na wideo
       const initialY = isMobile ? 0 : 36;
       const outY = isMobile ? 0 : -28;
       if (p < inStart) return initialY;
@@ -110,9 +110,6 @@ export default function EnclosureSection({
       const phoneWrap = phoneWrapperRef.current;
       if (phoneWrap) {
         if (isDesktop) {
-          // P=0 -> 0.06: Telefon idealnie na środku ekranu (offset = -23.5vw, powiększony scale=1.12)
-          // P=0.06 -> 0.22: Płynny, kinowy ruch w prawo do pozycji 0vw (dock w prawej kolumnie)
-          // P=0.22 -> 1.00: Telefon stabilnie przypięty w prawej kolumnie
           let offsetX = -23.5;
           let scale = 1.12;
 
@@ -131,7 +128,7 @@ export default function EnclosureSection({
 
           phoneWrap.style.transform = `translate3d(${offsetX}vw, 0, 0) scale(${scale})`;
         } else {
-          // Mobile: Telefon stabilny, bez przesuwania w pionie, by nie nachodzić na tekst
+          // Mobile: Telefon stabilny, bez przesuwania w pionie
           phoneWrap.style.transform = "translate3d(0, 0, 0)";
         }
       }
@@ -152,7 +149,6 @@ export default function EnclosureSection({
       }
 
       // ── 3. CECHA 01: ZEWNĘTRZNY WYBIEG ─────────────────────────────
-      // Wejście od razu po przesunięciu telefonu, szerokie okno pełnej jasności
       const b1 = textBlock1Ref.current;
       if (b1) {
         const op = smoothFade(p, 0.16, 0.23, 0.44, 0.49);
@@ -215,13 +211,13 @@ export default function EnclosureSection({
         {/* ── STAGE 0: TYTUŁ OTWIERAJĄCY (Czysty Apple, u góry z bezpiecznym marginesem) ── */}
         <div
           ref={introRef}
-          className="absolute top-[84px] sm:top-14 lg:top-14 left-1/2 -translate-x-1/2 z-30 text-center w-full max-w-3xl px-6 pointer-events-none will-change-transform"
+          className="absolute top-[80px] sm:top-14 lg:top-14 left-1/2 -translate-x-1/2 z-30 text-center w-full max-w-3xl px-5 pointer-events-none will-change-transform"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-ui uppercase tracking-[0.25em] text-white/90 font-medium mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-2.5">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
           </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-heading font-light text-white tracking-tight leading-[1.04]">
+          <h2 className="text-2xl sm:text-5xl lg:text-6xl font-heading font-light text-white tracking-tight leading-[1.05]">
             {lang === "PL" ? (
               <>
                 Nasz dom<br />
@@ -239,155 +235,147 @@ export default function EnclosureSection({
             )}
           </h2>
 
-          <div className="mt-3 flex items-center justify-center gap-2 text-[11px] font-ui uppercase tracking-[0.25em] text-[#86868b]">
+          <div className="mt-2.5 flex items-center justify-center gap-2 text-[10px] sm:text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b]">
             <span>{lang === "PL" ? "Przewiń, aby zobaczyć więcej" : "Scroll to explore"}</span>
             <ChevronDown className="w-3.5 h-3.5 text-[#86868b] animate-bounce" />
           </div>
         </div>
 
-        {/* ── GŁÓWNA SCENA SCROLLYTELLINGU APPLE (2 Kolumny z bezpiecznym marginesem) ── */}
-        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 pt-[90px] sm:pt-[110px] lg:pt-0 gap-4 sm:gap-8 lg:gap-0">
+        {/* ── GŁÓWNA SCENA SCROLLYTELLINGU APPLE ── */}
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 pt-[80px] sm:pt-24 lg:pt-0 gap-3 sm:gap-6 lg:gap-0">
 
-          {/* ── LEWA KOLUMNA: CZYSTA TYPOGRAFIA APPLE (ZERO KWADRATÓW, ZERO RAMEK) ── */}
-          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[180px] sm:h-[270px] lg:h-[440px] flex items-start sm:items-center">
+          {/* ── LEWA KOLUMNA: CZYSTA TYPOGRAFIA APPLE (Kompaktowa na mobile, bez nachodzenia) ── */}
+          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[140px] sm:h-[220px] lg:h-[440px] flex items-start sm:items-center">
 
             {/* 01. WYBIEG OGRODOWY */}
             <div
               ref={textBlock1Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
             >
-              <div>
-                <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
-                  01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
-                </p>
-                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.12] sm:leading-[1.08] tracking-tight">
-                  {lang === "PL" ? (
-                    <>
-                      Wychodzą na<br />
-                      <span className="text-[#86868b]">dwór kiedy chcą.</span>
-                    </>
-                  ) : (
-                    <>
-                      They go outside<br />
-                      <span className="text-[#86868b]">whenever they want.</span>
-                    </>
-                  )}
-                </h3>
-              </div>
+              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] text-amber-400 font-semibold mb-1">
+                01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
+              </p>
+              <h3 className="text-xl sm:text-3xl lg:text-5xl font-heading font-light text-white leading-tight tracking-tight mb-1 sm:mb-2.5">
+                {lang === "PL" ? (
+                  <>
+                    Wychodzą na<br className="hidden sm:inline" />{" "}
+                    <span className="text-[#86868b]">dwór kiedy chcą.</span>
+                  </>
+                ) : (
+                  <>
+                    They go outside<br className="hidden sm:inline" />{" "}
+                    <span className="text-[#86868b]">whenever they want.</span>
+                  </>
+                )}
+              </h3>
 
-              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-zinc-300 leading-relaxed font-light line-clamp-2 sm:line-clamp-none mb-2 sm:mb-4">
                 {lang === "PL"
-                  ? "Koty mają dostęp do bezpiecznego ogrodu i wybiegu przez cały rok. Mogą oddychać świeżym powietrzem, obserwować ptaki i biegać, kiedy tylko mają na to ochotę."
-                  : "Our cats have access to a safe garden and outdoor run all year round. They can breathe fresh air, watch birds and run whenever they feel like it."}
+                  ? "Koty mają całoroczny dostęp do bezpiecznego ogrodu i wybiegu. Oddychają świeżym powietrzem i biegają, kiedy mają ochotę."
+                  : "Our cats have year-round access to a safe garden and outdoor run, breathing fresh air whenever they want."}
               </p>
 
-              <div className="pt-2 sm:pt-6 border-t border-white/10 flex items-baseline justify-between sm:block">
-                <div className="text-3xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight sm:mb-2">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/10 border border-white/15">
+                <span className="text-sm sm:text-2xl lg:text-4xl font-heading font-light text-white leading-none">
                   365 dni
-                </div>
-                <p className="text-[11px] sm:text-xs font-ui uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Dostęp do ogrodu przez cały rok" : "Year-round garden access"}
-                </p>
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-zinc-300">
+                  {lang === "PL" ? "Całoroczny wybieg" : "Year-round access"}
+                </span>
               </div>
             </div>
 
             {/* 02. ŻYCIE W DOMU */}
             <div
               ref={textBlock2Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
             >
-              <div>
-                <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
-                  02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
-                </p>
-                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.12] sm:leading-[1.08] tracking-tight">
-                  {lang === "PL" ? (
-                    <>
-                      Śpią w łóżku,<br />
-                      <span className="text-[#86868b]">bawią się w salonie.</span>
-                    </>
-                  ) : (
-                    <>
-                      Sleep in bed,<br />
-                      <span className="text-[#86868b]">play in the living room.</span>
-                    </>
-                  )}
-                </h3>
-              </div>
+              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] text-emerald-400 font-semibold mb-1">
+                02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
+              </p>
+              <h3 className="text-xl sm:text-3xl lg:text-5xl font-heading font-light text-white leading-tight tracking-tight mb-1 sm:mb-2.5">
+                {lang === "PL" ? (
+                  <>
+                    Śpią w łóżku,<br className="hidden sm:inline" />{" "}
+                    <span className="text-[#86868b]">bawią się w salonie.</span>
+                  </>
+                ) : (
+                  <>
+                    Sleep in bed,<br className="hidden sm:inline" />{" "}
+                    <span className="text-[#86868b]">play in the room.</span>
+                  </>
+                )}
+              </h3>
 
-              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-zinc-300 leading-relaxed font-light line-clamp-2 sm:line-clamp-none mb-2 sm:mb-4">
                 {lang === "PL"
-                  ? "Nasze koty są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i towarzyszą nam przy codziennych czynnościach. Dzięki temu kociaki wyrastają na spokojne i przyjazne koty."
-                  : "Our cats are part of our family. They sit on the sofa, sleep in beds and join us in daily activities. This is why kittens grow up to be calm, friendly cats."}
+                  ? "Są częścią naszej rodziny. Siedzą na kanapie, śpią w łóżkach i wychowują się z dziećmi, dzięki czemu są ufne i spokojne."
+                  : "Part of our family. They sleep in beds, sit on sofas and grow up with children, making them loving and calm."}
               </p>
 
-              {/* Apple Spec Metric */}
-              <div className="pt-2 sm:pt-6 border-t border-white/10 flex items-baseline justify-between sm:block">
-                <div className="text-3xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight sm:mb-2">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/10 border border-white/15">
+                <span className="text-sm sm:text-2xl lg:text-4xl font-heading font-light text-white leading-none">
                   100%
-                </div>
-                <p className="text-[11px] sm:text-xs font-ui uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Kociaków z rodziną" : "Raised with family"}
-                </p>
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-zinc-300">
+                  {lang === "PL" ? "Domowa socjalizacja" : "Raised with family"}
+                </span>
               </div>
             </div>
 
             {/* 03. ZDROWE OD URODZENIA */}
             <div
               ref={textBlock3Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-6 absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform absolute top-0 sm:top-1/2 sm:-translate-y-1/2 left-0 w-full"
             >
-              <div>
-                <p className="text-[11px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-[#86868b] font-medium mb-1 sm:mb-3">
-                  03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
-                </p>
-                <h3 className="text-2xl sm:text-4xl lg:text-5xl font-heading font-light text-white leading-[1.12] sm:leading-[1.08] tracking-tight">
-                  {lang === "PL" ? (
-                    <>
-                      Przebadane<br />
-                      <span className="text-[#86868b]">i gotowe na Ciebie.</span>
-                    </>
-                  ) : (
-                    <>
-                      Tested<br />
-                      <span className="text-[#86868b]">and ready for you.</span>
-                    </>
-                  )}
-                </h3>
-              </div>
+              <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] text-blue-400 font-semibold mb-1">
+                03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
+              </p>
+              <h3 className="text-xl sm:text-3xl lg:text-5xl font-heading font-light text-white leading-tight tracking-tight mb-1 sm:mb-2.5">
+                {lang === "PL" ? (
+                  <>
+                    Przebadane<br className="hidden sm:inline" />{" "}
+                    <span className="text-[#86868b]">i gotowe na Ciebie.</span>
+                  </>
+                ) : (
+                  <>
+                    Tested<br className="hidden sm:inline" />{" "}
+                    <span className="text-[#86868b]">and ready for you.</span>
+                  </>
+                )}
+              </h3>
 
-              <p className="text-xs sm:text-base lg:text-lg font-body text-[#ceced2] leading-relaxed font-light line-clamp-2 sm:line-clamp-none">
+              <p className="text-xs sm:text-base lg:text-lg font-body text-zinc-300 leading-relaxed font-light line-clamp-2 sm:line-clamp-none mb-2 sm:mb-4">
                 {lang === "PL"
-                  ? "Każdy kociak odchodzi z hodowli z książeczką zdrowia, szczepieniami i dokumentami potwierdzającymi, że jego rodzice są zdrowi — w tym badaniami serca i testami genetycznymi."
-                  : "Every kitten leaves with a health book, vaccinations and documents confirming that its parents are healthy — including heart checks and genetic tests."}
+                  ? "Książeczka zdrowia, komplet szczepień, badania serca (Doppler) i testy genetyczne DNA (HCM, PKD, SMA N/N)."
+                  : "Full health book, vaccinations, heart checks (Doppler) and genetic DNA tests (HCM, PKD, SMA N/N)."}
               </p>
 
-              {/* Apple Spec Metric */}
-              <div className="pt-2 sm:pt-6 border-t border-white/10 flex items-baseline justify-between sm:block">
-                <div className="text-3xl sm:text-6xl lg:text-7xl font-heading font-extralight text-white leading-none tracking-tight sm:mb-2">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/10 border border-white/15">
+                <span className="text-sm sm:text-2xl lg:text-4xl font-heading font-light text-white leading-none">
                   100+
-                </div>
-                <p className="text-[11px] sm:text-xs font-ui uppercase tracking-[0.18em] sm:tracking-[0.25em] text-[#86868b]">
-                  {lang === "PL" ? "Szczęśliwych domów" : "Happy homes across Poland"}
-                </p>
+                </span>
+                <span className="text-[10px] sm:text-xs font-mono uppercase tracking-wider text-zinc-300">
+                  {lang === "PL" ? "Szczęśliwych domów" : "Happy homes"}
+                </span>
               </div>
             </div>
 
           </div>
 
-          {/* ── PRAWA KOLUMNA: AUTENTYCZNA OBUDOWA IPHONE 16 PRO (Przesuwa się na prawo) ── */}
+          {/* ── PRAWA KOLUMNA: AUTENTYCZNA OBUDOWA IPHONE 16 PRO ── */}
           <div className="w-full lg:w-[52%] max-w-[720px] z-10 flex justify-center lg:justify-end">
             <div
               ref={phoneWrapperRef}
               className="w-full will-change-transform transition-transform duration-75 ease-out relative"
             >
-              {/* Obudowa iPhone 16 Pro (Tytanowa ramka, zaokrąglone narożniki, Dynamic Island) */}
-              <div className="relative mx-auto w-full max-w-[360px] sm:max-w-[480px] lg:max-w-[680px] p-[6px] sm:p-[10px] rounded-[26px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
+              {/* Obudowa iPhone 16 Pro */}
+              <div className="relative mx-auto w-full max-w-[310px] sm:max-w-[440px] lg:max-w-[680px] p-[5px] sm:p-[10px] rounded-[22px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
                 
                 {/* Wewnętrzna krawędź ekranu Super Retina XDR */}
-                <div className="relative w-full aspect-[16/9] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-black">
+                <div className="relative w-full aspect-[16/9] rounded-[18px] sm:rounded-[36px] overflow-hidden bg-black">
                   
-                  {/* Wideo w pętli bez kontrolek */}
+                  {/* Wideo w pętli z delikatnym scale by skompensować ewentualne czarne pasy w pliku źródłowym */}
                   <video
                     ref={videoRef}
                     src="/video/film2.mp4"
@@ -396,26 +384,26 @@ export default function EnclosureSection({
                     muted={isMuted}
                     playsInline
                     preload="auto"
-                    className="w-full h-full object-cover pointer-events-none"
+                    className="w-full h-full object-cover pointer-events-none scale-[1.04]"
                   />
 
                   {/* Dynamic Island (Po lewej stronie w widoku poziomym) */}
-                  <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
-                    <div className="w-2 h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
+                  <div className="absolute left-3 top-1/2 -translate-y-1/2 w-3 sm:w-3.5 h-9 sm:h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
+                    <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
                   </div>
 
                   {/* Dyskretny przełącznik wyciszenia w rogu ekranu */}
-                  <div className="absolute bottom-4 right-4 z-30">
+                  <div className="absolute bottom-3 right-3 z-30">
                     <button
                       onClick={toggleMute}
-                      className="w-8 h-8 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:scale-105 transition-all cursor-pointer"
+                      className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:scale-105 transition-all cursor-pointer"
                       title={isMuted ? "Włącz dźwięk" : "Wycisz"}
                     >
                       {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
                     </button>
                   </div>
 
-                  {/* Szklany odblask ekranu Apple (specular highlight) */}
+                  {/* Szklany odblask ekranu Apple */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
                 </div>
               </div>
@@ -424,10 +412,9 @@ export default function EnclosureSection({
 
         </div>
 
-        {/* ── DOLNY SEGMENTOWY WSKAŹNIK POSTĘPU APPLE (3 segmenty jak na apple.com) ── */}
-        <div className="absolute bottom-5 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-3">
+        {/* ── DOLNY SEGMENTOWY WSKAŹNIK POSTĘPU APPLE ── */}
+        <div className="absolute bottom-3 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 sm:gap-3">
           {[1, 2, 3].map((step) => {
-            // Oblicz postęp każdego segmentu od 0 do 100%
             let fillPercent = 0;
             if (step === 1) {
               if (scrollProgress >= 0.44) fillPercent = 100;
@@ -443,7 +430,7 @@ export default function EnclosureSection({
             return (
               <div
                 key={step}
-                className="w-12 sm:w-24 h-[2px] bg-white/20 rounded-full overflow-hidden"
+                className="w-10 sm:w-20 h-[2px] bg-white/20 rounded-full overflow-hidden"
               >
                 <div
                   className="h-full bg-white transition-all duration-75 ease-out"
