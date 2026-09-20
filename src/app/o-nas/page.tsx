@@ -63,8 +63,8 @@ export default function AboutPage() {
       title: lang === "PL" ? "Bezpieczny wybieg ogrodowy" : "Safe Outdoor Garden Run",
       desc:
         lang === "PL"
-          ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego, gdzie mogą wspinać się po 3-metrowych pniach dębowych i obserwować naturę."
-          : "Cats have year-round access to a safe, covered garden enclosure where they can climb and enjoy fresh air.",
+          ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego i świeżego powietrza."
+          : "Cats have year-round access to a safe, covered garden enclosure and fresh outdoor air.",
     },
     {
       icon: Stethoscope,
@@ -309,36 +309,14 @@ export default function AboutPage() {
             </div>
 
             <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-              <div className="max-w-xl">
+              <div className="max-w-xl text-left">
                 <span className="px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-[11px] font-mono text-emerald-300 mb-2 inline-block">
-                  WIDEO Z WYBIEGU HODOWLANEGO
+                  {lang === "PL" ? "WYBIEG OGRODOWY" : "OUTDOOR ENCLOSURE"}
                 </span>
-                <p className="text-lg sm:text-xl font-heading font-medium text-white">
-                  3.2-metrowe pnie dębowe, platformy obserwacyjne i świeże powietrze
+                <p className="text-xl sm:text-2xl font-heading font-light text-white">
+                  {lang === "PL" ? "Nasz dom to ich dom" : "Our home is their home"}
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* 3 Wyróżniki wybiegu + Link do galerii wybiegu */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
-              <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-1">3.2 metra</div>
-              <p className="text-xs text-zinc-400 font-body font-light">
-                Wysokość naturalnych pni dębowych do bezpiecznej wspinaczki i ostrzenia pazurów.
-              </p>
-            </div>
-            <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
-              <div className="text-xl sm:text-2xl font-heading font-bold text-emerald-400 mb-1">Atestowana siatka</div>
-              <p className="text-xs text-zinc-400 font-body font-light">
-                Stalowo-polietylenowe zabezpieczenie odporne na przegryzienia i warunki atmosferyczne.
-              </p>
-            </div>
-            <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
-              <div className="text-xl sm:text-2xl font-heading font-bold text-amber-300 mb-1">365 dni w roku</div>
-              <p className="text-xs text-zinc-400 font-body font-light">
-                Zadaszenie poliwęglanowe chroni przed deszczem, dając radość z ogrodu także zimą.
-              </p>
             </div>
           </div>
 
@@ -364,7 +342,7 @@ export default function AboutPage() {
               subtitle={
                 <p>
                   {lang === "PL"
-                    ? "Autentyczne ujęcia naszych kotów korzystających z woliery i dębowych pni. Kliknij dowolne zdjęcie, by powiększyć je w pełnym formacie Apple."
+                    ? "Autentyczne ujęcia naszych kotów korzystających z woliery. Kliknij dowolne zdjęcie, by powiększyć je w pełnym formacie Apple."
                     : "Authentic moments of our cats enjoying the enclosure. Click any photo to expand fullscreen."}
                 </p>
               }

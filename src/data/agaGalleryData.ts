@@ -30,7 +30,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "title": "Całoroczny Wybieg i Ogród",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Wybieg i Ogród)",
     "bentoSpan": "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 lg:col-span-2 lg:row-span-2",
-    "editorialDesc": "Bezpieczna woliera z pniami dębowymi do 3.2m wysokości i bezpośrednim przejściem z salonu.",
+    "editorialDesc": "Bezpieczna, całoroczna woliera ogrodowa z bezpośrednim przejściem z salonu.",
     "badge": "🌿 WOLIERA 365 DNI"
   },
   {
