@@ -46,10 +46,9 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimatedBentoGrid
-          photos={showcasePhotos}
+          photos={ALL_AGA_PHOTOS}
           lang={lang}
-          itemsPerSet={7}
-          badge={lang === "PL" ? "Bento Grid · Kadry z Hodowli" : "Bento Grid · Cattery Moments"}
+          badge={lang === "PL" ? "Galeria Hodowlana" : "Cattery Showcase"}
           title={
             <h2
               className="font-heading font-light text-white leading-[1.0] tracking-tight"
@@ -75,8 +74,8 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
           subtitle={
             <p>
               {lang === "PL"
-                ? "Autentyczne ujęcia z życia naszych kotów w nowoczesnej siatce Bento (animacje w stylu SVGator & Apple). Kliknij dowolny kadr, by powiększyć go płynnym efektem Shared Layout."
-                : "Authentic moments from our cattery in an animated Bento layout. Click any image to expand with Apple-style smooth Shared Layout animation."}
+                ? "Autentyczne ujęcia z życia naszych kotów. Kliknij dowolny kadr, by powiększyć go na pełny ekran."
+                : "Authentic moments from our cattery. Click any image to expand fullscreen."}
             </p>
           }
           headerRight={
@@ -86,14 +85,12 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-amber-300 font-semibold transition-all group shadow-md hover:scale-105"
               >
                 <span>
-                  {lang === "PL"
-                    ? `Pełna galeria (${ALL_AGA_PHOTOS.length} zdjęć)`
-                    : `Full gallery (${ALL_AGA_PHOTOS.length} photos)`}
+                  {lang === "PL" ? "Pełna galeria" : "Full gallery"}
                 </span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <span className="text-[11px] font-mono text-zinc-500">
-                {lang === "PL" ? "Foldery: Wybieg, Kocury, Matki, Młode, W domu" : "Folders: Wybieg, Kocury, Matki, Młode, W domu"}
+                {lang === "PL" ? "Kategorie: Wybieg, Kocury, Matki, Młode, W domu" : "Categories: Enclosure, Studs, Queens, Kittens, Home"}
               </span>
             </div>
           }

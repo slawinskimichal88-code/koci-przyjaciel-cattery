@@ -12,13 +12,13 @@ export interface GalleryPhotoItem {
 }
 
 export const AGA_CATEGORIES = [
-  { id: "all", label: "🌟 Wszystkie (308)" },
-  { id: "wybieg", label: "🌿 Wybieg (9)" },
-  { id: "kocury", label: "🦁 Kocury (51)" },
-  { id: "matki", label: "🌸 Matki (27)" },
-  { id: "mlode", label: "🍼 Młode (93)" },
-  { id: "w-domu", label: "🏡 W domu (126)" },
-  { id: "wyprawka", label: "🎁 Wyprawka (2)" },
+  { id: "all", label: "🌟 Wszystkie" },
+  { id: "wybieg", label: "🌿 Wybieg" },
+  { id: "kocury", label: "🦁 Kocury" },
+  { id: "matki", label: "🌸 Matki" },
+  { id: "mlode", label: "🍼 Młode" },
+  { id: "w-domu", label: "🏡 W domu" },
+  { id: "wyprawka", label: "🎁 Wyprawka" },
 ] as const;
 
 export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
@@ -23,6 +23,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
+import AnimatedBentoGrid from "@/components/gallery/AnimatedBentoGrid";
 import BentoGallery from "@/components/gallery/BentoGallery";
 
 export default function AboutPage() {
@@ -30,6 +32,14 @@ export default function AboutPage() {
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<string>("all");
+
+  const wybiegPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg"), []);
+  const matkiPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "matki"), []);
+  const kocuryPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "kocury"), []);
+  const domPhotos = useMemo(
+    () => ALL_AGA_PHOTOS.filter((p) => p.category === "mlode" || p.category === "w-domu"),
+    []
+  );
 
   const jumpToGalleryCategory = (categoryId: string) => {
     setSelectedGalleryCategory(categoryId);
@@ -123,35 +133,42 @@ export default function AboutPage() {
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"
             >
               <span>🏠</span>
-              <span>{lang === "PL" ? "Nasza Hodowla" : "Our Cattery"}</span>
+              <span>{lang === "PL" ? "Hodowla" : "Cattery"}</span>
             </a>
             <a
               href="#wybieg"
-              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"
+              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 transition-all flex items-center gap-1.5"
             >
               <span>🌿</span>
-              <span>{lang === "PL" ? "Wybieg dla kotów" : "Enclosure"}</span>
+              <span>{lang === "PL" ? "Wybieg" : "Enclosure"}</span>
             </a>
             <a
               href="#matki"
-              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"
+              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 transition-all flex items-center gap-1.5"
             >
               <span>🌸</span>
-              <span>{lang === "PL" ? "Matki (Kotki)" : "Queens"}</span>
+              <span>{lang === "PL" ? "Matki" : "Queens"}</span>
             </a>
             <a
               href="#kocury"
-              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"
+              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 transition-all flex items-center gap-1.5"
             >
               <span>🦁</span>
-              <span>{lang === "PL" ? "Kocury Hodowlane" : "Studs"}</span>
+              <span>{lang === "PL" ? "Kocury" : "Studs"}</span>
+            </a>
+            <a
+              href="#w-domu"
+              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 text-blue-300 transition-all flex items-center gap-1.5"
+            >
+              <span>🏡</span>
+              <span>{lang === "PL" ? "Dom i Maluchy" : "Home & Kittens"}</span>
             </a>
             <button
               onClick={() => jumpToGalleryCategory("all")}
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/30 text-amber-200 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>📸</span>
-              <span>{lang === "PL" ? "Animowana Galeria Bento" : "Animated Bento Gallery"}</span>
+              <span>{lang === "PL" ? "Archiwum" : "Archive"}</span>
             </button>
           </div>
         </section>
@@ -325,21 +342,38 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Szybki odnośnik do zdjęć z wybiegu w galerii Bento */}
-          <div className="flex justify-end">
-            <button
-              onClick={() => jumpToGalleryCategory("wybieg")}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500/15 hover:bg-emerald-500/25 border border-emerald-500/30 text-emerald-300 font-mono text-xs uppercase tracking-wider transition-all cursor-pointer group"
-            >
-              <span>{lang === "PL" ? "Zobacz zdjęcia z wybiegu w ruchomej galerii Bento (9 zdjęć) ↓" : "View enclosure photos in moving Bento gallery ↓"}</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
-            </button>
+          {/* Ruchoma Siatka Bento ze zdjęciami z wybiegu */}
+          <div className="mt-8">
+            <AnimatedBentoGrid
+              photos={wybiegPhotos}
+              lang={lang}
+              badge={lang === "PL" ? "🌿 Kadry z Wybiegu" : "🌿 Enclosure Moments"}
+              title={
+                <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                  {lang === "PL" ? (
+                    <>
+                      Koty na wybiegu: <span className="font-semibold italic">Prawdziwe kadry z woliery</span>
+                    </>
+                  ) : (
+                    <>
+                      Cats in the Enclosure: <span className="font-semibold italic">Outdoor moments</span>
+                    </>
+                  )}
+                </h3>
+              }
+              subtitle={
+                <p>
+                  {lang === "PL"
+                    ? "Autentyczne ujęcia naszych kotów korzystających z woliery i dębowych pni. Kliknij dowolne zdjęcie, by powiększyć je w pełnym formacie Apple."
+                    : "Authentic moments of our cats enjoying the enclosure. Click any photo to expand fullscreen."}
+                </p>
+              }
+            />
           </div>
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 3: MATKI HODOWLANE (#matki)
-            CZYSTA I AUTENTYCZNA PREZENTACJA BEZ WYMYŚLONYCH OPISÓW I BEZ ŚCIANY ZDJĘĆ
         ═══════════════════════════════════════════════════════════════ */}
         <section id="matki" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
@@ -349,9 +383,9 @@ export default function AboutPage() {
             <div className="h-[1px] flex-1 bg-white/10" />
           </div>
 
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#111114] border border-white/10 shadow-xl">
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#111114] border border-white/10 shadow-xl mb-8">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <div className="max-w-2xl">
+              <div className="max-w-3xl">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono mb-4">
                   <Stethoscope className="w-3.5 h-3.5" />
                   <span>100% Echo Doppler HCM N/N · Badania DNA Laboklin</span>
@@ -374,27 +408,39 @@ export default function AboutPage() {
                   </span>
                 </div>
               </div>
-
-              <div className="shrink-0 flex flex-col items-start lg:items-end gap-3">
-                <button
-                  onClick={() => jumpToGalleryCategory("matki")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/40 text-rose-200 font-mono text-xs uppercase tracking-wider transition-all cursor-pointer hover:scale-105 shadow-lg group"
-                >
-                  <Camera className="w-4 h-4 text-rose-300" />
-                  <span>{lang === "PL" ? "Zobacz zdjęcia matek w ruchomej galerii (27 zdjęć) ↓" : "View queens in moving Bento gallery (27 photos) ↓"}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                </button>
-                <span className="text-[11px] font-mono text-zinc-500">
-                  {lang === "PL" ? "Folder ze zdjęciami: matki" : "Folder: matki"}
-                </span>
-              </div>
             </div>
           </div>
+
+          {/* Ruchoma Siatka Bento ze zdjęciami matek */}
+          <AnimatedBentoGrid
+            photos={matkiPhotos}
+            lang={lang}
+            badge={lang === "PL" ? "🌸 Kotki Hodowlane" : "🌸 Queens"}
+            title={
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                {lang === "PL" ? (
+                  <>
+                    Nasze Kotki: <span className="font-semibold italic">Matki miotów Koci Przyjaciel *PL</span>
+                  </>
+                ) : (
+                  <>
+                    Our Queens: <span className="font-semibold italic">Mothers of our litters</span>
+                  </>
+                )}
+              </h3>
+            }
+            subtitle={
+              <p>
+                {lang === "PL"
+                  ? "Opiekuńcze, czułe kotki hodowlane o doskonałej budowie i zrównoważonym charakterze. Kliknij dowolny kadr, by powiększyć."
+                  : "Caring, affectionate breeding females with certified genetics. Click any photo to expand."}
+              </p>
+            }
+          />
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 4: KOCURY HODOWLANE (#kocury)
-            CZYSTA I AUTENTYCZNA PREZENTACJA BEZ WYMYŚLONYCH OPISÓW I BEZ ŚCIANY ZDJĘĆ
         ═══════════════════════════════════════════════════════════════ */}
         <section id="kocury" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
@@ -404,9 +450,9 @@ export default function AboutPage() {
             <div className="h-[1px] flex-1 bg-white/10" />
           </div>
 
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#111114] border border-white/10 shadow-xl">
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#111114] border border-white/10 shadow-xl mb-8">
             <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <div className="max-w-2xl">
+              <div className="max-w-3xl">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-4">
                   <Scale className="w-3.5 h-3.5" />
                   <span>Waga do 12 kg · Echo Doppler serca N/N</span>
@@ -429,26 +475,93 @@ export default function AboutPage() {
                   </span>
                 </div>
               </div>
-
-              <div className="shrink-0 flex flex-col items-start lg:items-end gap-3">
-                <button
-                  onClick={() => jumpToGalleryCategory("kocury")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-amber-500/20 hover:bg-amber-500/30 border border-amber-500/40 text-amber-200 font-mono text-xs uppercase tracking-wider transition-all cursor-pointer hover:scale-105 shadow-lg group"
-                >
-                  <Camera className="w-4 h-4 text-amber-300" />
-                  <span>{lang === "PL" ? "Zobacz zdjęcia kocurów w ruchomej galerii (51 zdjęć) ↓" : "View studs in moving Bento gallery (51 photos) ↓"}</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                </button>
-                <span className="text-[11px] font-mono text-zinc-500">
-                  {lang === "PL" ? "Folder ze zdjęciami: kocury" : "Folder: kocury"}
-                </span>
-              </div>
             </div>
           </div>
+
+          {/* Ruchoma Siatka Bento ze zdjęciami kocurów */}
+          <AnimatedBentoGrid
+            photos={kocuryPhotos}
+            lang={lang}
+            badge={lang === "PL" ? "🦁 Kocury Reproduktory" : "🦁 Studs"}
+            title={
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                {lang === "PL" ? (
+                  <>
+                    Nasze Kocury: <span className="font-semibold italic">Potężne reproduktory</span>
+                  </>
+                ) : (
+                  <>
+                    Our Studs: <span className="font-semibold italic">Majestic breeding males</span>
+                  </>
+                )}
+              </h3>
+            }
+            subtitle={
+              <p>
+                {lang === "PL"
+                  ? "Samce o wadze dochodzącej do 12 kg, mocnym kośćcu i łagodnym, przytulaśnym sercu. Kliknij dowolny kadr, by powiększyć."
+                  : "Males weighing up to 12 kg with robust bone structure and affectionate character. Click any photo to expand."}
+              </p>
+            }
+          />
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
-            SEKCJA 5: JEDYNA, CENTRALNA, RUCHOMA GALERIA BENTO (#galeria)
+            SEKCJA 5: ŻYCIE W DOMU I MALUCHY (#w-domu)
+        ═══════════════════════════════════════════════════════════════ */}
+        <section id="w-domu" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
+          <div className="flex items-center gap-2 mb-4 pt-8">
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-blue-400 font-semibold">
+              05 · DOM I MALUCHY
+            </span>
+            <div className="h-[1px] flex-1 bg-white/10" />
+          </div>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-heading font-light text-white">
+                Życie w domu i Maluchy: <span className="font-semibold italic">Ciepło rodzinnego salonu</span>.
+              </h2>
+              <p className="text-sm sm:text-base text-zinc-400 font-body max-w-2xl mt-2 font-light">
+                Od pierwszych chwil życia kocięta i koty uczestniczą w normalnym rytmie domowym: bawią się na kanapach, przytulają do dzieci i żyją w harmonii z psem.
+              </p>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-400 text-xs font-mono shrink-0">
+              <Home className="w-4 h-4" />
+              <span>Dom bez klatek</span>
+            </span>
+          </div>
+
+          {/* Ruchoma Siatka Bento ze zdjęciami z życia domowego i kociąt */}
+          <AnimatedBentoGrid
+            photos={domPhotos}
+            lang={lang}
+            badge={lang === "PL" ? "🏡 Maluchy i Życie Domowe" : "🏡 Kittens & Home Life"}
+            title={
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
+                {lang === "PL" ? (
+                  <>
+                    W salonie i na kanapie: <span className="font-semibold italic">Dorastanie w sercu rodziny</span>
+                  </>
+                ) : (
+                  <>
+                    Living Room Life: <span className="font-semibold italic">Growing up with family</span>
+                  </>
+                )}
+              </h3>
+            }
+            subtitle={
+              <p>
+                {lang === "PL"
+                  ? "Kocięta od pierwszych tygodni oswajają się z domowym życiem, dotykiem i czułością. Kliknij dowolne ujęcie, by powiększyć."
+                  : "Kittens socialized from the earliest days with love and human affection. Click to expand."}
+              </p>
+            }
+          />
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            SEKCJA 6: JEDYNA, CENTRALNA, RUCHOMA GALERIA BENTO (#galeria)
             WSZYSTKIE 308 ZDJĘĆ Z FOLDERÓW W JEDNYM RUCHOMYM UKŁADZIE BENTO
         ═══════════════════════════════════════════════════════════════ */}
         <BentoGallery

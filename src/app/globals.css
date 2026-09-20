@@ -284,3 +284,46 @@
 .animate-hero-logo {
   animation: heroLogoEntrance 1.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* ── BENTO CONTINUOUS INFINITE MOTION (SVGATOR / APPLE STYLE) ─────── */
+@keyframes bentoScrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes bentoScrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+.animate-bento-up-fast {
+  animation: bentoScrollUp 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-bento-down-fast {
+  animation: bentoScrollDown 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-bento-up-slow {
+  animation: bentoScrollUp 44s linear infinite;
+  will-change: transform;
+}
+
+.animate-bento-down-slow {
+  animation: bentoScrollDown 36s linear infinite;
+  will-change: transform;
+}
+
+.bento-motion-paused .animate-bento-up-fast,
+.bento-motion-paused .animate-bento-down-fast,
+.bento-motion-paused .animate-bento-up-slow,
+.bento-motion-paused .animate-bento-down-slow,
+.bento-motion-container:hover .animate-bento-up-fast,
+.bento-motion-container:hover .animate-bento-down-fast,
+.bento-motion-container:hover .animate-bento-up-slow,
+.bento-motion-container:hover .animate-bento-down-slow {
+  animation-play-state: paused;
+}
+

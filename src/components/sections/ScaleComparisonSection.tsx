@@ -815,7 +815,7 @@ export default function ScaleComparisonSection({
           <div>
             <div className="text-center mb-10 reveal">
               <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">
-                Bento Grid · Zestawienie Parametrów
+                Zestawienie Parametrów
               </span>
               <h3
                 className="font-heading font-light text-white leading-tight"

@@ -38,9 +38,7 @@ export default function BentoGallery({
           activeCategory={currentCategory}
           onCategoryChange={handleCategoryChange}
           lang={lang}
-          itemsPerSet={7}
-          cycleInterval={4500}
-          badge={lang === "PL" ? "ARCHIWUM HODOWLI · BENTO GRID" : "CATTERY ARCHIVE · BENTO GRID"}
+          badge={lang === "PL" ? "ARCHIWUM HODOWLI" : "CATTERY ARCHIVE"}
           title={
             <h2
               className="font-heading font-light text-white leading-[1.0] tracking-tight"
@@ -50,14 +48,14 @@ export default function BentoGallery({
                 <>
                   Zdjęcia z hodowli.<br />
                   <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
-                    Ułożone według folderów w płynnym ruchu.
+                    Ułożone według kategorii w płynnym ruchu.
                   </span>
                 </>
               ) : (
                 <>
                   Cattery archive.<br />
                   <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
-                    Organized by folders in dynamic motion.
+                    Organized by categories in dynamic motion.
                   </span>
                 </>
               )}
@@ -66,8 +64,8 @@ export default function BentoGallery({
           subtitle={
             <p>
               {lang === "PL"
-                ? `Kompletne archiwum ${ALL_AGA_PHOTOS.length} fotografii w jednym ruchomym interfejsie Bento. Wybierz folder poniżej lub obserwuj płynny pokaz kadrów.`
-                : `Complete archive of ${ALL_AGA_PHOTOS.length} photos in an active animated Bento interface. Select a folder below or watch the dynamic showcase.`}
+                ? "Kompletne archiwum fotografii z naszej hodowli. Wybierz kategorię poniżej lub obserwuj płynny pokaz kadrów."
+                : "Complete photography archive of our cattery. Select a category below or watch the dynamic showcase."}
             </p>
           }
         />
