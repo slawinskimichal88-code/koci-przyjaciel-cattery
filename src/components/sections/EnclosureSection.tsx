@@ -12,91 +12,30 @@ export default function EnclosureSection({
   lang = "PL",
 }: EnclosureSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
+  
+  // Desktop Refs
   const phoneWrapperRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
-
-  // Warstwy tekstowe Apple (Desktop)
   const introRef = useRef<HTMLDivElement>(null);
   const textBlock1Ref = useRef<HTMLDivElement>(null);
   const textBlock2Ref = useRef<HTMLDivElement>(null);
   const textBlock3Ref = useRef<HTMLDivElement>(null);
+  const desktopBar1Ref = useRef<HTMLDivElement>(null);
+  const desktopBar2Ref = useRef<HTMLDivElement>(null);
+  const desktopBar3Ref = useRef<HTMLDivElement>(null);
 
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-  const [activeMobileIndex, setActiveMobileIndex] = useState<number>(0);
+  // Mobile Refs (Czyste manipulacje DOM bez re-renderów — 120 FPS płynności)
+  const mobilePhoneWrapRef = useRef<HTMLDivElement>(null);
+  const mobileVideoRef = useRef<HTMLVideoElement>(null);
+  const mobileIntroRef = useRef<HTMLDivElement>(null);
+  const mobileScene1Ref = useRef<HTMLDivElement>(null);
+  const mobileScene2Ref = useRef<HTMLDivElement>(null);
+  const mobileScene3Ref = useRef<HTMLDivElement>(null);
+  const mobileBar1Ref = useRef<HTMLDivElement>(null);
+  const mobileBar2Ref = useRef<HTMLDivElement>(null);
+  const mobileBar3Ref = useRef<HTMLDivElement>(null);
+
   const [isMuted, setIsMuted] = useState<boolean>(true);
-  const [sectionHeight, setSectionHeight] = useState<string>("400vh");
-
-  const stories = [
-    {
-      step: "01",
-      tabTitle: lang === "PL" ? "01 Wybieg" : "01 Outdoor",
-      category: lang === "PL" ? "01 / OGRÓD I WYBIEG" : "01 / GARDEN & RUN",
-      accentText: "text-amber-400",
-      accentBg: "bg-amber-400/10 border-amber-400/20",
-      title: lang === "PL" ? (
-        <>Wychodzą na <span className="text-[#86868b]">dwór kiedy chcą.</span></>
-      ) : (
-        <>They go outside <span className="text-[#86868b]">whenever they want.</span></>
-      ),
-      desc: lang === "PL"
-        ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i biegają na wolności bez klatek."
-        : "Cats have year-round access to a safe, covered garden run. They breathe fresh air, watch birds, and roam freely without cages.",
-      statValue: "365 dni",
-      statLabel: lang === "PL" ? "Całoroczny dostęp do ogrodu" : "Year-round outdoor access",
-      features: lang === "PL"
-        ? ["🌿 Atestowana siatka", "🌳 Dębowe pnie 3.2m", "❄️ Całoroczny wybieg"]
-        : ["🌿 Certified mesh", "🌳 3.2m oak trunks", "❄️ Year-round run"]
-    },
-    {
-      step: "02",
-      tabTitle: lang === "PL" ? "02 Dom" : "02 Family",
-      category: lang === "PL" ? "02 / ŻYCIE W DOMU" : "02 / HOME LIFE",
-      accentText: "text-emerald-400",
-      accentBg: "bg-emerald-400/10 border-emerald-400/20",
-      title: lang === "PL" ? (
-        <>Śpią w łóżku, <span className="text-[#86868b]">bawią się w salonie.</span></>
-      ) : (
-        <>Sleep in bed, <span className="text-[#86868b]">play in the living room.</span></>
-      ),
-      desc: lang === "PL"
-        ? "Nasze koty są częścią rodziny. Żyją z nami na co dzień, śpią na łóżkach, bawią się z dziećmi i psem. Dzięki temu kocięta opuszczają hodowlę w pełni zsocjalizowane, ufne i odważne."
-        : "Our cats are part of our family. They live with us every day, sleep in beds, and play with kids and our dog. Kittens leave confident, trusting, and fully socialized.",
-      statValue: "100%",
-      statLabel: lang === "PL" ? "Kociaków z rodziną i dziećmi" : "Raised with family & kids",
-      features: lang === "PL"
-        ? ["🏠 Bez klatek i boksów", "🐕 Kontakt z dziećmi i psem", "✨ Ufny i łagodny charakter"]
-        : ["🏠 No cages or boxes", "🐕 Dogs & children exposure", "✨ Calm & loving nature"]
-    },
-    {
-      step: "03",
-      tabTitle: lang === "PL" ? "03 Zdrowie" : "03 Health",
-      category: lang === "PL" ? "03 / ZDROWE OD URODZENIA" : "03 / HEALTHY FROM BIRTH",
-      accentText: "text-blue-400",
-      accentBg: "bg-blue-400/10 border-blue-400/20",
-      title: lang === "PL" ? (
-        <>Przebadane <span className="text-[#86868b]">i gotowe na Ciebie.</span></>
-      ) : (
-        <>Tested <span className="text-[#86868b]">and ready for you.</span></>
-      ),
-      desc: lang === "PL"
-        ? "Każdy kociak odchodzi z hodowli z książeczką zdrowia, kompletem szczepień, mikroczipem i rodowodem FPL/FIFe. Rodzice są regularnie badani (echo serca Doppler, PKD, testy DNA)."
-        : "Every kitten leaves with a health book, vaccinations, microchip, and FPL/FIFe pedigree. Parents tested for HCM (Doppler echo), PKD, and genetic DNA panels.",
-      statValue: "100+",
-      statLabel: lang === "PL" ? "Szczęśliwych domów w Polsce" : "Happy families across Poland",
-      features: lang === "PL"
-        ? ["❤️ Echo serca Doppler (HCM)", "🧬 Testy genetyczne N/N", "📜 5-pokoleniowy rodowód"]
-        : ["❤️ Doppler Echo (HCM)", "🧬 DNA panels N/N", "📜 5-generation pedigree"]
-    }
-  ];
-
-  useEffect(() => {
-    const updateHeight = () =>
-      setSectionHeight(window.innerWidth < 1024 ? "250vh" : "400vh");
-    updateHeight();
-    window.addEventListener("resize", updateHeight, { passive: true });
-    return () => window.removeEventListener("resize", updateHeight);
-  }, []);
 
   const toggleMute = () => {
     const nextMuted = !isMuted;
@@ -112,7 +51,7 @@ export default function EnclosureSection({
     const lerp = (a: number, b: number, t: number) =>
       a + (b - a) * Math.max(0, Math.min(1, t));
 
-    // Płynny fade z funkcją wygładzania (smoothstep) dla desktopu
+    // Smoothstep interpolation
     const smoothFade = (
       p: number,
       inStart: number,
@@ -138,10 +77,10 @@ export default function EnclosureSection({
       inStart: number,
       inEnd: number,
       outStart: number,
-      outEnd: number
+      outEnd: number,
+      initialY = 36,
+      outY = -28
     ) => {
-      const initialY = 36;
-      const outY = -28;
       if (p < inStart) return initialY;
       if (p < inEnd) {
         const t = (p - inStart) / (inEnd - inStart);
@@ -165,12 +104,13 @@ export default function EnclosureSection({
 
       const scrolled = -rect.top;
       const p = Math.max(0, Math.min(1, scrolled / totalScrollable));
-      setScrollProgress(p);
 
       const isDesktop = window.innerWidth >= 1024;
 
       if (isDesktop) {
-        // ── DESKTOP: RUCH TELEFONU ZE ŚRODKA NA PRAWO (IDEALNY EFEKT CHROME) ──
+        // ═══════════════════════════════════════════════════════════════
+        // ── DESKTOP: RUCH TELEFONU ZE ŚRODKA NA PRAWO (IDEALNY CHROME) ──
+        // ═══════════════════════════════════════════════════════════════
         const phoneWrap = phoneWrapperRef.current;
         if (phoneWrap) {
           let offsetX = -23.5;
@@ -234,14 +174,109 @@ export default function EnclosureSection({
           b3.style.transform = `translate3d(0, ${b3Ty}px, 0)`;
           b3.style.pointerEvents = b3Op > 0.3 ? "auto" : "none";
         }
+
+        // Wskaźniki desktop
+        if (desktopBar1Ref.current) {
+          let f = 0;
+          if (p >= 0.44) f = 100;
+          else if (p >= 0.16) f = ((p - 0.16) / 0.28) * 100;
+          desktopBar1Ref.current.style.width = `${f}%`;
+        }
+        if (desktopBar2Ref.current) {
+          let f = 0;
+          if (p >= 0.72) f = 100;
+          else if (p >= 0.48) f = ((p - 0.48) / 0.24) * 100;
+          desktopBar2Ref.current.style.width = `${f}%`;
+        }
+        if (desktopBar3Ref.current) {
+          let f = 0;
+          if (p >= 0.98) f = 100;
+          else if (p >= 0.76) f = ((p - 0.76) / 0.22) * 100;
+          desktopBar3Ref.current.style.width = `${f}%`;
+        }
       } else {
-        // ── MOBILE: SYNCHRONIZACJA ZAKŁADEK PRZY PRZEWIJANIU ──
-        if (p < 0.35) {
-          setActiveMobileIndex(0);
-        } else if (p < 0.70) {
-          setActiveMobileIndex(1);
-        } else {
-          setActiveMobileIndex(2);
+        // ═══════════════════════════════════════════════════════════════
+        // ── MOBILE: APPLE KINEMATYCZNE PRZEJŚCIE (ZERO RE-RENDERÓW) ──
+        // ═══════════════════════════════════════════════════════════════
+        const H = window.innerHeight;
+
+        // 1. Film w telefonie: na początku wycentrowany, płynnie schodzi w dół
+        const mPhone = mobilePhoneWrapRef.current;
+        if (mPhone) {
+          let targetY = 0;
+          let targetScale = 1;
+          if (scrolled <= 0) {
+            targetY = -190;
+            targetScale = 1.08;
+          } else if (scrolled < H * 0.75) {
+            const t = scrolled / (H * 0.75);
+            const ease = t * t * (3 - 2 * t);
+            targetY = lerp(-190, 0, ease);
+            targetScale = lerp(1.08, 1.0, ease);
+          } else {
+            targetY = 0;
+            targetScale = 1.0;
+          }
+          mPhone.style.transform = `translate3d(0, ${targetY}px, 0) scale(${targetScale})`;
+        }
+
+        // 2. Intro nagłówek mobilny: zanika gdy przewijamy
+        const mIntro = mobileIntroRef.current;
+        if (mIntro) {
+          let introOp = 1;
+          let introTy = 0;
+          if (scrolled > H * 0.08) {
+            const t = Math.min(1, (scrolled - H * 0.08) / (H * 0.42));
+            introOp = 1 - t;
+            introTy = -t * 30;
+          }
+          mIntro.style.opacity = String(introOp);
+          mIntro.style.transform = `translate3d(0, ${introTy}px, 0)`;
+          mIntro.style.pointerEvents = introOp > 0.1 ? "auto" : "none";
+        }
+
+        // 3. Scena 1: Ogród i Wybieg (0.55H -> 1.55H)
+        const s1 = mobileScene1Ref.current;
+        if (s1) {
+          const op = smoothFade(scrolled, H * 0.55, H * 0.85, H * 1.35, H * 1.65);
+          const ty = smoothTranslateY(scrolled, H * 0.55, H * 0.85, H * 1.35, H * 1.65, 30, -25);
+          s1.style.opacity = String(op);
+          s1.style.transform = `translate3d(0, ${ty}px, 0)`;
+          s1.style.pointerEvents = op > 0.3 ? "auto" : "none";
+        }
+
+        // 4. Scena 2: Życie w Domu (1.55H -> 2.55H)
+        const s2 = mobileScene2Ref.current;
+        if (s2) {
+          const op = smoothFade(scrolled, H * 1.55, H * 1.85, H * 2.35, H * 2.65);
+          const ty = smoothTranslateY(scrolled, H * 1.55, H * 1.85, H * 2.35, H * 2.65, 30, -25);
+          s2.style.opacity = String(op);
+          s2.style.transform = `translate3d(0, ${ty}px, 0)`;
+          s2.style.pointerEvents = op > 0.3 ? "auto" : "none";
+        }
+
+        // 5. Scena 3: Zdrowe od Urodzenia (2.55H -> 3.55H)
+        const s3 = mobileScene3Ref.current;
+        if (s3) {
+          const op = smoothFade(scrolled, H * 2.55, H * 2.85, H * 3.4, H * 3.8);
+          const ty = smoothTranslateY(scrolled, H * 2.55, H * 2.85, H * 3.4, H * 3.8, 30, -25);
+          s3.style.opacity = String(op);
+          s3.style.transform = `translate3d(0, ${ty}px, 0)`;
+          s3.style.pointerEvents = op > 0.3 ? "auto" : "none";
+        }
+
+        // 6. Subtelne segmentowe kreski Apple na dole
+        if (mobileBar1Ref.current) {
+          const prog = Math.min(100, Math.max(0, ((scrolled - H * 0.55) / (H * 0.8)) * 100));
+          mobileBar1Ref.current.style.width = `${prog}%`;
+        }
+        if (mobileBar2Ref.current) {
+          const prog = Math.min(100, Math.max(0, ((scrolled - H * 1.55) / (H * 0.8)) * 100));
+          mobileBar2Ref.current.style.width = `${prog}%`;
+        }
+        if (mobileBar3Ref.current) {
+          const prog = Math.min(100, Math.max(0, ((scrolled - H * 2.55) / (H * 0.8)) * 100));
+          mobileBar3Ref.current.style.width = `${prog}%`;
         }
       }
     };
@@ -262,17 +297,18 @@ export default function EnclosureSection({
     };
   }, []);
 
-  const currentStory = stories[activeMobileIndex] || stories[0];
-
   return (
     <section
       ref={sectionRef}
       id="wybieg"
       className="relative bg-[#000000] text-white select-none"
-      style={{ height: sectionHeight }}
+      style={{ height: "400vh" }}
     >
       {/* ── STICKY VIEWPORT CONTAINER ──────────────────────────────── */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
+      <div
+        className="sticky top-0 w-full overflow-hidden flex items-center justify-center"
+        style={{ height: "100dvh" }}
+      >
         
         {/* Ambientowe oświetlenie Apple */}
         <div className="absolute top-1/2 right-[18%] -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none" />
@@ -449,56 +485,166 @@ export default function EnclosureSection({
 
           {/* Dolny segmentowy wskaźnik postępu desktop */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
-            {[1, 2, 3].map((step) => {
-              let fillPercent = 0;
-              if (step === 1) {
-                if (scrollProgress >= 0.44) fillPercent = 100;
-                else if (scrollProgress >= 0.16) fillPercent = ((scrollProgress - 0.16) / 0.28) * 100;
-              } else if (step === 2) {
-                if (scrollProgress >= 0.72) fillPercent = 100;
-                else if (scrollProgress >= 0.48) fillPercent = ((scrollProgress - 0.48) / 0.24) * 100;
-              } else if (step === 3) {
-                if (scrollProgress >= 0.98) fillPercent = 100;
-                else if (scrollProgress >= 0.76) fillPercent = ((scrollProgress - 0.76) / 0.22) * 100;
-              }
-
-              return (
-                <div key={step} className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-white transition-all duration-75 ease-out"
-                    style={{ width: `${Math.min(100, Math.max(0, fillPercent))}%` }}
-                  />
-                </div>
-              );
-            })}
+            <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
+              <div
+                ref={desktopBar1Ref}
+                className="h-full bg-white transition-all duration-75 ease-out"
+                style={{ width: "0%" }}
+              />
+            </div>
+            <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
+              <div
+                ref={desktopBar2Ref}
+                className="h-full bg-white transition-all duration-75 ease-out"
+                style={{ width: "0%" }}
+              />
+            </div>
+            <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
+              <div
+                ref={desktopBar3Ref}
+                className="h-full bg-white transition-all duration-75 ease-out"
+                style={{ width: "0%" }}
+              />
+            </div>
           </div>
 
         </div>
 
         {/* ═════════════════════════════════════════════════════════════════ */}
+        {/* ── 2. WERSJA MOBILNA (APPLE SCROLLYTELLING — 120 FPS PŁYNNOŚCI) ─ */}
+        {/* ═════════════════════════════════════════════════════════════════ */}
         <div
-          className="lg:hidden flex flex-col justify-between w-full h-full px-4 relative z-10 max-w-md mx-auto"
-          style={{ paddingTop: "76px", paddingBottom: "22px" }}
+          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-5 max-w-md mx-auto"
+          style={{
+            paddingTop: "76px",
+            paddingBottom: "22px",
+            height: "100dvh",
+          }}
         >
-          
-          {/* ① Header sekcji z eleganckim badgem */}
-          <div className="text-center w-full">
-            <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1">
+          {/* A. INTRO NAGŁÓWEK (Na starcie widoczny, płynnie znika w górę) */}
+          <div
+            ref={mobileIntroRef}
+            className="w-full text-center will-change-transform pt-1 z-20"
+          >
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
             </div>
-            <h2 className="text-2xl font-heading font-light text-white tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-heading font-light text-white tracking-tight leading-tight">
               {lang === "PL" ? (
                 <>Nasz dom <span className="font-normal text-[#86868b]">to ich dom.</span></>
               ) : (
                 <>Our home <span className="font-normal text-[#86868b]">is their home.</span></>
               )}
             </h2>
+            <div className="flex mt-1.5 items-center justify-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#86868b]">
+              <span>{lang === "PL" ? "Przewiń, aby poznać wybieg" : "Scroll to explore"}</span>
+              <ChevronDown className="w-3 h-3 text-[#86868b] animate-bounce" />
+            </div>
           </div>
 
-          {/* ② Autentyczny iPhone 16 Pro z filmem wybiegu (Zero obcinania, zero tekstu na filmie!) */}
-          <div className="w-full relative px-1">
-            <div className="relative mx-auto w-full max-w-[340px] p-[5px] rounded-[24px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_16px_40px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.12)]">
+          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Czysty styl Apple, bez kwadratów!) */}
+          <div className="w-full relative flex-1 min-h-[200px] max-h-[250px] my-auto flex items-center justify-center z-10">
+            
+            {/* Scena 1: Ogród i Wybieg */}
+            <div
+              ref={mobileScene1Ref}
+              className="absolute inset-0 flex flex-col justify-center opacity-0 will-change-transform pointer-events-none"
+            >
+              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold mb-1">
+                01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
+                {lang === "PL" ? (
+                  <>Wychodzą na <span className="text-[#86868b]">dwór kiedy chcą.</span></>
+                ) : (
+                  <>They go outside <span className="text-[#86868b]">whenever they want.</span></>
+                )}
+              </h3>
+              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
+                {lang === "PL"
+                  ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i biegają na wolności bez klatek."
+                  : "Cats have year-round access to a safe, covered garden run. They breathe fresh air, watch birds, and roam freely without cages."}
+              </p>
+              <div className="flex items-center gap-3 pt-1">
+                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
+                  365 dni
+                </span>
+                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
+                  {lang === "PL" ? "Całoroczny dostęp do ogrodu" : "Year-round garden access"}
+                </span>
+              </div>
+            </div>
+
+            {/* Scena 2: Życie w Domu */}
+            <div
+              ref={mobileScene2Ref}
+              className="absolute inset-0 flex flex-col justify-center opacity-0 will-change-transform pointer-events-none"
+            >
+              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-emerald-400 font-semibold mb-1">
+                02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
+                {lang === "PL" ? (
+                  <>Śpią w łóżku, <span className="text-[#86868b]">bawią się w salonie.</span></>
+                ) : (
+                  <>Sleep in bed, <span className="text-[#86868b]">play in the living room.</span></>
+                )}
+              </h3>
+              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
+                {lang === "PL"
+                  ? "Nasze koty są częścią rodziny. Żyją z nami w salonie, śpią na łóżkach i bawią się z dziećmi oraz psem. Dzięki temu kociaki są w pełni zsocjalizowane i ufne."
+                  : "Our cats are part of our family. They live with us, sleep in beds and play with children and our dog. Kittens grow up calm, loving, and fully socialized."}
+              </p>
+              <div className="flex items-center gap-3 pt-1">
+                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
+                  100%
+                </span>
+                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
+                  {lang === "PL" ? "Wychowane z rodziną i dziećmi" : "Raised with family & kids"}
+                </span>
+              </div>
+            </div>
+
+            {/* Scena 3: Zdrowe od Urodzenia */}
+            <div
+              ref={mobileScene3Ref}
+              className="absolute inset-0 flex flex-col justify-center opacity-0 will-change-transform pointer-events-none"
+            >
+              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-blue-400 font-semibold mb-1">
+                03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
+              </p>
+              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
+                {lang === "PL" ? (
+                  <>Przebadane <span className="text-[#86868b]">i gotowe na Ciebie.</span></>
+                ) : (
+                  <>Tested <span className="text-[#86868b]">and ready for you.</span></>
+                )}
+              </h3>
+              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
+                {lang === "PL"
+                  ? "Każdy kociak opuszcza hodowlę z książeczką zdrowia, kompletem szczepień, mikroczipem i rodowodem FPL/FIFe. Rodzice są regularnie badani (echo serca Doppler, testy DNA)."
+                  : "Every kitten leaves with health book, vaccinations, microchip, and FPL/FIFe pedigree. Parents tested for HCM (Doppler echo) and genetic DNA panels."}
+              </p>
+              <div className="flex items-center gap-3 pt-1">
+                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
+                  100+
+                </span>
+                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
+                  {lang === "PL" ? "Szczęśliwych domów w Polsce" : "Happy homes across Poland"}
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* C. AUTENTYCZNY IPHONE 16 PRO (Na starcie w centrum, płynnie schodzi w dół!) */}
+          <div
+            ref={mobilePhoneWrapRef}
+            className="w-full will-change-transform relative px-1 pb-2 z-20"
+            style={{ transform: "translate3d(0, -190px, 0) scale(1.08)" }}
+          >
+            <div className="relative mx-auto w-full max-w-[340px] p-[5px] rounded-[24px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.12)]">
               <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-black">
                 <video
                   ref={mobileVideoRef}
@@ -520,96 +666,42 @@ export default function EnclosureSection({
                 <div className="absolute bottom-2.5 right-2.5 z-30">
                   <button
                     onClick={toggleMute}
-                    className="w-7 h-7 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/80 active:scale-95 transition-all"
+                    className="w-7 h-7 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/80 active:scale-95 transition-all cursor-pointer pointer-events-auto"
                     title={isMuted ? "Włącz dźwięk" : "Wycisz"}
                   >
                     {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
                   </button>
                 </div>
 
-                {/* Odblask ekranu Apple */}
+                {/* Subtelny odblask szkła ekranu */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
               </div>
             </div>
           </div>
 
-          {/* ③ Segmentowe przełączniki zakładek Apple (Tabs) */}
-          <div className="w-full flex items-center justify-between gap-1 p-1 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md">
-            {stories.map((story, idx) => {
-              const isActive = activeMobileIndex === idx;
-              return (
-                <button
-                  key={story.step}
-                  onClick={() => setActiveMobileIndex(idx)}
-                  className={`flex-1 py-1.5 px-2 rounded-full text-[10px] sm:text-[11px] font-mono tracking-wider transition-all duration-300 text-center cursor-pointer ${
-                    isActive
-                      ? "bg-white text-black font-semibold shadow-md"
-                      : "text-[#86868b] hover:text-white"
-                  }`}
-                >
-                  {story.tabTitle}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* ④ Karta opowieści Apple ze szkła mrożonego (Wypełnia dół ekranu, ZERO czarnego tła!) */}
-          <div
-            className="w-full rounded-2xl border border-white/10 p-3.5 sm:p-4 shadow-2xl space-y-2"
-            style={{ backgroundColor: "rgba(24, 24, 27, 0.88)", backdropFilter: "blur(20px)" }}
-          >
-            
-            {/* Kategoria i nagłówek */}
-            <div>
-              <p className={`text-[10px] font-mono uppercase tracking-[0.2em] font-semibold mb-0.5 ${currentStory.accentText}`}>
-                {currentStory.category}
-              </p>
-              <h3 className="text-lg sm:text-xl font-heading font-light text-white leading-tight">
-                {currentStory.title}
-              </h3>
-            </div>
-
-            {/* Opis merytoryczny */}
-            <p className="text-xs font-body text-[#ceced2] leading-relaxed font-light line-clamp-3">
-              {currentStory.desc}
-            </p>
-
-            {/* Karta z dużą liczbą Apple */}
-            <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-between">
-              <div className="text-2xl sm:text-3xl font-heading font-extralight text-white leading-none tracking-tight">
-                {currentStory.statValue}
-              </div>
-              <p className="text-[10px] font-mono uppercase tracking-[0.15em] text-[#86868b] text-right max-w-[160px]">
-                {currentStory.statLabel}
-              </p>
-            </div>
-
-            {/* Pigułki z atestami i unikalnymi cechami hodowli */}
-            <div className="flex flex-wrap gap-1.5 pt-0.5">
-              {currentStory.features.map((feat, i) => (
-                <span
-                  key={i}
-                  className="text-[9px] font-mono tracking-wider px-2 py-0.5 rounded-full bg-white/[0.05] border border-white/10 text-zinc-300"
-                >
-                  {feat}
-                </span>
-              ))}
-            </div>
-
-          </div>
-
-          {/* ⑤ Segmentowy wskaźnik postępu Apple na dole */}
-          <div className="flex items-center justify-center gap-2">
-            {stories.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveMobileIndex(idx)}
-                className={`h-1 rounded-full transition-all duration-300 cursor-pointer ${
-                  activeMobileIndex === idx ? "w-8 bg-white" : "w-4 bg-white/20"
-                }`}
-                aria-label={`Slide ${idx + 1}`}
+          {/* D. SUBTELNE WSKAŹNIKI POSTĘPU APPLE (Eleganckie linie bez topornych przycisków) */}
+          <div className="w-full flex items-center justify-center gap-2 pt-1 pb-1 z-20">
+            <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
+              <div
+                ref={mobileBar1Ref}
+                className="h-full bg-white will-change-transform"
+                style={{ width: "0%" }}
               />
-            ))}
+            </div>
+            <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
+              <div
+                ref={mobileBar2Ref}
+                className="h-full bg-white will-change-transform"
+                style={{ width: "0%" }}
+              />
+            </div>
+            <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
+              <div
+                ref={mobileBar3Ref}
+                className="h-full bg-white will-change-transform"
+                style={{ width: "0%" }}
+              />
+            </div>
           </div>
 
         </div>
