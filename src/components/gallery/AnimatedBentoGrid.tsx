@@ -176,53 +176,57 @@ export default function AnimatedBentoGrid({
         </div>
       )}
 
-      {/* ── BENTO GRID CONTAINER (Gwarantowana wysokość dla każdego kafelka) ── */}
-      <div
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-4 md:h-[700px] lg:h-[760px]"
-        style={{ gridAutoRows: "minmax(210px, auto)" }}
-      >
-        {/* 1. Large Main Tile - slowly pans left */}
+      {/* 
+        BENTO GRID CONTAINER
+        Mobile: 2 kolumny, 180px wysokość wiersza
+        Desktop: 4 kolumny, 240px wysokość wiersza
+      */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-bento auto-rows-[180px] md:auto-rows-[240px]">
+        {/* 1. Duży kafel - powolny ruch poziomy */}
         <FluidBentoCell
           images={cellPools[0]}
           direction="horizontal"
-          speed={35}
-          className="col-span-1 sm:col-span-2 row-span-2 md:col-span-2 md:row-span-2"
+          speed={40}
+          label="Zabawa w trawie"
+          className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 2. Tall Vertical Tile - scrolls down */}
+        {/* 2. Pionowy kafel - ruch pionowy w dół */}
         <FluidBentoCell
           images={cellPools[1]}
           direction="reverse-vertical"
           speed={25}
+          label="Portrety"
           className="col-span-1 row-span-2 md:col-span-1 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 3. Small Square 1 - scrolls up quickly */}
+        {/* 3. Mały kwadrat 1 - szybki ruch poziomy */}
         <FluidBentoCell
           images={cellPools[2]}
-          direction="vertical"
+          direction="horizontal"
           speed={15}
           className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 4. Small Square 2 - scrolls right */}
+        {/* 4. Mały kwadrat 2 - ruch pionowy w górę */}
         <FluidBentoCell
           images={cellPools[3]}
-          direction="reverse-horizontal"
+          direction="vertical"
           speed={20}
           className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 5. Long Bottom Banner - scrolls right steadily */}
+        {/* 5. Długi pasek na dole - ruch w lewo (reverse) */}
         <FluidBentoCell
           images={cellPools[4]}
           direction="reverse-horizontal"
-          speed={40}
-          className="col-span-1 sm:col-span-2 row-span-1 md:col-span-4 md:row-span-1"
+          speed={45}
+          label="Wybieg i Ogród"
+          className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
       </div>
