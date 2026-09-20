@@ -23,6 +23,15 @@ export default function EnclosureSection({
 
   const [scrollProgress, setScrollProgress] = useState<number>(0);
   const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [sectionHeight, setSectionHeight] = useState<string>("400vh");
+
+  useEffect(() => {
+    const updateHeight = () =>
+      setSectionHeight(window.innerWidth < 1024 ? "280vh" : "400vh");
+    updateHeight();
+    window.addEventListener("resize", updateHeight, { passive: true });
+    return () => window.removeEventListener("resize", updateHeight);
+  }, []);
 
   const toggleMute = () => {
     if (!videoRef.current) return;
@@ -195,7 +204,7 @@ export default function EnclosureSection({
       ref={sectionRef}
       id="wybieg"
       className="relative bg-[#000000] text-white select-none"
-      style={{ height: "400vh" }} // Zapewnia płynną, kinową podróż
+      style={{ height: sectionHeight }}
     >
       {/* ── STICKY VIEWPORT CONTAINER ──────────────────────────────── */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex items-center justify-center">
@@ -237,10 +246,10 @@ export default function EnclosureSection({
         </div>
 
         {/* ── GŁÓWNA SCENA SCROLLYTELLINGU APPLE (2 Kolumny z bezpiecznym marginesem) ── */}
-        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 pt-20 sm:pt-24 lg:pt-0 gap-7 sm:gap-8 lg:gap-0">
+        <div className="w-full max-w-[1440px] mx-auto px-5 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 pt-[90px] sm:pt-[110px] lg:pt-0 gap-4 sm:gap-8 lg:gap-0">
 
           {/* ── LEWA KOLUMNA: CZYSTA TYPOGRAFIA APPLE (ZERO KWADRATÓW, ZERO RAMEK) ── */}
-          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[185px] sm:h-[270px] lg:h-[440px] flex items-start sm:items-center">
+          <div className="w-full lg:w-[44%] max-w-[500px] z-20 relative h-[180px] sm:h-[270px] lg:h-[440px] flex items-start sm:items-center">
 
             {/* 01. WYBIEG OGRODOWY */}
             <div
@@ -373,7 +382,7 @@ export default function EnclosureSection({
               className="w-full will-change-transform transition-transform duration-75 ease-out relative"
             >
               {/* Obudowa iPhone 16 Pro (Tytanowa ramka, zaokrąglone narożniki, Dynamic Island) */}
-              <div className="relative mx-auto w-full max-w-[320px] sm:max-w-[480px] lg:max-w-[680px] p-[6px] sm:p-[10px] rounded-[26px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
+              <div className="relative mx-auto w-full max-w-[360px] sm:max-w-[480px] lg:max-w-[680px] p-[6px] sm:p-[10px] rounded-[26px] sm:rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_60px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.1)]">
                 
                 {/* Wewnętrzna krawędź ekranu Super Retina XDR */}
                 <div className="relative w-full aspect-[16/9] rounded-[20px] sm:rounded-[36px] overflow-hidden bg-black">

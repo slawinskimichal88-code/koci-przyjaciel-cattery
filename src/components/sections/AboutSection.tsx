@@ -13,8 +13,8 @@ export default function AboutSection({ lang }: AboutSectionProps) {
   return (
     <section id="o-nas" className="bg-white text-black overflow-hidden">
 
-      {/* ── Intro ─────────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-28 pb-20 reveal">
+      {/* ── Intro ──────────────────────────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-14 sm:pt-20 pb-10 sm:pb-16 reveal">
         <p className="text-[10px] sm:text-xs font-ui uppercase tracking-[0.4em] text-black/35 mb-6">
           {lang === "PL" ? "O nas" : "About"}
         </p>
@@ -43,9 +43,9 @@ export default function AboutSection({ lang }: AboutSectionProps) {
         </div>
       </div>
 
-      {/* ── Tekst + Statystyki ─────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-16 pb-28">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      {/* ── Tekst + Statystyki ────────────────────────────────────────── */}
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-8 sm:pt-12 pb-14 sm:pb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
 
           {/* Tekst */}
           <div className="reveal space-y-5">
@@ -80,13 +80,13 @@ export default function AboutSection({ lang }: AboutSectionProps) {
           </div>
 
           {/* Stats — duże liczby jak Apple */}
-          <div className="reveal reveal-delay-2 space-y-10">
+          <div className="reveal reveal-delay-2 flex flex-row lg:flex-col flex-wrap gap-0 lg:space-y-10">
             {[
               { num: "26 000+", label: lang === "PL" ? "Osób obserwuje nas na Facebooku" : "Facebook followers" },
               { num: "100+", label: lang === "PL" ? "Kociaków trafiło do dobrych domów" : "Kittens in loving homes" },
-              { num: "10+", label: lang === "PL" ? "Lat dowodzimy, że to można robić pięknie" : "Years of experience" },
+              { num: "10+", label: lang === "PL" ? "Lat budujemy zaufanie hodowców" : "Years of experience" },
             ].map((stat, i) => (
-              <div key={i} className={`reveal reveal-delay-${i + 1} border-t border-black/10 pt-6`}>
+              <div key={i} className={`reveal reveal-delay-${i + 1} border-t border-black/10 pt-4 sm:pt-6 w-full sm:w-1/3 lg:w-full`}>
                 <div
                   className="font-heading font-light text-black leading-none mb-1"
                   style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}

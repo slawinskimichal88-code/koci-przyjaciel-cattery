@@ -562,37 +562,42 @@ export default function ScaleComparisonSection({ lang = "PL" }: ScaleComparisonS
                     onClick={() => handleOpenFeature(hotspot.featureId)}
                     onMouseEnter={() => setHoveredHotspotId(hotspot.id)}
                     onMouseLeave={() => setHoveredHotspotId(null)}
-                    className="relative flex items-center justify-center p-3 cursor-pointer focus:outline-none group/hotspot"
+                    className="relative flex items-center justify-center p-1.5 sm:p-2.5 cursor-pointer focus:outline-none group/hotspot"
                     aria-label={hotspot.label}
                   >
-                    {/* Delikatny puls przy wybranej lub najeżdżanej kropce */}
+                    {/* Delikatny puls przy wybranej kropce */}
                     {isSelected && (
-                      <span className="absolute w-10 h-10 rounded-full bg-white/25 animate-ping pointer-events-none" />
+                      <span className="absolute w-4 h-4 sm:w-7 sm:h-7 rounded-full bg-white/30 animate-ping pointer-events-none" />
                     )}
 
+                    {/* Zewnętrzna subtelna aureola Apple */}
                     <span
                       className={`absolute rounded-full transition-all duration-300 pointer-events-none ${
                         isSelected
-                          ? "w-8 h-8 bg-white/20 scale-125"
+                          ? "w-4 h-4 sm:w-6 sm:h-6 bg-white/25 scale-110"
                           : isHovered
-                          ? "w-8 h-8 bg-white/25 scale-110"
-                          : "w-6 h-6 bg-white/10 scale-95"
+                          ? "w-3.5 h-3.5 sm:w-5 sm:h-5 bg-white/25 scale-105"
+                          : "w-3 h-3 sm:w-4 sm:h-4 bg-white/10"
                       }`}
                     />
 
-                    {/* Minimalistyczna kropka Apple (zero etykiet na stałe) */}
+                    {/* Precyzyjna kropka inspekcyjna Apple LiDAR */}
                     <span
-                      className={`relative rounded-full border-2 transition-all duration-300 flex items-center justify-center ${
+                      className={`relative rounded-full transition-all duration-300 flex items-center justify-center ${
                         isSelected
-                          ? "w-5 h-5 sm:w-6 sm:h-6 border-white bg-white shadow-[0_0_25px_rgba(255,255,255,1)] scale-110"
+                          ? "w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 bg-white shadow-[0_0_12px_rgba(255,255,255,0.95)] ring-2 ring-white/70 scale-110"
                           : isHovered
-                          ? "w-5 h-5 border-white bg-white shadow-md scale-110"
-                          : "w-4 h-4 border-white/80 bg-black/90 group-hover/hotspot:border-white group-hover/hotspot:bg-white"
+                          ? "w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 bg-white shadow-sm ring-1 ring-white/80 scale-105"
+                          : "w-2 h-2 sm:w-3 sm:h-3 bg-white/90 ring-1 ring-black/30 group-hover/hotspot:bg-white"
                       }`}
                     >
                       <span
-                        className={`w-1.5 h-1.5 rounded-full transition-colors ${
-                          isSelected ? "bg-black" : isHovered ? "bg-black" : "bg-white group-hover/hotspot:bg-black"
+                        className={`rounded-full transition-colors ${
+                          isSelected
+                            ? "w-1 h-1 bg-black"
+                            : isHovered
+                            ? "w-1 h-1 bg-black"
+                            : "w-0.5 h-0.5 sm:w-1 sm:h-1 bg-black/60 group-hover/hotspot:bg-black"
                         }`}
                       />
                     </span>
@@ -757,8 +762,8 @@ export default function ScaleComparisonSection({ lang = "PL" }: ScaleComparisonS
         </div>
 
         {/* ── BENTO GRID: Podsumowanie Wszystkich Parametrów w Kafelkach ── */}
-        <div className="reveal">
-          <div className="text-center mb-10">
+        <div>
+          <div className="text-center mb-10 reveal">
             <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">
               Bento Grid · Zestawienie Parametrów
             </span>

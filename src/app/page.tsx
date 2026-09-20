@@ -4,10 +4,11 @@ import React, { useState } from "react";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
+import KittenReservationBar from "@/components/sections/KittenReservationBar";
 import EnclosureSection from "@/components/sections/EnclosureSection";
+import KittensSection from "@/components/sections/KittensSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ScaleComparisonSection from "@/components/sections/ScaleComparisonSection";
-import KittensSection from "@/components/sections/KittensSection";
 import KnowledgeBaseTeaser from "@/components/sections/KnowledgeBaseTeaser";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import FacebookCommunitySection from "@/components/sections/FacebookCommunitySection";
@@ -42,7 +43,7 @@ export default function Home() {
         onOpenReservation={() => handleOpenReservation()}
       />
 
-      {/* Główna sekwencja narracyjna strony głównej */}
+      {/* Główna sekwencja narracyjna strony głównej (Układ Sprzedażowo-Wiedzowy Apple Pro) */}
       <main className="relative z-10">
         
         {/* ① HERO: Monumentalny wstęp + film w tle */}
@@ -51,34 +52,40 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ② WYBIEG: Scrollytelling Apple iPhone — filozofia wybiegu, życie w domu, zero klatek */}
+        {/* ② PASEK SPRZEDAŻOWY: Status rezerwacji 2026, miniatury kociąt i szybki kontakt */}
+        <KittenReservationBar
+          lang={lang}
+          onOpenReservation={(name) => handleOpenReservation(name)}
+        />
+
+        {/* ③ WYBIEG: Scrollytelling Apple iPhone — filozofia wybiegu, życie w domu, zero klatek */}
         <EnclosureSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ③ O HODOWLI: Domowa filozofia, życie w salonie, FIFe / FPL */}
-        <AboutSection lang={lang} />
-
-        {/* ④ PORÓWNANIE KOTY VS PSY: Interaktywna skala wielkości, anatomia, rysiowe uszy, kuweta vs spacery */}
-        <ScaleComparisonSection lang={lang} />
-
-        {/* ⑤ KOCIĘTA: Aktualnie dostępne kocięta do rezerwacji z odnośnikiem do pełnej zakładki /kocieta */}
+        {/* ④ KOCIĘTA: Wirtualny selektor kociąt Apple Pro, filtry, EMS, specyfikacja i rezerwacja */}
         <KittensSection
           lang={lang}
           onOpenReservation={(name) => handleOpenReservation(name)}
         />
 
-        {/* ⑥ BAZA WIEDZY O MAINE COON: Kompendium wiedzy o rasie z odnośnikiem do zakładki /baza-wiedzy */}
+        {/* ⑤ O HODOWLI: Domowa filozofia, życie w salonie, standardy FIFe / FPL, 26 000+ fanów */}
+        <AboutSection lang={lang} />
+
+        {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, miarki laserowe, mikro-kropki Apple LiDAR, Bento Grid */}
+        <ScaleComparisonSection lang={lang} />
+
+        {/* ⑦ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Wirtualny kalkulator kosztów na żywo, badania genetyczne HCM/PKD/SMA N/N */}
         <KnowledgeBaseTeaser lang={lang} />
 
-        {/* ⑦ OPINIE OPIEKUNÓW: Referencje od rodzin */}
+        {/* ⑧ OPINIE OPIEKUNÓW: Oceny 5.0, metryki wagi, filtry kategorii, wirtualne notatki głosowe audio */}
         <TestimonialsSection lang={lang} />
 
-        {/* ⑧ SPOŁECZNOŚĆ FACEBOOK: 25 395 fanów na żywo */}
+        {/* ⑨ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API, zdjęcia rodzin i social hub */}
         <FacebookCommunitySection lang={lang} />
 
-        {/* ⑨ KONTAKT: Formularz, telefon, mapa Wrocławia */}
+        {/* ⑩ KONTAKT: 3 kroki adopcji, bezpośrednie linie kontaktu, formularz z preferencjami */}
         <ContactSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
