@@ -2,6 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import { Maximize2 } from "lucide-react";
 
 export interface BentoImageItem {
   id?: string;
@@ -16,6 +17,7 @@ interface FluidBentoCellProps {
   direction?: "vertical" | "horizontal" | "reverse-vertical" | "reverse-horizontal";
   speed?: number;
   onPhotoClick?: (item: BentoImageItem) => void;
+  badge?: string;
 }
 
 export default function FluidBentoCell({ 
@@ -24,6 +26,7 @@ export default function FluidBentoCell({
   direction = "horizontal", 
   speed = 15,
   onPhotoClick,
+  badge,
 }: FluidBentoCellProps) {
   if (!images || images.length === 0) return null;
 
@@ -33,18 +36,23 @@ export default function FluidBentoCell({
   const isVertical = direction.includes("vertical");
   const isReverse = direction.includes("reverse");
 
+  // Punkty startu i końca animacji
   const start = isReverse ? "-50%" : "0%";
   const end = isReverse ? "0%" : "-50%";
 
+  // Matematyczny trik CSS:
+  // Jeśli mamy 6 zdjęć poziomo, szerokość toru to 600%.
+  // Wtedy każde zdjęcie wewnątrz zajmuje dokładnie (100 / 6)% toru, czyli dokładnie 100% kafelka Bento.
+  const trackSize = doubled.length * 100;
+  const childSize = 100 / doubled.length;
+
   return (
-    <div className={`relative overflow-hidden rounded-3xl bg-neutral-900 border border-white/10 ${className}`}>
+    <div className={`group relative overflow-hidden rounded-[2rem] bg-gray-900 border border-white/10 shadow-xl ${className}`}>
       <motion.div
-        className={`flex ${isVertical ? "flex-col" : "flex-row"}`}
+        className={`flex ${isVertical ? "flex-col" : "flex-row"} absolute top-0 left-0`}
         style={{
-          // KLUCZOWY TRIK: Obliczamy dokładną szerokość/wysokość w procentach.
-          // Jeśli mamy 6 zdjęć na taśmie, szerokość to 600%. Nic się nie zgniecie.
-          width: isVertical ? "100%" : `${doubled.length * 100}%`,
-          height: isVertical ? `${doubled.length * 100}%` : "100%",
+          width: isVertical ? "100%" : `${trackSize}%`,
+          height: isVertical ? `${trackSize}%` : "100%",
         }}
         animate={{
           y: isVertical ? [start, end] : ["0%", "0%"],
@@ -64,21 +72,44 @@ export default function FluidBentoCell({
               : item;
 
           return (
-            // Pozycjonowanie absolutne wewnątrz flexa zapobiega deformacjom
-            <div
-              key={idx}
-              className="relative h-full w-full cursor-pointer"
+            <div 
+              key={idx} 
+              className="relative overflow-hidden cursor-pointer"
+              style={{
+                width: isVertical ? "100%" : `${childSize}%`,
+                height: isVertical ? `${childSize}%` : "100%",
+              }}
               onClick={() => onPhotoClick && onPhotoClick(photoObj)}
             >
               <img
                 src={src}
-                alt={`Slide ${idx}`}
-                className="absolute inset-0 h-full w-full object-cover"
+                alt={photoObj.title || `Gallery slide ${idx}`}
+                loading="eager"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
+              {/* Delikatny gradient podkreślający głębię */}
+              <div className="absolute inset-0 bg-black/15 pointer-events-none" />
             </div>
           );
         })}
       </motion.div>
+
+      {/* Subtelny badge kategorii */}
+      {(badge || (typeof images[0] !== "string" && (images[0] as BentoImageItem)?.categoryLabel)) && (
+        <div className="absolute top-3.5 left-3.5 z-10 pointer-events-none">
+          <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-mono text-zinc-200 shadow-md">
+            {badge || (images[0] as BentoImageItem)?.categoryLabel}
+          </span>
+        </div>
+      )}
+
+      {/* Ikona powiększenia (Apple Expand Icon on hover) */}
+      <div className="absolute top-3.5 right-3.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+        <div className="w-8 h-8 rounded-full bg-black/80 backdrop-blur-md border border-white/25 flex items-center justify-center text-white shadow-lg">
+          <Maximize2 className="w-3.5 h-3.5" />
+        </div>
+      </div>
     </div>
   );
 }
