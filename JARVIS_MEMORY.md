@@ -30,8 +30,8 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
    - `ContactSection`: 3-krokowa ścieżka adopcji, preferencje w formularzu i bezpośrednie kanały kontaktu.
 5. **Architektura Lejka Sprzedażowego**:
    - Kolejność: Hero -> Pasek Szybkiej Rezerwacji -> Wybieg (USP) -> Kocięta (Oferta) -> Kim Jestem (Właścicielka) -> Skala 1:1 (Teaser) -> Baza Wiedzy & Kalkulator -> Opinie -> Społeczność -> Kontakt.
-6. **Optymalizacja Informacji na Stronie Głównej & Przebudowa /o-nas**:
-   - `Kim jestem` (`BreederSection`): Sekcja z portretem właścicielki (`cat_07.webp`, `cat_24.webp`), opisem pasji, życia w salonie i certyfikatów FIFe/FPL.
-   - `ScaleComparisonSection`: Lekki teaser na głównej z metrykami (120 cm, 11.5 kg, 38 cm) i linkiem do Bazy Wiedzy (`/baza-wiedzy#porownanie`), pełna wersja w `/baza-wiedzy`.
-   - `EnclosureSection`: Płynny scrollytelling bez zmian, link do `/o-nas#wybieg`.
-   - `/o-nas`: 4 sekcje: `#hodowla` (Nasza Hodowla), `#wybieg` (Wybieg z wideo i galerią), `#matki` (Karty matek HCM/DNA), `#kocury` (Karty kocurów do 12 kg) + pigułki nawigacyjne Apple.
+7. **Dopracowanie Layoutu (Wybieg, Psy i Właścicielka)**:
+   - `EnclosureSection`: Rozszerzono kolumnę tekstową desktop z wąskiego 500px do 680px, usunięto sztuczne łamania `<br />`, wyrównano kompozycję z makietą iPhone'a (koniec efektu „wąskiego paska z boku”).
+   - `ScaleComparisonSection`: Na stronie głównej zachowano wyłącznie czystą grafikę skali 1:1 z laserowymi liniami HUD oraz wyrazisty przycisk/hiperłącze do Bazy Wiedzy (`/baza-wiedzy#porownanie`). Całkowicie usunięto kwadraty/boxy z tekstem o psach ze strony głównej.
+   - `BreederSection`: Drastycznie skrócono tekst o właścicielce – zastąpiono 3 długie akapity jednym zwięzłym cytatem w stylu Apple Keynote, dwuzdaniowym biogramem, 3 minimalistycznymi plakietkami zaufania oraz bezpośrednim hiperłączem do `/o-nas`.
+   - Zmiany zbudowane z kodem 0 i wysłane na produkcję (`main -> main`).
