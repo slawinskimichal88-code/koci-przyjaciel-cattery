@@ -427,7 +427,7 @@ export default function ScaleComparisonSection({
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-8 reveal">
+        <div className="text-center max-w-3xl mx-auto mb-8">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-5">
             <Crosshair className="w-3.5 h-3.5 text-white/70 animate-spin-slow" />
             <span className="text-[10px] sm:text-[11px] font-ui uppercase tracking-[0.35em] text-white/80 font-semibold">
@@ -455,7 +455,7 @@ export default function ScaleComparisonSection({
 
         {/* ── Szybki Pasek Apple Pills — Wybór Cechy (TYLKO w pełnej Bazie Wiedzy) ── */}
         {!compact && (
-          <div className="flex items-center justify-center gap-2 mb-6 flex-wrap reveal">
+          <div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
             {CHARACTERISTIC_FEATURES.map((feat) => {
               const isSelected = activeFeatureId === feat.id;
               return (
@@ -489,7 +489,7 @@ export default function ScaleComparisonSection({
         )}
 
         {/* ── GŁÓWNA SCENA INTERAKTYWNA: Apple Canvas ze Wskaźnikami ──── */}
-        <div className="relative rounded-3xl border border-white/15 bg-black overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] reveal mb-8">
+        <div className="relative rounded-3xl border border-white/15 bg-black overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] mb-8">
           
           {/* Pasek statusu u góry sceny */}
           <div className="px-5 py-3 border-b border-white/10 bg-white/[0.02] backdrop-blur-md flex items-center justify-between flex-wrap gap-2 text-xs font-ui">
@@ -786,7 +786,7 @@ export default function ScaleComparisonSection({
         {/* ── PODSUMOWANIE / BENTO GRID ─────────────────────────────────── */}
         {compact ? (
           /* Widok czysty na Stronie Głównej: Tylko hiperłącze do Bazy Wiedzy, ZERO kwadratów! */
-          <div className="text-center pt-4 pb-4 reveal">
+          <div className="text-center pt-4 pb-4">
             <div className="max-w-2xl mx-auto space-y-4">
               <p className="text-sm sm:text-base font-body text-white/75 leading-relaxed font-light">
                 {lang === "PL"
@@ -813,7 +813,7 @@ export default function ScaleComparisonSection({
         ) : (
           /* Widok pełny w Bazie Wiedzy (/baza-wiedzy) */
           <div>
-            <div className="text-center mb-10 reveal">
+            <div className="text-center mb-10">
               <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">
                 Zestawienie Parametrów
               </span>

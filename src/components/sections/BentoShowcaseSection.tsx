@@ -4,7 +4,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, X, Sparkles, ShieldCheck, Home, Sun } from "lucide-react";
-import AnimatedBentoCell, { BentoImageItem } from "@/components/gallery/AnimatedBentoCell";
+import FluidBentoCell, { BentoImageItem } from "@/components/gallery/FluidBentoCell";
 import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
 
 interface BentoShowcaseSectionProps {
@@ -14,7 +14,7 @@ interface BentoShowcaseSectionProps {
 export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<BentoImageItem | null>(null);
 
-  // Partition photos into 4 diverse pools across key categories for continuous vertical sliding
+  // Podział zdjęć na 3 zróżnicowane pule dla prawej kolumny 50/50
   const pools = useMemo(() => {
     const wybieg = ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg");
     const kocury = ALL_AGA_PHOTOS.filter((p) => p.category === "kocury");
@@ -25,18 +25,16 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
     const pool1: BentoImageItem[] = [];
     const pool2: BentoImageItem[] = [];
     const pool3: BentoImageItem[] = [];
-    const pool4: BentoImageItem[] = [];
 
-    // Distribute photos to each pool
     for (let i = 0; i < Math.max(wybieg.length, kocury.length, matki.length, mlode.length, wDomu.length); i++) {
       if (wybieg[i]) pool1.push({ id: wybieg[i].id, src: wybieg[i].src, title: wybieg[i].title, categoryLabel: wybieg[i].categoryLabel });
       if (kocury[i]) pool2.push({ id: kocury[i].id, src: kocury[i].src, title: kocury[i].title, categoryLabel: kocury[i].categoryLabel });
       if (matki[i]) pool3.push({ id: matki[i].id, src: matki[i].src, title: matki[i].title, categoryLabel: matki[i].categoryLabel });
-      if (mlode[i]) pool4.push({ id: mlode[i].id, src: mlode[i].src, title: mlode[i].title, categoryLabel: mlode[i].categoryLabel });
-      if (wDomu[i]) pool1.push({ id: wDomu[i].id, src: wDomu[i].src, title: wDomu[i].title, categoryLabel: wDomu[i].categoryLabel });
+      if (mlode[i]) pool1.push({ id: mlode[i].id, src: mlode[i].src, title: mlode[i].title, categoryLabel: mlode[i].categoryLabel });
+      if (wDomu[i]) pool2.push({ id: wDomu[i].id, src: wDomu[i].src, title: wDomu[i].title, categoryLabel: wDomu[i].categoryLabel });
     }
 
-    return [pool1, pool2, pool3, pool4];
+    return [pool1, pool2, pool3];
   }, []);
 
   return (
@@ -45,7 +43,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
       <div className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[600px] h-[400px] bg-amber-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* ── PODZIAŁ PÓŁ NA PÓŁ (50% TEKST / 50% DYNAMICZNIE PRZESUWANE ZDJĘCIA) ───── */}
+        {/* ── PODZIAŁ PÓŁ NA PÓŁ (50% TEKST / 50% DYNAMICZNIE PŁYNĄCA TAŚMA BENTO) ───── */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* LEWA STRONA: TEKST I WYRÓŻNIKI (50%) */}
@@ -145,28 +143,34 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
             </div>
           </div>
 
-          {/* PRAWA STRONA: PRZESUWAJĄCE SIĘ KAFELKI BENTO (50%) */}
+          {/* PRAWA STRONA: PŁYNĄCA TAŚMA BENTO (50%) */}
           <div className="lg:col-span-7 relative">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 md:h-[580px] lg:h-[620px]">
-              {/* Kafelek 1: Duży pionowy (zajmuje 2 wiersze na sm+) */}
-              <AnimatedBentoCell
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 auto-rows-[220px] sm:auto-rows-[260px]">
+              {/* Kafelek 1: Duży pionowy (płynie w górę) */}
+              <FluidBentoCell
                 images={pools[0]}
+                direction="vertical"
+                speed={22}
                 onPhotoClick={setSelectedPhoto}
-                className="min-h-[260px] sm:min-h-0 sm:row-span-2"
+                className="sm:row-span-2"
               />
 
-              {/* Kafelek 2: Górny kwadrat */}
-              <AnimatedBentoCell
+              {/* Kafelek 2: Górny kwadrat (płynie w prawo) */}
+              <FluidBentoCell
                 images={pools[1]}
+                direction="reverse-horizontal"
+                speed={16}
                 onPhotoClick={setSelectedPhoto}
-                className="min-h-[200px] sm:min-h-0 sm:row-span-1"
+                className="sm:row-span-1"
               />
 
-              {/* Kafelek 3: Dolny kwadrat */}
-              <AnimatedBentoCell
+              {/* Kafelek 3: Dolny kwadrat (płynie w dół) */}
+              <FluidBentoCell
                 images={pools[2]}
+                direction="reverse-vertical"
+                speed={19}
                 onPhotoClick={setSelectedPhoto}
-                className="min-h-[200px] sm:min-h-0 sm:row-span-1"
+                className="sm:row-span-1"
               />
             </div>
           </div>

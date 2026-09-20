@@ -3,7 +3,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X, Sparkles } from "lucide-react";
-import AnimatedBentoCell, { BentoImageItem } from "@/components/gallery/AnimatedBentoCell";
+import FluidBentoCell, { BentoImageItem } from "@/components/gallery/FluidBentoCell";
 import { GalleryPhotoItem } from "@/data/agaGalleryData";
 
 interface AnimatedBentoGridProps {
@@ -33,17 +33,17 @@ export default function AnimatedBentoGrid({
 }: AnimatedBentoGridProps) {
   const [selectedPhoto, setSelectedPhoto] = useState<BentoImageItem | null>(null);
 
-  // Filter photos based on activeCategory
+  // Filtrowanie po aktywnej kategorii
   const filteredPhotos = useMemo(() => {
     if (!activeCategory || activeCategory === "all") return photos;
     return photos.filter((p) => p.category === activeCategory);
   }, [photos, activeCategory]);
 
-  // Distribute photos across 6 Bento cells for continuous independent sliding
+  // Rozdzielenie zdjęć na 5 kafelków Bento dla niezależnego, ciągłego ruchu taśmy
   const cellPools = useMemo(() => {
-    if (filteredPhotos.length === 0) return [[], [], [], [], [], []];
+    if (filteredPhotos.length === 0) return [[], [], [], [], []];
 
-    const pools: BentoImageItem[][] = [[], [], [], [], [], []];
+    const pools: BentoImageItem[][] = [[], [], [], [], []];
     filteredPhotos.forEach((photo, idx) => {
       pools[idx % pools.length].push({
         id: photo.id,
@@ -53,7 +53,7 @@ export default function AnimatedBentoGrid({
       });
     });
 
-    // Ensure every pool has at least 1 photo
+    // Upewnij się, że każdy kafelek ma przypisane zdjęcia
     return pools.map((pool, idx) => {
       if (pool.length > 0) return pool;
       const fallback = filteredPhotos[idx % filteredPhotos.length];
@@ -68,7 +68,7 @@ export default function AnimatedBentoGrid({
     });
   }, [filteredPhotos]);
 
-  // Modal navigation
+  // Nawigacja w modalu lightbox
   const selectedIndex = useMemo(() => {
     if (!selectedPhoto) return -1;
     return filteredPhotos.findIndex((p) => p.src === selectedPhoto.src);
@@ -100,7 +100,7 @@ export default function AnimatedBentoGrid({
     });
   };
 
-  // Keyboard navigation for modal
+  // Nawigacja klawiaturą
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (!selectedPhoto) return;
@@ -112,7 +112,7 @@ export default function AnimatedBentoGrid({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [selectedPhoto, selectedIndex, filteredPhotos]);
 
-  // Lock scroll when modal is open
+  // Blokowanie scrolla pod modalem
   useEffect(() => {
     if (selectedPhoto) {
       document.body.style.overflow = "hidden";
@@ -151,7 +151,7 @@ export default function AnimatedBentoGrid({
         </div>
       )}
 
-      {/* ── CATEGORY TABS ─────────────────────────────────────────────── */}
+      {/* ── KATEGORIE ─────────────────────────────────────────────────── */}
       {categories && categories.length > 0 && onCategoryChange && (
         <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mb-6 sm:mb-8">
           {categories.map((cat) => {
@@ -173,48 +173,51 @@ export default function AnimatedBentoGrid({
         </div>
       )}
 
-      {/* ── ASYMMETRICAL ANIMATED BENTO GRID (KAFELKI SAMOCZYNNIE PRZESUWAJĄ SIĘ W GÓRĘ I W DÓŁ) ── */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-3 gap-3.5 sm:gap-4 md:h-[700px] lg:h-[760px]">
-        {/* Kafelek 1: Duży Hero 2x2 */}
-        <AnimatedBentoCell
+      {/* ── BENTO GRID: NIESKOŃCZONA MAŚLANA TAŚMA (SVGATOR STYLE) ────── */}
+      <div className="grid grid-cols-2 gap-3.5 sm:gap-4 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[240px]">
+        {/* Kafelek 1: Duży Hero 2x2 — płynie powoli w poziomie */}
+        <FluidBentoCell
           images={cellPools[0]}
+          direction="horizontal"
+          speed={26}
+          className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
-          className="min-h-[280px] sm:min-h-[340px] md:min-h-0 sm:col-span-2 md:col-span-2 md:row-span-2"
         />
 
-        {/* Kafelek 2: Pionowy Tall 1x2 */}
-        <AnimatedBentoCell
+        {/* Kafelek 2: Pionowy 1x2 — płynie w dół (reverse-vertical) */}
+        <FluidBentoCell
           images={cellPools[1]}
+          direction="reverse-vertical"
+          speed={18}
+          className="col-span-1 row-span-2 md:col-span-1 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
-          className="min-h-[260px] sm:min-h-[300px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-2"
         />
 
-        {/* Kafelek 3: Mały kwadrat górny prawy 1x1 */}
-        <AnimatedBentoCell
+        {/* Kafelek 3: Mały kwadrat 1x1 — płynie w górę (vertical) */}
+        <FluidBentoCell
           images={cellPools[2]}
+          direction="vertical"
+          speed={12}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
-          className="min-h-[190px] sm:min-h-[200px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-1"
         />
 
-        {/* Kafelek 4: Mały kwadrat środkowy prawy 1x1 */}
-        <AnimatedBentoCell
+        {/* Kafelek 4: Mały kwadrat 1x1 — płynie w lewo (horizontal) */}
+        <FluidBentoCell
           images={cellPools[3]}
+          direction="horizontal"
+          speed={15}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
-          className="min-h-[190px] sm:min-h-[200px] md:min-h-0 sm:col-span-1 md:col-span-1 md:row-span-1"
         />
 
-        {/* Kafelek 5: Panoramiczny kafelek dolny lewy 2x1 */}
-        <AnimatedBentoCell
+        {/* Kafelek 5: Panoramiczny pasek dolny 4x1 — płynie w prawo (reverse-horizontal) */}
+        <FluidBentoCell
           images={cellPools[4]}
+          direction="reverse-horizontal"
+          speed={22}
+          className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
-          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-2 md:row-span-1"
-        />
-
-        {/* Kafelek 6: Panoramiczny kafelek dolny prawy 2x1 */}
-        <AnimatedBentoCell
-          images={cellPools[5]}
-          onPhotoClick={setSelectedPhoto}
-          className="min-h-[190px] sm:min-h-[210px] md:min-h-0 sm:col-span-1 md:col-span-2 md:row-span-1"
         />
       </div>
 
