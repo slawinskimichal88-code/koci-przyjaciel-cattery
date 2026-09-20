@@ -33,9 +33,7 @@
     --color-paw: #FFFFFF;
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
+
 
   body {
     background-color: var(--color-dark-bg);

@@ -36,6 +36,8 @@ export default function EnclosureSection({
   const mobileBar3Ref = useRef<HTMLDivElement>(null);
 
   const [isMuted, setIsMuted] = useState<boolean>(true);
+  const [isDesktopDevice, setIsDesktopDevice] = useState<boolean>(true);
+  const [sectionHeight, setSectionHeight] = useState<string>("400vh");
 
   const toggleMute = () => {
     const nextMuted = !isMuted;
@@ -45,8 +47,45 @@ export default function EnclosureSection({
   };
 
   useEffect(() => {
+    const isDesk = window.innerWidth >= 1024;
+    setIsDesktopDevice(isDesk);
+    setSectionHeight(isDesk ? "400vh" : "310vh");
+
+    const onResize = () => {
+      const d = window.innerWidth >= 1024;
+      setIsDesktopDevice(d);
+      setSectionHeight(d ? "400vh" : "310vh");
+    };
+    window.addEventListener("resize", onResize, { passive: true });
+
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+
+    // IntersectionObserver — pauzuj wideo gdy wybieg nie jest na ekranie
+    let observer: IntersectionObserver | null = null;
+    if (typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            const v = videoRef.current;
+            const mv = mobileVideoRef.current;
+            if (entry.isIntersecting) {
+              if (v && v.src) v.play().catch(() => {});
+              if (mv && mv.src) mv.play().catch(() => {});
+            } else {
+              if (v) v.pause();
+              if (mv) mv.pause();
+            }
+          });
+        },
+        { threshold: 0.02 }
+      );
+      observer.observe(section);
+    }
 
     const lerp = (a: number, b: number, t: number) =>
       a + (b - a) * Math.max(0, Math.min(1, t));
@@ -208,8 +247,8 @@ export default function EnclosureSection({
           if (scrolled <= 0) {
             targetY = -190;
             targetScale = 1.08;
-          } else if (scrolled < H * 0.75) {
-            const t = scrolled / (H * 0.75);
+          } else if (scrolled < H * 0.65) {
+            const t = scrolled / (H * 0.65);
             const ease = t * t * (3 - 2 * t);
             targetY = lerp(-190, 0, ease);
             targetScale = lerp(1.08, 1.0, ease);
@@ -225,8 +264,8 @@ export default function EnclosureSection({
         if (mIntro) {
           let introOp = 1;
           let introTy = 0;
-          if (scrolled > H * 0.08) {
-            const t = Math.min(1, (scrolled - H * 0.08) / (H * 0.42));
+          if (scrolled > H * 0.06) {
+            const t = Math.min(1, (scrolled - H * 0.06) / (H * 0.35));
             introOp = 1 - t;
             introTy = -t * 30;
           }
@@ -235,31 +274,31 @@ export default function EnclosureSection({
           mIntro.style.pointerEvents = introOp > 0.1 ? "auto" : "none";
         }
 
-        // 3. Scena 1: Ogród i Wybieg (0.55H -> 1.55H)
+        // 3. Scena 1: Ogród i Wybieg (0.45H -> 1.25H)
         const s1 = mobileScene1Ref.current;
         if (s1) {
-          const op = smoothFade(scrolled, H * 0.55, H * 0.85, H * 1.35, H * 1.65);
-          const ty = smoothTranslateY(scrolled, H * 0.55, H * 0.85, H * 1.35, H * 1.65, 30, -25);
+          const op = smoothFade(scrolled, H * 0.45, H * 0.70, H * 1.10, H * 1.30);
+          const ty = smoothTranslateY(scrolled, H * 0.45, H * 0.70, H * 1.10, H * 1.30, 30, -25);
           s1.style.opacity = String(op);
           s1.style.transform = `translate3d(0, ${ty}px, 0)`;
           s1.style.pointerEvents = op > 0.3 ? "auto" : "none";
         }
 
-        // 4. Scena 2: Życie w Domu (1.55H -> 2.55H)
+        // 4. Scena 2: Życie w Domu (1.25H -> 1.95H)
         const s2 = mobileScene2Ref.current;
         if (s2) {
-          const op = smoothFade(scrolled, H * 1.55, H * 1.85, H * 2.35, H * 2.65);
-          const ty = smoothTranslateY(scrolled, H * 1.55, H * 1.85, H * 2.35, H * 2.65, 30, -25);
+          const op = smoothFade(scrolled, H * 1.25, H * 1.45, H * 1.80, H * 2.00);
+          const ty = smoothTranslateY(scrolled, H * 1.25, H * 1.45, H * 1.80, H * 2.00, 30, -25);
           s2.style.opacity = String(op);
           s2.style.transform = `translate3d(0, ${ty}px, 0)`;
           s2.style.pointerEvents = op > 0.3 ? "auto" : "none";
         }
 
-        // 5. Scena 3: Zdrowe od Urodzenia (2.55H -> 3.55H)
+        // 5. Scena 3: Zdrowe od Urodzenia (1.95H -> 2.80H)
         const s3 = mobileScene3Ref.current;
         if (s3) {
-          const op = smoothFade(scrolled, H * 2.55, H * 2.85, H * 3.4, H * 3.8);
-          const ty = smoothTranslateY(scrolled, H * 2.55, H * 2.85, H * 3.4, H * 3.8, 30, -25);
+          const op = smoothFade(scrolled, H * 1.95, H * 2.20, H * 2.70, H * 3.00);
+          const ty = smoothTranslateY(scrolled, H * 1.95, H * 2.20, H * 2.70, H * 3.00, 30, -25);
           s3.style.opacity = String(op);
           s3.style.transform = `translate3d(0, ${ty}px, 0)`;
           s3.style.pointerEvents = op > 0.3 ? "auto" : "none";
@@ -267,15 +306,15 @@ export default function EnclosureSection({
 
         // 6. Subtelne segmentowe kreski Apple na dole
         if (mobileBar1Ref.current) {
-          const prog = Math.min(100, Math.max(0, ((scrolled - H * 0.55) / (H * 0.8)) * 100));
+          const prog = Math.min(100, Math.max(0, ((scrolled - H * 0.45) / (H * 0.70)) * 100));
           mobileBar1Ref.current.style.width = `${prog}%`;
         }
         if (mobileBar2Ref.current) {
-          const prog = Math.min(100, Math.max(0, ((scrolled - H * 1.55) / (H * 0.8)) * 100));
+          const prog = Math.min(100, Math.max(0, ((scrolled - H * 1.25) / (H * 0.65)) * 100));
           mobileBar2Ref.current.style.width = `${prog}%`;
         }
         if (mobileBar3Ref.current) {
-          const prog = Math.min(100, Math.max(0, ((scrolled - H * 2.55) / (H * 0.8)) * 100));
+          const prog = Math.min(100, Math.max(0, ((scrolled - H * 1.95) / (H * 0.75)) * 100));
           mobileBar3Ref.current.style.width = `${prog}%`;
         }
       }
@@ -294,6 +333,7 @@ export default function EnclosureSection({
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleScroll);
       cancelAnimationFrame(rafId);
+      observer?.disconnect();
     };
   }, []);
 
@@ -302,7 +342,7 @@ export default function EnclosureSection({
       ref={sectionRef}
       id="wybieg"
       className="relative bg-[#000000] text-white select-none"
-      style={{ height: "400vh" }}
+      style={{ height: sectionHeight }}
     >
       {/* ── STICKY VIEWPORT CONTAINER ──────────────────────────────── */}
       <div
@@ -455,12 +495,12 @@ export default function EnclosureSection({
                   <div className="relative w-full aspect-[16/9] rounded-[36px] overflow-hidden bg-black">
                     <video
                       ref={videoRef}
-                      src="/video/film2.mp4"
+                      src={isDesktopDevice ? "/video/film2.mp4" : undefined}
                       autoPlay
                       loop
                       muted={isMuted}
                       playsInline
-                      preload="auto"
+                      preload="metadata"
                       className="w-full h-full object-cover pointer-events-none scale-[1.05]"
                     />
                     <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
@@ -648,12 +688,12 @@ export default function EnclosureSection({
               <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-black">
                 <video
                   ref={mobileVideoRef}
-                  src="/video/film2.mp4"
+                  src={!isDesktopDevice ? "/video/film2.mp4" : undefined}
                   autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="auto"
+                  preload="metadata"
                   className="w-full h-full object-cover scale-[1.04]"
                 />
                 

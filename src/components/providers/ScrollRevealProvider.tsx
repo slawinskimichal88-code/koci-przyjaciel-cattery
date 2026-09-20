@@ -23,20 +23,15 @@ export default function ScrollRevealProvider() {
     const elements = document.querySelectorAll(".reveal");
     elements.forEach((el) => observer.observe(el));
 
-    // Obserwuj zmiany w DOM (dla dynamicznie renderowanych elementów)
-    const mutationObserver = new MutationObserver(() => {
-      const newElements = document.querySelectorAll(".reveal:not(.is-visible)");
-      newElements.forEach((el) => observer.observe(el));
-    });
-
-    mutationObserver.observe(document.body, {
-      childList: true,
-      subtree: true,
-    });
+    // Opcjonalne jednorazowe sprawdzenie po załadowaniu dodatkowych komponentów
+    const timer = setTimeout(() => {
+      const laterElements = document.querySelectorAll(".reveal:not(.is-visible)");
+      laterElements.forEach((el) => observer.observe(el));
+    }, 1500);
 
     return () => {
+      clearTimeout(timer);
       observer.disconnect();
-      mutationObserver.disconnect();
     };
   }, []);
 

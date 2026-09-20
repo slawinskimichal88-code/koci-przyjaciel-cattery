@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
 import { ArrowRight, Phone } from "lucide-react";
@@ -22,6 +22,8 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
   const badgeRef = useRef<HTMLDivElement>(null);
   const scrollHintRef = useRef<HTMLDivElement>(null);
 
+  const [wrapperHeight, setWrapperHeight] = useState<string>("550vh");
+
   // Video overlay — zmienia opacity/tint w zależności od sekcji
   const overlayRef = useRef<HTMLDivElement>(null);
 
@@ -29,8 +31,27 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
 
-    const SECTION_H = window.innerHeight; // wysokość jednej "sceny"
-    const TOTAL = SECTION_H * 5; // 5 scen x 1 viewport
+    const isMobile = window.innerWidth < 1024;
+    const SECTION_H = isMobile ? window.innerHeight * 0.65 : window.innerHeight; // wysokość jednej "sceny"
+
+    // IntersectionObserver — pauzuj wideo gdy sekcja nie jest na ekranie (oszczędność GPU)
+    const video = videoRef.current;
+    let observer: IntersectionObserver | null = null;
+    if (video && typeof IntersectionObserver !== "undefined") {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              video.play().catch(() => {});
+            } else {
+              video.pause();
+            }
+          });
+        },
+        { threshold: 0.02 }
+      );
+      observer.observe(wrapper);
+    }
 
     const lerp = (a: number, b: number, t: number) =>
       a + (b - a) * Math.max(0, Math.min(1, t));
@@ -186,11 +207,21 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
     window.addEventListener("scroll", onScroll, { passive: true });
     update();
 
+    setWrapperHeight(isMobile ? "350vh" : "550vh");
+
+    const onResize = () => {
+      const mobileNow = window.innerWidth < 1024;
+      setWrapperHeight(mobileNow ? "350vh" : "550vh");
+    };
+    window.addEventListener("resize", onResize, { passive: true });
+
     return () => {
       clearTimeout(autoTimer);
       cancelAnimationFrame(autoRafId);
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
       cancelAnimationFrame(rafId);
+      observer?.disconnect();
     };
   }, []);
 
@@ -198,7 +229,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
     <div
       ref={wrapperRef}
       className="relative"
-      style={{ height: "600vh" }} // 6 viewportów = 5 scen + końcowy bufor
+      style={{ height: wrapperHeight }}
     >
       {/* ============================================================ */}
       {/* STICKY — przyklejony pojemnik z wideo i tekstem              */}
@@ -218,10 +249,13 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           style={{
             opacity: 0,
             transform: "scale(1.06)",
-            filter: "sepia(40%) saturate(1.2) brightness(0.65)",
             willChange: "opacity, transform",
           }}
         />
+
+        {/* Ciepły, złocisty odcień filmowy bez obciążania procesora GPU filtrami */}
+        <div className="absolute inset-0 bg-[#3a200a]/25 mix-blend-color pointer-events-none" />
+        <div className="absolute inset-0 bg-black/35 pointer-events-none" />
 
         {/* Dodatkowe przyciemnienie na scroll */}
         <div
