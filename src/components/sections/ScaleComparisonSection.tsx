@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Sparkles,
   Ruler,
@@ -19,6 +20,8 @@ import {
   Info,
   Volume2,
   MousePointerClick,
+  ArrowRight,
+  BookOpen,
 } from "lucide-react";
 
 interface Hotspot {
@@ -367,9 +370,13 @@ const COMPARISON_CARDS = [
 
 interface ScaleComparisonSectionProps {
   lang?: "PL" | "EN";
+  compact?: boolean;
 }
 
-export default function ScaleComparisonSection({ lang = "PL" }: ScaleComparisonSectionProps) {
+export default function ScaleComparisonSection({
+  lang = "PL",
+  compact = false,
+}: ScaleComparisonSectionProps) {
   // Stan: która cecha jest otwarta (null = brak aktywnej cechy, czysty widok)
   const [activeFeatureId, setActiveFeatureId] = useState<string | null>("ears");
   const [hoveredHotspotId, setHoveredHotspotId] = useState<string | null>(null);
@@ -761,101 +768,181 @@ export default function ScaleComparisonSection({ lang = "PL" }: ScaleComparisonS
 
         </div>
 
-        {/* ── BENTO GRID: Podsumowanie Wszystkich Parametrów w Kafelkach ── */}
-        <div>
-          <div className="text-center mb-10 reveal">
-            <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">
-              Bento Grid · Zestawienie Parametrów
-            </span>
-            <h3
-              className="font-heading font-light text-white leading-tight"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
-            >
-              Wszystkie różnice w pigułce.
-            </h3>
-            <p className="text-sm sm:text-base font-body text-white/60 max-w-xl mx-auto mt-2">
-              Przejrzyste kafelki porównujące naturę, anatomię, upodobanie do wody i codzienne życie z Maine Coonem.
-            </p>
-          </div>
+        {/* ── PODSUMOWANIE / BENTO GRID ─────────────────────────────────── */}
+        {compact ? (
+          /* Widok kompaktowy na Stronie Głównej: Pigułka wiedzy + hiperłącze do Bazy Wiedzy */
+          <div className="reveal">
+            <div className="p-8 sm:p-12 rounded-3xl border border-white/15 bg-gradient-to-br from-white/[0.06] via-white/[0.02] to-black/80 backdrop-blur-2xl shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                
+                {/* 3 kluczowe metryki w pigułkach */}
+                <div className="lg:col-span-7 space-y-6">
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-mono uppercase tracking-wider text-amber-300">
+                    <BookOpen className="w-3.5 h-3.5 text-amber-400" />
+                    <span>{lang === "PL" ? "Kluczowe Parametry Skali 1:1" : "1:1 Scale Key Metrics"}</span>
+                  </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {COMPARISON_CARDS.map((card, idx) => {
-              const Icon = card.icon;
-              return (
-                <div
-                  key={idx}
-                  className={`p-6 sm:p-7 rounded-2xl border transition-all duration-300 flex flex-col justify-between hover:translate-y-[-3px] ${
-                    card.highlight
-                      ? "bg-white/[0.04] border-white/25 shadow-[0_10px_35px_rgba(255,255,255,0.05)]"
-                      : "bg-white/[0.015] border-white/10 hover:border-white/20"
-                  }`}
-                >
-                  <div>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-white" />
+                  <h3 className="text-2xl sm:text-3xl font-heading font-medium text-white leading-tight">
+                    {lang === "PL"
+                      ? "Format małego psa w ciele dostojnego kota kanapowego."
+                      : "The format of a dog in the body of a magnificent cat."}
+                  </h3>
+
+                  <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-2">
+                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
+                      <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-0.5">120 cm</div>
+                      <div className="text-[10px] sm:text-xs font-ui text-white/50 uppercase tracking-wider">
+                        {lang === "PL" ? "Długość z ogonem" : "Length with tail"}
                       </div>
-                      <span className="text-[10px] uppercase font-ui tracking-widest text-white/50 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
-                        {card.badge}
-                      </span>
                     </div>
-
-                    <h4 className="text-lg sm:text-xl font-heading font-medium text-white mb-4">
-                      {card.title}
-                    </h4>
-
-                    <div className="space-y-3 font-body text-xs sm:text-sm">
-                      {/* Maine Coon (Wyróżniony) */}
-                      <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 shadow-inner">
-                        <span className="text-[10px] font-ui uppercase tracking-wider text-white font-bold block mb-1 flex items-center gap-1.5">
-                          <Sparkles className="w-3 h-3 text-white" />
-                          Maine Coon:
-                        </span>
-                        <p className="text-white font-medium leading-relaxed">
-                          {card.mainecoon}
-                        </p>
+                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
+                      <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-0.5">11.5 kg</div>
+                      <div className="text-[10px] sm:text-xs font-ui text-white/50 uppercase tracking-wider">
+                        {lang === "PL" ? "Waga kocura" : "Adult male weight"}
                       </div>
-
-                      {/* Kot domowy */}
-                      <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-white/60">
-                        <span className="text-[10px] font-ui uppercase tracking-wider text-white/40 block mb-0.5">
-                          Kot Domowy:
-                        </span>
-                        <p className="leading-relaxed">{card.cat}</p>
-                      </div>
-
-                      {/* Pies Beagle */}
-                      <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-white/60">
-                        <span className="text-[10px] font-ui uppercase tracking-wider text-white/40 block mb-0.5">
-                          Pies (Beagle):
-                        </span>
-                        <p className="leading-relaxed">{card.dog}</p>
+                    </div>
+                    <div className="p-3.5 sm:p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-center">
+                      <div className="text-xl sm:text-2xl font-heading font-bold text-white mb-0.5">38 cm</div>
+                      <div className="text-[10px] sm:text-xs font-ui text-white/50 uppercase tracking-wider">
+                        {lang === "PL" ? "Kłąb (= Beagle)" : "Withers (= Beagle)"}
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
 
-          {/* Podsumowanie końcowe */}
-          <div className="mt-12 p-8 sm:p-10 rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.05] via-white/[0.02] to-transparent flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
-            <div className="max-w-2xl">
-              <span className="text-[10px] uppercase font-ui tracking-[0.3em] text-white/40 block mb-2">
-                Dlaczego hodowla Koci Przyjaciel?
+                  <p className="text-xs sm:text-sm font-body text-white/70 leading-relaxed">
+                    {lang === "PL"
+                      ? "Maine Coon łączy oddanie i inteligencję psa (aportuje, wita w drzwiach, uwielbia wodę) z wygodą posiadania kota (brak spacerów o świcie w ulewie, 100% czystości w kuwecie)."
+                      : "Maine Coon combines dog loyalty and intelligence with feline indoor comfort."}
+                  </p>
+                </div>
+
+                {/* Przyciski CTA i przejście do Bazy Wiedzy */}
+                <div className="lg:col-span-5 flex flex-col items-stretch gap-4 bg-black/50 p-6 sm:p-8 rounded-2xl border border-white/10">
+                  <div className="text-xs font-mono uppercase tracking-widest text-white/40 mb-1">
+                    {lang === "PL" ? "Chcesz poznać wszystkie szczegóły?" : "Want full details?"}
+                  </div>
+                  <p className="text-sm font-heading font-light text-white/90 mb-2">
+                    {lang === "PL"
+                      ? "Zobacz wyczerpujące zestawienie 6 obszarów anatomicznych, zachowań w wodzie i higieny w Bazie Wiedzy."
+                      : "Explore all 6 anatomical areas, water behaviors, and hygiene differences in our Knowledge Base."}
+                  </p>
+
+                  <Link
+                    href="/baza-wiedzy#porownanie"
+                    className="w-full py-3.5 px-6 rounded-full bg-white text-black font-ui uppercase tracking-wider text-xs font-bold hover:bg-white/85 transition-all text-center flex items-center justify-center gap-2 shadow-[0_10px_30px_rgba(255,255,255,0.2)]"
+                  >
+                    <span>{lang === "PL" ? "Pełne Porównanie w Bazie Wiedzy" : "Full Comparison in Knowledge Base"}</span>
+                    <ArrowRight className="w-4 h-4 text-black" />
+                  </Link>
+
+                  <a
+                    href="#kocieta"
+                    className="w-full py-3 px-6 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white font-ui uppercase tracking-wider text-xs font-medium transition-all text-center"
+                  >
+                    {lang === "PL" ? "Zobacz Dostępne Kocięta" : "View Available Kittens"}
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        ) : (
+          /* Widok pełny w Bazie Wiedzy (/baza-wiedzy) */
+          <div>
+            <div className="text-center mb-10 reveal">
+              <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">
+                Bento Grid · Zestawienie Parametrów
               </span>
-              <p className="font-heading font-light text-xl sm:text-2xl text-white/95 leading-snug">
-                „Otrzymujesz majestat i oddanie psa, bez konieczności wychodzenia w ulewę o 6 rano, z dodatkiem jedwabistego futra i fascynacji wodą.”
+              <h3
+                className="font-heading font-light text-white leading-tight"
+                style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
+              >
+                Wszystkie różnice w pigułce.
+              </h3>
+              <p className="text-sm sm:text-base font-body text-white/60 max-w-xl mx-auto mt-2">
+                Przejrzyste kafelki porównujące naturę, anatomię, upodobanie do wody i codzienne życie z Maine Coonem.
               </p>
             </div>
-            <a
-              href="#kocieta"
-              className="shrink-0 px-8 py-4 bg-white text-black font-ui uppercase tracking-widest text-xs font-semibold hover:bg-white/85 transition-all shadow-lg hover:scale-105 cursor-pointer"
-            >
-              Zobacz Dostępne Kocięta
-            </a>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {COMPARISON_CARDS.map((card, idx) => {
+                const Icon = card.icon;
+                return (
+                  <div
+                    key={idx}
+                    className={`p-6 sm:p-7 rounded-2xl border transition-all duration-300 flex flex-col justify-between hover:translate-y-[-3px] ${
+                      card.highlight
+                        ? "bg-white/[0.04] border-white/25 shadow-[0_10px_35px_rgba(255,255,255,0.05)]"
+                        : "bg-white/[0.015] border-white/10 hover:border-white/20"
+                    }`}
+                  >
+                    <div>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
+                          <Icon className="w-5 h-5 text-white" />
+                        </div>
+                        <span className="text-[10px] uppercase font-ui tracking-widest text-white/50 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                          {card.badge}
+                        </span>
+                      </div>
+
+                      <h4 className="text-lg sm:text-xl font-heading font-medium text-white mb-4">
+                        {card.title}
+                      </h4>
+
+                      <div className="space-y-3 font-body text-xs sm:text-sm">
+                        {/* Maine Coon (Wyróżniony) */}
+                        <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 shadow-inner">
+                          <span className="text-[10px] font-ui uppercase tracking-wider text-white font-bold block mb-1 flex items-center gap-1.5">
+                            <Sparkles className="w-3 h-3 text-white" />
+                            Maine Coon:
+                          </span>
+                          <p className="text-white font-medium leading-relaxed">
+                            {card.mainecoon}
+                          </p>
+                        </div>
+
+                        {/* Kot domowy */}
+                        <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-white/60">
+                          <span className="text-[10px] font-ui uppercase tracking-wider text-white/40 block mb-0.5">
+                            Kot Domowy:
+                          </span>
+                          <p className="leading-relaxed">{card.cat}</p>
+                        </div>
+
+                        {/* Pies Beagle */}
+                        <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-white/60">
+                          <span className="text-[10px] font-ui uppercase tracking-wider text-white/40 block mb-0.5">
+                            Pies (Beagle):
+                          </span>
+                          <p className="leading-relaxed">{card.dog}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Podsumowanie końcowe */}
+            <div className="mt-12 p-8 sm:p-10 rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.05] via-white/[0.02] to-transparent flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
+              <div className="max-w-2xl">
+                <span className="text-[10px] uppercase font-ui tracking-[0.3em] text-white/40 block mb-2">
+                  Dlaczego hodowla Koci Przyjaciel?
+                </span>
+                <p className="font-heading font-light text-xl sm:text-2xl text-white/95 leading-snug">
+                  „Otrzymujesz majestat i oddanie psa, bez konieczności wychodzenia w ulewę o 6 rano, z dodatkiem jedwabistego futra i fascynacji wodą.”
+                </p>
+              </div>
+              <a
+                href="#kocieta"
+                className="shrink-0 px-8 py-4 bg-white text-black font-ui uppercase tracking-widest text-xs font-semibold hover:bg-white/85 transition-all shadow-lg hover:scale-105 cursor-pointer"
+              >
+                Zobacz Dostępne Kocięta
+              </a>
+            </div>
           </div>
-        </div>
+        )}
 
       </div>
     </section>

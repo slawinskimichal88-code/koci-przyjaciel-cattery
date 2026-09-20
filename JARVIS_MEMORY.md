@@ -29,4 +29,9 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
    - `TestimonialsSection`: Pasek KPI zaufania (`5.0/5.0`, `10.4 kg`, `100% DNA`), filtry relacji, wirtualny odtwarzacz audio Apple Voice Memo.
    - `ContactSection`: 3-krokowa ścieżka adopcji, preferencje w formularzu i bezpośrednie kanały kontaktu.
 5. **Architektura Lejka Sprzedażowego**:
-   - Kolejność: Hero -> Pasek Szybkiej Rezerwacji -> Wybieg (USP) -> Kocięta (Oferta) -> O hodowli -> Skala 1:1 -> Baza Wiedzy & Kalkulator -> Opinie -> Społeczność -> Kontakt.
+   - Kolejność: Hero -> Pasek Szybkiej Rezerwacji -> Wybieg (USP) -> Kocięta (Oferta) -> Kim Jestem (Właścicielka) -> Skala 1:1 (Teaser) -> Baza Wiedzy & Kalkulator -> Opinie -> Społeczność -> Kontakt.
+6. **Optymalizacja Informacji na Stronie Głównej & Przebudowa /o-nas**:
+   - `Kim jestem` (`BreederSection`): Sekcja z portretem właścicielki (`cat_07.webp`, `cat_24.webp`), opisem pasji, życia w salonie i certyfikatów FIFe/FPL.
+   - `ScaleComparisonSection`: Lekki teaser na głównej z metrykami (120 cm, 11.5 kg, 38 cm) i linkiem do Bazy Wiedzy (`/baza-wiedzy#porownanie`), pełna wersja w `/baza-wiedzy`.
+   - `EnclosureSection`: Płynny scrollytelling bez zmian, link do `/o-nas#wybieg`.
+   - `/o-nas`: 4 sekcje: `#hodowla` (Nasza Hodowla), `#wybieg` (Wybieg z wideo i galerią), `#matki` (Karty matek HCM/DNA), `#kocury` (Karty kocurów do 12 kg) + pigułki nawigacyjne Apple.

@@ -7,7 +7,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import KittenReservationBar from "@/components/sections/KittenReservationBar";
 import EnclosureSection from "@/components/sections/EnclosureSection";
 import KittensSection from "@/components/sections/KittensSection";
-import AboutSection from "@/components/sections/AboutSection";
+import BreederSection from "@/components/sections/BreederSection";
 import ScaleComparisonSection from "@/components/sections/ScaleComparisonSection";
 import KnowledgeBaseTeaser from "@/components/sections/KnowledgeBaseTeaser";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -70,11 +70,14 @@ export default function Home() {
           onOpenReservation={(name) => handleOpenReservation(name)}
         />
 
-        {/* ⑤ O HODOWLI: Domowa filozofia, życie w salonie, standardy FIFe / FPL, 26 000+ fanów */}
-        <AboutSection lang={lang} />
+        {/* ⑤ KIM JESTEM: Właścicielka hodowli, domowy odchów w salonie, brak klatek, badania zdrowotne */}
+        <BreederSection
+          lang={lang}
+          onOpenReservation={() => handleOpenReservation()}
+        />
 
-        {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, miarki laserowe, mikro-kropki Apple LiDAR, Bento Grid */}
-        <ScaleComparisonSection lang={lang} />
+        {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, laserowe miarki, mikro-kropki Apple LiDAR + skrót z odnośnikiem do Bazy Wiedzy */}
+        <ScaleComparisonSection lang={lang} compact={true} />
 
         {/* ⑦ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Wirtualny kalkulator kosztów na żywo, badania genetyczne HCM/PKD/SMA N/N */}
         <KnowledgeBaseTeaser lang={lang} />

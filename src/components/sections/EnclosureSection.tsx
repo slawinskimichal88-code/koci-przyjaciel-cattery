@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { ChevronDown, Volume2, VolumeX } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown, Volume2, VolumeX, ArrowRight } from "lucide-react";
 
 interface EnclosureSectionProps {
   lang?: "PL" | "EN";
@@ -417,6 +418,15 @@ export default function EnclosureSection({
                     {lang === "PL" ? "Dostęp do ogrodu przez cały rok" : "Year-round garden access"}
                   </p>
                 </div>
+                <div className="pt-2">
+                  <Link
+                    href="/o-nas#wybieg"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto"
+                  >
+                    <span>{lang === "PL" ? "Zobacz galerię wybiegu w O nas" : "View enclosure in About"}</span>
+                    <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
+                  </Link>
+                </div>
               </div>
 
               {/* 02. Dom */}
@@ -613,6 +623,15 @@ export default function EnclosureSection({
                 <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
                   {lang === "PL" ? "Całoroczny dostęp do ogrodu" : "Year-round garden access"}
                 </span>
+              </div>
+              <div className="pt-2">
+                <Link
+                  href="/o-nas#wybieg"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 active:bg-white/20 border border-white/15 text-[10px] font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto"
+                >
+                  <span>{lang === "PL" ? "Więcej zdjęć w zakładce O nas" : "More photos in About"}</span>
+                  <ArrowRight className="w-3 h-3 text-amber-400" />
+                </Link>
               </div>
             </div>
 
