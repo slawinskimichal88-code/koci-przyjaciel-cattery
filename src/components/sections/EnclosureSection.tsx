@@ -277,8 +277,11 @@ export default function EnclosureSection({
         </div>
 
         {/* ── GŁÓWNA SCENA SCROLLYTELLINGU APPLE ── */}
-        {/* Na mobile: flex-col justify-start z naturalnym odstępem mt-4; na desktop: układ 2-kolumnowy z justify-between */}
-        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 pt-[72px] sm:pt-20 lg:pt-0">
+        {/* Na mobile: flex-col justify-start z gwarantowanym padding-top; na desktop: 2 kolumny z justify-between */}
+        <div
+          className="w-full max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-16 h-full flex flex-col lg:flex-row items-center justify-start lg:justify-between relative z-10 sm:pt-20 lg:pt-0"
+          style={{ paddingTop: "76px" }}
+        >
 
           {/* ── TELEFON IPHONE 16 PRO (Na mobile: order-1 u góry; na desktop: order-2 po prawej) ── */}
           <div className="order-1 lg:order-2 w-full lg:w-[52%] max-w-[720px] z-10 flex justify-center lg:justify-end">
@@ -328,12 +331,15 @@ export default function EnclosureSection({
           </div>
 
           {/* ── CECHY: TEKSTY (Na mobile: order-2 bezpośrednio pod telefonem; na desktop: order-1 po lewej) ── */}
-          <div className="order-2 lg:order-1 w-full lg:w-[44%] max-w-[500px] z-20 relative min-h-[220px] sm:min-h-[260px] lg:h-[440px] mt-4 sm:mt-6 lg:mt-0 flex items-center">
+          <div
+            className="order-2 lg:order-1 w-full lg:w-[44%] max-w-[500px] z-20 relative mt-4 sm:mt-6 lg:mt-0 flex items-center"
+            style={{ minHeight: "260px" }}
+          >
 
             {/* 01. WYBIEG OGRODOWY */}
             <div
               ref={textBlock1Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-4 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-4 absolute top-0 lg:top-1/2 lg:-translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-amber-400 font-semibold mb-1 sm:mb-2">
@@ -373,7 +379,7 @@ export default function EnclosureSection({
             {/* 02. ŻYCIE W DOMU */}
             <div
               ref={textBlock2Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-4 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-4 absolute top-0 lg:top-1/2 lg:-translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-emerald-400 font-semibold mb-1 sm:mb-2">
@@ -413,7 +419,7 @@ export default function EnclosureSection({
             {/* 03. ZDROWE OD URODZENIA */}
             <div
               ref={textBlock3Ref}
-              className="opacity-0 will-change-transform space-y-2 sm:space-y-4 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              className="opacity-0 will-change-transform space-y-2 sm:space-y-4 absolute top-0 lg:top-1/2 lg:-translate-y-1/2 left-0 w-full"
             >
               <div>
                 <p className="text-[10px] sm:text-xs font-mono uppercase tracking-[0.22em] sm:tracking-[0.25em] text-blue-400 font-semibold mb-1 sm:mb-2">
