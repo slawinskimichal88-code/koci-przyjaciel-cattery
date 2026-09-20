@@ -36,12 +36,12 @@ export default function EnclosureSection({
   useEffect(() => {
     const isDesk = window.innerWidth >= 1024;
     setIsDesktopDevice(isDesk);
-    setSectionHeight(isDesk ? "260vh" : "190vh");
+    setSectionHeight(isDesk ? "200vh" : "170vh");
 
     const onResize = () => {
       const d = window.innerWidth >= 1024;
       setIsDesktopDevice(d);
-      setSectionHeight(d ? "260vh" : "190vh");
+      setSectionHeight(d ? "200vh" : "170vh");
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -165,8 +165,8 @@ export default function EnclosureSection({
         // Cechy 01, 02, 03 desktop — Scena 3 zostaje w 100% widoczna do końca sekcji
         const b1 = textBlock1Ref.current;
         if (b1) {
-          const b1Op = smoothFade(p, 0.10, 0.18, 0.44, 0.50);
-          const b1Ty = smoothTranslateY(p, 0.10, 0.18, 0.44, 0.50);
+          const b1Op = smoothFade(p, 0.08, 0.16, 0.38, 0.46);
+          const b1Ty = smoothTranslateY(p, 0.08, 0.16, 0.38, 0.46);
           b1.style.opacity = String(b1Op);
           b1.style.transform = `translate3d(0, ${b1Ty}px, 0)`;
           b1.style.pointerEvents = b1Op > 0.3 ? "auto" : "none";
@@ -174,8 +174,8 @@ export default function EnclosureSection({
 
         const b2 = textBlock2Ref.current;
         if (b2) {
-          const b2Op = smoothFade(p, 0.48, 0.55, 0.74, 0.80);
-          const b2Ty = smoothTranslateY(p, 0.48, 0.55, 0.74, 0.80);
+          const b2Op = smoothFade(p, 0.44, 0.52, 0.70, 0.76);
+          const b2Ty = smoothTranslateY(p, 0.44, 0.52, 0.70, 0.76);
           b2.style.opacity = String(b2Op);
           b2.style.transform = `translate3d(0, ${b2Ty}px, 0)`;
           b2.style.pointerEvents = b2Op > 0.3 ? "auto" : "none";
@@ -183,8 +183,8 @@ export default function EnclosureSection({
 
         const b3 = textBlock3Ref.current;
         if (b3) {
-          const b3Op = smoothFade(p, 0.78, 0.85, 1.0, 1.0);
-          const b3Ty = smoothTranslateY(p, 0.78, 0.85, 1.0, 1.0);
+          const b3Op = smoothFade(p, 0.74, 0.82, 1.0, 1.0);
+          const b3Ty = smoothTranslateY(p, 0.74, 0.82, 1.0, 1.0);
           b3.style.opacity = String(b3Op);
           b3.style.transform = `translate3d(0, ${b3Ty}px, 0)`;
           b3.style.pointerEvents = b3Op > 0.3 ? "auto" : "none";
@@ -193,21 +193,19 @@ export default function EnclosureSection({
         // ═══════════════════════════════════════════════════════════════
         // ── MOBILE: APPLE KINEMATYCZNE PRZEJŚCIE (ZERO RE-RENDERÓW) ──
         // ═══════════════════════════════════════════════════════════════
-        const H = window.innerHeight;
-
         // 1. Film w telefonie: na początku wycentrowany, płynnie schodzi w dół
         const mPhone = mobilePhoneWrapRef.current;
         if (mPhone) {
           let targetY = 0;
           let targetScale = 1;
-          if (scrolled <= 0) {
-            targetY = -170;
-            targetScale = 1.06;
-          } else if (scrolled < H * 0.45) {
-            const t = scrolled / (H * 0.45);
+          if (p <= 0) {
+            targetY = -120;
+            targetScale = 1.05;
+          } else if (p < 0.25) {
+            const t = p / 0.25;
             const ease = t * t * (3 - 2 * t);
-            targetY = lerp(-170, 0, ease);
-            targetScale = lerp(1.06, 1.0, ease);
+            targetY = lerp(-120, 0, ease);
+            targetScale = lerp(1.05, 1.0, ease);
           } else {
             targetY = 0;
             targetScale = 1.0;
@@ -215,15 +213,15 @@ export default function EnclosureSection({
           mPhone.style.transform = `translate3d(0, ${targetY}px, 0) scale(${targetScale})`;
         }
 
-        // 2. Intro nagłówek mobilny: zanika gdy przewijamy
+        // 2. Intro nagłówek mobilny: wyrównany do lewej, zanika gdy przewijamy
         const mIntro = mobileIntroRef.current;
         if (mIntro) {
           let introOp = 1;
           let introTy = 0;
-          if (scrolled > H * 0.05) {
-            const t = Math.min(1, (scrolled - H * 0.05) / (H * 0.25));
+          if (p > 0.02) {
+            const t = Math.min(1, (p - 0.02) / 0.16);
             introOp = 1 - t;
-            introTy = -t * 25;
+            introTy = -t * 20;
           }
           mIntro.style.opacity = String(introOp);
           mIntro.style.transform = `translate3d(0, ${introTy}px, 0)`;
@@ -233,8 +231,8 @@ export default function EnclosureSection({
         // 3. Scena 1: Ogród i Wybieg
         const s1 = mobileScene1Ref.current;
         if (s1) {
-          const op = smoothFade(scrolled, H * 0.22, H * 0.40, H * 0.65, H * 0.78);
-          const ty = smoothTranslateY(scrolled, H * 0.22, H * 0.40, H * 0.65, H * 0.78, 25, -20);
+          const op = smoothFade(p, 0.10, 0.18, 0.38, 0.46);
+          const ty = smoothTranslateY(p, 0.10, 0.18, 0.38, 0.46, 20, -15);
           s1.style.opacity = String(op);
           s1.style.transform = `translate3d(0, ${ty}px, 0)`;
           s1.style.pointerEvents = op > 0.3 ? "auto" : "none";
@@ -243,18 +241,18 @@ export default function EnclosureSection({
         // 4. Scena 2: Życie w Domu
         const s2 = mobileScene2Ref.current;
         if (s2) {
-          const op = smoothFade(scrolled, H * 0.75, H * 0.90, H * 1.15, H * 1.28);
-          const ty = smoothTranslateY(scrolled, H * 0.75, H * 0.90, H * 1.15, H * 1.28, 25, -20);
+          const op = smoothFade(p, 0.44, 0.52, 0.70, 0.76);
+          const ty = smoothTranslateY(p, 0.44, 0.52, 0.70, 0.76, 20, -15);
           s2.style.opacity = String(op);
           s2.style.transform = `translate3d(0, ${ty}px, 0)`;
           s2.style.pointerEvents = op > 0.3 ? "auto" : "none";
         }
 
-        // 5. Scena 3: Zdrowe od Urodzenia — zostaje w 100% widoczna do końca bez pustki!
+        // 5. Scena 3: Zdrowe od Urodzenia — zostaje w 100% widoczna do końca sekcji
         const s3 = mobileScene3Ref.current;
         if (s3) {
-          const op = smoothFade(scrolled, H * 1.25, H * 1.40, H * 2.50, H * 2.50);
-          const ty = smoothTranslateY(scrolled, H * 1.25, H * 1.40, H * 2.50, H * 2.50, 25, 0);
+          const op = smoothFade(p, 0.74, 0.82, 1.0, 1.0);
+          const ty = smoothTranslateY(p, 0.74, 0.82, 1.0, 1.0, 20, 0);
           s3.style.opacity = String(op);
           s3.style.transform = `translate3d(0, ${ty}px, 0)`;
           s3.style.pointerEvents = op > 0.3 ? "auto" : "none";
@@ -300,16 +298,16 @@ export default function EnclosureSection({
         {/* ═════════════════════════════════════════════════════════════════ */}
         <div className="hidden lg:flex flex-col items-center justify-center w-full h-full relative">
           
-          {/* Tytuł otwierający desktop */}
+          {/* Tytuł otwierający desktop - przesunięty do lewej, poza obszar filmu */}
           <div
             ref={introRef}
-            className="absolute top-14 left-1/2 -translate-x-1/2 z-30 text-center w-full max-w-3xl px-5 pointer-events-none will-change-transform"
+            className="absolute top-24 sm:top-28 left-8 lg:left-14 xl:left-20 z-30 text-left w-full max-w-lg pointer-events-none will-change-transform"
           >
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-3">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
             </div>
-            <h2 className="text-5xl lg:text-6xl font-heading font-light text-white tracking-tight leading-[1.05]">
+            <h2 className="text-4xl lg:text-5xl font-heading font-light text-white tracking-tight leading-[1.08]">
               {lang === "PL" ? (
                 <>Nasz dom<br /><span className="font-normal text-[#86868b]">to ich dom.</span></>
               ) : (
@@ -317,7 +315,7 @@ export default function EnclosureSection({
               )}
             </h2>
 
-            <div className="flex mt-3 items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b]">
+            <div className="flex mt-3 items-center justify-start gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b]">
               <span>{lang === "PL" ? "Przewiń, aby zobaczyć więcej" : "Scroll to explore"}</span>
               <ChevronDown className="w-3.5 h-3.5 text-[#86868b] animate-bounce" />
             </div>
@@ -511,10 +509,10 @@ export default function EnclosureSection({
             height: "100dvh",
           }}
         >
-          {/* A. INTRO NAGŁÓWEK (Na starcie widoczny, płynnie znika w górę) */}
+          {/* A. INTRO NAGŁÓWEK (Na starcie widoczny, wyrównany do lewej, płynnie znika w górę) */}
           <div
             ref={mobileIntroRef}
-            className="w-full text-center will-change-transform pt-1 z-20"
+            className="w-full text-left will-change-transform pt-1 z-20"
           >
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -527,7 +525,7 @@ export default function EnclosureSection({
                 <>Our home <span className="font-normal text-[#86868b]">is their home.</span></>
               )}
             </h2>
-            <div className="flex mt-1.5 items-center justify-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#86868b]">
+            <div className="flex mt-1.5 items-center justify-start gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#86868b]">
               <span>{lang === "PL" ? "Przewiń, aby poznać wybieg" : "Scroll to explore"}</span>
               <ChevronDown className="w-3 h-3 text-[#86868b] animate-bounce" />
             </div>

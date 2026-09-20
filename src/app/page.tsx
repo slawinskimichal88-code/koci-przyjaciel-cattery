@@ -65,20 +65,20 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ④ KOCIĘTA: Wirtualny selektor kociąt Apple Pro, filtry, EMS, specyfikacja i rezerwacja */}
+        {/* ④ BENTO SHOWCASE: 10 kadrów z życia hodowli z efektem Shared Layout Animation i odnośnikiem do galerii */}
+        <BentoShowcaseSection lang={lang} />
+
+        {/* ⑤ KOCIĘTA: Wirtualny selektor kociąt Apple Pro, filtry, EMS, specyfikacja i rezerwacja */}
         <KittensSection
           lang={lang}
           onOpenReservation={(name) => handleOpenReservation(name)}
         />
 
-        {/* ⑤ KIM JESTEM: Właścicielka hodowli, domowy odchów w salonie, brak klatek, badania zdrowotne */}
+        {/* ⑥ KIM JESTEM: Właścicielka hodowli, domowy odchów w salonie, brak klatek, badania zdrowotne */}
         <BreederSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
-
-        {/* ⑥ BENTO SHOWCASE: 10 kadrów z życia hodowli z efektem Shared Layout Animation i odnośnikiem do galerii */}
-        <BentoShowcaseSection lang={lang} />
 
         {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, laserowe miarki, mikro-kropki Apple LiDAR + skrót z odnośnikiem do Bazy Wiedzy */}
         <ScaleComparisonSection lang={lang} compact={true} />
