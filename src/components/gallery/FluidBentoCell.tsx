@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { Maximize2 } from "lucide-react";
 
@@ -11,18 +11,12 @@ export interface BentoImageItem {
   categoryLabel?: string;
 }
 
-export type FluidDirection =
-  | "vertical"
-  | "horizontal"
-  | "reverse-vertical"
-  | "reverse-horizontal";
-
 interface FluidBentoCellProps {
   images: (string | BentoImageItem)[];
   className?: string;
-  direction?: FluidDirection;
+  direction?: "vertical" | "horizontal" | "reverse-vertical" | "reverse-horizontal";
   speed?: number; // Czas w sekundach na pełen obrót pętli
-  onPhotoClick?: (photo: BentoImageItem) => void;
+  onPhotoClick?: (item: BentoImageItem) => void;
   badge?: string;
 }
 
@@ -30,38 +24,30 @@ export default function FluidBentoCell({
   images,
   className = "",
   direction = "vertical",
-  speed = 18,
+  speed = 15,
   onPhotoClick,
   badge,
 }: FluidBentoCellProps) {
-  // 1. Znormalizuj tablicę wejściową do BentoImageItem
-  const normalizedImages: BentoImageItem[] = useMemo(() => {
-    if (!images || images.length === 0) return [];
-    return images.map((item, idx) => {
-      if (typeof item === "string") {
-        return { id: `fluid-img-${idx}`, src: item };
-      }
-      return item;
-    });
-  }, [images]);
+  if (!images || images.length === 0) return null;
 
-  // 2. Aby pętla była pełna i bogata, upewniamy się, że mamy co najmniej 3 zdjęcia w bazie
-  const baseList: BentoImageItem[] = useMemo(() => {
-    if (normalizedImages.length === 0) return [];
-    let list = [...normalizedImages];
-    while (list.length < 3) {
-      list = [...list, ...normalizedImages];
+  // Normalizacja do tablicy obiektów
+  const normalized: BentoImageItem[] = images.map((item, idx) => {
+    if (typeof item === "string") {
+      return { id: `img-${idx}`, src: item };
     }
-    return list;
-  }, [normalizedImages]);
+    return item;
+  });
 
-  // 3. Trik na płynną, nieskończoną pętlę bez przeskoków:
-  // Podwajamy tablicę zdjęć [...images, ...images].
-  // Kiedy pierwsza połowa wyjedzie poza ekran, druga połowa jest dokładnie na jej miejscu,
-  // a animacja niezauważalnie wraca na początek (0%).
-  const duplicatedImages: BentoImageItem[] = useMemo(() => {
-    return [...baseList, ...baseList];
-  }, [baseList]);
+  // Upewnijmy się, że w liście są co najmniej 3 zdjęcia przed zdublowaniem
+  let baseList = [...normalized];
+  if (baseList.length === 1) {
+    baseList = [baseList[0], baseList[0], baseList[0]];
+  } else if (baseList.length === 2) {
+    baseList = [baseList[0], baseList[1], baseList[0], baseList[1]];
+  }
+
+  // Trik na płynną, nieskończoną pętlę: podwajamy tablicę zdjęć
+  const duplicatedImages = [...baseList, ...baseList];
 
   // Konfiguracja kierunków ruchu
   const isVertical = direction.includes("vertical");
@@ -71,60 +57,45 @@ export default function FluidBentoCell({
   const startPos = isReverse ? "-50%" : "0%";
   const endPos = isReverse ? "0%" : "-50%";
 
-  const totalCount = duplicatedImages.length;
-  if (totalCount === 0) return null;
-
-  // Każde zdjęcie ma dokładnie 100% wymiaru komórki Bento
-  const itemPercent = 100 / totalCount;
-
   return (
     <div
-      className={`group relative overflow-hidden rounded-3xl bg-[#111114] border border-white/10 hover:border-amber-400/50 shadow-lg hover:shadow-2xl transition-all duration-300 select-none ${className}`}
+      className={`group relative overflow-hidden rounded-3xl bg-[#111114] border border-white/10 hover:border-amber-400/50 shadow-lg transition-all duration-300 ${className}`}
     >
       <motion.div
-        className={`flex ${isVertical ? "flex-col" : "flex-row"}`}
-        style={{
-          width: isVertical ? "100%" : `${totalCount * 100}%`,
-          height: isVertical ? `${totalCount * 100}%` : "100%",
-        }}
-        // Animujemy po osi Y (pion) lub X (poziom) w stałym, "maślanym" ruchu bez zwalniania
+        className={`flex h-full w-full ${isVertical ? "flex-col" : "flex-row"}`}
         animate={{
-          y: isVertical ? [startPos, endPos] : ["0%", "0%"],
-          x: !isVertical ? [startPos, endPos] : ["0%", "0%"],
+          y: isVertical ? [startPos, endPos] : 0,
+          x: !isVertical ? [startPos, endPos] : 0,
         }}
         transition={{
-          repeat: Infinity, // Nieskończona pętla
-          ease: "linear",   // Stała prędkość — maślany ruch bez przyspieszania i hamowania
-          duration: speed,  // Długość pełnego cyklu
+          repeat: Infinity,
+          ease: "linear",
+          duration: speed,
         }}
       >
         {duplicatedImages.map((photo, idx) => (
           <div
-            key={`${photo.src}-${idx}`}
+            key={idx}
             onClick={() => onPhotoClick && onPhotoClick(photo)}
-            style={{
-              width: isVertical ? "100%" : `${itemPercent}%`,
-              height: isVertical ? `${itemPercent}%` : "100%",
-            }}
-            className="flex-shrink-0 relative cursor-pointer overflow-hidden"
+            className="h-full w-full flex-shrink-0 relative cursor-pointer overflow-hidden"
           >
             <img
               src={photo.src}
-              alt={photo.title || "Zdjęcie z hodowli Koci Przyjaciel"}
+              alt={photo.title || "Galeria Koci Przyjaciel"}
               loading="eager"
               decoding="async"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+              className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/10 pointer-events-none" />
           </div>
         ))}
       </motion.div>
 
       {/* Subtelny badge kategorii */}
-      {(badge || normalizedImages[0]?.categoryLabel) && (
+      {(badge || normalized[0]?.categoryLabel) && (
         <div className="absolute top-3.5 left-3.5 z-10 pointer-events-none">
           <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/15 text-[11px] font-mono text-zinc-200 shadow-md">
-            {badge || normalizedImages[0]?.categoryLabel}
+            {badge || normalized[0]?.categoryLabel}
           </span>
         </div>
       )}
