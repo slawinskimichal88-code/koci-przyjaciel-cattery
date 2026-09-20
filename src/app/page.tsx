@@ -7,6 +7,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import KittenReservationBar from "@/components/sections/KittenReservationBar";
 import EnclosureSection from "@/components/sections/EnclosureSection";
 import KittensSection from "@/components/sections/KittensSection";
+import BentoShowcaseSection from "@/components/sections/BentoShowcaseSection";
 import BreederSection from "@/components/sections/BreederSection";
 import ScaleComparisonSection from "@/components/sections/ScaleComparisonSection";
 import KnowledgeBaseTeaser from "@/components/sections/KnowledgeBaseTeaser";
@@ -75,6 +76,9 @@ export default function Home() {
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
+
+        {/* ⑥ BENTO SHOWCASE: 10 kadrów z życia hodowli z efektem Shared Layout Animation i odnośnikiem do galerii */}
+        <BentoShowcaseSection lang={lang} />
 
         {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, laserowe miarki, mikro-kropki Apple LiDAR + skrót z odnośnikiem do Bazy Wiedzy */}
         <ScaleComparisonSection lang={lang} compact={true} />

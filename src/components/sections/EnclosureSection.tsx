@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Volume2, VolumeX, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight } from "lucide-react";
 
 interface EnclosureSectionProps {
   lang?: "PL" | "EN";
@@ -21,9 +21,6 @@ export default function EnclosureSection({
   const textBlock1Ref = useRef<HTMLDivElement>(null);
   const textBlock2Ref = useRef<HTMLDivElement>(null);
   const textBlock3Ref = useRef<HTMLDivElement>(null);
-  const desktopBar1Ref = useRef<HTMLDivElement>(null);
-  const desktopBar2Ref = useRef<HTMLDivElement>(null);
-  const desktopBar3Ref = useRef<HTMLDivElement>(null);
 
   // Mobile Refs (Czyste manipulacje DOM bez re-renderów — 120 FPS płynności)
   const mobilePhoneWrapRef = useRef<HTMLDivElement>(null);
@@ -32,30 +29,19 @@ export default function EnclosureSection({
   const mobileScene1Ref = useRef<HTMLDivElement>(null);
   const mobileScene2Ref = useRef<HTMLDivElement>(null);
   const mobileScene3Ref = useRef<HTMLDivElement>(null);
-  const mobileBar1Ref = useRef<HTMLDivElement>(null);
-  const mobileBar2Ref = useRef<HTMLDivElement>(null);
-  const mobileBar3Ref = useRef<HTMLDivElement>(null);
 
-  const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isDesktopDevice, setIsDesktopDevice] = useState<boolean>(true);
-  const [sectionHeight, setSectionHeight] = useState<string>("400vh");
-
-  const toggleMute = () => {
-    const nextMuted = !isMuted;
-    if (videoRef.current) videoRef.current.muted = nextMuted;
-    if (mobileVideoRef.current) mobileVideoRef.current.muted = nextMuted;
-    setIsMuted(nextMuted);
-  };
+  const [sectionHeight, setSectionHeight] = useState<string>("260vh");
 
   useEffect(() => {
     const isDesk = window.innerWidth >= 1024;
     setIsDesktopDevice(isDesk);
-    setSectionHeight(isDesk ? "400vh" : "310vh");
+    setSectionHeight(isDesk ? "260vh" : "190vh");
 
     const onResize = () => {
       const d = window.innerWidth >= 1024;
       setIsDesktopDevice(d);
-      setSectionHeight(d ? "400vh" : "310vh");
+      setSectionHeight(d ? "260vh" : "190vh");
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -176,11 +162,11 @@ export default function EnclosureSection({
           intro.style.pointerEvents = op > 0.1 ? "auto" : "none";
         }
 
-        // Cechy 01, 02, 03 desktop
+        // Cechy 01, 02, 03 desktop — Scena 3 zostaje w 100% widoczna do końca sekcji
         const b1 = textBlock1Ref.current;
         if (b1) {
-          const b1Op = smoothFade(p, 0.16, 0.23, 0.44, 0.49);
-          const b1Ty = smoothTranslateY(p, 0.16, 0.23, 0.44, 0.49);
+          const b1Op = smoothFade(p, 0.10, 0.18, 0.44, 0.50);
+          const b1Ty = smoothTranslateY(p, 0.10, 0.18, 0.44, 0.50);
           b1.style.opacity = String(b1Op);
           b1.style.transform = `translate3d(0, ${b1Ty}px, 0)`;
           b1.style.pointerEvents = b1Op > 0.3 ? "auto" : "none";
@@ -188,8 +174,8 @@ export default function EnclosureSection({
 
         const b2 = textBlock2Ref.current;
         if (b2) {
-          const b2Op = smoothFade(p, 0.48, 0.54, 0.72, 0.77);
-          const b2Ty = smoothTranslateY(p, 0.48, 0.54, 0.72, 0.77);
+          const b2Op = smoothFade(p, 0.48, 0.55, 0.74, 0.80);
+          const b2Ty = smoothTranslateY(p, 0.48, 0.55, 0.74, 0.80);
           b2.style.opacity = String(b2Op);
           b2.style.transform = `translate3d(0, ${b2Ty}px, 0)`;
           b2.style.pointerEvents = b2Op > 0.3 ? "auto" : "none";
@@ -197,31 +183,11 @@ export default function EnclosureSection({
 
         const b3 = textBlock3Ref.current;
         if (b3) {
-          const b3Op = smoothFade(p, 0.76, 0.82, 0.98, 1.0);
-          const b3Ty = smoothTranslateY(p, 0.76, 0.82, 0.98, 1.0);
+          const b3Op = smoothFade(p, 0.78, 0.85, 1.0, 1.0);
+          const b3Ty = smoothTranslateY(p, 0.78, 0.85, 1.0, 1.0);
           b3.style.opacity = String(b3Op);
           b3.style.transform = `translate3d(0, ${b3Ty}px, 0)`;
           b3.style.pointerEvents = b3Op > 0.3 ? "auto" : "none";
-        }
-
-        // Wskaźniki desktop
-        if (desktopBar1Ref.current) {
-          let f = 0;
-          if (p >= 0.44) f = 100;
-          else if (p >= 0.16) f = ((p - 0.16) / 0.28) * 100;
-          desktopBar1Ref.current.style.width = `${f}%`;
-        }
-        if (desktopBar2Ref.current) {
-          let f = 0;
-          if (p >= 0.72) f = 100;
-          else if (p >= 0.48) f = ((p - 0.48) / 0.24) * 100;
-          desktopBar2Ref.current.style.width = `${f}%`;
-        }
-        if (desktopBar3Ref.current) {
-          let f = 0;
-          if (p >= 0.98) f = 100;
-          else if (p >= 0.76) f = ((p - 0.76) / 0.22) * 100;
-          desktopBar3Ref.current.style.width = `${f}%`;
         }
       } else {
         // ═══════════════════════════════════════════════════════════════
@@ -235,13 +201,13 @@ export default function EnclosureSection({
           let targetY = 0;
           let targetScale = 1;
           if (scrolled <= 0) {
-            targetY = -190;
-            targetScale = 1.08;
-          } else if (scrolled < H * 0.65) {
-            const t = scrolled / (H * 0.65);
+            targetY = -170;
+            targetScale = 1.06;
+          } else if (scrolled < H * 0.45) {
+            const t = scrolled / (H * 0.45);
             const ease = t * t * (3 - 2 * t);
-            targetY = lerp(-190, 0, ease);
-            targetScale = lerp(1.08, 1.0, ease);
+            targetY = lerp(-170, 0, ease);
+            targetScale = lerp(1.06, 1.0, ease);
           } else {
             targetY = 0;
             targetScale = 1.0;
@@ -254,58 +220,44 @@ export default function EnclosureSection({
         if (mIntro) {
           let introOp = 1;
           let introTy = 0;
-          if (scrolled > H * 0.06) {
-            const t = Math.min(1, (scrolled - H * 0.06) / (H * 0.35));
+          if (scrolled > H * 0.05) {
+            const t = Math.min(1, (scrolled - H * 0.05) / (H * 0.25));
             introOp = 1 - t;
-            introTy = -t * 30;
+            introTy = -t * 25;
           }
           mIntro.style.opacity = String(introOp);
           mIntro.style.transform = `translate3d(0, ${introTy}px, 0)`;
           mIntro.style.pointerEvents = introOp > 0.1 ? "auto" : "none";
         }
 
-        // 3. Scena 1: Ogród i Wybieg (0.45H -> 1.25H)
+        // 3. Scena 1: Ogród i Wybieg
         const s1 = mobileScene1Ref.current;
         if (s1) {
-          const op = smoothFade(scrolled, H * 0.45, H * 0.70, H * 1.10, H * 1.30);
-          const ty = smoothTranslateY(scrolled, H * 0.45, H * 0.70, H * 1.10, H * 1.30, 30, -25);
+          const op = smoothFade(scrolled, H * 0.22, H * 0.40, H * 0.65, H * 0.78);
+          const ty = smoothTranslateY(scrolled, H * 0.22, H * 0.40, H * 0.65, H * 0.78, 25, -20);
           s1.style.opacity = String(op);
           s1.style.transform = `translate3d(0, ${ty}px, 0)`;
           s1.style.pointerEvents = op > 0.3 ? "auto" : "none";
         }
 
-        // 4. Scena 2: Życie w Domu (1.25H -> 1.95H)
+        // 4. Scena 2: Życie w Domu
         const s2 = mobileScene2Ref.current;
         if (s2) {
-          const op = smoothFade(scrolled, H * 1.25, H * 1.45, H * 1.80, H * 2.00);
-          const ty = smoothTranslateY(scrolled, H * 1.25, H * 1.45, H * 1.80, H * 2.00, 30, -25);
+          const op = smoothFade(scrolled, H * 0.75, H * 0.90, H * 1.15, H * 1.28);
+          const ty = smoothTranslateY(scrolled, H * 0.75, H * 0.90, H * 1.15, H * 1.28, 25, -20);
           s2.style.opacity = String(op);
           s2.style.transform = `translate3d(0, ${ty}px, 0)`;
           s2.style.pointerEvents = op > 0.3 ? "auto" : "none";
         }
 
-        // 5. Scena 3: Zdrowe od Urodzenia (1.95H -> 2.80H)
+        // 5. Scena 3: Zdrowe od Urodzenia — zostaje w 100% widoczna do końca bez pustki!
         const s3 = mobileScene3Ref.current;
         if (s3) {
-          const op = smoothFade(scrolled, H * 1.95, H * 2.20, H * 2.70, H * 3.00);
-          const ty = smoothTranslateY(scrolled, H * 1.95, H * 2.20, H * 2.70, H * 3.00, 30, -25);
+          const op = smoothFade(scrolled, H * 1.25, H * 1.40, H * 2.50, H * 2.50);
+          const ty = smoothTranslateY(scrolled, H * 1.25, H * 1.40, H * 2.50, H * 2.50, 25, 0);
           s3.style.opacity = String(op);
           s3.style.transform = `translate3d(0, ${ty}px, 0)`;
           s3.style.pointerEvents = op > 0.3 ? "auto" : "none";
-        }
-
-        // 6. Subtelne segmentowe kreski Apple na dole
-        if (mobileBar1Ref.current) {
-          const prog = Math.min(100, Math.max(0, ((scrolled - H * 0.45) / (H * 0.70)) * 100));
-          mobileBar1Ref.current.style.width = `${prog}%`;
-        }
-        if (mobileBar2Ref.current) {
-          const prog = Math.min(100, Math.max(0, ((scrolled - H * 1.25) / (H * 0.65)) * 100));
-          mobileBar2Ref.current.style.width = `${prog}%`;
-        }
-        if (mobileBar3Ref.current) {
-          const prog = Math.min(100, Math.max(0, ((scrolled - H * 1.95) / (H * 0.75)) * 100));
-          mobileBar3Ref.current.style.width = `${prog}%`;
         }
       }
     };
@@ -530,7 +482,7 @@ export default function EnclosureSection({
                       src={isDesktopDevice ? "/video/film2.mp4" : undefined}
                       autoPlay
                       loop
-                      muted={isMuted}
+                      muted
                       playsInline
                       preload="metadata"
                       className="w-full h-full object-cover pointer-events-none scale-[1.05]"
@@ -538,46 +490,12 @@ export default function EnclosureSection({
                     <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
                       <div className="w-2 h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
                     </div>
-                    <div className="absolute bottom-4 right-4 z-30">
-                      <button
-                        onClick={toggleMute}
-                        className="w-8 h-8 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:scale-105 transition-all cursor-pointer"
-                        title={isMuted ? "Włącz dźwięk" : "Wycisz"}
-                      >
-                        {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
-                      </button>
-                    </div>
                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
                   </div>
                 </div>
               </div>
             </div>
 
-          </div>
-
-          {/* Dolny segmentowy wskaźnik postępu desktop */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
-            <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
-              <div
-                ref={desktopBar1Ref}
-                className="h-full bg-white transition-all duration-75 ease-out"
-                style={{ width: "0%" }}
-              />
-            </div>
-            <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
-              <div
-                ref={desktopBar2Ref}
-                className="h-full bg-white transition-all duration-75 ease-out"
-                style={{ width: "0%" }}
-              />
-            </div>
-            <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
-              <div
-                ref={desktopBar3Ref}
-                className="h-full bg-white transition-all duration-75 ease-out"
-                style={{ width: "0%" }}
-              />
-            </div>
           </div>
 
         </div>
@@ -732,7 +650,7 @@ export default function EnclosureSection({
                   src={!isDesktopDevice ? "/video/film2.mp4" : undefined}
                   autoPlay
                   loop
-                  muted={isMuted}
+                  muted
                   playsInline
                   preload="metadata"
                   className="w-full h-full object-cover scale-[1.04]"
@@ -743,45 +661,9 @@ export default function EnclosureSection({
                   <div className="w-1.5 h-1.5 rounded-full bg-[#0a1224] border border-blue-500/20" />
                 </div>
 
-                {/* Przycisk dźwięku */}
-                <div className="absolute bottom-2.5 right-2.5 z-30">
-                  <button
-                    onClick={toggleMute}
-                    className="w-7 h-7 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/80 active:scale-95 transition-all cursor-pointer pointer-events-auto"
-                    title={isMuted ? "Włącz dźwięk" : "Wycisz"}
-                  >
-                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
-                  </button>
-                </div>
-
                 {/* Subtelny odblask szkła ekranu */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
               </div>
-            </div>
-          </div>
-
-          {/* D. SUBTELNE WSKAŹNIKI POSTĘPU APPLE (Eleganckie linie bez topornych przycisków) */}
-          <div className="w-full flex items-center justify-center gap-2 pt-1 pb-1 z-20">
-            <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
-              <div
-                ref={mobileBar1Ref}
-                className="h-full bg-white will-change-transform"
-                style={{ width: "0%" }}
-              />
-            </div>
-            <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
-              <div
-                ref={mobileBar2Ref}
-                className="h-full bg-white will-change-transform"
-                style={{ width: "0%" }}
-              />
-            </div>
-            <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
-              <div
-                ref={mobileBar3Ref}
-                className="h-full bg-white will-change-transform"
-                style={{ width: "0%" }}
-              />
             </div>
           </div>
 

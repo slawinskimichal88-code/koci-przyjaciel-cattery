@@ -32,6 +32,7 @@ import {
   BREEDING_STUDS,
   ENCLOSURE_PHOTOS,
 } from "@/data/breedingCatsData";
+import BentoGallery from "@/components/gallery/BentoGallery";
 
 export default function AboutPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
@@ -145,6 +146,13 @@ export default function AboutPage() {
             >
               <span>🦁</span>
               <span>{lang === "PL" ? "Kocury Hodowlane" : "Studs"}</span>
+            </a>
+            <a
+              href="#galeria"
+              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/30 text-amber-200 transition-all flex items-center gap-1.5"
+            >
+              <span>📸</span>
+              <span>{lang === "PL" ? "Galeria Bento" : "Bento Gallery"}</span>
             </a>
           </div>
         </section>
@@ -582,6 +590,11 @@ export default function AboutPage() {
             ))}
           </div>
         </section>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            SEKCJA 5: BENTO GRID ZDJĘĆ Z HODOWLI (#galeria)
+        ═══════════════════════════════════════════════════════════════ */}
+        <BentoGallery lang={lang} />
 
         {/* ── BANNER CTA — PRZEJŚCIE DO KOCIĄT I KONTAKTU ──────────────── */}
         <section className="max-w-5xl mx-auto px-6 sm:px-10 mb-28">

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Check, Sparkles, ShieldCheck, Heart, Award, Info, Phone } from "lucide-react";
+import { ArrowRight, Check, ShieldCheck, Heart, Award, Info, Phone, Sparkles } from "lucide-react";
 import { REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
 
 interface KittensSectionProps {
@@ -67,14 +67,13 @@ const KITTENS = [
 ];
 
 export default function KittensSection({ lang, onOpenReservation }: KittensSectionProps) {
-  const [filter, setFilter] = useState<"all" | "available" | "male" | "female">("all");
+  const [filter, setFilter] = useState<"available" | "male" | "female">("available");
   const [activeId, setActiveId] = useState<string>("luna");
 
   const filteredKittens = KITTENS.filter((k) => {
-    if (filter === "available") return k.status === "available";
     if (filter === "male") return k.gender === "male";
     if (filter === "female") return k.gender === "female";
-    return true;
+    return k.status === "available";
   });
 
   // Jeżeli aktywny kociak nie mieści się w filtrze, przełącz na pierwszy pasujący
@@ -89,7 +88,6 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/5 border border-black/10 text-[11px] font-mono uppercase tracking-[0.3em] text-black/70 mb-5">
-              <Sparkles className="w-3.5 h-3.5 text-amber-600" />
               <span>{lang === "PL" ? "Dostępne Kocięta · Mioty 2026" : "Available Kittens · 2026 Litters"}</span>
             </div>
             <h2
@@ -104,7 +102,6 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
           {/* Filtry Apple-style */}
           <div className="flex items-center flex-wrap gap-2">
             {[
-              { id: "all", label: lang === "PL" ? "Wszystkie" : "All" },
               { id: "available", label: lang === "PL" ? "● Dostępne (3)" : "● Available (3)" },
               { id: "male", label: lang === "PL" ? "Kocurki ♂" : "Males ♂" },
               { id: "female", label: lang === "PL" ? "Kotki ♀" : "Females ♀" },
