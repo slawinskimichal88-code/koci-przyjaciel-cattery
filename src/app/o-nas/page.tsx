@@ -20,6 +20,7 @@ import {
   VolumeX,
   Camera,
   Sparkles,
+  CheckCircle2,
 } from "lucide-react";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
@@ -49,35 +50,99 @@ export default function AboutPage() {
   const pillars = [
     {
       icon: Home,
+      badge: lang === "PL" ? "100% DOMOWY ODCHÓW" : "100% HOME RAISED",
+      accent: "from-amber-500/20 to-amber-500/5",
+      iconBg: "bg-amber-400/10 text-amber-300 border-amber-400/25",
+      badgeColor: "bg-amber-400/10 text-amber-300 border-amber-400/30",
       title: lang === "PL" ? "Salon, nie klatki" : "Living Room, No Cages",
       desc:
         lang === "PL"
           ? "Nasze koty to pełnoprawni domownicy. Śpią z nami w łóżkach, odpoczywają na kanapach, uczestniczą w codziennym życiu rodziny z dziećmi i psem."
           : "Our cats live freely in our living room with our family, children, and dog. No cages, ever.",
+      points:
+        lang === "PL"
+          ? [
+              "Socjalizacja przy dzieciach i psie od 1. dnia",
+              "Swobodny dostęp do całego domu i kanap",
+              "Zero klatek, boksów czy odizolowanych piwnic",
+            ]
+          : [
+              "Socialized with kids & dog from day one",
+              "Free run of the entire home and sofas",
+              "Zero cages, kennels or isolated basements",
+            ],
     },
     {
       icon: Sun,
+      badge: lang === "PL" ? "WOLIERA 365 DNI W ROKU" : "365 DAYS ENCLOSURE",
+      accent: "from-emerald-500/20 to-emerald-500/5",
+      iconBg: "bg-emerald-400/10 text-emerald-300 border-emerald-400/25",
+      badgeColor: "bg-emerald-400/10 text-emerald-300 border-emerald-400/30",
       title: lang === "PL" ? "Bezpieczny wybieg ogrodowy" : "Safe Outdoor Garden Run",
       desc:
         lang === "PL"
           ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego i świeżego powietrza."
           : "Cats have year-round access to a safe, covered garden enclosure and fresh outdoor air.",
+      points:
+        lang === "PL"
+          ? [
+              "Zadaszona, atestowana konstrukcja wolierowa",
+              "Naturalne pnie drzew i drapaki do 3m",
+              "Bezpośrednie przejście z salonu na wybieg",
+            ]
+          : [
+              "Safe covered enclosure structure",
+              "Natural wood scratching trunks up to 3m",
+              "Direct access straight from the living room",
+            ],
     },
     {
       icon: Stethoscope,
+      badge: lang === "PL" ? "LABOKLIN GERMANY · N/N" : "LABOKLIN GERMANY · N/N",
+      accent: "from-rose-500/20 to-rose-500/5",
+      iconBg: "bg-rose-400/10 text-rose-300 border-rose-400/25",
+      badgeColor: "bg-rose-400/10 text-rose-300 border-rose-400/30",
       title: lang === "PL" ? "Rygorystyczne zdrowie" : "Strict Health Screening",
       desc:
         lang === "PL"
           ? "Wszystkie koty hodowlane przechodzą regularne badania echokardiograficzne serca (Echo Doppler) oraz pełny profil DNA w niemieckim laboratorium Laboklin (HCM, PKD, SMA N/N)."
           : "Echo Doppler heart screening and certified Laboklin genetic testing (HCM, PKD, SMA N/N).",
+      points:
+        lang === "PL"
+          ? [
+              "Certyfikowane Echo Doppler serca u kardiologa",
+              "Testy genetyczne DNA: HCM, PKD, SMA – N/N",
+              "Komplet szczepień, mikrochip i profilaktyka",
+            ]
+          : [
+              "Certified Doppler heart echocardiography",
+              "Genetic DNA tests: HCM, PKD, SMA – N/N",
+              "Full vaccination course, microchip & health book",
+            ],
     },
     {
       icon: Award,
+      badge: lang === "PL" ? "CAT CLUB WROCŁAW · FIFe / FPL" : "FIFe / FPL PEDIGREE",
+      accent: "from-blue-500/20 to-blue-500/5",
+      iconBg: "bg-blue-400/10 text-blue-300 border-blue-400/25",
+      badgeColor: "bg-blue-400/10 text-blue-300 border-blue-400/30",
       title: lang === "PL" ? "Felis Polonia & FIFe" : "FIFe & FPL Pedigree",
       desc:
         lang === "PL"
           ? "Jesteśmy zrzeszeni w Cat Club Wrocław należącym do FPL i FIFe — największej na świecie federacji felinologicznej. Każde kocię otrzymuje prawdziwy 5-pokoleniowy rodowód."
           : "Registered with Cat Club Wrocław / Felis Polonia (FPL / FIFe). Every kitten receives a certified 5-generation pedigree.",
+      points:
+        lang === "PL"
+          ? [
+              "Prawdziwy 5-pokoleniowy rodowód FPL / FIFe",
+              "Gwarancja 100% czystości rasy Maine Coon",
+              "Dożywotnie wsparcie hodowcy i kontakt",
+            ]
+          : [
+              "Certified 5-generation FPL / FIFe pedigree",
+              "100% purebred Maine Coon guarantee",
+              "Lifelong breeder guidance and friendship",
+            ],
     },
   ];
 
@@ -159,7 +224,7 @@ export default function AboutPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 1: NASZA HODOWLA (#hodowla)
         ═══════════════════════════════════════════════════════════════ */}
-        <section id="hodowla" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28">
+        <section id="hodowla" className="max-w-6xl mx-auto px-6 sm:px-10 mb-16 pt-8 scroll-mt-28">
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xs font-mono uppercase tracking-[0.3em] text-amber-300 font-semibold">
               01 · SERCE DOMU
@@ -217,25 +282,53 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* 4 Filary */}
+          {/* 4 Filary w stylu Apple iPhone Frosted Glass */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {pillars.map((p, idx) => {
               const Icon = p.icon;
               return (
                 <div
                   key={idx}
-                  className="p-8 rounded-3xl bg-[#121215] border border-white/10 hover:border-white/20 transition-all flex flex-col justify-between"
+                  className="relative p-7 sm:p-8 rounded-3xl bg-white/[0.06] backdrop-blur-2xl border border-white/15 hover:border-white/30 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] transition-all duration-300 flex flex-col justify-between group overflow-hidden hover:-translate-y-1 hover:bg-white/[0.09]"
                 >
-                  <div>
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6">
-                      <Icon className="w-6 h-6 text-amber-300" />
+                  {/* Delikatna poświata w tle */}
+                  <div
+                    className={`absolute -top-20 -right-20 w-48 h-48 bg-gradient-to-br ${p.accent} rounded-full blur-3xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity`}
+                  />
+
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between gap-3 mb-5">
+                      <div
+                        className={`w-12 h-12 rounded-2xl ${p.iconBg} border flex items-center justify-center backdrop-blur-md shadow-sm`}
+                      >
+                        <Icon className="w-6 h-6" />
+                      </div>
+                      <span
+                        className={`px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-wider font-semibold border ${p.badgeColor} backdrop-blur-md`}
+                      >
+                        {p.badge}
+                      </span>
                     </div>
-                    <h3 className="text-xl font-heading font-semibold text-white mb-3">
+
+                    <h3 className="text-xl sm:text-2xl font-heading font-semibold text-white mb-2.5">
                       {p.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-zinc-400 font-body leading-relaxed font-light">
+                    <p className="text-sm sm:text-base text-zinc-300 font-body leading-relaxed font-light mb-5">
                       {p.desc}
                     </p>
+
+                    {/* Kluczowe fakty z checkmarkami */}
+                    <div className="space-y-2 pt-3 border-t border-white/10">
+                      {p.points.map((pt, pIdx) => (
+                        <div
+                          key={pIdx}
+                          className="flex items-center gap-2 text-xs sm:text-sm text-zinc-300 font-body"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                          <span>{pt}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               );
@@ -246,7 +339,7 @@ export default function AboutPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 2: WYBIEG DLA KOTÓW (#wybieg)
         ═══════════════════════════════════════════════════════════════ */}
-        <section id="wybieg" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
+        <section id="wybieg" className="max-w-6xl mx-auto px-6 sm:px-10 mb-16 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
             <span className="text-xs font-mono uppercase tracking-[0.3em] text-emerald-400 font-semibold">
               02 · OGRÓD I NATURA
@@ -254,51 +347,66 @@ export default function AboutPage() {
             <div className="h-[1px] flex-1 bg-white/10" />
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl sm:text-4xl font-heading font-light">
-                Wybieg dla kotów: <span className="font-semibold italic">Woliera 365 dni w roku</span>.
+          <div className="flex flex-col lg:flex-row items-center gap-12 mb-12">
+            {/* Left side text */}
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light mb-4 text-white leading-tight">
+                Wybieg dla kotów: <br/>
+                <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 to-emerald-400">Woliera 365 dni w roku</span>.
               </h2>
-              <p className="text-sm sm:text-base text-zinc-400 font-body max-w-2xl mt-2 font-light">
-                Bezpieczna, zadaszona przestrzeń w ogrodzie z bezpośrednim przejściem z domu. Koty same decydują, kiedy chcą wyjść na świeże powietrze.
+              <p className="text-base sm:text-lg text-zinc-300 font-body max-w-xl font-light leading-relaxed mb-6">
+                Bezpieczna, zadaszona przestrzeń w ogrodzie z bezpośrednim przejściem z domu. Koty same decydują, kiedy chcą wyjść na świeże powietrze, obserwować ptaki i zażywać słońca — w 100% bezpiecznie.
               </p>
-            </div>
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono shrink-0">
-              <ShieldCheck className="w-4 h-4" />
-              <span>100% Bezpieczeństwa</span>
-            </span>
-          </div>
-
-          {/* Karta z wideo z wybiegu */}
-          <div className="relative rounded-3xl overflow-hidden border border-white/15 bg-black shadow-2xl mb-8 aspect-video max-h-[520px] w-full">
-            <video
-              src="/video/film2.mp4"
-              autoPlay
-              loop
-              muted={isMuted}
-              playsInline
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
-
-            <div className="absolute top-4 right-4 flex items-center gap-2">
-              <button
-                onClick={() => setIsMuted(!isMuted)}
-                className="p-2.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all cursor-pointer"
-                title={isMuted ? "Włącz dźwięk" : "Wycisz dźwięk"}
-              >
-                {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
-              </button>
-            </div>
-
-            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
-              <div className="max-w-xl text-left">
-                <span className="px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-[11px] font-mono text-emerald-300 mb-2 inline-block">
-                  {lang === "PL" ? "WYBIEG OGRODOWY" : "OUTDOOR ENCLOSURE"}
+              <div className="flex items-center gap-3">
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-sm font-mono shrink-0 font-medium">
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Atestowana Konstrukcja</span>
                 </span>
-                <p className="text-xl sm:text-2xl font-heading font-light text-white">
-                  {lang === "PL" ? "Nasz dom to ich dom" : "Our home is their home"}
-                </p>
+                <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white text-sm font-mono shrink-0 font-medium">
+                  🌿 Natura
+                </span>
+              </div>
+            </div>
+
+            {/* Right side iPhone Mockup */}
+            <div className="lg:w-1/2 flex justify-center perspective-1000">
+              <div className="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[3rem] border-[12px] border-[#18181B] bg-black shadow-2xl ring-1 ring-white/10 overflow-hidden transform-gpu hover:-translate-y-2 hover:rotate-y-2 transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-10">
+                {/* Dynamic Island */}
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-20 flex items-center justify-center">
+                   <div className="w-2 h-2 rounded-full bg-white/10 absolute right-2" />
+                </div>
+                
+                <video
+                  src="/video/film2.mp4"
+                  poster="/images/gallery/wybieg/wybieg_001.jpeg"
+                  autoPlay
+                  loop
+                  muted={isMuted}
+                  playsInline
+                  className="w-full h-full object-cover scale-105"
+                />
+                
+                {/* Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+
+                {/* iPhone UI Overlays */}
+                <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
+                  <div className="max-w-[75%]">
+                    <span className="px-2 py-1 rounded-md bg-emerald-500/20 backdrop-blur-md text-[10px] font-mono text-emerald-300 mb-1 inline-block">
+                      LIVE · WROCŁAW
+                    </span>
+                    <p className="text-lg font-heading font-semibold text-white leading-tight">
+                      Ciepłe dni na wybiegu
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => setIsMuted(!isMuted)}
+                    className="p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all cursor-pointer"
+                    title={isMuted ? "Włącz dźwięk" : "Wycisz dźwięk"}
+                  >
+                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -336,7 +444,7 @@ export default function AboutPage() {
         {/* ═══════════════════════════════════════════════════════════════
             SEKCJA 3: ŻYCIE W DOMU — W SALONIE I NA KANAPIE (#w-domu)
         ═══════════════════════════════════════════════════════════════ */}
-        <section id="w-domu" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
+        <section id="w-domu" className="max-w-6xl mx-auto px-6 sm:px-10 mb-16 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
             <span className="text-xs font-mono uppercase tracking-[0.3em] text-blue-400 font-semibold">
               03 · DOM I SALON
@@ -398,7 +506,7 @@ export default function AboutPage() {
         />
 
         {/* ── BANNER CTA — PRZEJŚCIE DO KOCIĄT I KONTAKTU ──────────────── */}
-        <section className="max-w-5xl mx-auto px-6 sm:px-10 mb-28">
+        <section className="max-w-5xl mx-auto px-6 sm:px-10 mb-16 mt-8">
           <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#18181B] via-[#121214] to-[#0D0D0F] border border-white/15 text-center relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
             

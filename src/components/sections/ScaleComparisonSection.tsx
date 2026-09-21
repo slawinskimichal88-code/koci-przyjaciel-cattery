@@ -371,11 +371,13 @@ const COMPARISON_CARDS = [
 interface ScaleComparisonSectionProps {
   lang?: "PL" | "EN";
   compact?: boolean;
+  theme?: "dark" | "light";
 }
 
 export default function ScaleComparisonSection({
   lang = "PL",
   compact = false,
+  theme = "dark",
 }: ScaleComparisonSectionProps) {
   // Stan: w trybie kompaktowym nie otwieramy kart z kwadratami
   const [activeFeatureId, setActiveFeatureId] = useState<string | null>(compact ? null : "ears");
@@ -419,34 +421,48 @@ export default function ScaleComparisonSection({
   return (
     <section
       id="porownanie"
-      className="relative bg-[#050505] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10"
+      className={
+        theme === "light"
+          ? "relative bg-[#FAF9F6] text-zinc-900 py-14 sm:py-18 overflow-hidden border-t border-zinc-200"
+          : "relative bg-[#050505] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10"
+      }
     >
       {/* Poświata tła Apple */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-white/[0.03] blur-[160px] pointer-events-none rounded-full" />
+      <div className={`absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none rounded-full ${
+        theme === "light" ? "bg-amber-100/30 blur-[160px]" : "bg-white/[0.03] blur-[160px]"
+      }`} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 relative z-10">
         
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
         <div className="text-center max-w-3xl mx-auto mb-8">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-5">
-            <Crosshair className="w-3.5 h-3.5 text-white/70 animate-spin-slow" />
-            <span className="text-[10px] sm:text-[11px] font-ui uppercase tracking-[0.35em] text-white/80 font-semibold">
+          <div className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border mb-5 ${
+            theme === "light"
+              ? "border-zinc-300 bg-white shadow-sm text-zinc-800"
+              : "border-white/15 bg-white/5 backdrop-blur-md text-white/80"
+          }`}>
+            <Crosshair className={`w-3.5 h-3.5 ${theme === "light" ? "text-amber-700" : "text-white/70"} animate-spin-slow`} />
+            <span className="text-[10px] sm:text-[11px] font-ui uppercase tracking-[0.35em] font-semibold">
               {compact ? "SKALA 1:1 · PORÓWNANIE GABARYTÓW" : "Interaktywne Studio Porównawcze · Skala 1:1"}
             </span>
           </div>
 
           <h2
-            className="font-heading font-light text-white leading-[0.92] tracking-tight mb-4"
+            className={`font-heading font-light leading-[0.92] tracking-tight mb-4 ${
+              theme === "light" ? "text-zinc-950" : "text-white"
+            }`}
             style={{ fontSize: "clamp(2.3rem, 5.2vw, 4.8rem)" }}
           >
             Maine Coon vs Kot Domowy vs Pies.
             <br />
-            <span className="font-semibold italic text-white/95">
+            <span className={`font-semibold italic ${theme === "light" ? "text-zinc-900" : "text-white/95"}`}>
               {compact ? "Wzrost psa w ciele kota." : "Klikaj kropki na zwierzętach."}
             </span>
           </h2>
 
-          <p className="text-sm sm:text-base font-body text-white/65 leading-relaxed max-w-2xl mx-auto">
+          <p className={`text-sm sm:text-base font-body leading-relaxed max-w-2xl mx-auto ${
+            theme === "light" ? "text-zinc-600" : "text-white/65"
+          }`}>
             {compact
               ? "Porównanie skali rzeczywistej: w kłębie dorosły Maine Coon osiąga 38 cm — dokładnie tyle samo co pies rasy Beagle, przewyższając zwykłego kota domowego o 14 cm."
               : "Najedź lub kliknij dowolną pulsującą kropkę na zdjęciu, aby otworzyć interaktywną kartę i sprawdzić, czym Maine Coon różni się od psa i zwykłego kota w codziennym życiu."}
@@ -464,8 +480,12 @@ export default function ScaleComparisonSection({
                   onClick={() => handleOpenFeature(feat.id)}
                   className={`px-3.5 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all duration-300 cursor-pointer flex items-center gap-2 ${
                     isSelected
-                      ? "bg-white text-black font-bold shadow-[0_0_25px_rgba(255,255,255,0.4)] scale-105"
-                      : "bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20"
+                      ? (theme === "light"
+                          ? "bg-zinc-900 text-white font-bold shadow-md scale-105 ring-2 ring-zinc-900/10"
+                          : "bg-white text-black font-bold shadow-[0_0_25px_rgba(255,255,255,0.4)] scale-105")
+                      : (theme === "light"
+                          ? "bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-950 hover:bg-zinc-50 shadow-sm"
+                          : "bg-white/[0.04] border border-white/10 text-white/60 hover:text-white hover:bg-white/10 hover:border-white/20")
                   }`}
                 >
                   <span className="text-sm">{feat.icon}</span>
@@ -478,8 +498,12 @@ export default function ScaleComparisonSection({
               onClick={() => setShowRulerLines(!showRulerLines)}
               className={`px-3.5 py-2 rounded-full text-xs font-ui uppercase tracking-wider border transition-all cursor-pointer flex items-center gap-1.5 ${
                 showRulerLines
-                  ? "bg-white/15 border-white/30 text-white"
-                  : "bg-transparent border-white/10 text-white/40 hover:text-white"
+                  ? (theme === "light"
+                      ? "bg-amber-100/70 border-amber-300 text-amber-900 font-semibold"
+                      : "bg-white/15 border-white/30 text-white")
+                  : (theme === "light"
+                      ? "bg-white border-zinc-200 text-zinc-600 hover:text-zinc-900"
+                      : "bg-transparent border-white/10 text-white/40 hover:text-white")
               }`}
             >
               <Ruler className="w-3.5 h-3.5" />
@@ -814,16 +838,22 @@ export default function ScaleComparisonSection({
           /* Widok pełny w Bazie Wiedzy (/baza-wiedzy) */
           <div>
             <div className="text-center mb-10">
-              <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/40 block mb-2">
+              <span className={`text-[10px] font-ui uppercase tracking-[0.4em] block mb-2 ${
+                theme === "light" ? "text-zinc-500 font-bold" : "text-white/40"
+              }`}>
                 Zestawienie Parametrów
               </span>
               <h3
-                className="font-heading font-light text-white leading-tight"
+                className={`font-heading font-light leading-tight ${
+                  theme === "light" ? "text-zinc-950" : "text-white"
+                }`}
                 style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
               >
                 Wszystkie różnice w pigułce.
               </h3>
-              <p className="text-sm sm:text-base font-body text-white/60 max-w-xl mx-auto mt-2">
+              <p className={`text-sm sm:text-base font-body max-w-xl mx-auto mt-2 ${
+                theme === "light" ? "text-zinc-600" : "text-white/60"
+              }`}>
                 Przejrzyste kafelki porównujące naturę, anatomię, upodobanie do wody i codzienne życie z Maine Coonem.
               </p>
             </div>
@@ -834,52 +864,84 @@ export default function ScaleComparisonSection({
                 return (
                   <div
                     key={idx}
-                    className={`p-6 sm:p-7 rounded-2xl border transition-all duration-300 flex flex-col justify-between hover:translate-y-[-3px] ${
-                      card.highlight
-                        ? "bg-white/[0.04] border-white/25 shadow-[0_10px_35px_rgba(255,255,255,0.05)]"
-                        : "bg-white/[0.015] border-white/10 hover:border-white/20"
+                    className={`p-6 sm:p-7 rounded-3xl border transition-all duration-300 flex flex-col justify-between hover:translate-y-[-3px] ${
+                      theme === "light"
+                        ? (card.highlight
+                            ? "bg-white border-amber-300 shadow-md hover:shadow-lg hover:border-amber-400"
+                            : "bg-white border-zinc-200 shadow-sm hover:shadow-md hover:border-zinc-300")
+                        : (card.highlight
+                            ? "bg-white/[0.08] border-amber-400/30 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.25)] hover:bg-white/[0.12] hover:border-amber-400/50 backdrop-blur-2xl"
+                            : "bg-white/[0.05] border-white/15 shadow-[0_12px_32px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.18)] hover:bg-white/[0.09] hover:border-white/30 backdrop-blur-2xl")
                     }`}
                   >
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center">
-                          <Icon className="w-5 h-5 text-white" />
+                        <div className={`w-10 h-10 rounded-2xl border flex items-center justify-center ${
+                          theme === "light" ? "bg-zinc-100 border-zinc-200 text-zinc-800" : "bg-white/10 border-white/20 text-white backdrop-blur-md"
+                        }`}>
+                          <Icon className="w-5 h-5" />
                         </div>
-                        <span className="text-[10px] uppercase font-ui tracking-widest text-white/50 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+                        <span className={`text-[10px] uppercase font-mono tracking-widest px-3 py-1 rounded-full font-semibold ${
+                          theme === "light"
+                            ? "bg-amber-100/80 border border-amber-300 text-amber-800"
+                            : "bg-amber-400/10 border border-amber-400/25 text-amber-300"
+                        }`}>
                           {card.badge}
                         </span>
                       </div>
 
-                      <h4 className="text-lg sm:text-xl font-heading font-medium text-white mb-4">
+                      <h4 className={`text-lg sm:text-xl font-heading font-medium mb-4 ${
+                        theme === "light" ? "text-zinc-950" : "text-white"
+                      }`}>
                         {card.title}
                       </h4>
 
                       <div className="space-y-3 font-body text-xs sm:text-sm">
                         {/* Maine Coon (Wyróżniony) */}
-                        <div className="p-3.5 rounded-xl bg-white/10 border border-white/20 shadow-inner">
-                          <span className="text-[10px] font-ui uppercase tracking-wider text-white font-bold block mb-1 flex items-center gap-1.5">
-                            <Sparkles className="w-3 h-3 text-white" />
-                            Maine Coon:
+                        <div className={`p-4 rounded-2xl border ${
+                          theme === "light"
+                            ? "bg-amber-50/90 border-amber-200/90 shadow-inner"
+                            : "bg-amber-500/[0.12] border-amber-400/30 shadow-inner backdrop-blur-md"
+                        }`}>
+                          <span className={`text-[10px] font-mono uppercase tracking-wider font-bold block mb-1 flex items-center gap-1.5 ${
+                            theme === "light" ? "text-amber-800" : "text-amber-300"
+                          }`}>
+                            <Sparkles className="w-3 h-3 text-amber-500" />
+                            Maine Coon (Nasza hodowla):
                           </span>
-                          <p className="text-white font-medium leading-relaxed">
+                          <p className={`font-normal leading-relaxed ${
+                            theme === "light" ? "text-zinc-800" : "text-white"
+                          }`}>
                             {card.mainecoon}
                           </p>
                         </div>
 
                         {/* Kot domowy */}
-                        <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-white/60">
-                          <span className="text-[10px] font-ui uppercase tracking-wider text-white/40 block mb-0.5">
-                            Kot Domowy:
+                        <div className={`p-3 rounded-xl border ${
+                          theme === "light"
+                            ? "bg-zinc-50 border-zinc-200 text-zinc-700"
+                            : "bg-white/[0.04] border-white/10 text-zinc-300"
+                        }`}>
+                          <span className={`text-[10px] font-mono uppercase tracking-wider block mb-0.5 font-semibold ${
+                            theme === "light" ? "text-zinc-500" : "text-zinc-400"
+                          }`}>
+                            🐱 Kot Domowy:
                           </span>
-                          <p className="leading-relaxed">{card.cat}</p>
+                          <p className="leading-relaxed font-light">{card.cat}</p>
                         </div>
 
                         {/* Pies Beagle */}
-                        <div className="p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-white/60">
-                          <span className="text-[10px] font-ui uppercase tracking-wider text-white/40 block mb-0.5">
-                            Pies (Beagle):
+                        <div className={`p-3 rounded-xl border ${
+                          theme === "light"
+                            ? "bg-zinc-50 border-zinc-200 text-zinc-700"
+                            : "bg-white/[0.04] border-white/10 text-zinc-300"
+                        }`}>
+                          <span className={`text-[10px] font-mono uppercase tracking-wider block mb-0.5 font-semibold ${
+                            theme === "light" ? "text-zinc-500" : "text-zinc-400"
+                          }`}>
+                            🐶 Pies (Beagle):
                           </span>
-                          <p className="leading-relaxed">{card.dog}</p>
+                          <p className="leading-relaxed font-light">{card.dog}</p>
                         </div>
                       </div>
                     </div>
@@ -889,21 +951,41 @@ export default function ScaleComparisonSection({
             </div>
 
             {/* Podsumowanie końcowe */}
-            <div className="mt-12 p-8 sm:p-10 rounded-2xl border border-white/15 bg-gradient-to-r from-white/[0.05] via-white/[0.02] to-transparent flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl">
+            <div className={`mt-12 p-8 sm:p-10 rounded-3xl border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 shadow-xl ${
+              theme === "light"
+                ? "border-zinc-200 bg-white"
+                : "border-white/20 bg-gradient-to-r from-white/[0.08] via-white/[0.04] to-transparent backdrop-blur-2xl"
+            }`}>
               <div className="max-w-2xl">
-                <span className="text-[10px] uppercase font-ui tracking-[0.3em] text-white/40 block mb-2">
+                <span className={`text-[10px] uppercase font-mono tracking-[0.3em] block mb-2 font-semibold ${
+                  theme === "light" ? "text-amber-800" : "text-amber-300"
+                }`}>
                   Dlaczego hodowla Koci Przyjaciel?
                 </span>
-                <p className="font-heading font-light text-xl sm:text-2xl text-white/95 leading-snug">
+                <p className={`font-heading font-light text-xl sm:text-2xl leading-snug ${
+                  theme === "light" ? "text-zinc-900" : "text-white"
+                }`}>
                   „Otrzymujesz majestat i oddanie psa, bez konieczności wychodzenia w ulewę o 6 rano, z dodatkiem jedwabistego futra i fascynacji wodą.”
                 </p>
               </div>
-              <a
-                href="#kocieta"
-                className="shrink-0 px-8 py-4 bg-white text-black font-ui uppercase tracking-widest text-xs font-semibold hover:bg-white/85 transition-all shadow-lg hover:scale-105 cursor-pointer"
-              >
-                Zobacz Dostępne Kocięta
-              </a>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="/kocieta"
+                  className="px-8 py-4 rounded-full bg-zinc-950 text-white font-ui uppercase tracking-wider text-xs font-bold hover:bg-zinc-800 transition-all shadow-md hover:scale-105 cursor-pointer"
+                >
+                  Dostępne Kocięta
+                </Link>
+                <Link
+                  href="/o-nas"
+                  className={`px-6 py-4 rounded-full border font-ui uppercase tracking-wider text-xs font-semibold transition-all hover:scale-105 ${
+                    theme === "light"
+                      ? "bg-zinc-100 hover:bg-zinc-200 border-zinc-200 text-zinc-900"
+                      : "bg-white/10 hover:bg-white/20 border-white/25 text-white backdrop-blur-md"
+                  }`}
+                >
+                  Poznaj Hodowlę
+                </Link>
+              </div>
             </div>
           </div>
         )}

@@ -21,25 +21,6 @@ interface KnowledgeBaseTeaserProps {
 }
 
 export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaserProps) {
-  // Stan interaktywnego mini-kalkulatora
-  const [catType, setCatType] = useState<"female" | "male">("male");
-  const [dietType, setDietType] = useState<"wet_premium" | "barf" | "mixed">("wet_premium");
-
-  // Dynamiczne kalkulacje kosztów miesięcznych
-  const calculateCosts = () => {
-    let foodBase = catType === "male" ? 260 : 190;
-    if (dietType === "barf") foodBase = catType === "male" ? 220 : 160;
-    if (dietType === "mixed") foodBase = catType === "male" ? 240 : 180;
-
-    const litter = catType === "male" ? 65 : 45;
-    const vetCare = 50; // Średnia profilaktyka (szczepienia, odrobaczenia, kontrola w skali roku / 12)
-    const total = foodBase + litter + vetCare;
-
-    return { foodBase, litter, vetCare, total };
-  };
-
-  const costs = calculateCosts();
-
   const cards = [
     {
       icon: Scale,
@@ -66,7 +47,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
       desc: lang === "PL"
         ? "Koty to bezwzględni mięsożercy. Dowiedz się, dlaczego tanie karmy z marketu niszczą nerki i jak ułożyć prostą dietę wysokomięsną lub BARF."
         : "Cats are obligate carnivores. Learn why cheap commercial kibble harms kidneys and how to build an easy meat-based or BARF diet.",
-      href: "/baza-wiedzy#kalkulator",
+      href: "/kalkulator",
     },
     {
       icon: Coins,
@@ -92,7 +73,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-300/80 bg-amber-50 mb-6 shadow-sm">
             <BookOpen className="w-3.5 h-3.5 text-amber-700" />
             <span className="text-[11px] font-ui uppercase tracking-[0.3em] text-amber-950 font-semibold">
-              {lang === "PL" ? "WIRTUALNE CENTRUM WIEDZY I KALKULATOR" : "INTERACTIVE KNOWLEDGE HUB & CALCULATOR"}
+              {lang === "PL" ? "WIRTUALNE CENTRUM WIEDZY I FELINOLOGII" : "INTERACTIVE KNOWLEDGE & FELINOLOGY"}
             </span>
           </div>
 
@@ -113,168 +94,30 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
           </p>
         </div>
 
-        {/* ── INTERAKTYWNA RZECZ #1: WIRTUALNY KALKULATOR KOSZTÓW (APPLE IPHONE GLASS) ── */}
-        <div className="mb-20 bg-white/80 backdrop-blur-2xl rounded-3xl sm:rounded-[36px] border border-white/90 p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.05),inset_0_1px_2px_rgba(255,255,255,0.95)]">
-          
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-zinc-200/80 mb-8">
-            <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 mb-2 font-semibold">
-                <Sliders className="w-4 h-4 text-amber-600" />
-                <span>{lang === "PL" ? "Wirtualny Symulator Kosztów Życia" : "Live Cost Simulator"}</span>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-normal text-zinc-950">
-                {lang === "PL" ? "Ile naprawdę kosztuje utrzymanie Maine Coona?" : "How much does keeping a Maine Coon really cost?"}
-              </h3>
+        {/* ── WZMIANKA O KOSZTACH (APPLE IPHONE FROSTED GLASS BANNER) ──── */}
+        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/[0.08] via-amber-500/[0.03] to-white border border-amber-300/60 backdrop-blur-xl shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/90 border border-amber-300 text-amber-900 text-xs font-mono font-semibold mb-3">
+              <Coins className="w-3.5 h-3.5 text-amber-700" />
+              <span>{lang === "PL" ? "KALKULATOR FINANSOWY 2026" : "2026 FINANCIAL SIMULATOR"}</span>
             </div>
-
-            {/* Selektory Płci / Rozmiaru */}
-            <div className="flex items-center gap-2 bg-zinc-100/90 p-1.5 rounded-full border border-white/80 shadow-sm backdrop-blur-md">
-              <button
-                onClick={() => setCatType("male")}
-                className={`px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all cursor-pointer font-medium ${
-                  catType === "male"
-                    ? "bg-zinc-950 text-white shadow-sm"
-                    : "text-zinc-600 hover:text-zinc-950"
-                }`}
-              >
-                ♂ Kocur (10 – 12 kg)
-              </button>
-              <button
-                onClick={() => setCatType("female")}
-                className={`px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all cursor-pointer font-medium ${
-                  catType === "female"
-                    ? "bg-zinc-950 text-white shadow-sm"
-                    : "text-zinc-600 hover:text-zinc-950"
-                }`}
-              >
-                ♀ Kotka (6.5 – 8 kg)
-              </button>
-            </div>
+            <h3 className="text-xl sm:text-2xl font-heading font-medium text-zinc-950 mb-2">
+              {lang === "PL" ? "Ile realnie kosztuje utrzymanie kota Maine Coon?" : "How much does keeping a Maine Coon really cost?"}
+            </h3>
+            <p className="text-sm text-zinc-600 font-body font-light leading-relaxed">
+              {lang === "PL"
+                ? "Dieta wysokomięsna 0% zbóż, podłoże w kuwecie XXL, solidne drapaki sufitowe i coroczna profilaktyka serca Echo Doppler. Oblicz comiesięczne wydatki i sprawdź pełną wyprawkę w naszym symulatorze."
+                : "Grain-free species-appropriate diet, XXL litter, sturdy scratchers, and yearly heart ultrasound. Calculate live monthly expenses in our interactive tool."}
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
-            {/* Wybór Diety (Lewa strona) */}
-            <div className="lg:col-span-7 space-y-3.5">
-              <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3 font-semibold">
-                {lang === "PL" ? "Wybierz model żywienia:" : "Select feeding model:"}
-              </p>
-
-              {[
-                {
-                  id: "wet_premium" as const,
-                  title: lang === "PL" ? "Karmy Mokre Monobiałkowe Premium" : "Monoprotein Wet Food",
-                  brand: "Gussto, Catz Finefood Purrrr, Feringa Pure Meat (100% mięsa)",
-                  desc: "Najwygodniejszy i bezpieczny model żywienia. Zero zbóż, wysoka wilgotność chroniąca nerki.",
-                },
-                {
-                  id: "barf" as const,
-                  title: lang === "PL" ? "Dieta Surowa BARF z Suplementami" : "Raw BARF Nutrition",
-                  brand: "Wołowina, indyk, serca + tran + tauryna + wapń",
-                  desc: "Najbardziej naturalna dla kota i najbardziej ekonomiczna przy większym kocie, wymaga przygotowania porcji.",
-                },
-                {
-                  id: "mixed" as const,
-                  title: lang === "PL" ? "Model Mieszany (Mokra + Mięso)" : "Mixed Model",
-                  brand: "Puszki jakościowe na co dzień + surowe mięso 2-3x w tygodniu",
-                  desc: "Świetny kompromis wygody z naturalnym czyszczeniem zębów i żuchwy.",
-                },
-              ].map((opt) => (
-                <div
-                  key={opt.id}
-                  onClick={() => setDietType(opt.id)}
-                  className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-left backdrop-blur-xl ${
-                    dietType === opt.id
-                      ? "bg-amber-50/90 border-amber-500/50 shadow-[0_8px_24px_rgba(217,119,6,0.08),inset_0_1px_2px_rgba(255,255,255,1)] ring-1 ring-amber-500/30"
-                      : "bg-white/70 border-white/90 hover:bg-white/90 hover:border-amber-400/40 shadow-[0_4px_16px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,0.9)]"
-                  }`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <h4 className="text-sm sm:text-base font-heading font-medium text-zinc-950">
-                      {opt.title}
-                    </h4>
-                    <span
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                        dietType === opt.id ? "border-amber-600 bg-amber-600" : "border-zinc-300"
-                      }`}
-                    >
-                      {dietType === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
-                    </span>
-                  </div>
-                  <p className="text-xs font-mono text-amber-800 mb-1 font-semibold">{opt.brand}</p>
-                  <p className="text-xs text-zinc-600 font-body font-light leading-relaxed">{opt.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            {/* Licznik Kosztów w Czasie Rzeczywistym (Prawa strona — Ciemny iPhone Glass) */}
-            <div className="lg:col-span-5 bg-gradient-to-b from-[#18181b] to-[#0c0c0e] text-white rounded-3xl border border-white/15 p-6 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-2xl">
-              <div>
-                <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-zinc-400 block mb-2">
-                  {lang === "PL" ? "Szacowany Miesięczny Koszt" : "Estimated Monthly Total"}
-                </span>
-
-                <div className="flex items-baseline gap-2 mb-6">
-                  <span
-                    className="font-heading font-light text-white leading-none text-transparent bg-clip-text bg-gradient-to-r from-amber-200 to-white"
-                    style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)" }}
-                  >
-                    ~{costs.total}
-                  </span>
-                  <span className="text-lg font-mono text-zinc-400">PLN / msc</span>
-                </div>
-
-                {/* Rozbicie składowych */}
-                <div className="space-y-3 pb-6 border-b border-white/10 text-xs font-body">
-                  <div className="flex justify-between items-center text-zinc-300">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-amber-400" />
-                      <span>{lang === "PL" ? "Karma mięsna (0% zbóż)" : "Meat diet (grain-free)"}</span>
-                    </span>
-                    <span className="font-mono font-semibold text-white">~{costs.foodBase} zł</span>
-                  </div>
-
-                  <div className="flex justify-between items-center text-zinc-300">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-blue-400" />
-                      <span>{lang === "PL" ? "Żwirek kukurydziany zbrylający" : "Natural clumping litter"}</span>
-                    </span>
-                    <span className="font-mono font-semibold text-white">~{costs.litter} zł</span>
-                  </div>
-
-                  <div className="flex justify-between items-center text-zinc-300">
-                    <span className="flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                      <span>{lang === "PL" ? "Średnia profilaktyka (odrobaczenia, szczepienia)" : "Veterinary routine"}</span>
-                    </span>
-                    <span className="font-mono font-semibold text-white">~{costs.vetCare} zł</span>
-                  </div>
-                </div>
-
-                <div className="pt-4 flex items-start gap-2.5 text-[11px] text-zinc-400 font-light leading-relaxed">
-                  <Info className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
-                  <span>
-                    {lang === "PL"
-                      ? "Prawidłowa dieta mięsna na starcie zapobiega chorobom nerek i otyłości — to realna oszczędność na wizytach weterynaryjnych przez kilkanaście lat życia kota."
-                      : "A species-appropriate high-protein diet prevents renal stress and obesity, saving thousands on vet bills over the cat's lifetime."}
-                  </span>
-                </div>
-              </div>
-
-              <div className="mt-6">
-                <Link
-                  href="/baza-wiedzy#kalkulator"
-                  className="w-full py-3 rounded-full bg-white text-zinc-950 text-xs font-ui uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 hover:bg-zinc-200"
-                >
-                  <span>{lang === "PL" ? "Zobacz szczegółowy kalkulator wyprawki" : "Full starter equipment calculator"}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-
-            </div>
-
-          </div>
-
+          <Link
+            href="/kalkulator"
+            className="px-7 py-4 rounded-full bg-zinc-950 text-white font-ui text-xs font-bold uppercase tracking-wider hover:bg-zinc-800 transition-all flex items-center gap-2 shadow-lg hover:scale-105 shrink-0 cursor-pointer"
+          >
+            <span>{lang === "PL" ? "Sprawdź koszty utrzymania kota" : "Calculate Living Costs"}</span>
+            <ArrowRight className="w-4 h-4 text-amber-400" />
+          </Link>
         </div>
 
         {/* ── INTERAKTYWNA RZECZ #2: CERTYFIKOWANY STANDARD BADAŃ GENETYCZNYCH ── */}

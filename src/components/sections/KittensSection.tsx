@@ -21,7 +21,7 @@ const KITTENS = [
     status: "available" as const,
     readyDate: "Odbiór: Kwiecień 2026",
     weightEstimate: "6.5 – 8.0 kg (Dorosła samica)",
-    image: "/images/cats/cat_07.webp",
+    image: "/images/gallery/mlode/mlode_003.jpeg",
     desc: "Czuła, odważna kotka o jedwabistej szacie, głębokim profilu i wspaniałym, otwartym charakterze. Uwielbia zasypiać na kolanach i towarzyszyć w codziennych czynnościach.",
     highlights: ["Wybitne pędzle rysiowe", "Idealny profil głowy", "Nauczona kuwety i drapaka", "Wychowana z dziećmi"],
   },

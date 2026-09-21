@@ -80,8 +80,8 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, laserowe miarki, mikro-kropki Apple LiDAR + skrót z odnośnikiem do Bazy Wiedzy */}
-        <ScaleComparisonSection lang={lang} compact={true} />
+        {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, laserowe miarki, mikro-kropki Apple LiDAR oraz pełne 6 kart porównawczych iPhone Glass */}
+        <ScaleComparisonSection lang={lang} compact={false} />
 
         {/* ⑦ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Wirtualny kalkulator kosztów na żywo, badania genetyczne HCM/PKD/SMA N/N */}
         <KnowledgeBaseTeaser lang={lang} />

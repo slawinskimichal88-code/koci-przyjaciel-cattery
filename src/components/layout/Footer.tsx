@@ -25,13 +25,13 @@ export default function Footer({ lang = "PL" }: FooterProps) {
       ],
     },
     {
-      title: lang === "PL" ? "Baza Wiedzy" : "Knowledge Base",
+      title: lang === "PL" ? "Wiedza & Narzędzia" : "Knowledge & Tools",
       items: [
-        { label: lang === "PL" ? "Wzorzec rasy Maine Coon" : "Breed Standard", href: "/baza-wiedzy#rasa" },
-        { label: lang === "PL" ? "Porównanie wymiarów (Skala)" : "Scale Comparison", href: "/baza-wiedzy#porownanie" },
-        { label: lang === "PL" ? "Zdrowie & Badania HCM" : "Heart Health & HCM", href: "/baza-wiedzy#zdrowie" },
-        { label: lang === "PL" ? "Kalkulator kosztów życia" : "Cost Calculator", href: "/baza-wiedzy#kalkulator" },
-        { label: lang === "PL" ? "Najczęstsze pytania (FAQ)" : "FAQ", href: "/baza-wiedzy#faq" },
+        { label: lang === "PL" ? "Kalkulator Kosztów & Wyprawka" : "Cost Calculator", href: "/baza-wiedzy?tab=kalkulator" },
+        { label: lang === "PL" ? "Wzorzec rasy Maine Coon" : "Breed Standard", href: "/baza-wiedzy?tab=wzorzec" },
+        { label: lang === "PL" ? "Porównanie wymiarów (Skala)" : "Scale Comparison", href: "/baza-wiedzy?tab=skala" },
+        { label: lang === "PL" ? "Zdrowie & Badania HCM" : "Heart Health & HCM", href: "/baza-wiedzy?tab=zdrowie" },
+        { label: lang === "PL" ? "Najczęstsze pytania (FAQ)" : "FAQ", href: "/baza-wiedzy?tab=faq" },
       ],
     },
     {
