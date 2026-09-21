@@ -151,7 +151,6 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
                 images={pools[0]}
                 direction="vertical"
                 speed={65}
-                label="🌿 Ogród & Maluchy"
                 onPhotoClick={setSelectedPhoto}
                 className="sm:row-span-2 h-[260px] sm:h-full min-h-[250px] sm:min-h-full w-full"
               />
@@ -161,7 +160,6 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
                 images={pools[1]}
                 direction="horizontal"
                 speed={50}
-                label="🦁 Kocury & Dom"
                 onPhotoClick={setSelectedPhoto}
                 className="sm:row-span-1 h-[220px] sm:h-full min-h-[220px] sm:min-h-full w-full"
               />
@@ -171,7 +169,6 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
                 images={pools[2]}
                 direction="reverse-vertical"
                 speed={55}
-                label="🌸 Matki & Królowe"
                 onPhotoClick={setSelectedPhoto}
                 className="sm:row-span-1 h-[220px] sm:h-full min-h-[220px] sm:min-h-full w-full"
               />

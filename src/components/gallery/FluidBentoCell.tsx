@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Leaf, Maximize2 } from "lucide-react";
+import { Maximize2 } from "lucide-react";
 
 export interface BentoImageItem {
   id?: string;
@@ -52,7 +52,7 @@ export default function FluidBentoCell({
 
   return (
     /* KLUCZOWE: w-full h-full wymusza zajęcie całej komórki siatki (auto-rows). */
-    <div className={`relative overflow-hidden rounded-3xl bg-[#111] border border-gray-800 shadow-2xl w-full h-full ${className}`}>
+    <div className={`relative overflow-hidden rounded-3xl bg-[#111] border border-gray-800 shadow-2xl w-full h-full group ${className}`}>
       
       <motion.div
         className={`absolute top-0 left-0 flex ${isVertical ? "flex-col" : "flex-row"}`}
@@ -91,25 +91,13 @@ export default function FluidBentoCell({
               <img
                 src={src}
                 alt={photoObj.title || `Maine Coon slide ${idx}`}
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105"
                 loading="eager"
               />
-              {/* Delikatny gradient dla lepszej czytelności i efektu premium */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
             </div>
           );
         })}
       </motion.div>
-
-      {/* Opcjonalna etykieta (jak na zrzucie ekranu) */}
-      {(label || (typeof images[0] !== "string" && (images[0] as BentoImageItem)?.categoryLabel)) && (
-        <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 pointer-events-none">
-          <Leaf className="w-4 h-4 text-[#8a9f6d]" />
-          <span className="text-white text-xs font-medium tracking-wide">
-            {label || (images[0] as BentoImageItem)?.categoryLabel}
-          </span>
-        </div>
-      )}
 
       {/* Ikona powiększenia (Apple Expand Icon on hover) */}
       <div className="absolute top-3.5 right-3.5 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">

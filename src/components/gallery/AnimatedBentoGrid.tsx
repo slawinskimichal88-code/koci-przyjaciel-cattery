@@ -192,7 +192,6 @@ export default function AnimatedBentoGrid({
           images={cellPools[0]}
           direction="horizontal"
           speed={70}
-          label="Zabawa w trawie"
           className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
@@ -202,7 +201,6 @@ export default function AnimatedBentoGrid({
           images={cellPools[1]}
           direction="reverse-vertical"
           speed={60}
-          label="Portrety"
           className="col-span-1 row-span-2 md:col-span-1 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
@@ -230,7 +228,6 @@ export default function AnimatedBentoGrid({
           images={cellPools[4]}
           direction="reverse-horizontal"
           speed={80}
-          label="Wybieg i Ogród"
           className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
