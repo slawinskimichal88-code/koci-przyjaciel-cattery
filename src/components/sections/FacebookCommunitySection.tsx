@@ -39,12 +39,12 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
   }, []);
 
   return (
-    <section id="spolecznosc" className="bg-[#0A0A0A] text-white overflow-hidden border-t border-white/10 py-14 sm:py-18">
+    <section id="spolecznosc" className="bg-white text-zinc-900 overflow-hidden border-t border-zinc-200 py-16 sm:py-20">
       
       {/* ── Intro ───────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-8 sm:mb-10">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono uppercase tracking-[0.3em] text-[#C8973B] mb-6">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-10 sm:mb-12">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 border border-amber-300 text-[11px] font-mono uppercase tracking-[0.3em] text-amber-900 mb-6 font-semibold">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           <span>
             {lang === "PL"
               ? isLive
@@ -55,14 +55,16 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
         </div>
 
         <h2
-          className="font-heading font-light text-white leading-[0.9] tracking-tight mb-6"
+          className="font-heading font-light text-zinc-950 leading-[0.9] tracking-tight mb-6"
           style={{ fontSize: "clamp(2.8rem, 6.5vw, 5.5rem)" }}
         >
           {followerCount} fanów.<br />
-          <span className="font-semibold italic">Nasza wielka rodzina.</span>
+          <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-800 to-zinc-900">
+            Nasza wielka rodzina.
+          </span>
         </h2>
 
-        <p className="text-base sm:text-lg font-body text-white/70 max-w-2xl leading-relaxed">
+        <p className="text-base sm:text-lg font-body text-zinc-600 max-w-2xl leading-relaxed font-light">
           {lang === "PL"
             ? "Od ponad 10 lat prowadzimy jeden z najbardziej zaangażowanych profili hodowli kotów rasowych w Polsce. Codziennie publikujemy relacje z życia kociąt, nagrania wideo oraz zdjęcia z nowych domów."
             : "For over 10 years, we have nurtured one of the most engaged pedigree cattery communities in Europe. Explore daily stories, live video updates, and joyful photos from adoptive homes."}
@@ -74,31 +76,31 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* KARTA FACEBOOK */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#12141A] to-[#0E1015] border border-blue-500/20 hover:border-blue-500/40 transition-all duration-300 flex flex-col justify-between shadow-xl">
+          <div className="p-8 sm:p-10 rounded-3xl bg-zinc-50 border border-blue-100 hover:border-blue-300 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl">
             <div>
               <div className="flex items-center justify-between mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-[#1877F2]/15 border border-[#1877F2]/30 flex items-center justify-center text-[#1877F2]">
+                <div className="w-14 h-14 rounded-2xl bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2]">
                   <FacebookIcon className="w-7 h-7 fill-current" />
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-400">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-[11px] font-mono text-emerald-800 font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span>{isLive ? "LIVE META API" : "AKTYWNA SPOŁECZNOŚĆ"}</span>
                 </div>
               </div>
 
               <div className="mb-4">
                 <span
-                  className="font-heading font-medium text-white leading-none block mb-1"
+                  className="font-heading font-medium text-zinc-950 leading-none block mb-1"
                   style={{ fontSize: "clamp(2.5rem, 5vw, 3.8rem)" }}
                 >
                   {followerCount}
                 </span>
-                <p className="text-xs font-mono uppercase tracking-widest text-zinc-400">
+                <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 font-semibold">
                   {lang === "PL" ? "Obserwujących profil Koci Przyjaciel *PL" : "Facebook followers"}
                 </p>
               </div>
 
-              <p className="text-sm text-zinc-300 font-body mb-8 leading-relaxed">
+              <p className="text-sm text-zinc-600 font-body mb-8 leading-relaxed font-light">
                 Codzienne transmisje na żywo, relacje z rozwoju maluchów, porady felinologiczne i galeria zdjęć z całego kraju.
               </p>
             </div>
@@ -107,7 +109,7 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               href={REAL_FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 px-6 rounded-2xl bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-ui font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-500/20 group cursor-pointer"
+              className="w-full py-4 px-6 rounded-2xl bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-ui font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg group cursor-pointer"
             >
               <span>{lang === "PL" ? "Dołącz na Facebooku" : "Join on Facebook"}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -115,30 +117,30 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
           </div>
 
           {/* KARTA INSTAGRAM */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-[#181116] to-[#120D11] border border-rose-500/20 hover:border-rose-500/40 transition-all duration-300 flex flex-col justify-between shadow-xl">
+          <div className="p-8 sm:p-10 rounded-3xl bg-zinc-50 border border-rose-100 hover:border-rose-300 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl">
             <div>
               <div className="flex items-center justify-between mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-[#E4405F]/15 border border-[#E4405F]/30 flex items-center justify-center text-[#E4405F]">
+                <div className="w-14 h-14 rounded-2xl bg-[#E4405F]/10 border border-[#E4405F]/20 flex items-center justify-center text-[#E4405F]">
                   <InstagramIcon className="w-7 h-7" />
                 </div>
-                <div className="px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-[11px] font-mono text-rose-300">
+                <div className="px-3 py-1 rounded-full bg-rose-50 border border-rose-300 text-[11px] font-mono text-rose-800 font-semibold">
                   @koci_przyjaciel_pl
                 </div>
               </div>
 
               <div className="mb-4">
                 <span
-                  className="font-heading font-medium text-white leading-none block mb-1"
+                  className="font-heading font-medium text-zinc-950 leading-none block mb-1"
                   style={{ fontSize: "clamp(2.5rem, 5vw, 3.8rem)" }}
                 >
                   Instagram
                 </span>
-                <p className="text-xs font-mono uppercase tracking-widest text-zinc-400">
+                <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 font-semibold">
                   {lang === "PL" ? "Rolki, Stories & Zdjęcia Makro" : "Reels, Stories & Macro Photos"}
                 </p>
               </div>
 
-              <p className="text-sm text-zinc-300 font-body mb-8 leading-relaxed">
+              <p className="text-sm text-zinc-600 font-body mb-8 leading-relaxed font-light">
                 Krótkie formy wideo w formacie 4K, zbliżenia na rysiowe pędzle uszu, zabawy na wybiegu i backstage z życia hodowli.
               </p>
             </div>
@@ -147,7 +149,7 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               href={REAL_INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white text-xs font-ui font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-lg shadow-rose-500/20 group cursor-pointer"
+              className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white text-xs font-ui font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-md hover:shadow-lg group cursor-pointer"
             >
               <span>{lang === "PL" ? "Obserwuj na Instagramie" : "Follow on Instagram"}</span>
               <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
@@ -159,14 +161,14 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
 
       {/* ── Mini Gallery: Koty w Nowych Domach ────────────────────── */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12">
-        <p className="text-xs font-mono uppercase tracking-[0.25em] text-white/50 mb-6">
+        <p className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500 mb-6 font-semibold">
           {lang === "PL" ? "ZDJĘCIA NADESŁANE PRZEZ NASZYCH OPIEKUNÓW:" : "PHOTOS SENT BY ADOPTIVE FAMILIES:"}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-          {communityPhotos.map((item, idx) => (
+          {communityPhotos.map((item) => (
             <div
               key={item.id}
-              className="relative aspect-square rounded-2xl overflow-hidden border border-white/10 group bg-[#151518]"
+              className="relative aspect-square rounded-2xl overflow-hidden border border-zinc-200 group bg-zinc-100 shadow-sm"
             >
               <Image
                 src={item.src}

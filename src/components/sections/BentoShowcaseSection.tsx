@@ -38,9 +38,9 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
     }, []);
 
   return (
-    <section id="galeria-showcase" className="relative bg-[#09090B] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10">
-      {/* Ambient glow */}
-      <div className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[600px] h-[400px] bg-amber-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
+    <section id="galeria-showcase" className="relative bg-[#FBFBFD] text-zinc-900 py-16 sm:py-20 overflow-hidden border-t border-zinc-200">
+      {/* Subtelna poświata w tle */}
+      <div className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[600px] h-[400px] bg-amber-400/[0.08] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* ── PODZIAŁ PÓŁ NA PÓŁ (50% TEKST / 50% DYNAMICZNIE PŁYNĄCA TAŚMA BENTO) ───── */}
@@ -48,33 +48,33 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
           
           {/* LEWA STRONA: TEKST I WYRÓŻNIKI (50%) */}
           <div className="lg:col-span-5 flex flex-col justify-center text-left">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono uppercase tracking-[0.25em] text-amber-300/90 mb-4 self-start shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-amber-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100/80 border border-amber-300/70 text-[11px] font-mono uppercase tracking-[0.25em] text-amber-900 mb-4 self-start shadow-sm font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-pulse" />
               <span>{lang === "PL" ? "Z Życia Hodowli" : "Cattery Life"}</span>
             </div>
 
             <h2
-              className="font-heading font-light text-white leading-[1.05] tracking-tight mb-5"
+              className="font-heading font-light text-zinc-950 leading-[1.05] tracking-tight mb-5"
               style={{ fontSize: "clamp(2.2rem, 4.2vw, 3.8rem)" }}
             >
               {lang === "PL" ? (
                 <>
                   Prawdziwe kadry.<br />
-                  <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
+                  <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-800 to-zinc-800">
                     Nasz dom to ich dom.
                   </span>
                 </>
               ) : (
                 <>
                   Authentic moments.<br />
-                  <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
+                  <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-800 to-zinc-800">
                     Our home is their home.
                   </span>
                 </>
               )}
             </h2>
 
-            <p className="text-sm sm:text-base text-zinc-300 font-body font-light leading-relaxed mb-6">
+            <p className="text-sm sm:text-base text-zinc-600 font-body font-light leading-relaxed mb-6">
               {lang === "PL"
                 ? "Nie prowadzimy masowej produkcji kociąt ani hodowli klatkowej. Nasze Maine Coony to pełnoprawni domownicy, którzy uczestniczą w codziennym życiu rodziny: śpią z nami, odpoczywają na kanapach i korzystają z bezpiecznego wybiegu w ogrodzie."
                 : "We are a small family cattery. Our Maine Coons are cherished family members living freely in our home and enjoying our secure outdoor garden run."}
@@ -82,43 +82,43 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
 
             {/* 3 Wyróżniki */}
             <div className="space-y-3 mb-8">
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0">
+              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-emerald-500/40 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-600 shrink-0">
                   <Sun className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-white">
+                  <div className="text-xs font-semibold text-zinc-900">
                     {lang === "PL" ? "Całoroczna woliera ogrodowa" : "Year-round garden enclosure"}
                   </div>
-                  <div className="text-[11px] text-zinc-400 font-light">
+                  <div className="text-[11px] text-zinc-500 font-light">
                     {lang === "PL" ? "Świeże powietrze i bezpośrednie przejście z salonu" : "Fresh air and safe outdoor exploration"}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-300 shrink-0">
+              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-amber-500/40 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-600 shrink-0">
                   <Home className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-white">
+                  <div className="text-xs font-semibold text-zinc-900">
                     {lang === "PL" ? "Salon i kanapy zamiast klatek" : "Living room warmth, no cages"}
                   </div>
-                  <div className="text-[11px] text-zinc-400 font-light">
+                  <div className="text-[11px] text-zinc-500 font-light">
                     {lang === "PL" ? "Wychowanie przy dzieciach, psie i codziennych dźwiękach" : "Socialized with kids, dogs, and family love"}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 p-3 rounded-2xl bg-white/[0.03] border border-white/10">
-                <div className="w-9 h-9 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 shrink-0">
+              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-rose-500/40 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-600 shrink-0">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-white">
+                  <div className="text-xs font-semibold text-zinc-900">
                     {lang === "PL" ? "Badania kardiologiczne & DNA Laboklin" : "Cardiac Echo & DNA Laboklin"}
                   </div>
-                  <div className="text-[11px] text-zinc-400 font-light">
+                  <div className="text-[11px] text-zinc-500 font-light">
                     {lang === "PL" ? "Echo Doppler HCM, PKD, SMA N/N i rodowód FIFe / FPL" : "Clean genetics and certified 5-generation pedigree"}
                   </div>
                 </div>
@@ -129,14 +129,14 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
             <div className="flex flex-wrap items-center gap-3.5">
               <Link
                 href="/o-nas#galeria"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-amber-400 text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-amber-300 transition-all shadow-[0_0_25px_rgba(251,191,36,0.3)] hover:scale-105 group"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-zinc-950 text-white font-body text-xs sm:text-sm font-semibold uppercase tracking-wider hover:bg-zinc-800 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.15)] hover:scale-105 group"
               >
                 <span>{lang === "PL" ? "Zobacz całą galerię" : "Explore full gallery"}</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-amber-400" />
               </Link>
               <Link
                 href="/o-nas"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-body text-xs sm:text-sm font-semibold border border-white/20 transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-body text-xs sm:text-sm font-semibold border border-zinc-300/80 transition-all hover:scale-105"
               >
                 <span>{lang === "PL" ? "O naszej hodowli" : "About our cattery"}</span>
               </Link>

@@ -80,33 +80,33 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
   ];
 
   return (
-    <section id="baza-wiedzy" className="relative bg-[#0E0E11] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10">
+    <section id="baza-wiedzy" className="relative bg-[#FBFBFD] text-zinc-900 py-16 sm:py-20 overflow-hidden border-t border-zinc-200">
       
       {/* Ambient background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-500/10 via-white/[0.02] to-transparent rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-400/10 via-white/50 to-transparent rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
 
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
-            <BookOpen className="w-3.5 h-3.5 text-amber-300" />
-            <span className="text-[11px] font-ui uppercase tracking-[0.3em] text-white/80 font-semibold">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-300/80 bg-amber-50 mb-6 shadow-sm">
+            <BookOpen className="w-3.5 h-3.5 text-amber-700" />
+            <span className="text-[11px] font-ui uppercase tracking-[0.3em] text-amber-950 font-semibold">
               {lang === "PL" ? "WIRTUALNE CENTRUM WIEDZY I KALKULATOR" : "INTERACTIVE KNOWLEDGE HUB & CALCULATOR"}
             </span>
           </div>
 
           <h2
-            className="font-heading font-light text-white leading-[0.92] tracking-tight mb-6"
+            className="font-heading font-light text-zinc-950 leading-[0.92] tracking-tight mb-6"
             style={{ fontSize: "clamp(2.6rem, 6vw, 5rem)" }}
           >
             Wszystko, co musisz wiedzieć<br />
-            <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
+            <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-800 to-zinc-900">
               przed adopcją kota.
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-zinc-400 font-body leading-relaxed max-w-2xl mx-auto font-light">
+          <p className="text-base sm:text-lg text-zinc-600 font-body leading-relaxed max-w-2xl mx-auto font-light">
             {lang === "PL"
               ? "Przejrzyste fakty zamiast mitów. Sprawdź realne miesięczne koszty, wymogi zdrowotne i standardy opieki nad największym kotem domowym."
               : "Clear facts instead of myths. Calculate real monthly expenses, genetic health standards, and care guidelines for the gentle giant."}
@@ -114,27 +114,27 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
         </div>
 
         {/* ── INTERAKTYWNA RZECZ #1: WIRTUALNY KALKULATOR KOSZTÓW (APPLE STYLE) ── */}
-        <div className="mb-20 bg-gradient-to-b from-[#18181D] to-[#121215] rounded-3xl sm:rounded-[36px] border border-white/15 p-6 sm:p-10 lg:p-12 shadow-[0_25px_60px_rgba(0,0,0,0.6)]">
+        <div className="mb-20 bg-white rounded-3xl sm:rounded-[36px] border border-zinc-200 p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
           
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-white/10 mb-8">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-zinc-200 mb-8">
             <div>
-              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-300 mb-2">
-                <Sliders className="w-4 h-4" />
+              <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 mb-2 font-semibold">
+                <Sliders className="w-4 h-4 text-amber-600" />
                 <span>{lang === "PL" ? "Wirtualny Symulator Kosztów Życia" : "Live Cost Simulator"}</span>
               </div>
-              <h3 className="text-2xl sm:text-3xl font-heading font-normal text-white">
+              <h3 className="text-2xl sm:text-3xl font-heading font-normal text-zinc-950">
                 {lang === "PL" ? "Ile naprawdę kosztuje utrzymanie Maine Coona?" : "How much does keeping a Maine Coon really cost?"}
               </h3>
             </div>
 
             {/* Selektory Płci / Rozmiaru */}
-            <div className="flex items-center gap-2 bg-black/40 p-1.5 rounded-full border border-white/10">
+            <div className="flex items-center gap-2 bg-zinc-100 p-1.5 rounded-full border border-zinc-200">
               <button
                 onClick={() => setCatType("male")}
                 className={`px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all cursor-pointer font-medium ${
                   catType === "male"
-                    ? "bg-white text-black shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-zinc-950 text-white shadow-sm"
+                    : "text-zinc-600 hover:text-zinc-950"
                 }`}
               >
                 ♂ Kocur (10 – 12 kg)
@@ -143,8 +143,8 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
                 onClick={() => setCatType("female")}
                 className={`px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all cursor-pointer font-medium ${
                   catType === "female"
-                    ? "bg-white text-black shadow-md"
-                    : "text-zinc-400 hover:text-white"
+                    ? "bg-zinc-950 text-white shadow-sm"
+                    : "text-zinc-600 hover:text-zinc-950"
                 }`}
               >
                 ♀ Kotka (6.5 – 8 kg)
@@ -156,7 +156,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
             
             {/* Wybór Diety (Lewa strona) */}
             <div className="lg:col-span-7 space-y-4">
-              <p className="text-xs font-mono uppercase tracking-widest text-zinc-400 mb-3">
+              <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3 font-semibold">
                 {lang === "PL" ? "Wybierz model żywienia:" : "Select feeding model:"}
               </p>
 
@@ -185,30 +185,30 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
                   onClick={() => setDietType(opt.id)}
                   className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-left ${
                     dietType === opt.id
-                      ? "bg-white/10 border-amber-300/60 shadow-lg ring-1 ring-amber-300/30"
-                      : "bg-white/[0.02] border-white/10 hover:bg-white/[0.05] hover:border-white/20"
+                      ? "bg-amber-50/70 border-amber-400 shadow-sm ring-1 ring-amber-400/40"
+                      : "bg-zinc-50/80 border-zinc-200 hover:bg-zinc-100/80 hover:border-zinc-300"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <h4 className="text-sm sm:text-base font-heading font-medium text-white">
+                    <h4 className="text-sm sm:text-base font-heading font-medium text-zinc-900">
                       {opt.title}
                     </h4>
                     <span
                       className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                        dietType === opt.id ? "border-amber-300 bg-amber-300" : "border-white/30"
+                        dietType === opt.id ? "border-amber-600 bg-amber-600" : "border-zinc-300"
                       }`}
                     >
-                      {dietType === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-black" />}
+                      {dietType === opt.id && <span className="w-1.5 h-1.5 rounded-full bg-white" />}
                     </span>
                   </div>
-                  <p className="text-xs font-mono text-amber-200/80 mb-1">{opt.brand}</p>
-                  <p className="text-xs text-zinc-400 font-body font-light leading-relaxed">{opt.desc}</p>
+                  <p className="text-xs font-mono text-amber-800 mb-1 font-semibold">{opt.brand}</p>
+                  <p className="text-xs text-zinc-600 font-body font-light leading-relaxed">{opt.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* Licznik Kosztów w Czasie Rzeczywistym (Prawa strona) */}
-            <div className="lg:col-span-5 bg-black/60 rounded-3xl border border-white/15 p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
+            <div className="lg:col-span-5 bg-zinc-950 text-white rounded-3xl border border-zinc-800 p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
               <div>
                 <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-zinc-400 block mb-2">
                   {lang === "PL" ? "Szacowany Miesięczny Koszt" : "Estimated Monthly Total"}
@@ -264,7 +264,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
               <div className="mt-6">
                 <Link
                   href="/baza-wiedzy#kalkulator"
-                  className="w-full py-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-white text-xs font-ui uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2"
+                  className="w-full py-3 rounded-full bg-white text-zinc-950 text-xs font-ui uppercase tracking-wider font-semibold transition-all flex items-center justify-center gap-2 hover:bg-zinc-200"
                 >
                   <span>{lang === "PL" ? "Zobacz szczegółowy kalkulator wyprawki" : "Full starter equipment calculator"}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
@@ -280,10 +280,10 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
         {/* ── INTERAKTYWNA RZECZ #2: CERTYFIKOWANY STANDARD BADAŃ GENETYCZNYCH ── */}
         <div className="mb-16">
           <div className="text-center mb-8">
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-emerald-400 font-semibold block mb-2">
+            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-emerald-700 font-semibold block mb-2">
               100% Transparentności Zdrowotnej
             </span>
-            <h3 className="text-2xl sm:text-3xl font-heading font-normal text-white">
+            <h3 className="text-2xl sm:text-3xl font-heading font-normal text-zinc-950">
               Badania genetyczne, które wykonujemy każdemu rodzicowi
             </h3>
           </div>
@@ -317,20 +317,20 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
             ].map((test, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 transition-all flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-emerald-500/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono font-bold text-amber-300 uppercase tracking-wider">
+                    <span className="text-[11px] font-mono font-bold text-amber-800 uppercase tracking-wider">
                       {test.badge}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/30">
-                      <CheckCircle2 className="w-3 h-3" />
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-full border border-emerald-300">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
                       <span>{test.result}</span>
                     </span>
                   </div>
-                  <h4 className="text-base font-heading font-medium text-white mb-2">{test.name}</h4>
-                  <p className="text-xs text-zinc-400 font-body font-light leading-relaxed">{test.desc}</p>
+                  <h4 className="text-base font-heading font-medium text-zinc-900 mb-2">{test.name}</h4>
+                  <p className="text-xs text-zinc-500 font-body font-light leading-relaxed">{test.desc}</p>
                 </div>
               </div>
             ))}
@@ -345,30 +345,30 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
               <Link
                 key={i}
                 href={c.href}
-                className="group relative p-7 sm:p-8 rounded-3xl bg-[#141417] hover:bg-[#1a1a1e] border border-white/10 hover:border-white/25 transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-2xl hover:-translate-y-1"
+                className="group relative p-7 sm:p-8 rounded-3xl bg-white hover:bg-zinc-50 border border-zinc-200/90 hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
-                    <span className="text-[11px] font-mono tracking-widest text-amber-300/80 uppercase font-semibold">
+                    <span className="text-[11px] font-mono tracking-widest text-amber-800 uppercase font-semibold">
                       {c.tag}
                     </span>
-                    <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
+                    <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-800 group-hover:bg-zinc-950 group-hover:text-white transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-heading font-normal text-white group-hover:text-amber-200 transition-colors mb-3">
+                  <h3 className="text-xl sm:text-2xl font-heading font-normal text-zinc-950 group-hover:text-amber-700 transition-colors mb-3">
                     {c.title}
                   </h3>
 
-                  <p className="text-sm text-zinc-400 font-body leading-relaxed font-light">
+                  <p className="text-sm text-zinc-600 font-body leading-relaxed font-light">
                     {c.desc}
                   </p>
                 </div>
 
-                <div className="pt-5 mt-5 border-t border-white/5 flex items-center gap-2 text-xs font-ui uppercase tracking-widest text-zinc-400 group-hover:text-white transition-colors font-semibold">
+                <div className="pt-5 mt-5 border-t border-zinc-200/80 flex items-center gap-2 text-xs font-ui uppercase tracking-widest text-zinc-600 group-hover:text-zinc-950 transition-colors font-semibold">
                   <span>{lang === "PL" ? "Czytaj artykuł w Bazie Wiedzy" : "Read in Knowledge Base"}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-amber-600" />
                 </div>
               </Link>
             );
@@ -379,10 +379,10 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
         <div className="text-center">
           <Link
             href="/baza-wiedzy"
-            className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-white text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all transform hover:-translate-y-1 shadow-[0_10px_35px_rgba(255,255,255,0.2)]"
+            className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-zinc-950 text-white font-body text-xs sm:text-sm font-semibold uppercase tracking-wider hover:bg-zinc-800 transition-all transform hover:-translate-y-1 shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
           >
             <span>{lang === "PL" ? "Otwórz pełne Kompendium Wiedzy (FAQ, Wzrost, Kalkulatory)" : "Open Complete Knowledge Compendium"}</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 text-amber-400" />
           </Link>
         </div>
 
