@@ -81,11 +81,11 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
     filteredKittens.find((k) => k.id === activeId) || filteredKittens[0] || KITTENS[0];
 
   return (
-    <section id="kocieta" className="bg-[#FAF9F6] text-black overflow-hidden py-24 sm:py-32 border-t border-black/5">
+    <section id="kocieta" className="bg-[#FAF9F6] text-black overflow-hidden py-14 sm:py-20 border-t border-black/5">
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12">
 
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
           <div>
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/5 border border-black/10 text-[11px] font-mono uppercase tracking-[0.3em] text-black/70 mb-5">
               <span>{lang === "PL" ? "Dostępne Kocięta · Mioty 2026" : "Available Kittens · 2026 Litters"}</span>

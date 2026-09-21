@@ -80,7 +80,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
   ];
 
   return (
-    <section id="baza-wiedzy" className="relative bg-[#0E0E11] text-white py-24 sm:py-32 overflow-hidden border-t border-white/10">
+    <section id="baza-wiedzy" className="relative bg-[#0E0E11] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10">
       
       {/* Ambient background glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-500/10 via-white/[0.02] to-transparent rounded-full blur-[140px] pointer-events-none" />
@@ -88,7 +88,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
 
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
             <BookOpen className="w-3.5 h-3.5 text-amber-300" />
             <span className="text-[11px] font-ui uppercase tracking-[0.3em] text-white/80 font-semibold">

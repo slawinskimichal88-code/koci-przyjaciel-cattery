@@ -28,7 +28,7 @@ export default function BreederSection({
   return (
     <section
       id="kim-jestem"
-      className="relative bg-[#09090B] text-white py-24 sm:py-32 overflow-hidden border-t border-white/10"
+      className="relative bg-[#09090B] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10"
     >
       {/* Subtelna poświata w tle */}
       <div className="absolute top-1/3 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
@@ -37,7 +37,7 @@ export default function BreederSection({
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
         
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20 reveal">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
             <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/40" />
             <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/80 font-semibold">
@@ -77,7 +77,7 @@ export default function BreederSection({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
           {/* LEWA KOLUMNA: Kompozycja Zdjęć Właścicielki ──────────────── */}
-          <div className="lg:col-span-6 relative reveal">
+          <div className="lg:col-span-6 relative">
             {/* Główne zdjęcie: Portret z kociakiem (cat_07.webp) */}
             <div className="relative w-full h-[460px] sm:h-[560px] rounded-3xl overflow-hidden border border-white/15 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
               <Image
@@ -122,7 +122,7 @@ export default function BreederSection({
           </div>
 
           {/* PRAWA KOLUMNA: Osobisty Opis i Filozofia ─────────────────── */}
-          <div className="lg:col-span-6 space-y-6 reveal">
+          <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-400/10 border border-amber-400/25 text-amber-300 text-xs font-mono">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{lang === "PL" ? "Domowa, Certyfikowana Felinologia" : "Family Certified Felinology"}</span>

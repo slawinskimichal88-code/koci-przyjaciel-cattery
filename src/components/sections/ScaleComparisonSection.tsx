@@ -419,7 +419,7 @@ export default function ScaleComparisonSection({
   return (
     <section
       id="porownanie"
-      className="relative bg-[#050505] text-white py-24 sm:py-32 overflow-hidden border-t border-white/10"
+      className="relative bg-[#050505] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10"
     >
       {/* Poświata tła Apple */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-white/[0.03] blur-[160px] pointer-events-none rounded-full" />

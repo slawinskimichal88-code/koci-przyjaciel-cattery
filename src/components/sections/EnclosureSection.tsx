@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ShieldCheck, Sun, Home, Stethoscope, ArrowRight, Volume2, VolumeX, Sparkles } from "lucide-react";
 
 interface EnclosureSectionProps {
   lang?: "PL" | "EN";
@@ -12,661 +12,157 @@ interface EnclosureSectionProps {
 export default function EnclosureSection({
   lang = "PL",
 }: EnclosureSectionProps) {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  
-  // Desktop Refs
-  const phoneWrapperRef = useRef<HTMLDivElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const introRef = useRef<HTMLDivElement>(null);
-  const textBlock1Ref = useRef<HTMLDivElement>(null);
-  const textBlock2Ref = useRef<HTMLDivElement>(null);
-  const textBlock3Ref = useRef<HTMLDivElement>(null);
 
-  // Mobile Refs (Czyste manipulacje DOM bez re-renderów — 120 FPS płynności)
-  const mobilePhoneWrapRef = useRef<HTMLDivElement>(null);
-  const mobileVideoRef = useRef<HTMLVideoElement>(null);
-  const mobileIntroRef = useRef<HTMLDivElement>(null);
-  const mobileScene1Ref = useRef<HTMLDivElement>(null);
-  const mobileScene2Ref = useRef<HTMLDivElement>(null);
-  const mobileScene3Ref = useRef<HTMLDivElement>(null);
-
-  const [isDesktopDevice, setIsDesktopDevice] = useState<boolean>(true);
-  const [sectionHeight, setSectionHeight] = useState<string>("260vh");
-
-  useEffect(() => {
-    const isDesk = window.innerWidth >= 1024;
-    setIsDesktopDevice(isDesk);
-    setSectionHeight(isDesk ? "200vh" : "170vh");
-
-    const onResize = () => {
-      const d = window.innerWidth >= 1024;
-      setIsDesktopDevice(d);
-      setSectionHeight(d ? "200vh" : "170vh");
-    };
-    window.addEventListener("resize", onResize, { passive: true });
-
-    return () => window.removeEventListener("resize", onResize);
-  }, []);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    // IntersectionObserver — pauzuj wideo gdy wybieg nie jest na ekranie
-    let observer: IntersectionObserver | null = null;
-    if (typeof IntersectionObserver !== "undefined") {
-      observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            const v = videoRef.current;
-            const mv = mobileVideoRef.current;
-            if (entry.isIntersecting) {
-              if (v && v.src) v.play().catch(() => {});
-              if (mv && mv.src) mv.play().catch(() => {});
-            } else {
-              if (v) v.pause();
-              if (mv) mv.pause();
-            }
-          });
-        },
-        { threshold: 0.02 }
-      );
-      observer.observe(section);
+  const toggleSound = () => {
+    setIsMuted((prev) => !prev);
+    if (videoRef.current) {
+      videoRef.current.muted = !videoRef.current.muted;
     }
-
-    const lerp = (a: number, b: number, t: number) =>
-      a + (b - a) * Math.max(0, Math.min(1, t));
-
-    // Smoothstep interpolation
-    const smoothFade = (
-      p: number,
-      inStart: number,
-      inEnd: number,
-      outStart: number,
-      outEnd: number
-    ) => {
-      if (p < inStart) return 0;
-      if (p < inEnd) {
-        const t = (p - inStart) / (inEnd - inStart);
-        return t * t * (3 - 2 * t);
-      }
-      if (p < outStart) return 1;
-      if (p < outEnd) {
-        const t = (p - outStart) / (outEnd - outStart);
-        return 1 - t * t * (3 - 2 * t);
-      }
-      return 0;
-    };
-
-    const smoothTranslateY = (
-      p: number,
-      inStart: number,
-      inEnd: number,
-      outStart: number,
-      outEnd: number,
-      initialY = 36,
-      outY = -28
-    ) => {
-      if (p < inStart) return initialY;
-      if (p < inEnd) {
-        const t = (p - inStart) / (inEnd - inStart);
-        return lerp(initialY, 0, t * t * (3 - 2 * t));
-      }
-      if (p < outStart) return 0;
-      if (p < outEnd) {
-        const t = (p - outStart) / (outEnd - outStart);
-        return lerp(0, outY, t * t * (3 - 2 * t));
-      }
-      return outY;
-    };
-
-    let rafId: number;
-
-    const onScroll = () => {
-      if (!section) return;
-      const rect = section.getBoundingClientRect();
-      const totalScrollable = section.offsetHeight - window.innerHeight;
-      if (totalScrollable <= 0) return;
-
-      const scrolled = -rect.top;
-      const p = Math.max(0, Math.min(1, scrolled / totalScrollable));
-
-      const isDesktop = window.innerWidth >= 1024;
-
-      if (isDesktop) {
-        // ═══════════════════════════════════════════════════════════════
-        // ── DESKTOP: RUCH TELEFONU ZE ŚRODKA NA PRAWO (IDEALNY CHROME) ──
-        // ═══════════════════════════════════════════════════════════════
-        const phoneWrap = phoneWrapperRef.current;
-        if (phoneWrap) {
-          let scale = 1.0;
-          if (p <= 0.18) {
-            const t = p / 0.18;
-            scale = lerp(1.04, 1.0, t * (2 - t));
-          }
-          phoneWrap.style.transform = `translate3d(0, 0, 0) scale(${scale})`;
-        }
-
-        // Tytuł intro desktop
-        const intro = introRef.current;
-        let op = 1;
-        let ty = 0;
-        if (p > 0.04) {
-          const t = Math.min(1, (p - 0.04) / 0.14);
-          op = 1 - t;
-          ty = -t * 35;
-        }
-        if (intro) {
-          intro.style.opacity = String(op);
-          intro.style.transform = `translate3d(0, ${ty}px, 0)`;
-          intro.style.pointerEvents = op > 0.1 ? "auto" : "none";
-        }
-
-        // Cechy 01, 02, 03 desktop — Scena 3 zostaje w 100% widoczna do końca sekcji
-        const b1 = textBlock1Ref.current;
-        if (b1) {
-          const b1Op = smoothFade(p, 0.08, 0.16, 0.38, 0.46);
-          const b1Ty = smoothTranslateY(p, 0.08, 0.16, 0.38, 0.46);
-          b1.style.opacity = String(b1Op);
-          b1.style.transform = `translate3d(0, ${b1Ty}px, 0)`;
-          b1.style.pointerEvents = b1Op > 0.3 ? "auto" : "none";
-        }
-
-        const b2 = textBlock2Ref.current;
-        if (b2) {
-          const b2Op = smoothFade(p, 0.44, 0.52, 0.70, 0.76);
-          const b2Ty = smoothTranslateY(p, 0.44, 0.52, 0.70, 0.76);
-          b2.style.opacity = String(b2Op);
-          b2.style.transform = `translate3d(0, ${b2Ty}px, 0)`;
-          b2.style.pointerEvents = b2Op > 0.3 ? "auto" : "none";
-        }
-
-        const b3 = textBlock3Ref.current;
-        if (b3) {
-          const b3Op = smoothFade(p, 0.74, 0.82, 1.0, 1.0);
-          const b3Ty = smoothTranslateY(p, 0.74, 0.82, 1.0, 1.0);
-          b3.style.opacity = String(b3Op);
-          b3.style.transform = `translate3d(0, ${b3Ty}px, 0)`;
-          b3.style.pointerEvents = b3Op > 0.3 ? "auto" : "none";
-        }
-      } else {
-        // ═══════════════════════════════════════════════════════════════
-        // ── MOBILE: APPLE KINEMATYCZNE PRZEJŚCIE (ZERO RE-RENDERÓW) ──
-        // ═══════════════════════════════════════════════════════════════
-        // 1. Film w telefonie: na początku wycentrowany, płynnie schodzi w dół
-        const mPhone = mobilePhoneWrapRef.current;
-        if (mPhone) {
-          let targetY = 0;
-          let targetScale = 1;
-          if (p <= 0) {
-            targetY = -120;
-            targetScale = 1.05;
-          } else if (p < 0.25) {
-            const t = p / 0.25;
-            const ease = t * t * (3 - 2 * t);
-            targetY = lerp(-120, 0, ease);
-            targetScale = lerp(1.05, 1.0, ease);
-          } else {
-            targetY = 0;
-            targetScale = 1.0;
-          }
-          mPhone.style.transform = `translate3d(0, ${targetY}px, 0) scale(${targetScale})`;
-        }
-
-        // 2. Intro nagłówek mobilny: wyrównany do lewej, zanika gdy przewijamy
-        const mIntro = mobileIntroRef.current;
-        if (mIntro) {
-          let introOp = 1;
-          let introTy = 0;
-          if (p > 0.02) {
-            const t = Math.min(1, (p - 0.02) / 0.16);
-            introOp = 1 - t;
-            introTy = -t * 20;
-          }
-          mIntro.style.opacity = String(introOp);
-          mIntro.style.transform = `translate3d(0, ${introTy}px, 0)`;
-          mIntro.style.pointerEvents = introOp > 0.1 ? "auto" : "none";
-        }
-
-        // 3. Scena 1: Ogród i Wybieg
-        const s1 = mobileScene1Ref.current;
-        if (s1) {
-          const op = smoothFade(p, 0.10, 0.18, 0.38, 0.46);
-          const ty = smoothTranslateY(p, 0.10, 0.18, 0.38, 0.46, 20, -15);
-          s1.style.opacity = String(op);
-          s1.style.transform = `translate3d(0, ${ty}px, 0)`;
-          s1.style.pointerEvents = op > 0.3 ? "auto" : "none";
-        }
-
-        // 4. Scena 2: Życie w Domu
-        const s2 = mobileScene2Ref.current;
-        if (s2) {
-          const op = smoothFade(p, 0.44, 0.52, 0.70, 0.76);
-          const ty = smoothTranslateY(p, 0.44, 0.52, 0.70, 0.76, 20, -15);
-          s2.style.opacity = String(op);
-          s2.style.transform = `translate3d(0, ${ty}px, 0)`;
-          s2.style.pointerEvents = op > 0.3 ? "auto" : "none";
-        }
-
-        // 5. Scena 3: Zdrowe od Urodzenia — zostaje w 100% widoczna do końca sekcji
-        const s3 = mobileScene3Ref.current;
-        if (s3) {
-          const op = smoothFade(p, 0.74, 0.82, 1.0, 1.0);
-          const ty = smoothTranslateY(p, 0.74, 0.82, 1.0, 1.0, 20, 0);
-          s3.style.opacity = String(op);
-          s3.style.transform = `translate3d(0, ${ty}px, 0)`;
-          s3.style.pointerEvents = op > 0.3 ? "auto" : "none";
-        }
-      }
-    };
-
-    const handleScroll = () => {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(onScroll);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll, { passive: true });
-    onScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-      cancelAnimationFrame(rafId);
-      observer?.disconnect();
-    };
-  }, []);
+  };
 
   return (
-    <section
-      ref={sectionRef}
-      id="wybieg"
-      className="relative bg-[#000000] text-white select-none"
-      style={{ height: sectionHeight }}
-    >
-      {/* ── STICKY VIEWPORT CONTAINER ──────────────────────────────── */}
-      <div
-        className="sticky top-0 w-full overflow-hidden flex items-center justify-center"
-        style={{ height: "100dvh" }}
-      >
-        
-        {/* Ambientowe oświetlenie Apple */}
-        <div className="absolute top-1/2 right-[18%] -translate-y-1/2 w-[550px] h-[550px] bg-amber-500/10 rounded-full blur-[150px] pointer-events-none" />
+    <section id="wybieg" className="relative bg-[#09090B] text-white py-14 sm:py-20 border-t border-white/10 overflow-hidden">
+      
+      {/* Subtelna poświata w tle */}
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[500px] bg-emerald-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-[500px] h-[400px] bg-amber-500/[0.03] rounded-full blur-[140px] pointer-events-none" />
 
-        {/* ═════════════════════════════════════════════════════════════════ */}
-        {/* ── 1. WERSJA DESKTOPOWA (DLA CHROME — 100% ORYGINALNA I IDEALNA) ── */}
-        {/* ═════════════════════════════════════════════════════════════════ */}
-        <div className="hidden lg:flex flex-col items-center justify-center w-full h-full relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
           
-          {/* Tytuł otwierający desktop - przesunięty do lewej, poza obszar filmu */}
-          <div
-            ref={introRef}
-            className="absolute top-24 sm:top-28 left-8 lg:left-14 xl:left-20 z-30 text-left w-full max-w-lg pointer-events-none will-change-transform"
-          >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
+          {/* LEWA KOLUMNA: FILOZOFIA I 3 FILARY (WYBIEG, DOM, ZDROWIE) */}
+          <div className="lg:col-span-6 flex flex-col justify-center text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-[11px] font-mono uppercase tracking-[0.25em] text-emerald-400 mb-4 self-start shadow-sm">
+              <Sun className="w-3.5 h-3.5 text-emerald-400" />
+              <span>{lang === "PL" ? "Ogród i Woliera 365 dni" : "Year-round Garden Enclosure"}</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-heading font-light text-white tracking-tight leading-[1.08]">
+
+            <h2
+              className="font-heading font-light text-white leading-[1.05] tracking-tight mb-5"
+              style={{ fontSize: "clamp(2.2rem, 4.2vw, 3.8rem)" }}
+            >
               {lang === "PL" ? (
-                <>Nasz dom<br /><span className="font-normal text-[#86868b]">to ich dom.</span></>
+                <>
+                  Wybieg dla kotów.<br />
+                  <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-white to-zinc-300">
+                    Woliera 365 dni w roku.
+                  </span>
+                </>
               ) : (
-                <>Our home<br /><span className="font-normal text-[#86868b]">is their home.</span></>
+                <>
+                  Outdoor Enclosure.<br />
+                  <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-emerald-200 via-white to-zinc-300">
+                    Fresh air 365 days a year.
+                  </span>
+                </>
               )}
             </h2>
 
-            <div className="flex mt-3 items-center justify-start gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b]">
-              <span>{lang === "PL" ? "Przewiń, aby zobaczyć więcej" : "Scroll to explore"}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-[#86868b] animate-bounce" />
+            <p className="text-sm sm:text-base text-zinc-300 font-body font-light leading-relaxed mb-6">
+              {lang === "PL"
+                ? "Bezpieczna, zadaszona przestrzeń w ogrodzie z bezpośrednim przejściem z domowego salonu. Nasze koty same decydują, kiedy chcą wyjść na świeże powietrze, obserwować ptaki i wygrzewać się na słońcu — bez krat i klatek."
+                : "Safe, covered garden run with direct access from our living room. Our cats freely explore fresh air and nature 365 days a year without cages."}
+            </p>
+
+            {/* 3 Bloki z cechami (zawsze widoczne, zero pustych dziur) */}
+            <div className="space-y-3 mb-8">
+              <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/30 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                  <Sun className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-semibold text-white">
+                    {lang === "PL" ? "01 / Bezpieczna woliera ogrodowa" : "01 / Secure Outdoor Run"}
+                  </div>
+                  <div className="text-xs text-zinc-400 font-light mt-0.5">
+                    {lang === "PL" ? "Całoroczny dostęp do natury, traw, świeżego powietrza i słońca." : "Year-round access to fresh air, grass and nature."}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-amber-500/30 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-300 shrink-0 mt-0.5">
+                  <Home className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-semibold text-white">
+                    {lang === "PL" ? "02 / Ciepło rodzinnego salonu" : "02 / Living Room Family Warmth"}
+                  </div>
+                  <div className="text-xs text-zinc-400 font-light mt-0.5">
+                    {lang === "PL" ? "Śpią na kanapach, uczestniczą w życiu domu, wychowują się przy dzieciach i psie." : "Socialized with family, children, and dogs."}
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3.5 p-3.5 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-rose-500/30 transition-colors">
+                <div className="w-9 h-9 rounded-xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400 shrink-0 mt-0.5">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div>
+                  <div className="text-xs sm:text-sm font-semibold text-white">
+                    {lang === "PL" ? "03 / Certyfikowane zdrowie & DNA" : "03 / Certified Health & DNA"}
+                  </div>
+                  <div className="text-xs text-zinc-400 font-light mt-0.5">
+                    {lang === "PL" ? "Echo Doppler HCM, profil DNA Laboklin N/N i prawdziwy rodowód FIFe." : "Echo Doppler cardiac checks, Laboklin DNA, and FIFe pedigree."}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Przycisk przejścia do podstrony O nas */}
+            <div>
+              <Link
+                href="/o-nas#wybieg"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-body text-xs sm:text-sm font-semibold border border-white/20 transition-all hover:scale-105"
+              >
+                <span>{lang === "PL" ? "Poznaj historię wybiegu w zakładce O nas" : "Explore enclosure in About"}</span>
+                <ArrowRight className="w-4 h-4 text-emerald-400" />
+              </Link>
             </div>
           </div>
 
-          {/* Układ 2-kolumnowy desktop (Przestronny, szeroki układ Apple Pro) */}
-          <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-12 xl:px-16 h-full flex flex-row items-center justify-between gap-10 xl:gap-16 relative z-10">
-            
-            {/* Lewa kolumna: szeroki, niesztywny blok tekstowy - NIGDY NIE ZWĘŻA SIĘ (shrink-0)! */}
-            <div className="flex-1 w-1/2 min-w-[500px] max-w-[660px] shrink-0 z-20 relative h-[520px] flex items-center">
+          {/* PRAWA KOLUMNA: AUTENTYCZNE WIDEO Z WYBIEGU W FORMACIE SMARTFONA APPLE */}
+          <div className="lg:col-span-6 flex items-center justify-center relative">
+            <div className="relative w-full max-w-[420px] aspect-[9/16] max-h-[580px] rounded-[36px] overflow-hidden border-[3px] border-white/20 shadow-[0_25px_80px_rgba(0,0,0,0.9)] bg-black">
               
-              {/* 01. Wybieg */}
-              <div
-                ref={textBlock1Ref}
-                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+              <video
+                ref={videoRef}
+                src="/video/film2.mp4"
+                autoPlay
+                loop
+                muted={isMuted}
+                playsInline
+                className="w-full h-full object-cover"
+              />
+
+              {/* Gradienty ochronne dla tekstu na filmie */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 pointer-events-none" />
+
+              {/* Przycisk dźwięku */}
+              <button
+                onClick={toggleSound}
+                className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/60 hover:bg-black text-white border border-white/20 backdrop-blur-md transition-all cursor-pointer hover:scale-110"
+                title={isMuted ? "Włącz dźwięk" : "Wycisz dźwięk"}
               >
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold mb-2">
-                    01 / {lang === "PL" ? "OGRÓD I ZADASZONY WYBIEG" : "GARDEN & OUTDOOR RUN"}
-                  </p>
-                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
-                    {lang === "PL" ? (
-                      <>Wychodzą na świeże powietrze, <span className="text-[#86868b]">kiedy tylko chcą.</span></>
-                    ) : (
-                      <>They go outside freely, <span className="text-[#86868b]">whenever they want.</span></>
-                    )}
-                  </h3>
-                </div>
-                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
-                  {lang === "PL"
-                    ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i swobodnie biegają na wolności bez krat i klatek."
-                    : "Our cats have year-round access to a safe, covered garden run. They breathe fresh air, watch nature and run freely without cages."}
+                {isMuted ? <VolumeX className="w-4 h-4 text-zinc-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
+              </button>
+
+              {/* Plakietka dolna na filmie */}
+              <div className="absolute bottom-5 left-5 right-5 text-left pointer-events-none">
+                <span className="px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/40 text-[10px] font-mono uppercase tracking-wider text-emerald-300 mb-1.5 inline-block">
+                  {lang === "PL" ? "Woliera Ogrodowa Wrocław" : "Garden Run Wroclaw"}
+                </span>
+                <p className="text-base sm:text-lg font-heading font-medium text-white leading-snug">
+                  {lang === "PL" ? "Nasz dom to ich dom" : "Our home is their home"}
                 </p>
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
-                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
-                    365 dni
-                  </div>
-                  <div className="border-l border-white/10 pl-5">
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
-                      {lang === "PL" ? "Całoroczny wybieg ogrodowy" : "Year-round garden access"}
-                    </p>
-                    <p className="text-xs text-white/60 font-light">
-                      {lang === "PL" ? "Bezpieczny, zadaszony, dostępny z salonu" : "Covered, safe, directly accessible"}
-                    </p>
-                  </div>
-                </div>
-                <div className="pt-2">
-                  <Link
-                    href="/o-nas#wybieg"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
-                  >
-                    <span>{lang === "PL" ? "Zobacz pełną galerię wybiegu w zakładce O nas" : "View full enclosure gallery in About"}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
-                  </Link>
-                </div>
               </div>
 
-              {/* 02. Dom */}
-              <div
-                ref={textBlock2Ref}
-                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
-              >
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-[0.25em] text-emerald-400 font-semibold mb-2">
-                    02 / {lang === "PL" ? "ŻYCIE W DOMU Z RODZINĄ" : "HOME LIFE WITH FAMILY"}
-                  </p>
-                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
-                    {lang === "PL" ? (
-                      <>Śpią w łóżkach, <span className="text-[#86868b]">odpoczywają w salonie.</span></>
-                    ) : (
-                      <>Sleep in bed, <span className="text-[#86868b]">relax in the living room.</span></>
-                    )}
-                  </h3>
-                </div>
-                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
-                  {lang === "PL"
-                    ? "Nasze koty są pełnoprawnymi członkami rodziny. Spędzają dzień na kanapie, towarzyszą nam przy codziennych posiłkach i wychowują się z naszymi dziećmi oraz psem."
-                    : "Our cats are family members. They sit on the sofa, join family routines, and grow up alongside our children and dog."}
-                </p>
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
-                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
-                    100%
-                  </div>
-                  <div className="border-l border-white/10 pl-5">
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
-                      {lang === "PL" ? "Domowa socjalizacja w salonie" : "Living room socialization"}
-                    </p>
-                    <p className="text-xs text-white/60 font-light">
-                      {lang === "PL" ? "Kocięta ufne, zrównoważone i odważne" : "Kittens confident and affectionate"}
-                    </p>
-                  </div>
-                </div>
-                <div className="pt-2">
-                  <Link
-                    href="/o-nas#hodowla"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
-                  >
-                    <span>{lang === "PL" ? "Poznaj naszą hodowlę w zakładce O nas" : "Meet our cattery in About"}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
-                  </Link>
-                </div>
-              </div>
-
-              {/* 03. Zdrowie */}
-              <div
-                ref={textBlock3Ref}
-                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
-              >
-                <div>
-                  <p className="text-xs font-mono uppercase tracking-[0.25em] text-blue-400 font-semibold mb-2">
-                    03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
-                  </p>
-                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
-                    {lang === "PL" ? (
-                      <>Certyfikowane badania <span className="text-[#86868b]">i spokój na lata.</span></>
-                    ) : (
-                      <>Certified health checks <span className="text-[#86868b]">and peace of mind.</span></>
-                    )}
-                  </h3>
-                </div>
-                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
-                  {lang === "PL"
-                    ? "Każdy kociak opuszcza hodowlę z rodowodem FIFe/FPL, książeczką zdrowia, mikroczipem oraz kompletem szczepień. Rodzice posiadają aktualne echo serca Doppler i ujemne testy genetyczne."
-                    : "Every kitten leaves with FIFe/FPL pedigree, health book, microchip and vaccinations. Parents tested with Doppler heart echo and genetic DNA panels."}
-                </p>
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
-                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
-                    100+
-                  </div>
-                  <div className="border-l border-white/10 pl-5">
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
-                      {lang === "PL" ? "Zadowolonych rodzin w Polsce" : "Happy families in Poland"}
-                    </p>
-                    <p className="text-xs text-white/60 font-light">
-                      {lang === "PL" ? "Dożywotnie wsparcie hodowcy" : "Lifelong breeder support"}
-                    </p>
-                  </div>
-                </div>
-                <div className="pt-2">
-                  <Link
-                    href="/baza-wiedzy#zdrowie"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
-                  >
-                    <span>{lang === "PL" ? "Zobacz badania i profilaktykę w Bazie Wiedzy" : "See health tests in Knowledge Base"}</span>
-                    <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
-                  </Link>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Prawa kolumna: obudowa iPhone 16 Pro desktop */}
-            <div className="flex-1 w-1/2 min-w-[500px] max-w-[680px] shrink-0 z-10 flex justify-end">
-              <div
-                ref={phoneWrapperRef}
-                className="w-full will-change-transform transition-transform duration-75 ease-out relative flex justify-center"
-              >
-                <div className="relative mx-auto w-full max-w-[680px] p-[10px] rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_25px_70px_rgba(0,0,0,0.92),0_0_0_1px_rgba(255,255,255,0.12)]">
-                  <div className="relative w-full aspect-[16/9] rounded-[36px] overflow-hidden bg-black">
-                    <video
-                      ref={videoRef}
-                      src={isDesktopDevice ? "/video/film2.mp4" : undefined}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      preload="metadata"
-                      className="w-full h-full object-cover pointer-events-none scale-[1.05]"
-                    />
-                    <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
-                      <div className="w-2 h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
-                    </div>
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* ═════════════════════════════════════════════════════════════════ */}
-        {/* ── 2. WERSJA MOBILNA (APPLE SCROLLYTELLING — 120 FPS PŁYNNOŚCI) ─ */}
-        {/* ═════════════════════════════════════════════════════════════════ */}
-        <div
-          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-5 max-w-md mx-auto"
-          style={{
-            paddingTop: "76px",
-            paddingBottom: "22px",
-            height: "100dvh",
-          }}
-        >
-          {/* A. INTRO NAGŁÓWEK (Na starcie widoczny, wyrównany do lewej, płynnie znika w górę) */}
-          <div
-            ref={mobileIntroRef}
-            className="w-full text-left will-change-transform pt-1 z-20"
-          >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
-            </div>
-            <h2 className="text-2xl sm:text-3xl font-heading font-light text-white tracking-tight leading-tight">
-              {lang === "PL" ? (
-                <>Nasz dom <span className="font-normal text-[#86868b]">to ich dom.</span></>
-              ) : (
-                <>Our home <span className="font-normal text-[#86868b]">is their home.</span></>
-              )}
-            </h2>
-            <div className="flex mt-1.5 items-center justify-start gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#86868b]">
-              <span>{lang === "PL" ? "Przewiń, aby poznać wybieg" : "Scroll to explore"}</span>
-              <ChevronDown className="w-3 h-3 text-[#86868b] animate-bounce" />
-            </div>
-          </div>
-
-          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Czysty styl Apple, bez kwadratów!) */}
-          <div className="w-full relative flex-1 min-h-[200px] max-h-[250px] my-auto flex items-center justify-center z-10">
-            
-            {/* Scena 1: Ogród i Wybieg */}
-            <div
-              ref={mobileScene1Ref}
-              className="absolute inset-0 flex flex-col justify-center opacity-0 will-change-transform pointer-events-none"
-            >
-              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold mb-1">
-                01 / {lang === "PL" ? "OGRÓD I WYBIEG" : "GARDEN & OUTDOOR RUN"}
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
-                {lang === "PL" ? (
-                  <>Wychodzą na <span className="text-[#86868b]">dwór kiedy chcą.</span></>
-                ) : (
-                  <>They go outside <span className="text-[#86868b]">whenever they want.</span></>
-                )}
-              </h3>
-              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
-                {lang === "PL"
-                  ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i biegają na wolności bez klatek."
-                  : "Cats have year-round access to a safe, covered garden run. They breathe fresh air, watch birds, and roam freely without cages."}
-              </p>
-              <div className="flex items-center gap-3 pt-1">
-                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
-                  365 dni
-                </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
-                  {lang === "PL" ? "Całoroczny dostęp do ogrodu" : "Year-round garden access"}
-                </span>
-              </div>
-              <div className="pt-2">
-                <Link
-                  href="/o-nas#wybieg"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 active:bg-white/20 border border-white/15 text-[10px] font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto"
-                >
-                  <span>{lang === "PL" ? "Więcej zdjęć w zakładce O nas" : "More photos in About"}</span>
-                  <ArrowRight className="w-3 h-3 text-amber-400" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Scena 2: Życie w Domu */}
-            <div
-              ref={mobileScene2Ref}
-              className="absolute inset-0 flex flex-col justify-center opacity-0 will-change-transform pointer-events-none"
-            >
-              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-emerald-400 font-semibold mb-1">
-                02 / {lang === "PL" ? "ŻYCIE W DOMU" : "HOME LIFE"}
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
-                {lang === "PL" ? (
-                  <>Śpią w łóżku, <span className="text-[#86868b]">bawią się w salonie.</span></>
-                ) : (
-                  <>Sleep in bed, <span className="text-[#86868b]">play in the living room.</span></>
-                )}
-              </h3>
-              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
-                {lang === "PL"
-                  ? "Nasze koty są częścią rodziny. Żyją z nami w salonie, śpią na łóżkach i bawią się z dziećmi oraz psem. Dzięki temu kociaki są w pełni zsocjalizowane i ufne."
-                  : "Our cats are part of our family. They live with us, sleep in beds and play with children and our dog. Kittens grow up calm, loving, and fully socialized."}
-              </p>
-              <div className="flex items-center gap-3 pt-1">
-                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
-                  100%
-                </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
-                  {lang === "PL" ? "Wychowane z rodziną i dziećmi" : "Raised with family & kids"}
-                </span>
-              </div>
-            </div>
-
-            {/* Scena 3: Zdrowe od Urodzenia */}
-            <div
-              ref={mobileScene3Ref}
-              className="absolute inset-0 flex flex-col justify-center opacity-0 will-change-transform pointer-events-none"
-            >
-              <p className="text-[10px] font-mono uppercase tracking-[0.25em] text-blue-400 font-semibold mb-1">
-                03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
-              </p>
-              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
-                {lang === "PL" ? (
-                  <>Przebadane <span className="text-[#86868b]">i gotowe na Ciebie.</span></>
-                ) : (
-                  <>Tested <span className="text-[#86868b]">and ready for you.</span></>
-                )}
-              </h3>
-              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
-                {lang === "PL"
-                  ? "Każdy kociak opuszcza hodowlę z książeczką zdrowia, kompletem szczepień, mikroczipem i rodowodem FPL/FIFe. Rodzice są regularnie badani (echo serca Doppler, testy DNA)."
-                  : "Every kitten leaves with health book, vaccinations, microchip, and FPL/FIFe pedigree. Parents tested for HCM (Doppler echo) and genetic DNA panels."}
-              </p>
-              <div className="flex items-center gap-3 pt-1">
-                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
-                  100+
-                </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
-                  {lang === "PL" ? "Szczęśliwych domów w Polsce" : "Happy homes across Poland"}
-                </span>
-              </div>
-            </div>
-
-          </div>
-
-          {/* C. AUTENTYCZNY IPHONE 16 PRO (Na starcie w centrum, płynnie schodzi w dół!) */}
-          <div
-            ref={mobilePhoneWrapRef}
-            className="w-full will-change-transform relative px-1 pb-2 z-20"
-            style={{ transform: "translate3d(0, -190px, 0) scale(1.08)" }}
-          >
-            <div className="relative mx-auto w-full max-w-[340px] p-[5px] rounded-[24px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.12)]">
-              <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-black">
-                <video
-                  ref={mobileVideoRef}
-                  src={!isDesktopDevice ? "/video/film2.mp4" : undefined}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  preload="metadata"
-                  className="w-full h-full object-cover scale-[1.04]"
-                />
-                
-                {/* Dynamic Island */}
-                <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2.5 h-8 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#0a1224] border border-blue-500/20" />
-                </div>
-
-                {/* Subtelny odblask szkła ekranu */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-transparent pointer-events-none" />
-              </div>
             </div>
           </div>
 
         </div>
-
       </div>
     </section>
   );

@@ -129,7 +129,7 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
   };
 
   return (
-    <section id="opinie" className="py-24 sm:py-32 bg-[#0C0C0E] text-white border-t border-white/10 relative overflow-hidden">
+    <section id="opinie" className="py-14 sm:py-18 bg-[#0C0C0E] text-white border-t border-white/10 relative overflow-hidden">
       
       {/* Subtelny ambient glow */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
@@ -137,7 +137,7 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
 
         {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
             <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/30" />
             <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/80 font-semibold">

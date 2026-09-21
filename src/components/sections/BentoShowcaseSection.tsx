@@ -38,7 +38,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
     }, []);
 
   return (
-    <section id="galeria-showcase" className="relative bg-[#09090B] text-white py-20 sm:py-28 overflow-hidden border-t border-white/10">
+    <section id="galeria-showcase" className="relative bg-[#09090B] text-white py-14 sm:py-18 overflow-hidden border-t border-white/10">
       {/* Ambient glow */}
       <div className="absolute top-1/3 left-1/4 -translate-x-1/2 w-[600px] h-[400px] bg-amber-500/[0.04] rounded-full blur-[160px] pointer-events-none" />
 

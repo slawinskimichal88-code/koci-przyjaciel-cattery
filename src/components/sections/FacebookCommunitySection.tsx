@@ -39,10 +39,10 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
   }, []);
 
   return (
-    <section id="spolecznosc" className="bg-[#0A0A0A] text-white overflow-hidden border-t border-white/10 py-24 sm:py-32">
+    <section id="spolecznosc" className="bg-[#0A0A0A] text-white overflow-hidden border-t border-white/10 py-14 sm:py-18">
       
       {/* ── Intro ───────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-16">
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-8 sm:mb-10">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 border border-white/10 text-[11px] font-mono uppercase tracking-[0.3em] text-[#C8973B] mb-6">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
           <span>

@@ -52,7 +52,7 @@ export default function ContactSection({ lang, onOpenReservation }: ContactSecti
   };
 
   return (
-    <section id="kontakt" className="bg-[#09090B] text-white overflow-hidden py-24 sm:py-32 border-t border-white/10 relative">
+    <section id="kontakt" className="bg-[#09090B] text-white overflow-hidden py-14 sm:py-18 border-t border-white/10 relative">
       
       {/* Dynamic ambient backdrop */}
       <div className="absolute bottom-0 right-1/4 w-[600px] h-[300px] bg-amber-500/5 rounded-full blur-[150px] pointer-events-none" />
@@ -60,7 +60,7 @@ export default function ContactSection({ lang, onOpenReservation }: ContactSecti
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
 
         {/* ── Header ───────────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/80 font-semibold">
