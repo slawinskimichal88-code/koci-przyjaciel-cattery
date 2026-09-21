@@ -364,69 +364,70 @@ export default function EnclosureSection({
             ref={introRef}
             className="absolute top-14 left-1/2 -translate-x-1/2 z-30 text-center w-full max-w-3xl px-5 pointer-events-none will-change-transform"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 border border-white/15 text-[11px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/20 text-[11px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-3 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
             </div>
             <h2 className="text-5xl lg:text-6xl font-heading font-light text-white tracking-tight leading-[1.05]">
               {lang === "PL" ? (
-                <>Nasz dom<br /><span className="font-normal text-[#86868b]">to ich dom.</span></>
+                <>Nasz dom<br /><span className="font-normal text-zinc-400">to ich dom.</span></>
               ) : (
-                <>Our home<br /><span className="font-normal text-[#86868b]">is their home.</span></>
+                <>Our home<br /><span className="font-normal text-zinc-400">is their home.</span></>
               )}
             </h2>
 
-            <div className="flex mt-3 items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b]">
+            <div className="flex mt-3 items-center justify-center gap-2 text-[11px] font-mono uppercase tracking-[0.25em] text-zinc-400">
               <span>{lang === "PL" ? "Przewiń, aby zobaczyć więcej" : "Scroll to explore"}</span>
-              <ChevronDown className="w-3.5 h-3.5 text-[#86868b] animate-bounce" />
+              <ChevronDown className="w-3.5 h-3.5 text-zinc-400 animate-bounce" />
             </div>
           </div>
 
-          {/* Układ 2-kolumnowy desktop (Przestronny, szeroki układ Apple Pro) */}
-          <div className="w-full max-w-[1440px] mx-auto px-8 lg:px-12 xl:px-16 h-full flex flex-row items-center justify-between gap-10 xl:gap-16 relative z-10">
+          {/* Układ 2-kolumnowy desktop (Przestronny, szeroki układ Apple Pro — szeroki tekst, bez wąskiego paska!) */}
+          <div className="w-full max-w-[1560px] mx-auto px-6 sm:px-10 lg:px-12 xl:px-16 h-full flex flex-row items-center justify-between gap-8 xl:gap-14 relative z-10">
             
-            {/* Lewa kolumna: szeroki, elegancki blok tekstowy (Koniec z wąskim paskiem z boku!) */}
-            <div className="w-[50%] xl:w-[52%] max-w-[680px] z-20 relative h-[480px] flex items-center">
+            {/* Lewa kolumna: szeroki, elegancki blok tekstowy (Zero ściskania!) */}
+            <div className="flex-1 w-[56%] xl:w-[58%] max-w-[760px] z-20 relative h-[520px] flex items-center shrink-0">
               
               {/* 01. Wybieg */}
               <div
                 ref={textBlock1Ref}
-                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+                className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
               >
                 <div>
                   <p className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold mb-2">
                     01 / {lang === "PL" ? "OGRÓD I ZADASZONY WYBIEG" : "GARDEN & OUTDOOR RUN"}
                   </p>
-                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
+                  <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-[2.75rem] font-heading font-light text-white leading-[1.14] tracking-tight max-w-2xl">
                     {lang === "PL" ? (
-                      <>Wychodzą na świeże powietrze, <span className="text-[#86868b]">kiedy tylko chcą.</span></>
+                      <>Wychodzą na świeże powietrze, <span className="text-zinc-400 font-normal">kiedy tylko chcą.</span></>
                     ) : (
-                      <>They go outside freely, <span className="text-[#86868b]">whenever they want.</span></>
+                      <>They go outside freely, <span className="text-zinc-400 font-normal">whenever they want.</span></>
                     )}
                   </h3>
                 </div>
-                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
+                <p className="text-base sm:text-lg font-body text-zinc-300 leading-relaxed font-light w-full max-w-2xl">
                   {lang === "PL"
                     ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i swobodnie biegają na wolności bez krat i klatek."
                     : "Our cats have year-round access to a safe, covered garden run. They breathe fresh air, watch nature and run freely without cages."}
                 </p>
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
-                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
+                {/* Kwadrat iPhone Glass */}
+                <div className="p-5 sm:p-6 rounded-3xl bg-white/[0.08] backdrop-blur-2xl border border-white/20 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.28)] flex items-center gap-6 sm:gap-7 w-full max-w-2xl hover:bg-white/[0.12] hover:border-white/30 transition-all duration-300">
+                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0 drop-shadow-sm">
                     365 dni
                   </div>
-                  <div className="border-l border-white/10 pl-5">
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
+                  <div className="border-l border-white/20 pl-6">
+                    <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-zinc-200 leading-tight mb-1.5 font-medium">
                       {lang === "PL" ? "Całoroczny wybieg ogrodowy" : "Year-round garden access"}
                     </p>
-                    <p className="text-xs text-white/60 font-light">
-                      {lang === "PL" ? "Bezpieczny, zadaszony, dostępny z salonu" : "Covered, safe, directly accessible"}
+                    <p className="text-xs text-zinc-400 font-light">
+                      {lang === "PL" ? "Bezpieczny, zadaszony, dostępny bezpośrednio z salonu" : "Covered, safe, directly accessible from living room"}
                     </p>
                   </div>
                 </div>
-                <div className="pt-2">
+                <div className="pt-1">
                   <Link
                     href="/o-nas#wybieg"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/[0.10] hover:bg-white/[0.20] backdrop-blur-xl border border-white/25 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:scale-105 hover:border-white/40"
                   >
                     <span>{lang === "PL" ? "Zobacz pełną galerię wybiegu w zakładce O nas" : "View full enclosure gallery in About"}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-amber-400" />
@@ -437,42 +438,43 @@ export default function EnclosureSection({
               {/* 02. Dom */}
               <div
                 ref={textBlock2Ref}
-                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+                className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
               >
                 <div>
                   <p className="text-xs font-mono uppercase tracking-[0.25em] text-emerald-400 font-semibold mb-2">
                     02 / {lang === "PL" ? "ŻYCIE W DOMU Z RODZINĄ" : "HOME LIFE WITH FAMILY"}
                   </p>
-                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
+                  <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-[2.75rem] font-heading font-light text-white leading-[1.14] tracking-tight max-w-2xl">
                     {lang === "PL" ? (
-                      <>Śpią w łóżkach, <span className="text-[#86868b]">odpoczywają w salonie.</span></>
+                      <>Śpią w łóżkach, <span className="text-zinc-400 font-normal">odpoczywają w salonie.</span></>
                     ) : (
-                      <>Sleep in bed, <span className="text-[#86868b]">relax in the living room.</span></>
+                      <>Sleep in bed, <span className="text-zinc-400 font-normal">relax in the living room.</span></>
                     )}
                   </h3>
                 </div>
-                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
+                <p className="text-base sm:text-lg font-body text-zinc-300 leading-relaxed font-light w-full max-w-2xl">
                   {lang === "PL"
                     ? "Nasze koty są pełnoprawnymi członkami rodziny. Spędzają dzień na kanapie, towarzyszą nam przy codziennych posiłkach i wychowują się z naszymi dziećmi oraz psem."
                     : "Our cats are family members. They sit on the sofa, join family routines, and grow up alongside our children and dog."}
                 </p>
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
-                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
+                {/* Kwadrat iPhone Glass */}
+                <div className="p-5 sm:p-6 rounded-3xl bg-white/[0.08] backdrop-blur-2xl border border-white/20 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.28)] flex items-center gap-6 sm:gap-7 w-full max-w-2xl hover:bg-white/[0.12] hover:border-white/30 transition-all duration-300">
+                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0 drop-shadow-sm">
                     100%
                   </div>
-                  <div className="border-l border-white/10 pl-5">
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
+                  <div className="border-l border-white/20 pl-6">
+                    <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-zinc-200 leading-tight mb-1.5 font-medium">
                       {lang === "PL" ? "Domowa socjalizacja w salonie" : "Living room socialization"}
                     </p>
-                    <p className="text-xs text-white/60 font-light">
-                      {lang === "PL" ? "Kocięta ufne, zrównoważone i odważne" : "Kittens confident and affectionate"}
+                    <p className="text-xs text-zinc-400 font-light">
+                      {lang === "PL" ? "Kocięta ufne, zrównoważone, odważne i przytulaśne" : "Kittens confident, affectionate and family bonded"}
                     </p>
                   </div>
                 </div>
-                <div className="pt-2">
+                <div className="pt-1">
                   <Link
                     href="/o-nas#hodowla"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/[0.10] hover:bg-white/[0.20] backdrop-blur-xl border border-white/25 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:scale-105 hover:border-white/40"
                   >
                     <span>{lang === "PL" ? "Poznaj naszą hodowlę w zakładce O nas" : "Meet our cattery in About"}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-emerald-400" />
@@ -483,42 +485,43 @@ export default function EnclosureSection({
               {/* 03. Zdrowie */}
               <div
                 ref={textBlock3Ref}
-                className="opacity-0 will-change-transform space-y-5 absolute top-1/2 -translate-y-1/2 left-0 w-full"
+                className="opacity-0 will-change-transform space-y-6 absolute top-1/2 -translate-y-1/2 left-0 w-full"
               >
                 <div>
                   <p className="text-xs font-mono uppercase tracking-[0.25em] text-blue-400 font-semibold mb-2">
                     03 / {lang === "PL" ? "ZDROWE OD URODZENIA" : "HEALTHY FROM BIRTH"}
                   </p>
-                  <h3 className="text-4xl xl:text-5xl font-heading font-light text-white leading-[1.12] tracking-tight">
+                  <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-[2.75rem] font-heading font-light text-white leading-[1.14] tracking-tight max-w-2xl">
                     {lang === "PL" ? (
-                      <>Certyfikowane badania <span className="text-[#86868b]">i spokój na lata.</span></>
+                      <>Certyfikowane badania <span className="text-zinc-400 font-normal">i spokój na lata.</span></>
                     ) : (
-                      <>Certified health checks <span className="text-[#86868b]">and peace of mind.</span></>
+                      <>Certified health checks <span className="text-zinc-400 font-normal">and peace of mind.</span></>
                     )}
                   </h3>
                 </div>
-                <p className="text-base xl:text-lg font-body text-[#ceced2] leading-relaxed font-light max-w-xl">
+                <p className="text-base sm:text-lg font-body text-zinc-300 leading-relaxed font-light w-full max-w-2xl">
                   {lang === "PL"
                     ? "Każdy kociak opuszcza hodowlę z rodowodem FIFe/FPL, książeczką zdrowia, mikroczipem oraz kompletem szczepień. Rodzice posiadają aktualne echo serca Doppler i ujemne testy genetyczne."
                     : "Every kitten leaves with FIFe/FPL pedigree, health book, microchip and vaccinations. Parents tested with Doppler heart echo and genetic DNA panels."}
                 </p>
-                <div className="p-4 sm:p-5 rounded-2xl bg-white/[0.04] border border-white/10 flex items-center gap-6 max-w-lg">
-                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0">
+                {/* Kwadrat iPhone Glass */}
+                <div className="p-5 sm:p-6 rounded-3xl bg-white/[0.08] backdrop-blur-2xl border border-white/20 shadow-[0_16px_40px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.28)] flex items-center gap-6 sm:gap-7 w-full max-w-2xl hover:bg-white/[0.12] hover:border-white/30 transition-all duration-300">
+                  <div className="text-5xl xl:text-6xl font-heading font-extralight text-white leading-none tracking-tight shrink-0 drop-shadow-sm">
                     100+
                   </div>
-                  <div className="border-l border-white/10 pl-5">
-                    <p className="text-xs font-mono uppercase tracking-[0.2em] text-[#86868b] leading-tight mb-1">
+                  <div className="border-l border-white/20 pl-6">
+                    <p className="text-xs sm:text-sm font-mono uppercase tracking-[0.2em] text-zinc-200 leading-tight mb-1.5 font-medium">
                       {lang === "PL" ? "Zadowolonych rodzin w Polsce" : "Happy families in Poland"}
                     </p>
-                    <p className="text-xs text-white/60 font-light">
-                      {lang === "PL" ? "Dożywotnie wsparcie hodowcy" : "Lifelong breeder support"}
+                    <p className="text-xs text-zinc-400 font-light">
+                      {lang === "PL" ? "Dożywotnie wsparcie hodowcy i kontakt przez lata" : "Lifelong breeder support and guidance"}
                     </p>
                   </div>
                 </div>
-                <div className="pt-2">
+                <div className="pt-1">
                   <Link
                     href="/baza-wiedzy#zdrowie"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm hover:scale-105"
+                    className="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/[0.10] hover:bg-white/[0.20] backdrop-blur-xl border border-white/25 text-xs font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-[0_4px_20px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.3)] hover:scale-105 hover:border-white/40"
                   >
                     <span>{lang === "PL" ? "Zobacz badania i profilaktykę w Bazie Wiedzy" : "See health tests in Knowledge Base"}</span>
                     <ArrowRight className="w-3.5 h-3.5 text-blue-400" />
@@ -529,12 +532,12 @@ export default function EnclosureSection({
             </div>
 
             {/* Prawa kolumna: obudowa iPhone 16 Pro desktop */}
-            <div className="w-[52%] max-w-[720px] z-10 flex justify-end">
+            <div className="w-[44%] xl:w-[42%] max-w-[620px] z-10 flex justify-end shrink-0">
               <div
                 ref={phoneWrapperRef}
                 className="w-full will-change-transform transition-transform duration-75 ease-out relative flex justify-center"
               >
-                <div className="relative mx-auto w-full max-w-[680px] p-[10px] rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_25px_70px_rgba(0,0,0,0.92),0_0_0_1px_rgba(255,255,255,0.12)]">
+                <div className="relative mx-auto w-full max-w-[580px] xl:max-w-[620px] p-[10px] rounded-[44px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_25px_70px_rgba(0,0,0,0.92),0_0_0_1px_rgba(255,255,255,0.15)]">
                   <div className="relative w-full aspect-[16/9] rounded-[36px] overflow-hidden bg-black">
                     <video
                       ref={videoRef}
@@ -597,7 +600,7 @@ export default function EnclosureSection({
         {/* ── 2. WERSJA MOBILNA (APPLE SCROLLYTELLING — 120 FPS PŁYNNOŚCI) ─ */}
         {/* ═════════════════════════════════════════════════════════════════ */}
         <div
-          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-5 max-w-md mx-auto"
+          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-5 max-w-lg mx-auto"
           style={{
             paddingTop: "76px",
             paddingBottom: "22px",
@@ -609,25 +612,25 @@ export default function EnclosureSection({
             ref={mobileIntroRef}
             className="w-full text-center will-change-transform pt-1 z-20"
           >
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               {lang === "PL" ? "Jak żyją nasze koty" : "How our cats live"}
             </div>
             <h2 className="text-2xl sm:text-3xl font-heading font-light text-white tracking-tight leading-tight">
               {lang === "PL" ? (
-                <>Nasz dom <span className="font-normal text-[#86868b]">to ich dom.</span></>
+                <>Nasz dom <span className="font-normal text-zinc-400">to ich dom.</span></>
               ) : (
-                <>Our home <span className="font-normal text-[#86868b]">is their home.</span></>
+                <>Our home <span className="font-normal text-zinc-400">is their home.</span></>
               )}
             </h2>
-            <div className="flex mt-1.5 items-center justify-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-[#86868b]">
+            <div className="flex mt-1.5 items-center justify-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">
               <span>{lang === "PL" ? "Przewiń, aby poznać wybieg" : "Scroll to explore"}</span>
-              <ChevronDown className="w-3 h-3 text-[#86868b] animate-bounce" />
+              <ChevronDown className="w-3 h-3 text-zinc-400 animate-bounce" />
             </div>
           </div>
 
-          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Czysty styl Apple, bez kwadratów!) */}
-          <div className="w-full relative flex-1 min-h-[200px] max-h-[250px] my-auto flex items-center justify-center z-10">
+          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Karty iPhone Glass z optymalną czytelnością) */}
+          <div className="w-full relative flex-1 min-h-[220px] max-h-[270px] my-auto flex items-center justify-center z-10">
             
             {/* Scena 1: Ogród i Wybieg */}
             <div
@@ -639,28 +642,34 @@ export default function EnclosureSection({
               </p>
               <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
                 {lang === "PL" ? (
-                  <>Wychodzą na <span className="text-[#86868b]">dwór kiedy chcą.</span></>
+                  <>Wychodzą na <span className="text-zinc-400 font-normal">dwór kiedy chcą.</span></>
                 ) : (
-                  <>They go outside <span className="text-[#86868b]">whenever they want.</span></>
+                  <>They go outside <span className="text-zinc-400 font-normal">whenever they want.</span></>
                 )}
               </h3>
-              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
+              <p className="text-xs sm:text-sm font-body text-zinc-300 leading-relaxed font-light mb-3">
                 {lang === "PL"
                   ? "Koty mają całoroczny dostęp do bezpiecznego, zadaszonego wybiegu ogrodowego. Oddychają świeżym powietrzem, obserwują ptaki i biegają na wolności bez klatek."
                   : "Cats have year-round access to a safe, covered garden run. They breathe fresh air, watch birds, and roam freely without cages."}
               </p>
-              <div className="flex items-center gap-3 pt-1">
-                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
+              {/* Kwadrat iPhone Glass na mobile */}
+              <div className="p-3.5 rounded-2xl bg-white/[0.08] backdrop-blur-xl border border-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)] flex items-center gap-4 mb-2.5">
+                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight shrink-0 drop-shadow-sm">
                   365 dni
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
-                  {lang === "PL" ? "Całoroczny dostęp do ogrodu" : "Year-round garden access"}
-                </span>
+                <div className="border-l border-white/20 pl-3.5">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-zinc-200 leading-tight block mb-0.5 font-medium">
+                    {lang === "PL" ? "Całoroczny dostęp do ogrodu" : "Year-round garden access"}
+                  </span>
+                  <span className="text-[9px] text-zinc-400 font-light block">
+                    {lang === "PL" ? "Bezpieczny, zadaszony wybieg" : "Covered, safe run"}
+                  </span>
+                </div>
               </div>
-              <div className="pt-2">
+              <div className="pt-1">
                 <Link
                   href="/o-nas#wybieg"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 active:bg-white/20 border border-white/15 text-[10px] font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.12] active:bg-white/[0.22] backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm"
                 >
                   <span>{lang === "PL" ? "Więcej zdjęć w zakładce O nas" : "More photos in About"}</span>
                   <ArrowRight className="w-3 h-3 text-amber-400" />
@@ -678,23 +687,38 @@ export default function EnclosureSection({
               </p>
               <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
                 {lang === "PL" ? (
-                  <>Śpią w łóżku, <span className="text-[#86868b]">bawią się w salonie.</span></>
+                  <>Śpią w łóżku, <span className="text-zinc-400 font-normal">bawią się w salonie.</span></>
                 ) : (
-                  <>Sleep in bed, <span className="text-[#86868b]">play in the living room.</span></>
+                  <>Sleep in bed, <span className="text-zinc-400 font-normal">play in the living room.</span></>
                 )}
               </h3>
-              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
+              <p className="text-xs sm:text-sm font-body text-zinc-300 leading-relaxed font-light mb-3">
                 {lang === "PL"
                   ? "Nasze koty są częścią rodziny. Żyją z nami w salonie, śpią na łóżkach i bawią się z dziećmi oraz psem. Dzięki temu kociaki są w pełni zsocjalizowane i ufne."
                   : "Our cats are part of our family. They live with us, sleep in beds and play with children and our dog. Kittens grow up calm, loving, and fully socialized."}
               </p>
-              <div className="flex items-center gap-3 pt-1">
-                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
+              {/* Kwadrat iPhone Glass na mobile */}
+              <div className="p-3.5 rounded-2xl bg-white/[0.08] backdrop-blur-xl border border-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)] flex items-center gap-4 mb-2.5">
+                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight shrink-0 drop-shadow-sm">
                   100%
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
-                  {lang === "PL" ? "Wychowane z rodziną i dziećmi" : "Raised with family & kids"}
-                </span>
+                <div className="border-l border-white/20 pl-3.5">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-zinc-200 leading-tight block mb-0.5 font-medium">
+                    {lang === "PL" ? "Domowa socjalizacja w salonie" : "Living room socialization"}
+                  </span>
+                  <span className="text-[9px] text-zinc-400 font-light block">
+                    {lang === "PL" ? "Wychowane z rodziną i dziećmi" : "Raised with family & kids"}
+                  </span>
+                </div>
+              </div>
+              <div className="pt-1">
+                <Link
+                  href="/o-nas#hodowla"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.12] active:bg-white/[0.22] backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm"
+                >
+                  <span>{lang === "PL" ? "Poznaj naszą hodowlę w O nas" : "Meet our cattery in About"}</span>
+                  <ArrowRight className="w-3 h-3 text-emerald-400" />
+                </Link>
               </div>
             </div>
 
@@ -708,23 +732,38 @@ export default function EnclosureSection({
               </p>
               <h3 className="text-2xl sm:text-3xl font-heading font-light text-white leading-tight tracking-tight mb-2">
                 {lang === "PL" ? (
-                  <>Przebadane <span className="text-[#86868b]">i gotowe na Ciebie.</span></>
+                  <>Przebadane <span className="text-zinc-400 font-normal">i gotowe na Ciebie.</span></>
                 ) : (
-                  <>Tested <span className="text-[#86868b]">and ready for you.</span></>
+                  <>Tested <span className="text-zinc-400 font-normal">and ready for you.</span></>
                 )}
               </h3>
-              <p className="text-xs sm:text-sm font-body text-[#ceced2] leading-relaxed font-light mb-3">
+              <p className="text-xs sm:text-sm font-body text-zinc-300 leading-relaxed font-light mb-3">
                 {lang === "PL"
                   ? "Każdy kociak opuszcza hodowlę z książeczką zdrowia, kompletem szczepień, mikroczipem i rodowodem FPL/FIFe. Rodzice są regularnie badani (echo serca Doppler, testy DNA)."
                   : "Every kitten leaves with health book, vaccinations, microchip, and FPL/FIFe pedigree. Parents tested for HCM (Doppler echo) and genetic DNA panels."}
               </p>
-              <div className="flex items-center gap-3 pt-1">
-                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight">
+              {/* Kwadrat iPhone Glass na mobile */}
+              <div className="p-3.5 rounded-2xl bg-white/[0.08] backdrop-blur-xl border border-white/20 shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.25)] flex items-center gap-4 mb-2.5">
+                <span className="text-3xl sm:text-4xl font-heading font-extralight text-white leading-none tracking-tight shrink-0 drop-shadow-sm">
                   100+
                 </span>
-                <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#86868b] leading-tight">
-                  {lang === "PL" ? "Szczęśliwych domów w Polsce" : "Happy homes across Poland"}
-                </span>
+                <div className="border-l border-white/20 pl-3.5">
+                  <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-zinc-200 leading-tight block mb-0.5 font-medium">
+                    {lang === "PL" ? "Szczęśliwych domów w Polsce" : "Happy homes across Poland"}
+                  </span>
+                  <span className="text-[9px] text-zinc-400 font-light block">
+                    {lang === "PL" ? "Dożywotnie wsparcie hodowcy" : "Lifelong breeder support"}
+                  </span>
+                </div>
+              </div>
+              <div className="pt-1">
+                <Link
+                  href="/baza-wiedzy#zdrowie"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/[0.12] active:bg-white/[0.22] backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-wider text-white transition-all cursor-pointer pointer-events-auto shadow-sm"
+                >
+                  <span>{lang === "PL" ? "Zobacz badania w Bazie Wiedzy" : "See health tests in Knowledge Base"}</span>
+                  <ArrowRight className="w-3 h-3 text-blue-400" />
+                </Link>
               </div>
             </div>
 

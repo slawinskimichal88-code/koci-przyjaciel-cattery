@@ -75,14 +75,14 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-          {/* KARTA FACEBOOK */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-zinc-50 border border-blue-100 hover:border-blue-300 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl">
+          {/* KARTA FACEBOOK (iPhone Frosted Glass) */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 hover:border-blue-400/50 transition-all duration-300 flex flex-col justify-between shadow-[0_12px_36px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:bg-white/90">
             <div>
               <div className="flex items-center justify-between mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2]">
+                <div className="w-14 h-14 rounded-2xl bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2] shadow-xs">
                   <FacebookIcon className="w-7 h-7 fill-current" />
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-[11px] font-mono text-emerald-800 font-semibold">
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50/90 border border-emerald-300 text-[11px] font-mono text-emerald-900 font-semibold shadow-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span>{isLive ? "LIVE META API" : "AKTYWNA SPOŁECZNOŚĆ"}</span>
                 </div>
@@ -116,14 +116,14 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
             </a>
           </div>
 
-          {/* KARTA INSTAGRAM */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-zinc-50 border border-rose-100 hover:border-rose-300 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl">
+          {/* KARTA INSTAGRAM (iPhone Frosted Glass) */}
+          <div className="p-8 sm:p-10 rounded-3xl bg-white/75 backdrop-blur-2xl border border-white/90 hover:border-rose-400/50 transition-all duration-300 flex flex-col justify-between shadow-[0_12px_36px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:bg-white/90">
             <div>
               <div className="flex items-center justify-between mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-[#E4405F]/10 border border-[#E4405F]/20 flex items-center justify-center text-[#E4405F]">
+                <div className="w-14 h-14 rounded-2xl bg-[#E4405F]/10 border border-[#E4405F]/20 flex items-center justify-center text-[#E4405F] shadow-xs">
                   <InstagramIcon className="w-7 h-7" />
                 </div>
-                <div className="px-3 py-1 rounded-full bg-rose-50 border border-rose-300 text-[11px] font-mono text-rose-800 font-semibold">
+                <div className="px-3 py-1 rounded-full bg-rose-50/90 border border-rose-300 text-[11px] font-mono text-rose-900 font-semibold shadow-xs">
                   @koci_przyjaciel_pl
                 </div>
               </div>

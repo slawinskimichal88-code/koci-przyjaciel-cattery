@@ -155,7 +155,7 @@ export default function BreederSection({
                 : "For over a decade we run a 100% domestic cattery in Wrocław (FPL / FIFe). Our cats live in our living room with our kids and dog — no cages and no compromises."}
             </p>
 
-            {/* 3 Kluczowe Plakietki Zaufania */}
+            {/* 3 Kluczowe Plakietki Zaufania (iPhone Frosted Glass) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
               {[
                 { icon: Home, label: lang === "PL" ? "Salon · Zero klatek" : "Living room · No cages" },
@@ -166,10 +166,12 @@ export default function BreederSection({
                 return (
                   <div
                     key={i}
-                    className="p-3 rounded-2xl bg-zinc-50 border border-zinc-200 flex items-center gap-2.5 text-xs font-ui text-zinc-800 shadow-sm"
+                    className="p-3.5 rounded-2xl bg-white/75 backdrop-blur-xl border border-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:bg-white/90 hover:border-amber-400/50 hover:shadow-[0_10px_28px_rgba(0,0,0,0.07)] transition-all flex items-center gap-3 text-xs font-ui text-zinc-900"
                   >
-                    <Icon className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span className="font-medium">{pill.label}</span>
+                    <div className="w-7 h-7 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-700 shrink-0">
+                      <Icon className="w-3.5 h-3.5" />
+                    </div>
+                    <span className="font-semibold">{pill.label}</span>
                   </div>
                 );
               })}
@@ -188,7 +190,7 @@ export default function BreederSection({
               {onOpenReservation && (
                 <button
                   onClick={onOpenReservation}
-                  className="px-5 py-3.5 rounded-full bg-zinc-100 hover:bg-zinc-200 border border-zinc-300 text-zinc-800 font-ui text-xs font-medium uppercase tracking-wider transition-all cursor-pointer"
+                  className="px-5 py-3.5 rounded-full bg-white/80 hover:bg-white border border-white/90 text-zinc-800 font-ui text-xs font-medium uppercase tracking-wider transition-all cursor-pointer shadow-sm backdrop-blur-md"
                 >
                   {lang === "PL" ? "Zapytaj o kociaka" : "Inquire about kittens"}
                 </button>

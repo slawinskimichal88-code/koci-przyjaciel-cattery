@@ -130,8 +130,8 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
           </div>
         </div>
 
-        {/* ── Główny Split Showcase (Karta Produktu Apple) ───────────── */}
-        <div className="bg-white rounded-3xl sm:rounded-[36px] border border-black/10 shadow-[0_20px_60px_rgba(0,0,0,0.06)] overflow-hidden grid grid-cols-1 lg:grid-cols-12 mb-10 transition-all duration-300">
+        {/* ── Główny Split Showcase (Karta Produktu Apple iPhone Glass) ───────────── */}
+        <div className="bg-white/85 backdrop-blur-2xl rounded-3xl sm:rounded-[36px] border border-white/90 shadow-[0_20px_60px_rgba(0,0,0,0.06),inset_0_1px_2px_rgba(255,255,255,0.95)] overflow-hidden grid grid-cols-1 lg:grid-cols-12 mb-10 transition-all duration-300">
           
           {/* LEWA KOLUMNA: Zdjęcie + Status Overlay */}
           <div className="lg:col-span-6 relative bg-black/5 min-h-[380px] sm:min-h-[480px] lg:min-h-[640px] overflow-hidden">
@@ -283,10 +283,10 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
             <button
               key={k.id}
               onClick={() => setActiveId(k.id)}
-              className={`p-3.5 rounded-2xl sm:rounded-3xl border text-left transition-all cursor-pointer flex items-center gap-3 ${
+              className={`p-3.5 rounded-2xl sm:rounded-3xl border text-left transition-all cursor-pointer flex items-center gap-3 backdrop-blur-xl ${
                 activeId === k.id
-                  ? "bg-white border-black shadow-lg scale-[1.02]"
-                  : "bg-white/60 border-black/10 hover:bg-white hover:border-black/30"
+                  ? "bg-white/95 border-black shadow-[0_12px_32px_rgba(0,0,0,0.1),inset_0_1px_2px_rgba(255,255,255,1)] scale-[1.02]"
+                  : "bg-white/70 border-white/90 shadow-[0_4px_16px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,0.9)] hover:bg-white/90 hover:border-black/20"
               }`}
             >
               <div className="relative w-12 h-12 rounded-xl sm:rounded-2xl overflow-hidden shrink-0 border border-black/10">

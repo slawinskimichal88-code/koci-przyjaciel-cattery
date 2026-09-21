@@ -113,10 +113,10 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
           </p>
         </div>
 
-        {/* ── INTERAKTYWNA RZECZ #1: WIRTUALNY KALKULATOR KOSZTÓW (APPLE STYLE) ── */}
-        <div className="mb-20 bg-white rounded-3xl sm:rounded-[36px] border border-zinc-200 p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.06)]">
+        {/* ── INTERAKTYWNA RZECZ #1: WIRTUALNY KALKULATOR KOSZTÓW (APPLE IPHONE GLASS) ── */}
+        <div className="mb-20 bg-white/80 backdrop-blur-2xl rounded-3xl sm:rounded-[36px] border border-white/90 p-6 sm:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.05),inset_0_1px_2px_rgba(255,255,255,0.95)]">
           
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-zinc-200 mb-8">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-8 border-b border-zinc-200/80 mb-8">
             <div>
               <div className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-amber-800 mb-2 font-semibold">
                 <Sliders className="w-4 h-4 text-amber-600" />
@@ -128,7 +128,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
             </div>
 
             {/* Selektory Płci / Rozmiaru */}
-            <div className="flex items-center gap-2 bg-zinc-100 p-1.5 rounded-full border border-zinc-200">
+            <div className="flex items-center gap-2 bg-zinc-100/90 p-1.5 rounded-full border border-white/80 shadow-sm backdrop-blur-md">
               <button
                 onClick={() => setCatType("male")}
                 className={`px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider transition-all cursor-pointer font-medium ${
@@ -155,7 +155,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
             {/* Wybór Diety (Lewa strona) */}
-            <div className="lg:col-span-7 space-y-4">
+            <div className="lg:col-span-7 space-y-3.5">
               <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 mb-3 font-semibold">
                 {lang === "PL" ? "Wybierz model żywienia:" : "Select feeding model:"}
               </p>
@@ -183,14 +183,14 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
                 <div
                   key={opt.id}
                   onClick={() => setDietType(opt.id)}
-                  className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-left ${
+                  className={`p-4 sm:p-5 rounded-2xl border transition-all cursor-pointer text-left backdrop-blur-xl ${
                     dietType === opt.id
-                      ? "bg-amber-50/70 border-amber-400 shadow-sm ring-1 ring-amber-400/40"
-                      : "bg-zinc-50/80 border-zinc-200 hover:bg-zinc-100/80 hover:border-zinc-300"
+                      ? "bg-amber-50/90 border-amber-500/50 shadow-[0_8px_24px_rgba(217,119,6,0.08),inset_0_1px_2px_rgba(255,255,255,1)] ring-1 ring-amber-500/30"
+                      : "bg-white/70 border-white/90 hover:bg-white/90 hover:border-amber-400/40 shadow-[0_4px_16px_rgba(0,0,0,0.03),inset_0_1px_1px_rgba(255,255,255,0.9)]"
                   }`}
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <h4 className="text-sm sm:text-base font-heading font-medium text-zinc-900">
+                    <h4 className="text-sm sm:text-base font-heading font-medium text-zinc-950">
                       {opt.title}
                     </h4>
                     <span
@@ -207,8 +207,8 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
               ))}
             </div>
 
-            {/* Licznik Kosztów w Czasie Rzeczywistym (Prawa strona) */}
-            <div className="lg:col-span-5 bg-zinc-950 text-white rounded-3xl border border-zinc-800 p-6 sm:p-8 flex flex-col justify-between shadow-2xl">
+            {/* Licznik Kosztów w Czasie Rzeczywistym (Prawa strona — Ciemny iPhone Glass) */}
+            <div className="lg:col-span-5 bg-gradient-to-b from-[#18181b] to-[#0c0c0e] text-white rounded-3xl border border-white/15 p-6 sm:p-8 flex flex-col justify-between shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] backdrop-blur-2xl">
               <div>
                 <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-zinc-400 block mb-2">
                   {lang === "PL" ? "Szacowany Miesięczny Koszt" : "Estimated Monthly Total"}
@@ -317,27 +317,27 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
             ].map((test, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-emerald-500/40 transition-all flex flex-col justify-between"
+                className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:bg-white/95 hover:border-emerald-500/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-mono font-bold text-amber-800 uppercase tracking-wider">
                       {test.badge}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-800 bg-emerald-100/80 px-2 py-0.5 rounded-full border border-emerald-300">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-600" />
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-900 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-300 font-semibold shadow-xs">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-700" />
                       <span>{test.result}</span>
                     </span>
                   </div>
-                  <h4 className="text-base font-heading font-medium text-zinc-900 mb-2">{test.name}</h4>
-                  <p className="text-xs text-zinc-500 font-body font-light leading-relaxed">{test.desc}</p>
+                  <h4 className="text-base font-heading font-medium text-zinc-950 mb-2">{test.name}</h4>
+                  <p className="text-xs text-zinc-600 font-body font-light leading-relaxed">{test.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ── 4 Filary Bazy Wiedzy ───────────────────────────────────── */}
+        {/* ── 4 Filary Bazy Wiedzy (iPhone Frosted Glass) ───────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {cards.map((c, i) => {
             const Icon = c.icon;
@@ -345,19 +345,19 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
               <Link
                 key={i}
                 href={c.href}
-                className="group relative p-7 sm:p-8 rounded-3xl bg-white hover:bg-zinc-50 border border-zinc-200/90 hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between shadow-sm hover:shadow-xl hover:-translate-y-1"
+                className="group relative p-7 sm:p-8 rounded-3xl bg-white/75 hover:bg-white/95 border border-white/90 hover:border-amber-400/50 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-1 backdrop-blur-2xl"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <span className="text-[11px] font-mono tracking-widest text-amber-800 uppercase font-semibold">
                       {c.tag}
                     </span>
-                    <div className="w-10 h-10 rounded-2xl bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-800 group-hover:bg-zinc-950 group-hover:text-white transition-all">
+                    <div className="w-10 h-10 rounded-2xl bg-white/90 border border-zinc-200/80 shadow-xs flex items-center justify-center text-zinc-800 group-hover:bg-zinc-950 group-hover:text-white transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-heading font-normal text-zinc-950 group-hover:text-amber-700 transition-colors mb-3">
+                  <h3 className="text-xl sm:text-2xl font-heading font-normal text-zinc-950 group-hover:text-amber-800 transition-colors mb-3">
                     {c.title}
                   </h3>
 
@@ -366,7 +366,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
                   </p>
                 </div>
 
-                <div className="pt-5 mt-5 border-t border-zinc-200/80 flex items-center gap-2 text-xs font-ui uppercase tracking-widest text-zinc-600 group-hover:text-zinc-950 transition-colors font-semibold">
+                <div className="pt-5 mt-5 border-t border-zinc-200/60 flex items-center gap-2 text-xs font-ui uppercase tracking-widest text-zinc-600 group-hover:text-zinc-950 transition-colors font-semibold">
                   <span>{lang === "PL" ? "Czytaj artykuł w Bazie Wiedzy" : "Read in Knowledge Base"}</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-amber-600" />
                 </div>

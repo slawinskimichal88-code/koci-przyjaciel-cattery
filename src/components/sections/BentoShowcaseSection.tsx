@@ -80,45 +80,45 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
                 : "We are a small family cattery. Our Maine Coons are cherished family members living freely in our home and enjoying our secure outdoor garden run."}
             </p>
 
-            {/* 3 Wyróżniki */}
+            {/* 3 Wyróżniki (Styl iPhone Glass dla jasnego tła) */}
             <div className="space-y-3 mb-8">
-              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-emerald-500/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-600 shrink-0">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:bg-white/90 hover:border-emerald-500/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,1)] transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/25 flex items-center justify-center text-emerald-600 shrink-0 shadow-sm">
                   <Sun className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-zinc-900">
+                  <div className="text-xs sm:text-sm font-semibold text-zinc-950">
                     {lang === "PL" ? "Całoroczna woliera ogrodowa" : "Year-round garden enclosure"}
                   </div>
-                  <div className="text-[11px] text-zinc-500 font-light">
+                  <div className="text-[11px] sm:text-xs text-zinc-600 font-light">
                     {lang === "PL" ? "Świeże powietrze i bezpośrednie przejście z salonu" : "Fresh air and safe outdoor exploration"}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-amber-500/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-600 shrink-0">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:bg-white/90 hover:border-amber-500/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,1)] transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-600 shrink-0 shadow-sm">
                   <Home className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-zinc-900">
+                  <div className="text-xs sm:text-sm font-semibold text-zinc-950">
                     {lang === "PL" ? "Salon i kanapy zamiast klatek" : "Living room warmth, no cages"}
                   </div>
-                  <div className="text-[11px] text-zinc-500 font-light">
+                  <div className="text-[11px] sm:text-xs text-zinc-600 font-light">
                     {lang === "PL" ? "Wychowanie przy dzieciach, psie i codziennych dźwiękach" : "Socialized with kids, dogs, and family love"}
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white border border-zinc-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] hover:border-rose-500/40 transition-colors">
-                <div className="w-9 h-9 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-600 shrink-0">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/70 backdrop-blur-2xl border border-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:bg-white/90 hover:border-rose-500/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.07),inset_0_1px_2px_rgba(255,255,255,1)] transition-all duration-300">
+                <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/25 flex items-center justify-center text-rose-600 shrink-0 shadow-sm">
                   <ShieldCheck className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold text-zinc-900">
+                  <div className="text-xs sm:text-sm font-semibold text-zinc-950">
                     {lang === "PL" ? "Badania kardiologiczne & DNA Laboklin" : "Cardiac Echo & DNA Laboklin"}
                   </div>
-                  <div className="text-[11px] text-zinc-500 font-light">
+                  <div className="text-[11px] sm:text-xs text-zinc-600 font-light">
                     {lang === "PL" ? "Echo Doppler HCM, PKD, SMA N/N i rodowód FIFe / FPL" : "Clean genetics and certified 5-generation pedigree"}
                   </div>
                 </div>
@@ -136,7 +136,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               </Link>
               <Link
                 href="/o-nas"
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-body text-xs sm:text-sm font-semibold border border-zinc-300/80 transition-all hover:scale-105"
+                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-white/80 hover:bg-white text-zinc-800 font-body text-xs sm:text-sm font-semibold border border-white/90 shadow-sm transition-all hover:scale-105 backdrop-blur-md"
               >
                 <span>{lang === "PL" ? "O naszej hodowli" : "About our cattery"}</span>
               </Link>
