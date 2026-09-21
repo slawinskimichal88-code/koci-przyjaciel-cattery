@@ -68,6 +68,29 @@
   }
 }
 
+/* Bento Showcase Grid na stronie głównej - gwarantowana wysokość kafelków */
+.bento-showcase-grid {
+  display: grid;
+  gap: 1rem;
+}
+@media (max-width: 639px) {
+  .bento-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+  .bento-showcase-grid > div {
+    min-height: 240px;
+    height: 240px;
+  }
+}
+@media (min-width: 640px) {
+  .bento-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 580px;
+    min-height: 580px;
+  }
+}
+
 .font-body {
   font-family: var(--font-inter), system-ui, sans-serif;
 }

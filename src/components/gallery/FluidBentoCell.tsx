@@ -46,6 +46,10 @@ export default function FluidBentoCell({
   const trackSize = doubled.length * 100;
   const childSize = 100 / doubled.length;
 
+  // Obliczamy czas trwania animacji tak, aby ruch był powolny, dostojny i kojący:
+  // Każde zdjęcie ma średnio 11-14 sekund widoczności, co eliminuje zbyt szybkie przewijanie.
+  const effectiveDuration = Math.max(speed, images.length * 11);
+
   return (
     /* KLUCZOWE: w-full h-full wymusza zajęcie całej komórki siatki (auto-rows). */
     <div className={`relative overflow-hidden rounded-3xl bg-[#111] border border-gray-800 shadow-2xl w-full h-full ${className}`}>
@@ -63,7 +67,7 @@ export default function FluidBentoCell({
         transition={{
           repeat: Infinity,
           ease: "linear",
-          duration: speed,
+          duration: effectiveDuration,
         }}
       >
         {doubled.map((item, idx) => {

@@ -19,7 +19,6 @@ import {
   Volume2,
   VolumeX,
   Camera,
-  Scale,
   Sparkles,
 } from "lucide-react";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
@@ -34,8 +33,6 @@ export default function AboutPage() {
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<string>("all");
 
   const wybiegPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg"), []);
-  const matkiPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "matki"), []);
-  const kocuryPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "kocury"), []);
   const domPhotos = useMemo(
     () => ALL_AGA_PHOTOS.filter((p) => p.category === "mlode" || p.category === "w-domu"),
     []
@@ -143,32 +140,18 @@ export default function AboutPage() {
               <span>{lang === "PL" ? "Wybieg" : "Enclosure"}</span>
             </a>
             <a
-              href="#matki"
-              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 transition-all flex items-center gap-1.5"
-            >
-              <span>🌸</span>
-              <span>{lang === "PL" ? "Matki" : "Queens"}</span>
-            </a>
-            <a
-              href="#kocury"
-              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 transition-all flex items-center gap-1.5"
-            >
-              <span>🦁</span>
-              <span>{lang === "PL" ? "Kocury" : "Studs"}</span>
-            </a>
-            <a
               href="#w-domu"
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-blue-500/15 hover:bg-blue-500/25 border border-blue-500/30 text-blue-300 transition-all flex items-center gap-1.5"
             >
               <span>🏡</span>
-              <span>{lang === "PL" ? "Dom i Maluchy" : "Home & Kittens"}</span>
+              <span>{lang === "PL" ? "W salonie i na kanapie" : "Living Room Life"}</span>
             </a>
             <button
               onClick={() => jumpToGalleryCategory("all")}
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/30 text-amber-200 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>📸</span>
-              <span>{lang === "PL" ? "Archiwum" : "Archive"}</span>
+              <span>{lang === "PL" ? "Archiwum zdjęć" : "Photo Archive"}</span>
             </button>
           </div>
         </section>
@@ -351,146 +334,12 @@ export default function AboutPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
-            SEKCJA 3: MATKI HODOWLANE (#matki)
-        ═══════════════════════════════════════════════════════════════ */}
-        <section id="matki" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
-          <div className="flex items-center gap-2 mb-4 pt-8">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-rose-400 font-semibold">
-              03 · KOTKI HODOWLANE (MATKI)
-            </span>
-            <div className="h-[1px] flex-1 bg-white/10" />
-          </div>
-
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#111114] border border-white/10 shadow-xl mb-8">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <div className="max-w-3xl">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs font-mono mb-4">
-                  <Stethoscope className="w-3.5 h-3.5" />
-                  <span>100% Echo Doppler HCM N/N · Badania DNA Laboklin</span>
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-heading font-light text-white mb-4">
-                  Matki: <span className="font-semibold italic">Nasze królowe</span>.
-                </h2>
-                <p className="text-sm sm:text-base text-zinc-300 font-body font-light leading-relaxed mb-6">
-                  Zdrowe, opiekuńcze i czułe kotki hodowlane. Każda z nich posiada udokumentowane badania echokardiograficzne serca (Echo Doppler) oraz certyfikowany profil DNA w laboratorium Laboklin (HCM, PKD, SMA N/N). Wszystkie kotki dorastają i wychowują swoje mioty w domowym salonie przy rodzinie.
-                </p>
-                <div className="flex flex-wrap gap-2.5">
-                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                    Kardiologiczne Echo Doppler HCM: Normal
-                  </span>
-                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                    Genetyka Laboklin: Czysta N/N
-                  </span>
-                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                    5-pokoleniowy rodowód FIFe / FPL
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Ruchoma Siatka Bento ze zdjęciami matek */}
-          <AnimatedBentoGrid
-            photos={matkiPhotos}
-            lang={lang}
-            badge={lang === "PL" ? "🌸 Kotki Hodowlane" : "🌸 Queens"}
-            title={
-              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
-                {lang === "PL" ? (
-                  <>
-                    Nasze Kotki: <span className="font-semibold italic">Matki miotów Koci Przyjaciel *PL</span>
-                  </>
-                ) : (
-                  <>
-                    Our Queens: <span className="font-semibold italic">Mothers of our litters</span>
-                  </>
-                )}
-              </h3>
-            }
-            subtitle={
-              <p>
-                {lang === "PL"
-                  ? "Opiekuńcze, czułe kotki hodowlane o doskonałej budowie i zrównoważonym charakterze. Kliknij dowolny kadr, by powiększyć."
-                  : "Caring, affectionate breeding females with certified genetics. Click any photo to expand."}
-              </p>
-            }
-          />
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SEKCJA 4: KOCURY HODOWLANE (#kocury)
-        ═══════════════════════════════════════════════════════════════ */}
-        <section id="kocury" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
-          <div className="flex items-center gap-2 mb-4 pt-8">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-amber-400 font-semibold">
-              04 · KOCURY HODOWLANE (REPRODUKTORY)
-            </span>
-            <div className="h-[1px] flex-1 bg-white/10" />
-          </div>
-
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#111114] border border-white/10 shadow-xl mb-8">
-            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-              <div className="max-w-3xl">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-mono mb-4">
-                  <Scale className="w-3.5 h-3.5" />
-                  <span>Waga do 12 kg · Echo Doppler serca N/N</span>
-                </span>
-                <h2 className="text-3xl sm:text-4xl font-heading font-light text-white mb-4">
-                  Kocury: <span className="font-semibold italic">Potęga i łagodne serce</span>.
-                </h2>
-                <p className="text-sm sm:text-base text-zinc-300 font-body font-light leading-relaxed mb-6">
-                  Mocny kościec, majestat, rysie pędzle na uszach i zrównoważony charakter. Samce o potężnej sylwetce dochodzącej do 12 kg, które uwielbiają przytulanie i życie wśród domowników. Pełny profil badań kardiologicznych (Echo Doppler serca) i genetycznych Laboklin N/N.
-                </p>
-                <div className="flex flex-wrap gap-2.5">
-                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                    Potężny kościec & kufa
-                  </span>
-                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                    Pędzle rysia na uszach
-                  </span>
-                  <span className="px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-xs font-mono text-zinc-300">
-                    Echo Doppler serca N/N
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Ruchoma Siatka Bento ze zdjęciami kocurów */}
-          <AnimatedBentoGrid
-            photos={kocuryPhotos}
-            lang={lang}
-            badge={lang === "PL" ? "🦁 Kocury Reproduktory" : "🦁 Studs"}
-            title={
-              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
-                {lang === "PL" ? (
-                  <>
-                    Nasze Kocury: <span className="font-semibold italic">Potężne reproduktory</span>
-                  </>
-                ) : (
-                  <>
-                    Our Studs: <span className="font-semibold italic">Majestic breeding males</span>
-                  </>
-                )}
-              </h3>
-            }
-            subtitle={
-              <p>
-                {lang === "PL"
-                  ? "Samce o wadze dochodzącej do 12 kg, mocnym kośćcu i łagodnym, przytulaśnym sercu. Kliknij dowolny kadr, by powiększyć."
-                  : "Males weighing up to 12 kg with robust bone structure and affectionate character. Click any photo to expand."}
-              </p>
-            }
-          />
-        </section>
-
-        {/* ═══════════════════════════════════════════════════════════════
-            SEKCJA 5: ŻYCIE W DOMU I MALUCHY (#w-domu)
+            SEKCJA 3: ŻYCIE W DOMU — W SALONIE I NA KANAPIE (#w-domu)
         ═══════════════════════════════════════════════════════════════ */}
         <section id="w-domu" className="max-w-6xl mx-auto px-6 sm:px-10 mb-24 pt-8 scroll-mt-28 border-t border-white/10">
           <div className="flex items-center gap-2 mb-4 pt-8">
             <span className="text-xs font-mono uppercase tracking-[0.3em] text-blue-400 font-semibold">
-              05 · DOM I MALUCHY
+              03 · DOM I SALON
             </span>
             <div className="h-[1px] flex-1 bg-white/10" />
           </div>

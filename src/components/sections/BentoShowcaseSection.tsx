@@ -34,8 +34,8 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
       if (wDomu[i]) pool2.push({ id: wDomu[i].id, src: wDomu[i].src, title: wDomu[i].title, categoryLabel: wDomu[i].categoryLabel });
     }
 
-    return [pool1, pool2, pool3];
-  }, []);
+      return [pool1.slice(0, 10), pool2.slice(0, 10), pool3.slice(0, 10)];
+    }, []);
 
   return (
     <section id="galeria-showcase" className="relative bg-[#09090B] text-white py-20 sm:py-28 overflow-hidden border-t border-white/10">
@@ -145,32 +145,35 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
 
           {/* PRAWA STRONA: PŁYNĄCA TAŚMA BENTO (50%) */}
           <div className="lg:col-span-7 relative">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 auto-rows-[220px] sm:auto-rows-[260px]">
+            <div className="bento-showcase-grid grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4 min-h-[540px] sm:h-[580px] lg:h-[620px]">
               {/* Kafelek 1: Duży pionowy (płynie w górę) */}
               <FluidBentoCell
                 images={pools[0]}
                 direction="vertical"
-                speed={22}
+                speed={65}
+                label="🌿 Ogród & Maluchy"
                 onPhotoClick={setSelectedPhoto}
-                className="sm:row-span-2 min-h-[260px] sm:min-h-0"
+                className="sm:row-span-2 h-[260px] sm:h-full min-h-[250px] sm:min-h-full w-full"
               />
 
               {/* Kafelek 2: Górny kwadrat (płynie w lewo) */}
               <FluidBentoCell
                 images={pools[1]}
                 direction="horizontal"
-                speed={14}
+                speed={50}
+                label="🦁 Kocury & Dom"
                 onPhotoClick={setSelectedPhoto}
-                className="sm:row-span-1 min-h-[200px] sm:min-h-0"
+                className="sm:row-span-1 h-[220px] sm:h-full min-h-[220px] sm:min-h-full w-full"
               />
 
               {/* Kafelek 3: Dolny kwadrat (płynie w dół) */}
               <FluidBentoCell
                 images={pools[2]}
                 direction="reverse-vertical"
-                speed={18}
+                speed={55}
+                label="🌸 Matki & Królowe"
                 onPhotoClick={setSelectedPhoto}
-                className="sm:row-span-1 min-h-[200px] sm:min-h-0"
+                className="sm:row-span-1 h-[220px] sm:h-full min-h-[220px] sm:min-h-full w-full"
               />
             </div>
           </div>
