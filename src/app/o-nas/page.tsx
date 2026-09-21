@@ -21,6 +21,7 @@ import {
   Camera,
   Sparkles,
   CheckCircle2,
+  Film,
 } from "lucide-react";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
@@ -191,6 +192,13 @@ export default function AboutPage() {
           {/* ── SZYBKA NAWIGACJA ZAKŁADKOWA APPLE PILLS ───────────────── */}
           <div className="sticky top-20 z-30 py-3 bg-[#0A0A0A]/90 backdrop-blur-xl border-y border-white/10 flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
             <a
+              href="#pelny-film"
+              className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-400/25 hover:bg-amber-400/35 border border-amber-400/40 text-amber-200 transition-all flex items-center gap-1.5 shadow-sm"
+            >
+              <span>🎥</span>
+              <span>{lang === "PL" ? "Pełny Film (9 min)" : "Full Film (9 min)"}</span>
+            </a>
+            <a
               href="#hodowla"
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-white/10 hover:bg-white/20 border border-white/15 text-white transition-all flex items-center gap-1.5"
             >
@@ -218,6 +226,123 @@ export default function AboutPage() {
               <span>📸</span>
               <span>{lang === "PL" ? "Archiwum zdjęć" : "Photo Archive"}</span>
             </button>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            SEKCJA: PEŁNY FILM O HODOWLI (#pelny-film)
+        ═══════════════════════════════════════════════════════════════ */}
+        <section id="pelny-film" className="max-w-6xl mx-auto px-6 sm:px-10 mb-20 scroll-mt-28">
+          <div className="relative rounded-3xl p-8 sm:p-12 bg-gradient-to-b from-[#16161c] to-[#0d0d12] border border-amber-400/25 shadow-[0_25px_70px_rgba(0,0,0,0.85)] overflow-hidden">
+            
+            {/* Poświaty tła */}
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[140px] pointer-events-none" />
+
+            <div className="relative z-10">
+              
+              {/* Nagłówek i dopisek "PEŁNY FILM" */}
+              <div className="text-center max-w-3xl mx-auto mb-10">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/15 border border-amber-400/30 text-amber-300 text-xs font-mono mb-4 shadow-sm">
+                  <Film className="w-3.5 h-3.5 text-amber-400" />
+                  <span className="uppercase tracking-[0.25em] font-semibold">
+                    {lang === "PL" ? "MATERIAŁ WIDEO · PEŁNY FILM (9:14 MIN)" : "VIDEO FEATURE · FULL FILM (9:14 MIN)"}
+                  </span>
+                </div>
+
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-light text-white mb-4">
+                  {lang === "PL" ? (
+                    <>
+                      Pełny film: <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500">Historia naszej hodowli</span>
+                    </>
+                  ) : (
+                    <>
+                      Full Film: <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-500">The Story of Our Cattery</span>
+                    </>
+                  )}
+                </h2>
+
+                <p className="text-base text-zinc-300 font-body font-light leading-relaxed">
+                  {lang === "PL"
+                    ? "Pełny, niecięty wywiad z założycielką hodowli Koci Przyjaciel *PL. Opowieść o początkach z pierwszym miotem, poszukiwaniu rasy o gołębim sercu, inwestycjach w linie zagraniczne, budowie wybiegu i codziennym życiu w salonie."
+                    : "Complete, uncut interview with the founder of Koci Przyjaciel *PL. About the first litter, discovering Maine Coons, international bloodlines, and life without cages."}
+                </p>
+              </div>
+
+              {/* Odtwarzacz Kinowy Apple Cinema Player */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center max-w-5xl mx-auto">
+                
+                {/* Wideo w ramce Titanium */}
+                <div className="lg:col-span-6 flex justify-center">
+                  <div className="relative w-[300px] sm:w-[330px] p-2.5 rounded-[46px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.15)]">
+                    <div className="relative w-full aspect-[9/16] rounded-[38px] overflow-hidden bg-black">
+                      <video
+                        src="/video/breeder-full.mp4"
+                        poster="/video/breeder-full-poster.jpg"
+                        controls
+                        playsInline
+                        preload="metadata"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Rozdziały filmu i podsumowanie */}
+                <div className="lg:col-span-6 space-y-4">
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 block mb-1">
+                      Rozdział 1 · 00:00 – 01:30
+                    </span>
+                    <h4 className="text-base font-heading font-medium text-white mb-1">
+                      Pierwszy miot i odpowiedzialność
+                    </h4>
+                    <p className="text-xs text-zinc-400 font-body leading-relaxed font-light">
+                      Dlaczego założyłam hodowlę dopiero po dokładnym przemyśleniu i jak zależało mi na bezwzględnym zaufaniu opiekunów.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-blue-400 block mb-1">
+                      Rozdział 2 · 01:30 – 03:30
+                    </span>
+                    <h4 className="text-base font-heading font-medium text-white mb-1">
+                      Poszukiwanie rasy: Ragdoll vs Maine Coon
+                    </h4>
+                    <p className="text-xs text-zinc-400 font-body leading-relaxed font-light">
+                      Dlaczego to właśnie Maine Coon skradł nasze serca — charakter psa, przywiązanie i łagodne olbrzymy w rodzinie.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-purple-400 block mb-1">
+                      Rozdział 3 · 03:30 – 06:00
+                    </span>
+                    <h4 className="text-base font-heading font-medium text-white mb-1">
+                      Inwestycje w linie z zagranicy & genetyka
+                    </h4>
+                    <p className="text-xs text-zinc-400 font-body leading-relaxed font-light">
+                      Lata sprowadzania wybitnych kotek i kocurów, badania serca Doppler oraz genetyczne profile N/N.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 block mb-1">
+                      Rozdział 4 · 06:00 – 09:14
+                    </span>
+                    <h4 className="text-base font-heading font-medium text-white mb-1">
+                      Wybieg ogrodowy i codzienne życie w salonie
+                    </h4>
+                    <p className="text-xs text-zinc-400 font-body leading-relaxed font-light">
+                      Koty z kociakami zawsze w domu, na kanapie i przy stole. Bezpieczna woliera dla zdrowia i radości życia.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
         </section>
 

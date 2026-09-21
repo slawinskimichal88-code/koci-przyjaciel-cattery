@@ -40,3 +40,9 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
    - Usunięto zewsząd koty oznaczone jako do bieżącej adopcji (usunięto `KittenReservationBar` i `KittensSection` ze strony głównej).
    - Wdrożono nową zakładkę w menu **„Dostępne Kociaki”** (`/dostepne-kociaki` oraz `/kocieta`) z wyrazistym komunikatem: **„Obecnie brak dostępnych miotów do adopcji”**, formularzem zapisu na listę oczekujących na przyszłe mioty, archiwum wychowanków oraz prezentacją rodziców.
    - Przygotowano strukturę pod implementację filmu o właścicielce w technice scrollytellingu (jak wybieg).
+9. **Wdrożenie Filmów o Właścicielce z Automatyczną Transkrypcją i Scrollytellingiem**:
+   - Pobrane wideo z folderu `owner`: krótsza wersja 3:20 min (`breeder-short.mp4`) oraz pełna wersja 9:14 min (`breeder-full.mp4`).
+   - Przeprowadzono ekstrakcję audio i transkrypcję mowy AI (Whisper) w języku polskim ze znacznikami czasu.
+   - **Strona główna (`BreederSection`)**: Krótszy film zintegrowany w ramce pionowej iPhone 16 Pro (576x1024 9:16) ze scrollytellingiem (3 sceny: Początki i rejestracja -> Wybór rasy Maine Coon i linie zagraniczne -> Życie w salonie bez klatek i wybieg), szklanymi napisami VisionOS na wideo, przyciskiem dźwięku oraz bezpośrednim hiperłączem do pełnego filmu w `/o-nas`.
+   - **Zakładka O nas (`/o-nas#pelny-film`)**: Dodano sekcję z dopiskiem **„Pełny film (9:14 min)”**, dedykowanym odtwarzaczem kinowym w ramce Titanium, kontrolkami odtwarzania, plakatem i podziałem na rozdziały czasowe.
+   - Zweryfikowano wizualnie w Chromium Headless, zbudowano z kodem 0 i wysłano do repozytorium (`main -> main`).
