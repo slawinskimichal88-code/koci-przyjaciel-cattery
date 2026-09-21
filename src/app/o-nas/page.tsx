@@ -521,10 +521,10 @@ export default function AboutPage() {
 
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
-                href="/kocieta"
+                href="/dostepne-kociaki"
                 className="px-7 py-3.5 rounded-full bg-white text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-lg flex items-center gap-2"
               >
-                <span>{lang === "PL" ? "Dostępne Kocięta" : "Available Kittens"}</span>
+                <span>{lang === "PL" ? "Dostępne Kociaki" : "Available Kittens"}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a

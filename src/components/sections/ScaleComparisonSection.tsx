@@ -825,12 +825,12 @@ export default function ScaleComparisonSection({
                   <span>{lang === "PL" ? "Zobacz pełne porównanie z psem w Bazie Wiedzy" : "See Full Comparison in Knowledge Base"}</span>
                   <ArrowRight className="w-4 h-4 text-black" />
                 </Link>
-                <a
-                  href="#kocieta"
+                <Link
+                  href="/dostepne-kociaki"
                   className="px-6 py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui uppercase tracking-wider text-xs font-medium transition-all"
                 >
-                  {lang === "PL" ? "Dostępne Kocięta" : "Available Kittens"}
-                </a>
+                  {lang === "PL" ? "Dostępne Kociaki" : "Available Kittens"}
+                </Link>
               </div>
             </div>
           </div>
@@ -970,10 +970,10 @@ export default function ScaleComparisonSection({
               </div>
               <div className="flex flex-wrap items-center gap-3">
                 <Link
-                  href="/kocieta"
+                  href="/dostepne-kociaki"
                   className="px-8 py-4 rounded-full bg-zinc-950 text-white font-ui uppercase tracking-wider text-xs font-bold hover:bg-zinc-800 transition-all shadow-md hover:scale-105 cursor-pointer"
                 >
-                  Dostępne Kocięta
+                  {lang === "PL" ? "Dostępne Kociaki" : "Available Kittens"}
                 </Link>
                 <Link
                   href="/o-nas"

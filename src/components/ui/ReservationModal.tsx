@@ -112,13 +112,15 @@ export default function ReservationModal({
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-1">
               <span className="text-[11px] font-ui uppercase font-bold text-[#C8973B] tracking-[0.2em] block">
-                FORMULARZ REZERWACJI
+                LISTA OCZEKUJĄCYCH · PLANOWANE MIOTY
               </span>
               <h3 className="text-2xl sm:text-3xl font-heading font-normal text-white">
-                Zarezerwuj Kociaka
+                {lang === "PL" ? "Zapisz się na Przyszły Miot" : "Join Litter Waitlist"}
               </h3>
               <p className="text-xs text-[#8B8680] font-body">
-                Wypełnij poniższe dane — skontaktujemy się z Tobą telefonicznie.
+                {lang === "PL"
+                  ? "Obecnie brak wolnych kociąt. Zostaw kontakt, aby otrzymać pierwszeństwo przy kolejnym miocie."
+                  : "Currently all kittens are rehomed. Leave your details to get priority for the next litter."}
               </p>
             </div>
 
@@ -169,11 +171,11 @@ export default function ReservationModal({
 
               <div>
                 <label className="block text-xs font-ui uppercase tracking-wider text-[#8B8680] mb-1">
-                  Który kotek?
+                  Preferencje kociaka (płeć, umaszczenie)
                 </label>
                 <input
                   type="text"
-                  placeholder="np. Arthur Koci Przyjaciel *PL (lub Dowolny)"
+                  placeholder="np. Kocur czarny dymny, kotka szylkret, lub bez preferencji"
                   value={kitten}
                   onChange={(e) => setKitten(e.target.value)}
                   className="w-full px-3.5 py-2.5 bg-[#1A1A1A] border border-[#333333] focus:border-[#C8973B] text-white text-sm rounded-sm outline-none transition-colors"

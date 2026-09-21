@@ -26,15 +26,16 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
   }, []);
 
   const navItems = [
-    { href: "/",            label: lang === "PL" ? "Główna"       : "Home"        },
-    { href: "/o-nas",       label: lang === "PL" ? "O nas"        : "About"       },
-    { href: "/kocieta",     label: lang === "PL" ? "Kocięta"      : "Kittens"     },
-    { href: "/baza-wiedzy", label: lang === "PL" ? "Baza wiedzy"  : "Knowledge"   },
-    { href: "/kontakt",     label: lang === "PL" ? "Kontakt"      : "Contact"     },
+    { href: "/",            label: lang === "PL" ? "Główna"           : "Home"              },
+    { href: "/o-nas",       label: lang === "PL" ? "O nas"            : "About"             },
+    { href: "/dostepne-kociaki", label: lang === "PL" ? "Dostępne Kociaki" : "Available Kittens" },
+    { href: "/baza-wiedzy", label: lang === "PL" ? "Baza wiedzy"      : "Knowledge"         },
+    { href: "/kontakt",     label: lang === "PL" ? "Kontakt"          : "Contact"           },
   ];
 
   const isLinkActive = (href: string) => {
     if (href === "/") return pathname === "/";
+    if (href === "/dostepne-kociaki") return pathname === "/dostepne-kociaki" || pathname.startsWith("/kocieta");
     return pathname === href || pathname.startsWith(href + "/");
   };
 
@@ -138,13 +139,13 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               <span>{REAL_PHONE}</span>
             </a>
 
-            {/* Główny przycisk Rezerwacja z pulsującym statusem */}
+            {/* Główny przycisk Lista oczekujących z pulsującym statusem */}
             <button
               onClick={onOpenReservation}
               className="relative group px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white text-black font-body text-xs sm:text-[13px] font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.35)] transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>{lang === "PL" ? "Rezerwuj" : "Reserve"}</span>
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              <span>{lang === "PL" ? "Lista oczekujących" : "Waitlist"}</span>
             </button>
           </div>
 
@@ -206,7 +207,7 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               className="w-full py-4 rounded-2xl bg-white text-black font-body text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>{lang === "PL" ? "Zarezerwuj kociaka" : "Reserve a Kitten"}</span>
+              <span>{lang === "PL" ? "Lista oczekujących na kociaka" : "Join Waitlist"}</span>
             </button>
 
             <a

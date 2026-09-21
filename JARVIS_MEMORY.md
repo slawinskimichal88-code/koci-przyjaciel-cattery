@@ -35,3 +35,8 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
    - `ScaleComparisonSection`: Na stronie głównej zachowano wyłącznie czystą grafikę skali 1:1 z laserowymi liniami HUD oraz wyrazisty przycisk/hiperłącze do Bazy Wiedzy (`/baza-wiedzy#porownanie`). Całkowicie usunięto kwadraty/boxy z tekstem o psach ze strony głównej.
    - `BreederSection`: Drastycznie skrócono tekst o właścicielce – zastąpiono 3 długie akapity jednym zwięzłym cytatem w stylu Apple Keynote, dwuzdaniowym biogramem, 3 minimalistycznymi plakietkami zaufania oraz bezpośrednim hiperłączem do `/o-nas`.
    - Zmiany zbudowane z kodem 0 i wysłane na produkcję (`main -> main`).
+8. **Przebudowa Kolejności Sekcji i Statusu Adopcji**:
+   - Nowa kolejność strony głównej: **Hero** (film z kotem) -> **Kim Jestem / Właścicielka** (`BreederSection`) -> **Wybieg** (`EnclosureSection`) -> Bento Showcase -> Skala 1:1 -> Baza Wiedzy -> Opinie -> Społeczność -> Kontakt.
+   - Usunięto zewsząd koty oznaczone jako do bieżącej adopcji (usunięto `KittenReservationBar` i `KittensSection` ze strony głównej).
+   - Wdrożono nową zakładkę w menu **„Dostępne Kociaki”** (`/dostepne-kociaki` oraz `/kocieta`) z wyrazistym komunikatem: **„Obecnie brak dostępnych miotów do adopcji”**, formularzem zapisu na listę oczekujących na przyszłe mioty, archiwum wychowanków oraz prezentacją rodziców.
+   - Przygotowano strukturę pod implementację filmu o właścicielce w technice scrollytellingu (jak wybieg).

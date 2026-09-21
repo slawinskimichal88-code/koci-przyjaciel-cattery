@@ -4,11 +4,9 @@ import React, { useState } from "react";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
-import KittenReservationBar from "@/components/sections/KittenReservationBar";
-import EnclosureSection from "@/components/sections/EnclosureSection";
-import KittensSection from "@/components/sections/KittensSection";
-import BentoShowcaseSection from "@/components/sections/BentoShowcaseSection";
 import BreederSection from "@/components/sections/BreederSection";
+import EnclosureSection from "@/components/sections/EnclosureSection";
+import BentoShowcaseSection from "@/components/sections/BentoShowcaseSection";
 import ScaleComparisonSection from "@/components/sections/ScaleComparisonSection";
 import KnowledgeBaseTeaser from "@/components/sections/KnowledgeBaseTeaser";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
@@ -37,62 +35,50 @@ export default function Home() {
       {/* Pasek postępu scrollowania na samej górze */}
       <ScrollProgress />
 
-      {/* Nowoczesny, wyrazisty Navbar ze szklanym rozmyciem i czytelnym menu */}
+      {/* Nowoczesny Navbar ze szklanym rozmyciem i czytelnym menu */}
       <Navbar
         lang={lang}
         setLang={setLang}
         onOpenReservation={() => handleOpenReservation()}
       />
 
-      {/* Główna sekwencja narracyjna strony głównej (Układ Sprzedażowo-Wiedzowy Apple Pro) */}
+      {/* Główna sekwencja narracyjna strony głównej */}
       <main className="relative z-10">
         
-        {/* ① HERO: Monumentalny wstęp + film w tle */}
+        {/* ① HERO: Monumentalny wstęp + film w tle z kotem */}
         <HeroSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ② PASEK SPRZEDAŻOWY: Status rezerwacji 2026, miniatury kociąt i szybki kontakt */}
-        <KittenReservationBar
-          lang={lang}
-          onOpenReservation={(name) => handleOpenReservation(name)}
-        />
-
-        {/* ③ WYBIEG: Scrollytelling Apple iPhone — filozofia wybiegu, życie w domu, zero klatek */}
-        <EnclosureSection
-          lang={lang}
-          onOpenReservation={() => handleOpenReservation()}
-        />
-
-        {/* ④ BENTO SHOWCASE: 10 kadrów z życia hodowli z efektem Shared Layout Animation i odnośnikiem do galerii */}
-        <BentoShowcaseSection lang={lang} />
-
-        {/* ⑤ KOCIĘTA: Wirtualny selektor kociąt Apple Pro, filtry, EMS, specyfikacja i rezerwacja */}
-        <KittensSection
-          lang={lang}
-          onOpenReservation={(name) => handleOpenReservation(name)}
-        />
-
-        {/* ⑥ KIM JESTEM: Właścicielka hodowli, domowy odchów w salonie, brak klatek, badania zdrowotne */}
+        {/* ② O WŁAŚCICIELCE: Kim jestem — tuż pod sekcją pierwszą z filmem */}
         <BreederSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ⑥ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Interaktywna skala 1:1, laserowe miarki, mikro-kropki Apple LiDAR oraz pełne 6 kart porównawczych iPhone Glass */}
+        {/* ③ WYBIEG: Scrollytelling Apple iPhone — bezpośrednio pod sekcją o właścicielce */}
+        <EnclosureSection
+          lang={lang}
+          onOpenReservation={() => handleOpenReservation()}
+        />
+
+        {/* ④ BENTO SHOWCASE: 10 kadrów z życia hodowli */}
+        <BentoShowcaseSection lang={lang} />
+
+        {/* ⑤ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
         <ScaleComparisonSection lang={lang} compact={false} />
 
-        {/* ⑦ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Wirtualny kalkulator kosztów na żywo, badania genetyczne HCM/PKD/SMA N/N */}
+        {/* ⑥ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Kalkulator kosztów i badania genetyczne */}
         <KnowledgeBaseTeaser lang={lang} />
 
-        {/* ⑧ OPINIE OPIEKUNÓW: Oceny 5.0, metryki wagi, filtry kategorii, wirtualne notatki głosowe audio */}
+        {/* ⑦ OPINIE OPIEKUNÓW: Oceny 5.0, metryki, notatki głosowe */}
         <TestimonialsSection lang={lang} />
 
-        {/* ⑨ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API, zdjęcia rodzin i social hub */}
+        {/* ⑧ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API */}
         <FacebookCommunitySection lang={lang} />
 
-        {/* ⑩ KONTAKT: 3 kroki adopcji, bezpośrednie linie kontaktu, formularz z preferencjami */}
+        {/* ⑨ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
         <ContactSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
@@ -100,10 +86,10 @@ export default function Home() {
 
       </main>
 
-      {/* STOPKA: Nowoczesna z podziałem na zakładki */}
+      {/* STOPKA */}
       <Footer lang={lang} setLang={setLang} />
 
-      {/* Modal rezerwacji kociaka */}
+      {/* Modal rezerwacji / lista oczekujących */}
       <ReservationModal
         isOpen={isReservationOpen}
         onClose={handleCloseReservation}

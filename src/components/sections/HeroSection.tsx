@@ -429,14 +429,23 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
-            Weź kociaka
+            {lang === "PL" ? "Planowane mioty" : "Upcoming litters"}
           </span>
           <h2
             className="font-heading font-light text-white leading-[0.9] tracking-tight mb-10"
             style={{ fontSize: "clamp(3rem, 9vw, 8rem)" }}
           >
-            Znajdź swojego<br />
-            <span className="font-semibold">kociaka.</span>
+            {lang === "PL" ? (
+              <>
+                Poznaj naszą<br />
+                <span className="font-semibold">hodowlę.</span>
+              </>
+            ) : (
+              <>
+                Meet our<br />
+                <span className="font-semibold">cattery.</span>
+              </>
+            )}
           </h2>
 
           <div className="flex flex-wrap items-center gap-4">
@@ -444,15 +453,15 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
               onClick={onOpenReservation}
               className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-colors duration-200 cursor-pointer"
             >
-              <span>Zarezerwuj</span>
+              <span>{lang === "PL" ? "Lista oczekujących" : "Join Waitlist"}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
             </button>
 
             <a
-              href="#kocieta"
+              href="#kim-jestem"
               className="inline-flex items-center gap-3 px-8 py-4 border border-white/25 text-white text-xs font-ui font-bold uppercase tracking-[0.2em] hover:border-white/60 transition-colors duration-200"
             >
-              Kociaki ↓
+              {lang === "PL" ? "O właścicielce ↓" : "About Founder ↓"}
             </a>
 
             <a
