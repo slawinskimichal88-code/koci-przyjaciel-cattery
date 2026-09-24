@@ -107,6 +107,7 @@ export default function RootLayout({
   return (
     <html
       lang="pl"
+      data-scroll-behavior="smooth"
       className={`${cormorant.variable} ${raleway.variable} ${inter.variable}`}
     >
       <body className="bg-[#0A0A0A] text-[#F5F5F5] font-body selection:bg-white selection:text-black antialiased">

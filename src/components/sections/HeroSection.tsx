@@ -297,6 +297,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
                     src="/logo.png"
                     alt="Koci Przyjaciel PL — Hodowla Kotów Maine Coon"
                     fill
+                    sizes="(max-width: 768px) 250px, 300px"
                     className="object-cover"
                     priority
                   />
