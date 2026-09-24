@@ -3,16 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  REAL_LOGO,
-  REAL_PHONE,
-  REAL_PHONE_RAW,
-  REAL_FACEBOOK_URL,
-  REAL_INSTAGRAM_URL,
-  REAL_LOCATION,
-} from "@/data/realCatsData";
-import { Phone, MapPin, ShieldCheck, Heart } from "lucide-react";
-import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
+import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_INSTAGRAM_URL, REAL_LOCATION } from "@/data/realCatsData";
 
 interface FooterProps {
   lang?: "PL" | "EN";
@@ -22,85 +13,110 @@ interface FooterProps {
 export default function Footer({ lang = "PL" }: FooterProps) {
   const year = new Date().getFullYear();
 
+  const footerNav = [
+    {
+      title: lang === "PL" ? "Główne Zakładki" : "Main Navigation",
+      items: [
+        { label: lang === "PL" ? "Strona Główna" : "Home", href: "/" },
+        { label: lang === "PL" ? "O hodowli" : "About Us", href: "/o-nas" },
+        { label: lang === "PL" ? "Dostępne Kociaki" : "Available Kittens", href: "/dostepne-kociaki" },
+        { label: lang === "PL" ? "Baza Wiedzy" : "Knowledge Base", href: "/baza-wiedzy" },
+        { label: lang === "PL" ? "Kontakt & Wizyty" : "Contact & Visit", href: "/kontakt" },
+      ],
+    },
+    {
+      title: lang === "PL" ? "Wiedza & Narzędzia" : "Knowledge & Tools",
+      items: [
+        { label: lang === "PL" ? "Kalkulator Kosztów & Wyprawka" : "Cost Calculator", href: "/baza-wiedzy?tab=kalkulator" },
+        { label: lang === "PL" ? "Wzorzec rasy Maine Coon" : "Breed Standard", href: "/baza-wiedzy?tab=wzorzec" },
+        { label: lang === "PL" ? "Porównanie wymiarów (Skala)" : "Scale Comparison", href: "/baza-wiedzy?tab=skala" },
+        { label: lang === "PL" ? "Zdrowie & Badania HCM" : "Heart Health & HCM", href: "/baza-wiedzy?tab=zdrowie" },
+        { label: lang === "PL" ? "Najczęstsze pytania (FAQ)" : "FAQ", href: "/baza-wiedzy?tab=faq" },
+      ],
+    },
+    {
+      title: lang === "PL" ? "Hodowla & Certyfikaty" : "Cattery & Certs",
+      items: [
+        { label: "FIFe / Felis Polonia (FPL)", href: "/kocieta#rodowod" },
+        { label: "Badania Laboklin N/N", href: "/baza-wiedzy#zdrowie" },
+        { label: "Profilaktyka Echo Doppler", href: "/baza-wiedzy#zdrowie" },
+        { label: "Społeczność Facebook (26k+)", href: REAL_FACEBOOK_URL, isExternal: true },
+        { label: "Instagram @koci_przyjaciel_pl", href: REAL_INSTAGRAM_URL, isExternal: true },
+      ],
+    },
+  ];
+
   return (
-    <footer className="bg-[#09090B] text-white border-t border-white/10 py-12 sm:py-16">
+    <footer className="bg-[#0D0D0F] text-white border-t border-white/10 pt-16 pb-12">
       <div className="max-w-6xl mx-auto px-6 sm:px-10">
-        
-        {/* Główna sekcja z logo, danymi kontaktowymi i federacją */}
-        <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-8 pb-10 border-b border-white/10 text-center md:text-left">
-          
-          {/* Brand & Podstawowe Dane */}
-          <div className="flex flex-col sm:flex-row items-center gap-4">
+
+        {/* Top row */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
+
+          {/* Kolumna 1: Brand & Logo */}
+          <div className="space-y-4 md:pr-6">
             <Link href="/" className="flex items-center gap-3.5 group">
               <div
-                className="relative w-12 h-12 rounded-full overflow-hidden border border-white/30 shrink-0 shadow-md group-hover:border-white transition-all bg-black/40"
+                className="relative w-11 h-11 rounded-full overflow-hidden border border-white/30 shrink-0 shadow-md group-hover:border-white transition-all"
+                style={{ position: "relative", width: 44, height: 44 }}
               >
                 <Image
                   src={REAL_LOGO}
                   alt="Koci Przyjaciel PL"
-                  width={48}
-                  height={48}
+                  width={44}
+                  height={44}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="text-left">
-                <p className="text-lg font-heading font-medium text-white group-hover:text-amber-200 transition-colors">
+              <div>
+                <p className="text-base font-heading font-medium text-white group-hover:text-amber-200 transition-colors">
                   Koci Przyjaciel <span className="italic text-xs font-serif text-amber-300">*PL</span>
                 </p>
-                <p className="text-[11px] font-mono text-zinc-400 tracking-wider uppercase">
-                  FIFe · Felis Polonia (FPL) · Wrocław
+                <p className="text-[10px] font-mono text-zinc-400 tracking-wider uppercase">
+                  FIFe · FPL · Wrocław
                 </p>
               </div>
             </Link>
+
+            <p className="text-xs text-zinc-400 font-body font-light leading-relaxed">
+              {lang === "PL"
+                ? "Certyfikowana domowa hodowla kotów rasy Maine Coon. Życie w salonie z dziećmi i psem, bezpieczny wybieg ogrodowy, 100% czystość genetyczna."
+                : "Certified home cattery of Maine Coon cats in Wrocław. Free home life with kids and dog, outdoor aviary, 100% genetic health."}
+            </p>
           </div>
 
-          {/* Bezpośredni Telefon & Social Media */}
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 sm:gap-4">
-            {/* Przycisk Telefonu */}
-            <a
-              href={`tel:${REAL_PHONE_RAW}`}
-              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full bg-white text-zinc-950 hover:bg-zinc-100 text-xs font-ui font-bold uppercase tracking-wider transition-all shadow-md hover:scale-105"
-            >
-              <Phone className="w-3.5 h-3.5 text-zinc-900" />
-              <span>{REAL_PHONE}</span>
-            </a>
+          {/* Puste miejsce, aby zachować padding jeśli to konieczne lub usunięto całkowicie nawigację zgodnie z prośbą o sam telefon. */}
 
-            {/* Facebook */}
+        </div>
+
+        {/* Bottom row */}
+        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-body text-zinc-400">
+          <p>
+            © {year} Koci Przyjaciel *PL. Wszelkie prawa zastrzeżone.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-6">
+            <a href={`tel:${REAL_PHONE_RAW}`} className="hover:text-white transition-colors font-mono">
+              tel: {REAL_PHONE}
+            </a>
+            <span>{REAL_LOCATION}</span>
             <a
               href={REAL_FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-white text-xs font-ui transition-all"
-              title="Profil Facebook"
+              className="text-zinc-300 hover:text-white transition-colors font-medium flex items-center gap-1"
             >
-              <FacebookIcon className="w-4 h-4 fill-current text-[#1877F2]" />
-              <span className="hidden sm:inline">Facebook</span>
+              Facebook ↗
             </a>
-
-            {/* Instagram */}
             <a
               href={REAL_INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-4 py-3 rounded-full bg-white/5 hover:bg-white/15 border border-white/15 text-white text-xs font-ui transition-all"
-              title="Profil Instagram"
+              className="text-zinc-300 hover:text-white transition-colors font-medium flex items-center gap-1"
             >
-              <InstagramIcon className="w-4 h-4 text-[#E4405F]" />
-              <span className="hidden sm:inline">Instagram</span>
+              Instagram ↗
             </a>
           </div>
-        </div>
-
-        {/* Dolna linijka: Lokalizacja, status prawny i prawa autorskie */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-body text-zinc-400 text-center sm:text-left font-light">
-          <div className="flex items-center gap-2 text-zinc-300">
-            <MapPin className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span>{REAL_LOCATION}</span>
-          </div>
-
-          <p className="text-[11px] text-zinc-500">
-            © {year} Koci Przyjaciel *PL. Domowa hodowla kotów rasy Maine Coon.
-          </p>
         </div>
 
       </div>

@@ -528,7 +528,7 @@ export default function BreederSection({
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* 2. WIDOK MOBILNY (<lg)                                              */}
       {/* ═══════════════════════════════════════════════════════════════════ */}
-      <div className="block lg:hidden sticky top-0 h-screen w-full overflow-hidden pt-20 px-4">
+      <div className="lg:hidden sticky top-0 h-screen w-full overflow-hidden pt-20 px-4">
         
         {/* Kontener telefonu */}
         <div className="relative w-full max-w-[280px] sm:max-w-[300px] mx-auto mb-4">

@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
 import { ArrowRight, Phone } from "lucide-react";
 
 interface HeroSectionProps {
@@ -455,15 +455,13 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           </h2>
 
           <div className="flex flex-wrap items-center gap-4">
-            <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={onOpenReservation}
               className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-colors duration-200 cursor-pointer"
             >
-              <span>{lang === "PL" ? "Napisz do nas na Facebooku" : "Message on Facebook"}</span>
+              <span>{lang === "PL" ? "Lista oczekujących" : "Join Waitlist"}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </a>
+            </button>
 
             <a
               href="#kim-jestem"
