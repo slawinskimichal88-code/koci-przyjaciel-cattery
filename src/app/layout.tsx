@@ -8,22 +8,19 @@ import ScrollRevealProvider from "@/components/providers/ScrollRevealProvider";
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
   variable: "--font-cormorant",
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
+  weight: ["400", "600", "700"],
   display: "swap",
 });
 
 const raleway = Raleway({
   subsets: ["latin", "latin-ext"],
   variable: "--font-raleway",
-  weight: ["300", "400", "500", "600", "700", "800"],
   display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin", "latin-ext"],
   variable: "--font-inter",
-  weight: ["300", "400", "500", "600"],
   display: "swap",
 });
 
@@ -106,10 +103,14 @@ export default function RootLayout({
   return (
     <html
       lang="pl"
+      suppressHydrationWarning
       data-scroll-behavior="smooth"
       className={`${cormorant.variable} ${raleway.variable} ${inter.variable}`}
     >
-      <body className="bg-[#0A0A0A] text-[#F5F5F5] font-body selection:bg-white selection:text-black antialiased">
+      <body
+        suppressHydrationWarning
+        className="bg-[#0A0A0A] text-[#F5F5F5] font-body selection:bg-white selection:text-black antialiased"
+      >
         <StructuredData />
         <ScrollRevealProvider />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
