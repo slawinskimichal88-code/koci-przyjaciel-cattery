@@ -1,0 +1,13 @@
+.git
+.github
+node_modules
+.next
+scripts/*
+!scripts/build-css.js
+scratch/
+*.tar.gz
+*.log
+/audit_*.png
+/sec_home_*.png
+/shot.png
+/*.mjs
