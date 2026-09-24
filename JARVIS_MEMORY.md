@@ -46,3 +46,7 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
    - **Strona główna (`BreederSection`)**: Krótszy film zintegrowany w ramce pionowej iPhone 16 Pro (576x1024 9:16) ze scrollytellingiem (3 sceny: Początki i rejestracja -> Wybór rasy Maine Coon i linie zagraniczne -> Życie w salonie bez klatek i wybieg), szklanymi napisami VisionOS na wideo, przyciskiem dźwięku oraz bezpośrednim hiperłączem do pełnego filmu w `/o-nas`.
    - **Zakładka O nas (`/o-nas#pelny-film`)**: Dodano sekcję z dopiskiem **„Pełny film (9:14 min)”**, dedykowanym odtwarzaczem kinowym w ramce Titanium, kontrolkami odtwarzania, plakatem i podziałem na rozdziały czasowe.
    - Zweryfikowano wizualnie w Chromium Headless, zbudowano z kodem 0 i wysłano do repozytorium (`main -> main`).
+10. **Naprawa Stylów Vercel & Kompletna Dokumentacja Multimediów**:
+   - Rozwiązano problem degradacji stylów Tailwind v4 na Vercelu (pre-kompilacja CSS `build-css.js`, optymalizacja fontów Google, usunięcie hydracyjnych ostrzeżeń, wdrożenie `--force`).
+   - Usunięto formularz rezerwacji z sekcji Kontakt (pozostawiono bezpośredni przycisk Messenger/Facebook).
+   - Utworzono i zsynchronizowano pełną instrukcję techniczną `INSTRUKCJA_WDROZENIA_I_MULTIMEDIOW.md` w repozytorium, w kopii `C:\Users\Michu\Downloads\KOPIA STRONY\` oraz w GitHub (`main`).
