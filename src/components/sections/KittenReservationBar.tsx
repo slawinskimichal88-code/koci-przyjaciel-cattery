@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 import { Phone, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 
 interface KittenReservationBarProps {
@@ -47,11 +47,13 @@ export default function KittenReservationBar({
           {/* Środek: Miniatury aktualnych kociąt */}
           <div className="flex items-center gap-3">
             {FEATURED_KITTENS.map((k) => (
-              <button
+              <a
                 key={k.name}
-                onClick={() => onOpenReservation(k.name)}
+                href={REAL_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group flex items-center gap-2.5 px-3 py-1.5 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/10 transition-all cursor-pointer text-left"
-                title={`${k.name} - ${k.status}`}
+                title={`${k.name} - ${k.status} (Napisz na Facebooku)`}
               >
                 <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/25 shrink-0" style={{ position: "relative", width: 36, height: 36 }}>
                   <Image
@@ -70,19 +72,21 @@ export default function KittenReservationBar({
                     {k.status}
                   </p>
                 </div>
-              </button>
+              </a>
             ))}
           </div>
 
           {/* Prawa strona: Przyciski CTA */}
           <div className="flex flex-wrap items-center justify-center gap-3 w-full lg:w-auto">
-            <button
-              onClick={() => onOpenReservation()}
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex-1 sm:flex-initial px-5 py-3 rounded-full bg-white text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all transform hover:-translate-y-0.5 shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
               <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>{lang === "PL" ? "Zarezerwuj kociaka" : "Reserve Kitten"}</span>
-            </button>
+              <span>{lang === "PL" ? "Zarezerwuj na Facebooku" : "Reserve on Facebook"}</span>
+            </a>
 
             <a
               href={`tel:${REAL_PHONE_RAW}`}

@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, ShieldCheck, Heart, Award, Info, Phone, Sparkles } from "lucide-react";
-import { REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { FacebookIcon } from "@/components/ui/SocialIcons";
 
 interface KittensSectionProps {
   lang: "PL" | "EN";
@@ -245,24 +246,20 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
 
             {/* Przyciski CTA */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-6 border-t border-black/10">
-              {currentKitten.status === "available" ? (
-                <button
-                  onClick={() => onOpenReservation(currentKitten.name)}
-                  className="flex-1 px-8 py-4 rounded-full bg-black text-white text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-black/85 transition-all transform hover:-translate-y-0.5 shadow-xl flex items-center justify-center gap-3 cursor-pointer"
-                >
-                  <Sparkles className="w-4 h-4 text-amber-400" />
-                  <span>{lang === "PL" ? `Zarezerwuj ${currentKitten.name}` : `Reserve ${currentKitten.name}`}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              ) : (
-                <button
-                  onClick={() => onOpenReservation()}
-                  className="flex-1 px-8 py-4 rounded-full bg-black/10 text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-black/20 transition-all flex items-center justify-center gap-3 cursor-pointer"
-                >
-                  <span>{lang === "PL" ? "Zapisz się na listę kolejnego miotu" : "Join Waitlist"}</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-              )}
+              <a
+                href={REAL_FACEBOOK_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 px-8 py-4 rounded-full bg-black text-white text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-black/85 transition-all transform hover:-translate-y-0.5 shadow-xl flex items-center justify-center gap-3 cursor-pointer"
+              >
+                <FacebookIcon className="w-4 h-4 fill-current text-white" />
+                <span>
+                  {currentKitten.status === "available"
+                    ? (lang === "PL" ? `Zapytaj o ${currentKitten.name} na Facebooku` : `Ask about ${currentKitten.name} on Facebook`)
+                    : (lang === "PL" ? "Zapisz się na listę na Facebooku" : "Join Waitlist on Facebook")}
+                </span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
 
               <a
                 href={`tel:${REAL_PHONE_RAW}`}

@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { FAQS } from "@/data/faqs";
 import { ChevronDown, HelpCircle, Phone, ArrowRight } from "lucide-react";
-import { REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 
 interface FaqSectionProps {
   lang: "PL" | "EN";
@@ -91,15 +91,15 @@ export default function FaqSection({ lang, onOpenReservation }: FaqSectionProps)
               <Phone className="w-3.5 h-3.5" />
               <span>{REAL_PHONE}</span>
             </a>
-            {onOpenReservation && (
-              <button
-                onClick={onOpenReservation}
-                className="inline-flex items-center gap-2 px-5 py-2.5 border border-black text-black text-xs font-ui uppercase tracking-widest font-bold hover:bg-black hover:text-white transition-colors cursor-pointer"
-              >
-                <span>{lang === "PL" ? "Napisz do nas" : "Message us"}</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            )}
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 border border-black text-black text-xs font-ui uppercase tracking-widest font-bold hover:bg-black hover:text-white transition-colors cursor-pointer"
+            >
+              <span>{lang === "PL" ? "Napisz na Facebooku" : "Message on Facebook"}</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </a>
           </div>
         </div>
 

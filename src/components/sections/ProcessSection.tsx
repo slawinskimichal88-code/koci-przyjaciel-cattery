@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ArrowRight } from "lucide-react";
+import { REAL_FACEBOOK_URL } from "@/data/realCatsData";
 
 interface ProcessSectionProps {
   lang: "PL" | "EN";
@@ -83,16 +84,18 @@ export default function ProcessSection({ lang, onOpenReservation }: ProcessSecti
 
       {/* ── CTA ──────────────────────────────────────────────────── */}
       <div className="reveal max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-28 flex flex-wrap items-center gap-6">
-        <button
-          onClick={onOpenReservation}
+        <a
+          href={REAL_FACEBOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="group inline-flex items-center gap-3 px-8 py-4 bg-black text-white text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-black/80 transition-colors cursor-pointer"
         >
-          <span>{lang === "PL" ? "Zarezerwuj kociaka" : "Reserve a kitten"}</span>
+          <span>{lang === "PL" ? "Napisz na Facebooku" : "Message on Facebook"}</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </button>
+        </a>
         <span className="text-sm font-body text-black/35">
           {lang === "PL"
-            ? "Dostępne kociaki i lista oczekujących."
+            ? "Dostępne kociaki i lista oczekujących na Facebooku."
             : "Available kittens and waitlist."}
         </span>
       </div>

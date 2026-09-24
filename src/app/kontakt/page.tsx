@@ -52,8 +52,8 @@ export default function ContactPage() {
 
           <p className="text-base sm:text-lg text-zinc-400 font-body max-w-2xl mx-auto font-light leading-relaxed mb-8">
             {lang === "PL"
-              ? "Chętnie odpowiemy na wszystkie pytania dotyczące rasy, charakteru naszych kotów oraz procedury rezerwacji. Zapraszamy do kontaktu telefonicznego lub przez formularz."
-              : "We are happy to answer all your questions regarding the breed, our cats, and kitten reservation procedures."}
+              ? "Chętnie odpowiemy na wszystkie pytania dotyczące rasy, charakteru naszych kotów oraz procedury rezerwacji. Zapraszamy do kontaktu przez nasz oficjalny profil na Facebooku lub telefonicznie."
+              : "We are happy to answer all your questions regarding the breed, our cats, and kitten reservation procedures on Facebook or by phone."}
           </p>
 
           {/* Szybkie wizytówki */}

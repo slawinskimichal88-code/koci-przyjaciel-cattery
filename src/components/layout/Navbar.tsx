@@ -139,14 +139,16 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               <span>{REAL_PHONE}</span>
             </a>
 
-            {/* Główny przycisk Lista oczekujących z pulsującym statusem */}
-            <button
-              onClick={onOpenReservation}
+            {/* Główny przycisk Lista oczekujących / Facebook */}
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="relative group px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white text-black font-body text-xs sm:text-[13px] font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_25px_rgba(255,255,255,0.35)] transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
             >
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              <span>{lang === "PL" ? "Lista oczekujących" : "Waitlist"}</span>
-            </button>
+              <span className="w-2 h-2 rounded-full bg-[#1877F2] animate-pulse" />
+              <span>{lang === "PL" ? "Lista na Facebooku" : "Facebook Waitlist"}</span>
+            </a>
           </div>
 
           {/* Mobilny Hamburger */}
@@ -199,16 +201,16 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
           </nav>
 
           <div className="mt-8 pt-6 border-t border-white/10 space-y-3">
-            <button
-              onClick={() => {
-                setMenuOpen(false);
-                onOpenReservation();
-              }}
-              className="w-full py-4 rounded-2xl bg-white text-black font-body text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer"
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="w-full py-4 rounded-2xl bg-[#1877F2] text-white font-body text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-amber-500" />
-              <span>{lang === "PL" ? "Lista oczekujących na kociaka" : "Join Waitlist"}</span>
-            </button>
+              <FacebookIcon className="w-4 h-4 fill-current text-white" />
+              <span>{lang === "PL" ? "Napisz na Facebooku (Messenger)" : "Message us on Facebook"}</span>
+            </a>
 
             <a
               href={`tel:${REAL_PHONE_RAW}`}

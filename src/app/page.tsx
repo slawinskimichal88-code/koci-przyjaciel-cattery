@@ -51,20 +51,20 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ② O WŁAŚCICIELCE: Kim jestem — tuż pod sekcją pierwszą z filmem */}
+        {/* ② O WŁAŚCICIELCE: Kim jestem — z filmem pionowym w ramce iPhone */}
         <BreederSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ③ WYBIEG: Scrollytelling Apple iPhone — bezpośrednio pod sekcją o właścicielce */}
+        {/* ③ BENTO SHOWCASE: Prawdziwe kadry. Nasz dom to ich dom. (Jasne tło, naturalne oddzielenie sekcji wideo) */}
+        <BentoShowcaseSection lang={lang} />
+
+        {/* ④ WYBIEG: Scrollytelling Apple iPhone — z filmem z wybiegu */}
         <EnclosureSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
-
-        {/* ④ BENTO SHOWCASE: 10 kadrów z życia hodowli */}
-        <BentoShowcaseSection lang={lang} />
 
         {/* ⑤ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
         <ScaleComparisonSection lang={lang} compact={false} />

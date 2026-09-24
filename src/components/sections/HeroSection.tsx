@@ -2,7 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
+import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 import { ArrowRight, Phone } from "lucide-react";
 
 interface HeroSectionProps {
@@ -266,8 +266,14 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
 
         {/* Boczny gradient dla czytelności */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 via-black/30 to-transparent pointer-events-none" />
+
+        {/* Globalna kinowa winieta narożników (przyciemnienie rogów) */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.85)_100%)]" />
+
+        {/* Dedykowane, głębokie przyciemnienie dolnego prawego rogu (maskowanie loga z filmu) */}
+        <div className="absolute bottom-0 right-0 w-80 sm:w-[480px] h-56 sm:h-72 pointer-events-none bg-gradient-to-tl from-black via-black/85 to-transparent" />
 
         {/* ============================================================ */}
         {/* SCENA 0 — Wielkie Logo + Keynote Apple Reveal                */}
@@ -449,13 +455,15 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           </h2>
 
           <div className="flex flex-wrap items-center gap-4">
-            <button
-              onClick={onOpenReservation}
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-colors duration-200 cursor-pointer"
             >
-              <span>{lang === "PL" ? "Lista oczekujących" : "Join Waitlist"}</span>
+              <span>{lang === "PL" ? "Napisz do nas na Facebooku" : "Message on Facebook"}</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
+            </a>
 
             <a
               href="#kim-jestem"

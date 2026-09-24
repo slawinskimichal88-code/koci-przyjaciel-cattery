@@ -21,7 +21,7 @@ import {
   Users,
 } from "lucide-react";
 import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 import AnimatedBentoGrid from "@/components/gallery/AnimatedBentoGrid";
 
 export default function AvailableKittensPage() {
@@ -115,16 +115,18 @@ export default function AvailableKittensPage() {
                   : "All kittens from our recent litters have found loving forever homes. We prioritize the health and wellbeing of our queens over quantity. Upcoming litters are planned with the utmost care."}
               </p>
 
-              {/* Przyciski akcji: Zapis na listę oczekujących + kontakt */}
+              {/* Przyciski akcji: Zapis na listę oczekujących na Facebooku + telefon */}
               <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-                <button
-                  onClick={() => handleOpenReservation()}
-                  className="px-8 py-4 rounded-full bg-white text-black font-ui uppercase tracking-wider text-xs font-bold hover:bg-zinc-200 transition-all shadow-[0_10px_30px_rgba(255,255,255,0.2)] flex items-center gap-2 cursor-pointer transform hover:-translate-y-0.5"
+                <a
+                  href={REAL_FACEBOOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 rounded-full bg-[#1877F2] text-white font-ui uppercase tracking-wider text-xs font-bold hover:bg-[#166fe5] transition-all shadow-[0_10px_30px_rgba(24,119,242,0.3)] flex items-center gap-2 cursor-pointer transform hover:-translate-y-0.5"
                 >
-                  <Sparkles className="w-4 h-4 text-amber-600" />
-                  <span>{lang === "PL" ? "Zapisz się na listę oczekujących" : "Join the Waiting List"}</span>
-                  <ArrowRight className="w-4 h-4 text-black" />
-                </button>
+                  <Sparkles className="w-4 h-4 text-white" />
+                  <span>{lang === "PL" ? "Zapisz się na listę na Facebooku" : "Join Waitlist on Facebook"}</span>
+                  <ArrowRight className="w-4 h-4 text-white" />
+                </a>
 
                 <a
                   href={`tel:${REAL_PHONE_RAW}`}
@@ -133,13 +135,6 @@ export default function AvailableKittensPage() {
                   <Phone className="w-4 h-4 text-amber-400" />
                   <span>{REAL_PHONE}</span>
                 </a>
-
-                <Link
-                  href="/kontakt"
-                  className="px-7 py-4 rounded-full bg-transparent hover:bg-white/5 border border-white/10 text-zinc-300 hover:text-white font-ui uppercase tracking-wider text-xs font-medium transition-all"
-                >
-                  {lang === "PL" ? "Napisz wiadomość" : "Send a Message"}
-                </Link>
               </div>
 
               {/* Informacja o priorytecie listy oczekujących */}
@@ -226,12 +221,14 @@ export default function AvailableKittensPage() {
                   : "All kittens shown below are happily rehomed with their loving families."}
               </p>
             </div>
-            <button
-              onClick={() => handleOpenReservation()}
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui text-xs font-semibold uppercase tracking-wider transition-all shrink-0 cursor-pointer"
             >
-              {lang === "PL" ? "Zapytaj o kolejny miot" : "Inquire About Next Litter"}
-            </button>
+              {lang === "PL" ? "Zapytaj o kolejny miot na Facebooku" : "Inquire on Facebook"}
+            </a>
           </div>
 
           {/* Ruchoma Siatka Bento ze zdjęciami z archiwum folderu młode */}
@@ -351,13 +348,15 @@ export default function AvailableKittensPage() {
           </div>
 
           <div className="mt-12 text-center">
-            <button
-              onClick={() => handleOpenReservation()}
-              className="px-8 py-4 rounded-full bg-white text-black font-ui uppercase tracking-wider text-xs font-bold hover:bg-zinc-200 transition-all shadow-lg inline-flex items-center gap-2 cursor-pointer"
+            <a
+              href={REAL_FACEBOOK_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-4 rounded-full bg-[#1877F2] text-white font-ui uppercase tracking-wider text-xs font-bold hover:bg-[#166fe5] transition-all shadow-lg inline-flex items-center gap-2 cursor-pointer"
             >
-              <span>{lang === "PL" ? "Zapisz się na listę oczekujących" : "Join the Waiting List"}</span>
-              <ArrowRight className="w-4 h-4 text-black" />
-            </button>
+              <span>{lang === "PL" ? "Zapisz się na listę na Facebooku" : "Join Waitlist on Facebook"}</span>
+              <ArrowRight className="w-4 h-4 text-white" />
+            </a>
           </div>
         </section>
 
