@@ -198,17 +198,7 @@ export default function ContactSection({ lang, onOpenReservation }: ContactSecti
               </a>
             </div>
 
-            {/* Przycisk Rezerwacji Modal */}
-            <div>
-              <button
-                onClick={onOpenReservation}
-                className="w-full py-4 rounded-full bg-white text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all transform hover:-translate-y-0.5 shadow-xl flex items-center justify-center gap-3 cursor-pointer"
-              >
-                <Sparkles className="w-4 h-4 text-amber-500" />
-                <span>{lang === "PL" ? "Otwórz Formularz Rezerwacji Kociaka" : "Open Kitten Reservation Modal"}</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+
 
           </div>
 

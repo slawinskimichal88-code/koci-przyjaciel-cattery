@@ -15,18 +15,15 @@ import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/layout/Footer";
 import ReservationModal from "@/components/ui/ReservationModal";
 
+import { REAL_FACEBOOK_URL } from "@/data/realCatsData";
+
 export default function Home() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
-  const [isReservationOpen, setIsReservationOpen] = useState(false);
-  const [reservationKitten, setReservationKitten] = useState("");
 
-  const handleOpenReservation = (kittenName?: string) => {
-    setReservationKitten(kittenName || "");
-    setIsReservationOpen(true);
-  };
-
-  const handleCloseReservation = () => {
-    setIsReservationOpen(false);
+  const handleOpenReservation = () => {
+    if (typeof window !== "undefined") {
+      window.open(REAL_FACEBOOK_URL, "_blank");
+    }
   };
 
   return (
@@ -89,13 +86,7 @@ export default function Home() {
       {/* STOPKA */}
       <Footer lang={lang} setLang={setLang} />
 
-      {/* Modal rezerwacji / lista oczekujących */}
-      <ReservationModal
-        isOpen={isReservationOpen}
-        onClose={handleCloseReservation}
-        defaultKitten={reservationKitten}
-        lang={lang}
-      />
+
 
     </div>
   );
