@@ -278,8 +278,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* Globalna kinowa winieta narożników (przyciemnienie rogów) */}
         <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.85)_100%)]" />
 
-        {/* Dedykowane, głębokie przyciemnienie dolnego prawego rogu (maskowanie loga z filmu) */}
-        <div className="absolute bottom-0 right-0 w-80 sm:w-[480px] h-56 sm:h-72 pointer-events-none bg-gradient-to-tl from-black via-black/85 to-transparent" />
+        {/* Bezpośredni, czysty podgląd wideo w tle bez czarnych bloków i kwadratów */}
 
         {/* ============================================================ */}
         {/* SCENA 0 — Wielkie Logo + Keynote Apple Reveal                */}

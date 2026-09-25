@@ -15,6 +15,8 @@ import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/layout/Footer";
 import ReservationModal from "@/components/ui/ReservationModal";
 
+import KittensSection from "@/components/sections/KittensSection";
+import GallerySection from "@/components/sections/GallerySection";
 import { REAL_FACEBOOK_URL } from "@/data/realCatsData";
 
 export default function Home() {
@@ -54,28 +56,37 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ③ BENTO SHOWCASE: Prawdziwe kadry. Nasz dom to ich dom. (Jasne tło, naturalne oddzielenie sekcji wideo) */}
+        {/* ③ NASZE KOCIĘTA: Dostępne maluchy z opcją wyboru */}
+        <KittensSection
+          lang={lang}
+          onOpenReservation={() => handleOpenReservation()}
+        />
+
+        {/* ④ BENTO SHOWCASE: Prawdziwe kadry. Nasz dom to ich dom */}
         <BentoShowcaseSection lang={lang} />
 
-        {/* ④ WYBIEG: Scrollytelling Apple iPhone — z filmem z wybiegu */}
+        {/* ⑤ WYBIEG: Scrollytelling Apple iPhone — z filmem z wybiegu */}
         <EnclosureSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ⑤ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
+        {/* ⑥ GALERIA NASZYCH KOTÓW */}
+        <GallerySection lang={lang} />
+
+        {/* ⑦ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
         <ScaleComparisonSection lang={lang} compact={false} />
 
-        {/* ⑥ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Kalkulator kosztów i badania genetyczne */}
+        {/* ⑧ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Kalkulator kosztów i badania genetyczne */}
         <KnowledgeBaseTeaser lang={lang} />
 
-        {/* ⑦ OPINIE OPIEKUNÓW: Oceny 5.0, metryki, notatki głosowe */}
+        {/* ⑨ OPINIE OPIEKUNÓW: Oceny 5.0, metryki, notatki głosowe */}
         <TestimonialsSection lang={lang} />
 
-        {/* ⑧ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API */}
+        {/* ⑩ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API */}
         <FacebookCommunitySection lang={lang} />
 
-        {/* ⑨ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
+        {/* ⑪ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
         <ContactSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}

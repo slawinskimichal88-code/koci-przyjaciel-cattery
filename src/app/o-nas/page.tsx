@@ -390,14 +390,9 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Right side iPhone Mockup */}
-            <div className="lg:w-1/2 flex justify-center perspective-1000">
-              <div className="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[3rem] border-[12px] border-[#18181B] bg-black shadow-2xl ring-1 ring-white/10 overflow-hidden transform-gpu hover:-translate-y-2 hover:rotate-y-2 transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-10">
-                {/* Dynamic Island */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-20 flex items-center justify-center">
-                   <div className="w-2 h-2 rounded-full bg-white/10 absolute right-2" />
-                </div>
-                
+            {/* Odtwarzacz wideo bez ramki telefonu */}
+            <div className="lg:w-1/2 flex justify-center">
+              <div className="relative w-full h-[400px] sm:h-[480px] rounded-3xl overflow-hidden border border-white/15 bg-black shadow-2xl transition-all duration-500 hover:border-emerald-500/30">
                 <video
                   src="/video/film2.mp4"
                   poster="/images/gallery/wybieg/wybieg_001.webp"
@@ -410,37 +405,37 @@ export default function AboutPage() {
                   disablePictureInPicture
                   disableRemotePlayback
                   onContextMenu={(e) => e.preventDefault()}
-                  className="w-full h-full object-cover scale-105 pointer-events-none select-none"
+                  className="w-full h-full object-cover pointer-events-none select-none"
                 />
                 
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none" />
+                {/* Subtle Overlay Gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10 pointer-events-none" />
 
-                {/* iPhone UI Overlays */}
+                {/* Video Info Overlay */}
                 <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
                   <div className="max-w-[75%]">
-                    <span className="px-2 py-1 rounded-md bg-emerald-500/20 backdrop-blur-md text-[10px] font-mono text-emerald-300 mb-1 inline-block">
-                      LIVE · WROCŁAW
+                    <span className="px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-xs font-mono text-emerald-300 mb-2 inline-block">
+                      WOLIERA · WROCŁAW
                     </span>
-                    <p className="text-lg font-heading font-semibold text-white leading-tight">
-                      Ciepłe dni na wybiegu
+                    <p className="text-xl font-heading font-semibold text-white leading-tight">
+                      Ciepłe dni na bezklatkowym wybiegu
                     </p>
                   </div>
                   <button
                     onClick={() => setIsMuted(!isMuted)}
-                    className="p-3 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all cursor-pointer"
+                    className="p-3.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all cursor-pointer shadow-lg"
                     title={isMuted ? "Włącz dźwięk" : "Wycisz dźwięk"}
                   >
-                    {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
+                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-emerald-400" />}
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Czysta, ultraszybka Siatka Bento ze zdjęciami z wybiegu */}
+          {/* Ruchoma, płynna Siatka Bento ze zdjęciami z wybiegu */}
           <div className="mt-8">
-            <StaticBentoGrid
+            <AnimatedBentoGrid
               photos={wybiegPhotos}
               lang={lang}
               badge={lang === "PL" ? "🌿 Kadry z Wybiegu" : "🌿 Enclosure Moments"}
@@ -494,8 +489,8 @@ export default function AboutPage() {
             </span>
           </div>
 
-          {/* Czysta, ultraszybka Siatka Bento ze zdjęciami z życia domowego i kociąt */}
-          <StaticBentoGrid
+          {/* Ruchoma, płynna Siatka Bento ze zdjęciami z życia domowego i kociąt */}
+          <AnimatedBentoGrid
             photos={domPhotos}
             lang={lang}
             badge={lang === "PL" ? "🏡 Maluchy i Życie Domowe" : "🏡 Kittens & Home Life"}

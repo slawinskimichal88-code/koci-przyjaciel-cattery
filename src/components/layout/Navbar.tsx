@@ -120,14 +120,7 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               </a>
             </div>
 
-            {/* Przełącznik języka */}
-            <button
-              onClick={() => setLang(lang === "PL" ? "EN" : "PL")}
-              className="px-2.5 py-1.5 rounded-full text-xs font-mono font-semibold text-zinc-300 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 transition-all cursor-pointer"
-              title="Zmień język / Change language"
-            >
-              {lang === "PL" ? "EN" : "PL"}
-            </button>
+            {/* Język wyłącznie Polski (wersja PL) */}
 
             {/* Szybki telefon (pokazywany tylko na szerokich ekranach) */}
             <a
@@ -151,18 +144,9 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             </a>
           </div>
 
-          {/* Mobilny Hamburger & Language Switcher — gwarancja braku ucinania na telefonach */}
+          {/* Mobilny Przycisk Menu */}
           <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <button
-              onClick={() => setLang(lang === "PL" ? "EN" : "PL")}
-              className="px-2.5 py-1.5 rounded-full text-xs font-mono font-semibold text-zinc-300 bg-white/5 hover:bg-white/15 border border-white/10 transition-all cursor-pointer"
-              title="Zmień język / Change language"
-            >
-              {lang === "PL" ? "EN" : "PL"}
-            </button>
-
-            <button
-              onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer border border-white/20 active:scale-95 shadow-sm"
               aria-label="Menu nawigacyjne"
             >

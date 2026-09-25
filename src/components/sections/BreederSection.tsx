@@ -603,11 +603,7 @@ export default function BreederSection({
                     className="w-full h-full object-cover scale-[1.02] pointer-events-none select-none"
                   />
 
-                  {/* Dynamic Island (subtelna kropka aparatu) */}
-                  <div className="absolute top-2.5 left-1/2 -translate-x-1/2 w-10 h-2.5 bg-black/90 rounded-full z-30 flex items-center justify-center gap-1.5 px-1 border border-white/10 pointer-events-none">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#0a1224] border border-blue-500/20" />
-                    <span className="w-1 h-1 rounded-full bg-amber-400 animate-pulse" />
-                  </div>
+                  {/* Czyste wideo bez żadnych czarnych nakładek i elementów przysłaniających */}
 
                   {/* Pływające napisy Apple Glass na dole wideo */}
                   <div
@@ -681,8 +677,7 @@ export default function BreederSection({
                 onContextMenu={(e) => e.preventDefault()}
                 className="w-full h-full object-cover pointer-events-none select-none"
               />
-              {/* Dynamic Island (subtelny pasek) */}
-              <div className="absolute top-2 left-1/2 -translate-x-1/2 w-10 h-2 bg-black/90 rounded-full z-30 border border-white/10 pointer-events-none" />
+              {/* Czyste mobilne wideo */}
 
               {/* Pływające napisy Mobile */}
               <div
