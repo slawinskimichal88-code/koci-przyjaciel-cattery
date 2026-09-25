@@ -8,10 +8,53 @@ import { REAL_PHONE } from "@/data/realCatsData";
 interface BreederSectionProps {
   lang?: "PL" | "EN";
   onOpenReservation?: () => void;
+  id?: string;
+  isAboutPage?: boolean;
 }
+
+const BREEDER_SUBTITLES = {
+  PL: [
+    {
+      badge: "HISTORIA HODOWLI · INTRO",
+      text: "„Powoływanie życia to ogromna odpowiedzialność. Chciałam, żeby koty miały u nas raj.”",
+    },
+    {
+      badge: "01 · POCZĄTKI I PASJA",
+      text: "„Zaczęło się kilkanaście lat temu od jednego miotu. Szybko zrozumiałam, że to pasja życia.”",
+    },
+    {
+      badge: "02 · GENETYKA & MAINE COON",
+      text: "„Szukałam kotów o łagodnym charakterze psa. Postawiłam na linie z Europy i badania serca Doppler.”",
+    },
+    {
+      badge: "03 · DOMOWY SALON & WYBIEG",
+      text: "„Koty śpią z nami w salonie, na kanapach i korzystają z woliery. Zero klatek, 100% z rodziną.”",
+    },
+  ],
+  EN: [
+    {
+      badge: "CATTERY STORY · INTRO",
+      text: "“Bringing life into this world is an enormous responsibility. I wanted to give our cats paradise.”",
+    },
+    {
+      badge: "01 · EARLY DAYS & PASSION",
+      text: "“It started over a decade ago with a single litter. I soon realized it was my lifelong passion.”",
+    },
+    {
+      badge: "02 · GENETICS & BREED",
+      text: "“I looked for cats with gentle, dog-like traits. Top European bloodlines and Echo Doppler screening.”",
+    },
+    {
+      badge: "03 · HOME LOUNGE & RUN",
+      text: "“Our cats live freely in the lounge, on sofas, and enjoy the cat run. Zero cages, 100% family life.”",
+    },
+  ],
+};
 
 export default function BreederSection({
   lang = "PL",
+  id = "kim-jestem",
+  isAboutPage = false,
 }: BreederSectionProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -69,6 +112,10 @@ export default function BreederSection({
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
+
+    // Autoplay natychmiast po zamontowaniu
+    if (videoRef.current) videoRef.current.play().catch(() => {});
+    if (mobileVideoRef.current) mobileVideoRef.current.play().catch(() => {});
 
     // IntersectionObserver — pauzuj wideo gdy sekcja nie jest na ekranie
     let observer: IntersectionObserver | null = null;
@@ -242,6 +289,33 @@ export default function BreederSection({
           mobileBar3Ref.current.style.width = `${fill}%`;
         }
       }
+
+      // ── DYNAMICZNE NAPISY NA WIDEO (LIVE SUBTITLES) ──────────────
+      const sceneIndex =
+        progress < 0.16 ? 0 : progress < 0.42 ? 1 : progress < 0.68 ? 2 : 3;
+      const currentSub = BREEDER_SUBTITLES[lang || "PL"][sceneIndex];
+
+      if (subtitleOverlayRef.current) {
+        const badgeEl = subtitleOverlayRef.current.querySelector(".subtitle-badge");
+        const textEl = subtitleOverlayRef.current.querySelector(".subtitle-text");
+        if (badgeEl && badgeEl.textContent !== currentSub.badge) {
+          badgeEl.textContent = currentSub.badge;
+        }
+        if (textEl && textEl.textContent !== currentSub.text) {
+          textEl.textContent = currentSub.text;
+        }
+      }
+
+      if (mobileSubtitleRef.current) {
+        const badgeEl = mobileSubtitleRef.current.querySelector(".subtitle-badge");
+        const textEl = mobileSubtitleRef.current.querySelector(".subtitle-text");
+        if (badgeEl && badgeEl.textContent !== currentSub.badge) {
+          badgeEl.textContent = currentSub.badge;
+        }
+        if (textEl && textEl.textContent !== currentSub.text) {
+          textEl.textContent = currentSub.text;
+        }
+      }
     };
 
     const handleScroll = () => {
@@ -262,7 +336,7 @@ export default function BreederSection({
   return (
     <section
       ref={sectionRef}
-      id="kim-jestem"
+      id={id}
       className="relative bg-[#070709] text-white border-t border-white/10"
       style={{ height: sectionHeight }}
     >
@@ -425,22 +499,36 @@ export default function BreederSection({
                   : "“We built an outdoor cat run, but queens with kittens and youth are with us inside all the time around our children and dog.”"}
               </blockquote>
 
-              {/* Wyraźne hiperłącze do zakładki O nas z pełnym filmem */}
+              {/* Wyraźne hiperłącze do kolejnych sekcji */}
               <div className="pt-2 flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <Link
-                  href="/o-nas#pelny-film"
+                  href={isAboutPage ? "#wybieg" : "/o-nas#pelny-film"}
                   className="group px-7 py-3.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-ui uppercase tracking-wider text-xs font-bold hover:brightness-110 transition-all shadow-[0_10px_35px_rgba(251,191,36,0.25)] flex items-center gap-2.5 cursor-pointer transform hover:-translate-y-0.5"
                 >
                   <Film className="w-4 h-4 text-black" />
-                  <span>{lang === "PL" ? "Obejrzyj pełny film w „O nas” (9 min)" : "Watch Full Video in About (9 min)"}</span>
+                  <span>
+                    {lang === "PL"
+                      ? isAboutPage
+                        ? "Poznaj nasz wybieg ogrodowy"
+                        : "Obejrzyj pełny film w „O nas” (9 min)"
+                      : isAboutPage
+                      ? "Explore our outdoor cat run"
+                      : "Watch Full Video in About (9 min)"}
+                  </span>
                   <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
                 </Link>
 
                 <Link
-                  href="/o-nas"
+                  href={isAboutPage ? "/dostepne-kociaki" : "/o-nas"}
                   className="px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui uppercase tracking-wider text-xs font-medium transition-all"
                 >
-                  {lang === "PL" ? "Więcej o hodowli" : "More About Us"}
+                  {lang === "PL"
+                    ? isAboutPage
+                      ? "Dostępne kociaki"
+                      : "Więcej o hodowli"
+                    : isAboutPage
+                    ? "Available kittens"
+                    : "More About Us"}
                 </Link>
               </div>
             </div>
@@ -483,12 +571,12 @@ export default function BreederSection({
                   {/* Pływające napisy Apple Glass na dole wideo */}
                   <div
                     ref={subtitleOverlayRef}
-                    className="absolute bottom-14 left-3 right-3 z-20 p-3 rounded-2xl bg-black/65 backdrop-blur-xl border border-white/20 text-center shadow-lg"
+                    className="absolute bottom-14 left-3 right-3 z-20 p-3 rounded-2xl bg-black/75 backdrop-blur-xl border border-white/20 text-center shadow-lg transition-all duration-300"
                   >
-                    <span className="text-[9px] font-mono uppercase tracking-widest text-amber-300 font-semibold block mb-0.5">
-                      Wypowiedź Założycielki · Koci Przyjaciel *PL
+                    <span className="subtitle-badge text-[9px] font-mono uppercase tracking-widest text-amber-300 font-semibold block mb-0.5">
+                      HISTORIA HODOWLI · INTRO
                     </span>
-                    <p className="text-xs font-body text-zinc-100 font-light leading-snug">
+                    <p className="subtitle-text text-xs font-body text-zinc-100 font-light leading-snug">
                       {lang === "PL"
                         ? "„Powoływanie życia to ogromna odpowiedzialność. Chciałam, żeby koty miały u nas raj.”"
                         : "“Breeding is an enormous responsibility. I wanted to give our cats paradise.”"}
@@ -556,6 +644,21 @@ export default function BreederSection({
               {/* Dynamic Island */}
               <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-30 border border-white/10" />
 
+              {/* Pływające napisy Mobile */}
+              <div
+                ref={mobileSubtitleRef}
+                className="absolute bottom-11 left-2.5 right-2.5 z-20 p-2 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 text-center shadow-md pointer-events-none transition-all duration-300"
+              >
+                <span className="subtitle-badge text-[8px] font-mono uppercase tracking-widest text-amber-300 font-semibold block mb-0.5">
+                  HISTORIA HODOWLI · INTRO
+                </span>
+                <p className="subtitle-text text-[10px] font-body text-zinc-100 font-light leading-snug">
+                  {lang === "PL"
+                    ? "„Powoływanie życia to ogromna odpowiedzialność. Chciałam, żeby koty miały u nas raj.”"
+                    : "“Breeding is an enormous responsibility. I wanted to give our cats paradise.”"}
+                </p>
+              </div>
+
               {/* Przycisk dźwięku */}
               <div className="absolute bottom-2 right-2 z-30">
                 <button
@@ -619,10 +722,18 @@ export default function BreederSection({
               Koty mieszkają z nami. Zero klatek.
             </h4>
             <Link
-              href="/o-nas#pelny-film"
+              href={isAboutPage ? "#wybieg" : "/o-nas#pelny-film"}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black text-xs font-ui font-bold uppercase tracking-wider shadow-lg"
             >
-              <span>Pełny film w „O nas” (9 min)</span>
+              <span>
+                {lang === "PL"
+                  ? isAboutPage
+                    ? "Poznaj nasz wybieg ogrodowy"
+                    : "Pełny film w „O nas” (9 min)"
+                  : isAboutPage
+                  ? "Explore our cat run"
+                  : "Pełny film w „O nas” (9 min)"}
+              </span>
               <ArrowRight className="w-3.5 h-3.5 text-black" />
             </Link>
           </div>
