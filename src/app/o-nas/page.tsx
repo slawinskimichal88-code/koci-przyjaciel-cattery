@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
@@ -26,13 +26,37 @@ import {
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
 import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
 import AnimatedBentoGrid from "@/components/gallery/AnimatedBentoGrid";
+import StaticBentoGrid from "@/components/gallery/StaticBentoGrid";
 import BentoGallery from "@/components/gallery/BentoGallery";
 
 export default function AboutPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
+  const [isPlayingCinema, setIsPlayingCinema] = useState(false);
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<string>("all");
+  const wybiegVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = wybiegVideoRef.current;
+    if (!video || typeof IntersectionObserver === "undefined") return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
 
   const wybiegPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg"), []);
   const domPhotos = useMemo(
@@ -275,19 +299,39 @@ export default function AboutPage() {
                 {/* Wideo w ramce Titanium */}
                 <div className="lg:col-span-6 flex justify-center">
                   <div className="relative w-[300px] sm:w-[330px] p-2.5 rounded-[46px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.15)]">
-                    <div className="relative w-full aspect-[9/16] rounded-[38px] overflow-hidden bg-black">
-                      <video
-                        src="/video/breeder-full.mp4"
-                        poster="/video/breeder-full-poster.webp"
-                        controls
-                        playsInline
-                        preload="metadata"
-                        controlsList="nodownload nofullscreen noremoteplayback"
-                        disablePictureInPicture
-                        disableRemotePlayback
-                        onContextMenu={(e) => e.preventDefault()}
-                        className="w-full h-full object-cover select-none"
-                      />
+                    <div className="relative w-full aspect-[9/16] rounded-[38px] overflow-hidden bg-black group select-none">
+                      {isPlayingCinema ? (
+                        <video
+                          src="/video/breeder-full.mp4"
+                          autoPlay
+                          controls
+                          playsInline
+                          controlsList="nodownload nofullscreen noremoteplayback"
+                          disablePictureInPicture
+                          disableRemotePlayback
+                          onContextMenu={(e) => e.preventDefault()}
+                          className="w-full h-full object-cover select-none"
+                        />
+                      ) : (
+                        <div
+                          onClick={() => setIsPlayingCinema(true)}
+                          className="relative w-full h-full cursor-pointer overflow-hidden"
+                        >
+                          <img
+                            src="/video/breeder-full-poster.webp"
+                            alt="Okładka filmu o hodowli"
+                            className="w-full h-full object-cover pointer-events-none select-none transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex flex-col items-center justify-center p-4 text-center">
+                            <div className="w-16 h-16 rounded-full bg-amber-400 text-black flex items-center justify-center shadow-[0_0_30px_rgba(251,191,36,0.6)] group-hover:scale-110 transition-transform mb-3">
+                              <Film className="w-7 h-7 fill-current ml-0.5" />
+                            </div>
+                            <span className="text-xs font-ui font-bold uppercase tracking-wider text-white bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/20">
+                              {lang === "PL" ? "Odtwórz film (9 min)" : "Play full film (9 min)"}
+                            </span>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -498,26 +542,26 @@ export default function AboutPage() {
             </div>
 
             {/* Right side iPhone Mockup */}
-            <div className="lg:w-1/2 flex justify-center perspective-1000">
-              <div className="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[3rem] border-[12px] border-[#18181B] bg-black shadow-2xl ring-1 ring-white/10 overflow-hidden transform-gpu hover:-translate-y-2 hover:rotate-y-2 transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-10">
+            <div className="lg:w-1/2 flex justify-center">
+              <div className="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[3rem] border-[10px] border-[#18181B] bg-black shadow-2xl ring-1 ring-white/10 overflow-hidden select-none">
                 {/* Dynamic Island */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-20 flex items-center justify-center">
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-20 flex items-center justify-center pointer-events-none">
                    <div className="w-2 h-2 rounded-full bg-white/10 absolute right-2" />
                 </div>
                 
                 <video
+                  ref={wybiegVideoRef}
                   src="/video/film2.mp4"
                   poster="/images/gallery/wybieg/wybieg_001.webp"
-                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   controlsList="nodownload nofullscreen noremoteplayback"
                   disablePictureInPicture
                   disableRemotePlayback
                   onContextMenu={(e) => e.preventDefault()}
-                  className="w-full h-full object-cover scale-105 pointer-events-none select-none"
+                  className="w-full h-full object-cover pointer-events-none select-none"
                 />
                 
                 {/* Overlay Gradient */}
@@ -545,9 +589,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Ruchoma Siatka Bento ze zdjęciami z wybiegu */}
+          {/* Czysta, ultraszybka Siatka Bento ze zdjęciami z wybiegu */}
           <div className="mt-8">
-            <AnimatedBentoGrid
+            <StaticBentoGrid
               photos={wybiegPhotos}
               lang={lang}
               badge={lang === "PL" ? "🌿 Kadry z Wybiegu" : "🌿 Enclosure Moments"}
@@ -601,8 +645,8 @@ export default function AboutPage() {
             </span>
           </div>
 
-          {/* Ruchoma Siatka Bento ze zdjęciami z życia domowego i kociąt */}
-          <AnimatedBentoGrid
+          {/* Czysta, ultraszybka Siatka Bento ze zdjęciami z życia domowego i kociąt */}
+          <StaticBentoGrid
             photos={domPhotos}
             lang={lang}
             badge={lang === "PL" ? "🏡 Maluchy i Życie Domowe" : "🏡 Kittens & Home Life"}

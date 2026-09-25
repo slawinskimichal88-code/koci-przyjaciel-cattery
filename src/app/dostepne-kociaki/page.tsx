@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL } from "@/data/realCatsData";
-import AnimatedBentoGrid from "@/components/gallery/AnimatedBentoGrid";
+import StaticBentoGrid from "@/components/gallery/StaticBentoGrid";
 
 export default function AvailableKittensPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
@@ -231,8 +231,8 @@ export default function AvailableKittensPage() {
             </a>
           </div>
 
-          {/* Ruchoma Siatka Bento ze zdjęciami z archiwum folderu młode */}
-          <AnimatedBentoGrid
+          {/* Czysta, ultraszybka Siatka Bento ze zdjęciami z archiwum folderu młode */}
+          <StaticBentoGrid
             photos={mlodePhotos}
             lang={lang}
             badge={lang === "PL" ? "🍼 Archiwum Miotów" : "🍼 Litter Archive"}
@@ -272,7 +272,7 @@ export default function AvailableKittensPage() {
                   {lang === "PL" ? "Kotki z naszej hodowli" : "Our Breeding Queens"}
                 </h3>
               </div>
-              <AnimatedBentoGrid
+              <StaticBentoGrid
                 photos={matkiPhotos}
                 lang={lang}
                 badge={lang === "PL" ? "🌸 Kotki (Matki)" : "🌸 Queens"}
@@ -289,7 +289,7 @@ export default function AvailableKittensPage() {
                   {lang === "PL" ? "Potężne kocury o łagodnym sercu" : "Majestic Studs"}
                 </h3>
               </div>
-              <AnimatedBentoGrid
+              <StaticBentoGrid
                 photos={kocuryPhotos}
                 lang={lang}
                 badge={lang === "PL" ? "🦁 Kocury (Reproduktory)" : "🦁 Studs"}

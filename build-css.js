@@ -12,11 +12,15 @@ if (!fs.existsSync(inputPath)) {
 
 const css = fs.readFileSync(inputPath, 'utf8');
 
+const customPath = path.join(__dirname, 'src', 'app', 'custom.css');
+const customCss = fs.existsSync(customPath) ? fs.readFileSync(customPath, 'utf8') : '';
+
 postcss([tailwind()])
   .process(css, { from: inputPath, to: outputPath })
   .then(result => {
-    fs.writeFileSync(outputPath, result.css, 'utf8');
-    console.log(`[build-css] Generated ${outputPath} (${result.css.length} bytes)`);
+    const finalCss = result.css + '\n\n' + customCss;
+    fs.writeFileSync(outputPath, finalCss, 'utf8');
+    console.log(`[build-css] Generated ${outputPath} (${finalCss.length} bytes)`);
   })
   .catch(err => {
     console.error('[build-css] Error:', err);

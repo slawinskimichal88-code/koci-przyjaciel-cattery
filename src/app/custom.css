@@ -1,54 +1,6 @@
-@import "tailwindcss";
-@source "../**/*.{js,ts,jsx,tsx}";
-@source "../../src/**/*.{js,ts,jsx,tsx}";
-
-@theme {
-  --font-heading: var(--font-cormorant), Georgia, serif;
-  --font-ui: var(--font-raleway), system-ui, sans-serif;
-  --font-body: var(--font-inter), system-ui, sans-serif;
-}
-
-@layer base {
-  :root {
-    /* Ciemne sekcje */
-    --color-dark-bg: #0A0A0A;
-    --color-dark-surface: #111111;
-    --color-dark-border: #2a2a2a;
-
-    /* Jasne sekcje */
-    --color-light-bg: #FFFFFF;
-    --color-light-surface: #F5F5F5;
-    --color-light-border: #E0E0E0;
-
-    /* Akcent biały/szary */
-    --color-accent: #FFFFFF;
-    --color-accent-light: #E0E0E0;
-    --color-accent-dark: #AAAAAA;
-
-    /* Tekst */
-    --color-text-on-dark: #F5F5F5;
-    --color-text-on-light: #111111;
-    --color-text-muted: #888888;
-
-    /* Ozdobniki */
-    --color-paw: #FFFFFF;
-  }
-
-
-
-  body {
-    background-color: var(--color-dark-bg);
-    color: var(--color-text-on-dark);
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
-  }
-
-  * {
-    box-sizing: border-box;
-  }
-}
+/* ========================================================================== */
+/* KOCI PRZYJACIEL *PL — CUSTOM STYLES, HARDWARE KEYFRAMES & ANTI-THEFT SHIELD */
+/* ========================================================================== */
 
 /* Typografia */
 .font-heading {
@@ -57,6 +9,10 @@
 
 .font-ui {
   font-family: var(--font-raleway), system-ui, sans-serif;
+}
+
+.font-body {
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 /* Bento Grid auto rows */
@@ -90,10 +46,6 @@
     height: 580px;
     min-height: 580px;
   }
-}
-
-.font-body {
-  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 /* Przyciski — biel i czerń */
@@ -218,7 +170,7 @@
   }
 }
 
-/* Klasy wyjściowe — elementy są od razu w 100% widoczne, eliminując puste czarne przestrzenie */
+/* Klasy wyjściowe */
 .reveal {
   opacity: 1;
   transform: translateY(0);
@@ -236,7 +188,6 @@
   transform: scale(1);
 }
 
-/* Klasa dodawana przez IntersectionObserver */
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0) translateX(0) scale(1);
@@ -432,5 +383,3 @@ img, video {
     display: none !important;
   }
 }
-
-

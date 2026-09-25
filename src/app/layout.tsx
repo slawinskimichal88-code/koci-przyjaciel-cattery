@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Raleway, Inter } from "next/font/google";
 import "./globals.css";
+import "./custom.css";
 import StructuredData from "@/components/StructuredData";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/providers/ScrollRevealProvider";
