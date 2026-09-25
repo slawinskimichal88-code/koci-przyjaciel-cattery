@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
 import { ArrowRight, Phone } from "lucide-react";
 
@@ -461,13 +462,13 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           </h2>
 
           <div className="flex flex-wrap items-center gap-4">
-            <button
-              onClick={onOpenReservation}
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-white/90 transition-colors duration-200 cursor-pointer"
+            <Link
+              href="/dostepne-kociaki"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:brightness-110 transition-all duration-200 shadow-lg cursor-pointer"
             >
-              <span>{lang === "PL" ? "Lista oczekujących" : "Join Waitlist"}</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-            </button>
+              <span>{lang === "PL" ? "Zobacz dostępne kociaki" : "View Available Kittens"}</span>
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform duration-200" />
+            </Link>
 
             <a
               href="#kim-jestem"
@@ -478,7 +479,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
 
             <a
               href={`tel:${REAL_PHONE_RAW}`}
-              className="inline-flex items-center gap-2 text-white/40 hover:text-white/80 text-sm font-ui transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-white/50 hover:text-white/90 text-sm font-ui transition-colors duration-200"
             >
               <Phone className="w-4 h-4" />
               <span>{REAL_PHONE}</span>

@@ -19,7 +19,7 @@ export default function TrustBar({ lang = "PL" }: TrustBarProps) {
       link: REAL_FACEBOOK_URL,
     },
     {
-      value: "15+ lat",
+      value: "10+ lat",
       label: lang === "PL" ? "Pasji i doświadczenia" : "Years of experience",
       sub: lang === "PL" ? "Ciągła hodowla FIFe / FPL" : "Continuous FIFe / FPL breeding",
       icon: <CustomIcon name="zegar-godziny" className="w-5 h-5 text-amber-400" />,
