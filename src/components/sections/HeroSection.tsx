@@ -285,11 +285,11 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/75 via-black/30 to-transparent pointer-events-none z-10" />
 
-        {/* Globalna kinowa winieta narożników (przyciemnienie rogów kodem CSS) */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)] z-10" />
+        {/* Naturalna, kinowa winieta narożników (przyciemnienie rogów kodem CSS) */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.75)_100%)] z-10" />
 
-        {/* Dedykowane, głębokie przyciemnienie dolnego prawego rogu kodem CSS (maskowanie loga/gwiazdki z filmu) */}
-        <div className="absolute bottom-0 right-0 w-80 sm:w-[480px] h-56 sm:h-72 pointer-events-none bg-gradient-to-tl from-black via-black/90 to-transparent z-10" />
+        {/* Precyzyjne, subtelne wygaszenie małej gwiazdki w prawym dolnym rogu — zero zasłaniania kota */}
+        <div className="absolute bottom-10 right-2 w-44 h-44 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.92)_0%,rgba(0,0,0,0.6)_35%,transparent_70%)] z-10" />
 
         {/* ============================================================ */}
         {/* SCENA 0 — Wielkie Logo + Teksty Hero + Przyciski Akcji       */}

@@ -494,6 +494,9 @@
   .bottom-8 {
     bottom: calc(var(--spacing) * 8);
   }
+  .bottom-10 {
+    bottom: calc(var(--spacing) * 10);
+  }
   .bottom-11 {
     bottom: calc(var(--spacing) * 11);
   }
@@ -2661,14 +2664,17 @@
   .bg-\[radial-gradient\(\#2A221F_1px\,transparent_1px\)\] {
     background-image: radial-gradient(#2A221F 1px,transparent 1px);
   }
+  .bg-\[radial-gradient\(circle_at_center\,rgba\(0\,0\,0\,0\.92\)_0\%\,rgba\(0\,0\,0\,0\.6\)_35\%\,transparent_70\%\)\] {
+    background-image: radial-gradient(circle at center,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.6) 35%,transparent 70%);
+  }
   .bg-\[radial-gradient\(circle_at_center\,rgba\(255\,255\,255\,0\.18\)_0\%\,transparent_70\%\)\] {
     background-image: radial-gradient(circle at center,rgba(255,255,255,0.18) 0%,transparent 70%);
   }
   .bg-\[radial-gradient\(circle_at_center\,transparent_45\%\,rgba\(0\,0\,0\,0\.85\)_100\%\)\] {
     background-image: radial-gradient(circle at center,transparent 45%,rgba(0,0,0,0.85) 100%);
   }
-  .bg-\[radial-gradient\(ellipse_at_center\,transparent_40\%\,rgba\(0\,0\,0\,0\.85\)_100\%\)\] {
-    background-image: radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,0.85) 100%);
+  .bg-\[radial-gradient\(ellipse_at_center\,transparent_55\%\,rgba\(0\,0\,0\,0\.75\)_100\%\)\] {
+    background-image: radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,0.75) 100%);
   }
   .from-\[\#3a393d\] {
     --tw-gradient-from: #3a393d;
@@ -2955,14 +2961,6 @@
     --tw-gradient-via: color-mix(in srgb, #000 85%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       --tw-gradient-via: color-mix(in oklab, var(--color-black) 85%, transparent);
-    }
-    --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
-    --tw-gradient-stops: var(--tw-gradient-via-stops);
-  }
-  .via-black\/90 {
-    --tw-gradient-via: color-mix(in srgb, #000 90%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      --tw-gradient-via: color-mix(in oklab, var(--color-black) 90%, transparent);
     }
     --tw-gradient-via-stops: var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-via) var(--tw-gradient-via-position), var(--tw-gradient-to) var(--tw-gradient-to-position);
     --tw-gradient-stops: var(--tw-gradient-via-stops);
