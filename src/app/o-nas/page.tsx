@@ -221,13 +221,13 @@ export default function AboutPage() {
               <span>🏡</span>
               <span>{lang === "PL" ? "W salonie i na kanapie" : "Living Room Life"}</span>
             </a>
-            <button
-              onClick={() => jumpToGalleryCategory("all")}
+            <Link
+              href="/galeria"
               className="px-4 py-2 rounded-full text-xs font-ui uppercase tracking-wider font-semibold bg-amber-400/20 hover:bg-amber-400/30 border border-amber-400/30 text-amber-200 transition-all flex items-center gap-1.5 cursor-pointer"
             >
               <span>📸</span>
-              <span>{lang === "PL" ? "Archiwum zdjęć" : "Photo Archive"}</span>
-            </button>
+              <span>Galeria kotów →</span>
+            </Link>
           </div>
         </section>
 
@@ -518,14 +518,33 @@ export default function AboutPage() {
         </section>
 
         {/* ═══════════════════════════════════════════════════════════════
-            SEKCJA 6: JEDYNA, CENTRALNA, RUCHOMA GALERIA BENTO (#galeria)
-            WSZYSTKIE 308 ZDJĘĆ Z FOLDERÓW W JEDNYM RUCHOMYM UKŁADZIE BENTO
+            SEKCJA: ODSYŁACZ DO DEDYKOWANEJ GALERII ZDJĘĆ (/galeria)
         ═══════════════════════════════════════════════════════════════ */}
-        <BentoGallery
-          lang={lang}
-          activeCategory={selectedGalleryCategory}
-          onCategoryChange={(catId) => setSelectedGalleryCategory(catId)}
-        />
+        <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-16 pt-8 border-t border-white/10">
+          <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#141416] via-[#101012] to-[#0a0a0c] border border-amber-400/20 text-center relative overflow-hidden shadow-2xl">
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-mono uppercase tracking-widest font-semibold mb-5">
+              <Camera className="w-3.5 h-3.5" />
+              <span>PEŁNE ARCHIWUM ZDJĘĆ HODOWLI</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-4xl font-heading font-light text-white mb-4">
+              Poznaj całą naszą galerię: <span className="font-semibold italic text-amber-300">Wszystkie kadry i mioty</span>.
+            </h2>
+            <p className="text-base text-zinc-300 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
+              Przenieśliśmy pełne archiwum zdjęć naszych kotów, reproduktorów, kotek hodowlanych oraz maluchów do osobnej, dedykowanej zakładki z podziałem na kategorie.
+            </p>
+
+            <Link
+              href="/galeria"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:brightness-110 transition-all shadow-[0_10px_35px_rgba(251,191,36,0.3)] cursor-pointer"
+            >
+              <span>Zobacz Galerię Kotów</span>
+              <ArrowRight className="w-4 h-4 text-black" />
+            </Link>
+          </div>
+        </section>
 
         {/* ── BANNER CTA — PRZEJŚCIE DO KOCIĄT I KONTAKTU ──────────────── */}
         <section className="max-w-5xl mx-auto px-6 sm:px-10 mb-16 mt-8">

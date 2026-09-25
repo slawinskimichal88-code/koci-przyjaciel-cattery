@@ -26,11 +26,12 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
   }, []);
 
   const navItems = [
-    { href: "/",            label: lang === "PL" ? "Główna"           : "Home"              },
-    { href: "/o-nas",       label: lang === "PL" ? "O nas"            : "About"             },
-    { href: "/dostepne-kociaki", label: lang === "PL" ? "Dostępne Kociaki" : "Available Kittens" },
-    { href: "/baza-wiedzy", label: lang === "PL" ? "Baza wiedzy"      : "Knowledge"         },
-    { href: "/kontakt",     label: lang === "PL" ? "Kontakt"          : "Contact"           },
+    { href: "/",            label: "Główna"           },
+    { href: "/o-nas",       label: "O nas"            },
+    { href: "/galeria",     label: "Galeria"          },
+    { href: "/dostepne-kociaki", label: "Dostępne Kociaki" },
+    { href: "/baza-wiedzy", label: "Baza wiedzy"      },
+    { href: "/kontakt",     label: "Kontakt"          },
   ];
 
   const isLinkActive = (href: string) => {

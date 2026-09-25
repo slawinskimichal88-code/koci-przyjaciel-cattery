@@ -17,11 +17,12 @@ export default function Footer({ lang = "PL" }: FooterProps) {
     {
       title: lang === "PL" ? "Główne Zakładki" : "Main Navigation",
       items: [
-        { label: lang === "PL" ? "Strona Główna" : "Home", href: "/" },
-        { label: lang === "PL" ? "O hodowli" : "About Us", href: "/o-nas" },
-        { label: lang === "PL" ? "Dostępne Kociaki" : "Available Kittens", href: "/dostepne-kociaki" },
-        { label: lang === "PL" ? "Baza Wiedzy" : "Knowledge Base", href: "/baza-wiedzy" },
-        { label: lang === "PL" ? "Kontakt & Wizyty" : "Contact & Visit", href: "/kontakt" },
+        { label: "Strona Główna", href: "/" },
+        { label: "O hodowli", href: "/o-nas" },
+        { label: "Galeria kotów", href: "/galeria" },
+        { label: "Dostępne Kociaki", href: "/dostepne-kociaki" },
+        { label: "Baza Wiedzy", href: "/baza-wiedzy" },
+        { label: "Kontakt & Wizyty", href: "/kontakt" },
       ],
     },
     {
