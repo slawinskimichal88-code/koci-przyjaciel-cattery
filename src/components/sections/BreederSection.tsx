@@ -461,13 +461,17 @@ export default function BreederSection({
                   <video
                     ref={videoRef}
                     src="/video/breeder-short.mp4"
-                    poster="/video/breeder-poster.jpg"
+                    poster="/video/breeder-poster.webp"
                     autoPlay
                     loop
                     muted={isMuted}
                     playsInline
-                    preload="auto"
-                    className="w-full h-full object-cover scale-[1.02]"
+                    preload="metadata"
+                    controlsList="nodownload nofullscreen noremoteplayback"
+                    disablePictureInPicture
+                    disableRemotePlayback
+                    onContextMenu={(e) => e.preventDefault()}
+                    className="w-full h-full object-cover scale-[1.02] pointer-events-none select-none"
                   />
 
                   {/* Dynamic Island u góry */}
@@ -537,13 +541,17 @@ export default function BreederSection({
               <video
                 ref={mobileVideoRef}
                 src="/video/breeder-short.mp4"
-                poster="/video/breeder-poster.jpg"
+                poster="/video/breeder-poster.webp"
                 autoPlay
                 loop
                 muted={isMuted}
                 playsInline
-                preload="auto"
-                className="w-full h-full object-cover"
+                preload="metadata"
+                controlsList="nodownload nofullscreen noremoteplayback"
+                disablePictureInPicture
+                disableRemotePlayback
+                onContextMenu={(e) => e.preventDefault()}
+                className="w-full h-full object-cover pointer-events-none select-none"
               />
               {/* Dynamic Island */}
               <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-5 bg-black rounded-full z-30 border border-white/10" />

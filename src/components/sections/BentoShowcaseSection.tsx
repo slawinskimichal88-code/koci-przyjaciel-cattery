@@ -34,7 +34,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
       if (wDomu[i]) pool2.push({ id: wDomu[i].id, src: wDomu[i].src, title: wDomu[i].title, categoryLabel: wDomu[i].categoryLabel });
     }
 
-      return [pool1.slice(0, 10), pool2.slice(0, 10), pool3.slice(0, 10)];
+      return [pool1.slice(0, 6), pool2.slice(0, 6), pool3.slice(0, 6)];
     }, []);
 
   return (
@@ -196,13 +196,28 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.94 }}
               transition={{ type: "spring", stiffness: 320, damping: 28 }}
-              className="relative z-10 max-w-5xl max-h-[90vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] bg-black border border-white/20 flex flex-col items-center justify-center cursor-default"
+              className="relative z-10 max-w-5xl max-h-[90vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.95)] bg-black border border-white/20 flex flex-col items-center justify-center cursor-default select-none"
+              onContextMenu={(e) => e.preventDefault()}
             >
-              <img
-                src={selectedPhoto.src}
-                alt={selectedPhoto.title || "Powiększone zdjęcie"}
-                className="w-auto h-auto max-w-full max-h-[82vh] object-contain rounded-2xl sm:rounded-3xl"
-              />
+              <div className="relative w-full flex items-center justify-center">
+                <img
+                  src={selectedPhoto.src}
+                  alt={selectedPhoto.title || "Powiększone zdjęcie"}
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="w-auto h-auto max-w-full max-h-[82vh] object-contain rounded-2xl sm:rounded-3xl pointer-events-none select-none"
+                />
+                {/* Niewidoczna tarcza uniemożliwiająca pobranie pliku */}
+                <div
+                  className="absolute inset-0 z-10"
+                  onContextMenu={(e) => e.preventDefault()}
+                  onDragStart={(e) => e.preventDefault()}
+                />
+                {/* Znak wodny praw autorskich */}
+                <div className="absolute bottom-4 right-4 z-20 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-[10px] font-mono text-zinc-300 pointer-events-none select-none shadow-sm">
+                  © Koci Przyjaciel *PL · Prawa zastrzeżone
+                </div>
+              </div>
 
               <div className="w-full bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 flex items-center justify-between text-xs font-mono text-zinc-300">
                 <span className="text-amber-300 font-semibold">
@@ -215,7 +230,7 @@ export default function BentoShowcaseSection({ lang }: BentoShowcaseSectionProps
 
               <button
                 onClick={() => setSelectedPhoto(null)}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white border border-white/25 flex items-center justify-center backdrop-blur-md transition-all cursor-pointer hover:scale-110 shadow-lg"
+                className="absolute top-4 right-4 z-30 w-10 h-10 rounded-full bg-black/70 hover:bg-black text-white border border-white/25 flex items-center justify-center backdrop-blur-md transition-all cursor-pointer hover:scale-110 shadow-lg"
                 title="Zamknij (Esc)"
               >
                 <X className="w-5 h-5" />

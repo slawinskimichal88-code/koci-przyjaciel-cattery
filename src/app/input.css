@@ -360,3 +360,51 @@
   animation-play-state: paused;
 }
 
+/* ========================================================================== */
+/* OCHRONA TREŚCI, ZDJĘĆ I MULTIMEDIÓW (ANTI-THEFT / ANTI-COPY / ANTI-DRAG)    */
+/* ========================================================================== */
+
+/* Blokada zaznaczania tekstu na całej stronie */
+body, img, video, a, button, div, span, p, h1, h2, h3, h4, h5, h6 {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Zezwolenie na zaznaczanie tekstu wyłącznie w polach formularza */
+input, textarea {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Blokada przeciągania obrazków i wideo */
+img, video {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-touch-callout: none;
+}
+
+/* Tarcza ochronna na wideo i zdjęcia */
+.media-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Ukrycie zawartości przed drukowaniem i próbą eksportu do PDF */
+@media print {
+  body {
+    display: none !important;
+  }
+}
+
+

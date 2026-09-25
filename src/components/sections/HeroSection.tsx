@@ -240,12 +240,17 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         <video
           ref={videoRef}
           src="/video/hero-cat.mp4"
+          poster="/video/hero-poster.webp"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
-          className="absolute inset-0 w-full h-full object-cover object-[60%_center]"
+          controlsList="nodownload nofullscreen noremoteplayback"
+          disablePictureInPicture
+          disableRemotePlayback
+          onContextMenu={(e) => e.preventDefault()}
+          className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none"
           style={{
             opacity: 0,
             transform: "scale(1.06)",

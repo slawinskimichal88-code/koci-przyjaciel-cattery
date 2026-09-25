@@ -278,11 +278,15 @@ export default function AboutPage() {
                     <div className="relative w-full aspect-[9/16] rounded-[38px] overflow-hidden bg-black">
                       <video
                         src="/video/breeder-full.mp4"
-                        poster="/video/breeder-full-poster.jpg"
+                        poster="/video/breeder-full-poster.webp"
                         controls
                         playsInline
                         preload="metadata"
-                        className="w-full h-full object-cover"
+                        controlsList="nodownload nofullscreen noremoteplayback"
+                        disablePictureInPicture
+                        disableRemotePlayback
+                        onContextMenu={(e) => e.preventDefault()}
+                        className="w-full h-full object-cover select-none"
                       />
                     </div>
                   </div>
@@ -503,12 +507,17 @@ export default function AboutPage() {
                 
                 <video
                   src="/video/film2.mp4"
-                  poster="/images/gallery/wybieg/wybieg_001.jpeg"
+                  poster="/images/gallery/wybieg/wybieg_001.webp"
                   autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  className="w-full h-full object-cover scale-105"
+                  preload="metadata"
+                  controlsList="nodownload nofullscreen noremoteplayback"
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="w-full h-full object-cover scale-105 pointer-events-none select-none"
                 />
                 
                 {/* Overlay Gradient */}

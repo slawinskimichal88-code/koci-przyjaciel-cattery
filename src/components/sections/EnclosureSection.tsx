@@ -542,13 +542,17 @@ export default function EnclosureSection({
                     <video
                       ref={videoRef}
                       src="/video/film2.mp4"
-                      poster="/images/gallery/wybieg/wybieg_001.jpeg"
+                      poster="/images/gallery/wybieg/wybieg_001.webp"
                       autoPlay
                       loop
                       muted={isMuted}
                       playsInline
-                      preload="auto"
-                      className="w-full h-full object-cover pointer-events-none scale-[1.05]"
+                      preload="metadata"
+                      controlsList="nodownload nofullscreen noremoteplayback"
+                      disablePictureInPicture
+                      disableRemotePlayback
+                      onContextMenu={(e) => e.preventDefault()}
+                      className="w-full h-full object-cover pointer-events-none scale-[1.05] select-none"
                     />
                     <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
                       <div className="w-2 h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
@@ -781,13 +785,17 @@ export default function EnclosureSection({
                 <video
                   ref={mobileVideoRef}
                   src="/video/film2.mp4"
-                  poster="/images/gallery/wybieg/wybieg_001.jpeg"
+                  poster="/images/gallery/wybieg/wybieg_001.webp"
                   autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="auto"
-                  className="w-full h-full object-cover scale-[1.04]"
+                  preload="metadata"
+                  controlsList="nodownload nofullscreen noremoteplayback"
+                  disablePictureInPicture
+                  disableRemotePlayback
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="w-full h-full object-cover scale-[1.04] pointer-events-none select-none"
                 />
                 
                 {/* Dynamic Island */}

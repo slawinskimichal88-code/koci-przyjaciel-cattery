@@ -316,7 +316,8 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
                 src={item.src}
                 alt="Maine Coon Koci Przyjaciel w nowym domu"
                 fill
-                className="object-cover group-hover:scale-105 transition-all duration-500"
+                draggable={false}
+                className="object-cover group-hover:scale-105 transition-all duration-500 pointer-events-none select-none"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
               />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -366,13 +367,16 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
                 </button>
               </div>
 
-              <div className="relative w-full max-h-[60vh] bg-black flex items-center justify-center overflow-hidden">
+              <div className="relative w-full max-h-[60vh] bg-black flex items-center justify-center overflow-hidden select-none" onContextMenu={(e) => e.preventDefault()}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={activeStory.screenSrc}
                   alt={activeStory.quote}
-                  className="w-full h-auto max-h-[60vh] object-contain"
+                  draggable={false}
+                  onContextMenu={(e) => e.preventDefault()}
+                  className="w-full h-auto max-h-[60vh] object-contain pointer-events-none select-none"
                 />
+                <div className="absolute inset-0 z-10" onContextMenu={(e) => e.preventDefault()} onDragStart={(e) => e.preventDefault()} />
               </div>
 
               <div className="p-4 border-t border-zinc-100 bg-white">

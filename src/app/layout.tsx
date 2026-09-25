@@ -4,6 +4,7 @@ import "./globals.css";
 import StructuredData from "@/components/StructuredData";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/providers/ScrollRevealProvider";
+import SecurityProtection from "@/components/security/SecurityProtection";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
@@ -113,6 +114,7 @@ export default function RootLayout({
       >
         <StructuredData />
         <ScrollRevealProvider />
+        <SecurityProtection />
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
