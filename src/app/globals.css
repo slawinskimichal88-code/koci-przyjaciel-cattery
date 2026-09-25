@@ -540,6 +540,9 @@
   .z-50 {
     z-index: 50;
   }
+  .z-\[60\] {
+    z-index: 60;
+  }
   .z-\[9999\] {
     z-index: 9999;
   }
@@ -1211,6 +1214,9 @@
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
+  .transform-gpu {
+    transform: translateZ(0) var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
   .animate-\[spin_25s_linear_infinite_reverse\] {
     animation: spin 25s linear infinite reverse;
   }
@@ -1508,9 +1514,9 @@
     border-style: var(--tw-border-style);
     border-width: 3px;
   }
-  .border-\[10px\] {
+  .border-\[12px\] {
     border-style: var(--tw-border-style);
-    border-width: 10px;
+    border-width: 12px;
   }
   .border-y {
     border-block-style: var(--tw-border-style);
@@ -4479,6 +4485,10 @@
       --tw-translate-y: calc(var(--spacing) * -1.5);
       translate: var(--tw-translate-x) var(--tw-translate-y);
     }
+    .hover\:-translate-y-2:hover {
+      --tw-translate-y: calc(var(--spacing) * -2);
+      translate: var(--tw-translate-x) var(--tw-translate-y);
+    }
     .hover\:scale-105:hover {
       --tw-scale-x: 105%;
       --tw-scale-y: 105%;
@@ -4496,6 +4506,10 @@
     }
     .hover\:rotate-0:hover {
       rotate: 0deg;
+    }
+    .hover\:rotate-y-2:hover {
+      --tw-rotate-y: rotateY(2deg);
+      transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
     }
     .hover\:border-\[\#2A221F\]:hover {
       border-color: #2A221F;
@@ -4642,9 +4656,6 @@
     }
     .hover\:bg-\[\#166fe5\]:hover {
       background-color: #166fe5;
-    }
-    .hover\:bg-\[\#1877F2\]\/30:hover {
-      background-color: color-mix(in oklab, #1877F2 30%, transparent);
     }
     .hover\:bg-\[\#433530\]:hover {
       background-color: #433530;
@@ -5054,6 +5065,9 @@
     .sm\:-mt-14 {
       margin-top: calc(var(--spacing) * -14);
     }
+    .sm\:mt-1 {
+      margin-top: var(--spacing);
+    }
     .sm\:mb-6 {
       margin-bottom: calc(var(--spacing) * 6);
     }
@@ -5206,6 +5220,9 @@
     }
     .sm\:gap-3 {
       gap: calc(var(--spacing) * 3);
+    }
+    .sm\:gap-3\.5 {
+      gap: calc(var(--spacing) * 3.5);
     }
     .sm\:gap-4 {
       gap: calc(var(--spacing) * 4);
@@ -5385,8 +5402,15 @@
       font-size: var(--text-xs);
       line-height: var(--tw-leading, var(--text-xs--line-height));
     }
+    .sm\:text-\[11px\] {
+      font-size: 11px;
+    }
     .sm\:text-\[14px\] {
       font-size: 14px;
+    }
+    .sm\:tracking-\[0\.25em\] {
+      --tw-tracking: 0.25em;
+      letter-spacing: 0.25em;
     }
   }
   @media (width >= 48rem) {

@@ -51,10 +51,9 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
 
           {/* Logo & Nazwa - Wyraźnie powiększone i wyraziste */}
-          <Link href="/" className="flex items-center gap-3.5 group shrink-0">
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
             <div
-              className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.25)] group-hover:border-white group-hover:shadow-[0_0_25px_rgba(255,255,255,0.45)] transition-all duration-300 shrink-0 bg-black"
-              style={{ position: "relative", width: 56, height: 56 }}
+              className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.25)] group-hover:border-white group-hover:shadow-[0_0_25px_rgba(255,255,255,0.45)] transition-all duration-300 shrink-0 bg-black"
             >
               <Image
                 src="/logo.png"
@@ -66,10 +65,10 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg sm:text-xl font-heading font-semibold text-white group-hover:text-amber-200 transition-colors tracking-wide leading-tight whitespace-nowrap">
+              <span className="text-base sm:text-xl font-heading font-semibold text-white group-hover:text-amber-200 transition-colors tracking-wide leading-tight whitespace-nowrap">
                 Koci Przyjaciel <span className="text-xs sm:text-sm text-amber-300 font-serif font-light italic">*PL</span>
               </span>
-              <span className="text-[11px] font-ui uppercase tracking-[0.25em] text-zinc-300 font-medium leading-none mt-1">
+              <span className="text-[10px] sm:text-[11px] font-ui uppercase tracking-[0.2em] sm:tracking-[0.25em] text-zinc-300 font-medium leading-none mt-0.5 sm:mt-1">
                 FIFe · FPL · Wrocław
               </span>
             </div>
@@ -152,32 +151,25 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             </a>
           </div>
 
-          {/* Mobilny Hamburger & Quick Action */}
-          <div className="flex lg:hidden items-center gap-2">
-            <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-full bg-[#1877F2]/20 border border-[#1877F2]/40 text-[#1877F2] hover:bg-[#1877F2]/30 flex items-center gap-1.5 transition-all"
-              title="Facebook"
-            >
-              <FacebookIcon className="w-3.5 h-3.5 text-[#1877F2]" />
-              <span className="text-[11px] font-mono uppercase text-white font-bold">FB</span>
-            </a>
-
+          {/* Mobilny Hamburger & Language Switcher — gwarancja braku ucinania na telefonach */}
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <button
               onClick={() => setLang(lang === "PL" ? "EN" : "PL")}
-              className="px-2.5 py-1.5 rounded-full text-xs font-mono font-semibold text-zinc-300 bg-white/5 border border-white/10"
+              className="px-2.5 py-1.5 rounded-full text-xs font-mono font-semibold text-zinc-300 bg-white/5 hover:bg-white/15 border border-white/10 transition-all cursor-pointer"
+              title="Zmień język / Change language"
             >
               {lang === "PL" ? "EN" : "PL"}
             </button>
 
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer border border-white/15"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer border border-white/20 active:scale-95 shadow-sm"
               aria-label="Menu nawigacyjne"
             >
-              {menuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              <span className="text-xs font-ui font-semibold uppercase tracking-wider">
+                {menuOpen ? (lang === "PL" ? "Zamknij" : "Close") : "Menu"}
+              </span>
+              {menuOpen ? <X className="w-4 h-4 text-amber-300" /> : <Menu className="w-4 h-4 text-white" />}
             </button>
           </div>
 
@@ -186,8 +178,21 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
 
       {/* Menu Mobilne (Pełny ekran, nowoczesny drawer z dużymi fontami) */}
       {menuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0B0B0D]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-10 pt-28 pb-10 overflow-y-auto lg:hidden animate-fadeIn">
+        <div className="fixed inset-0 z-[60] bg-[#0B0B0D]/98 backdrop-blur-2xl flex flex-col justify-between p-6 sm:p-10 pt-24 pb-10 overflow-y-auto lg:hidden animate-fadeIn">
           
+          <div className="flex items-center justify-between pb-4 border-b border-white/10 mb-4">
+            <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-zinc-400 font-semibold">
+              {lang === "PL" ? "NAWIGACJA HODOWLI" : "CATTERY NAVIGATION"}
+            </p>
+            <button
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 text-white border border-white/20 text-xs font-mono font-semibold cursor-pointer"
+            >
+              <span>{lang === "PL" ? "ZAMKNIJ" : "CLOSE"}</span>
+              <X className="w-3.5 h-3.5 text-amber-300" />
+            </button>
+          </div>
+
           <nav className="flex flex-col gap-3">
             <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-zinc-500 mb-2">
               {lang === "PL" ? "NAWIGACJA HODOWLI" : "CATTERY NAVIGATION"}

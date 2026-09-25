@@ -85,13 +85,25 @@ export default function BreederSection({
   const mobileSubtitleRef = useRef<HTMLDivElement>(null);
 
   const [isMuted, setIsMuted] = useState<boolean>(true);
-  const [isDesktopDevice, setIsDesktopDevice] = useState<boolean>(true);
+  const [isDesktopDevice, setIsDesktopDevice] = useState<boolean | null>(null);
   const [sectionHeight, setSectionHeight] = useState<string>("380vh");
 
   const toggleMute = () => {
     const nextMuted = !isMuted;
-    if (videoRef.current) videoRef.current.muted = nextMuted;
-    if (mobileVideoRef.current) mobileVideoRef.current.muted = nextMuted;
+    const isDesk = window.innerWidth >= 1024;
+    if (isDesk) {
+      if (videoRef.current) videoRef.current.muted = nextMuted;
+      if (mobileVideoRef.current) {
+        mobileVideoRef.current.muted = true;
+        mobileVideoRef.current.pause();
+      }
+    } else {
+      if (mobileVideoRef.current) mobileVideoRef.current.muted = nextMuted;
+      if (videoRef.current) {
+        videoRef.current.muted = true;
+        videoRef.current.pause();
+      }
+    }
     setIsMuted(nextMuted);
   };
 
@@ -104,6 +116,17 @@ export default function BreederSection({
       const d = window.innerWidth >= 1024;
       setIsDesktopDevice(d);
       setSectionHeight(d ? "380vh" : "290vh");
+      if (d) {
+        if (mobileVideoRef.current) {
+          mobileVideoRef.current.pause();
+          mobileVideoRef.current.muted = true;
+        }
+      } else {
+        if (videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.muted = true;
+        }
+      }
     };
     window.addEventListener("resize", onResize, { passive: true });
     return () => window.removeEventListener("resize", onResize);
@@ -113,9 +136,31 @@ export default function BreederSection({
     const section = sectionRef.current;
     if (!section) return;
 
-    // Autoplay natychmiast po zamontowaniu
-    if (videoRef.current) videoRef.current.play().catch(() => {});
-    if (mobileVideoRef.current) mobileVideoRef.current.play().catch(() => {});
+    // Bezpieczny odtwarzacz: tylko JEDNO aktywne wideo (brak echa i przegłosu)
+    const playActiveVideo = () => {
+      const isDesk = window.innerWidth >= 1024;
+      if (isDesk) {
+        if (videoRef.current) {
+          videoRef.current.muted = isMuted;
+          videoRef.current.play().catch(() => {});
+        }
+        if (mobileVideoRef.current) {
+          mobileVideoRef.current.pause();
+          mobileVideoRef.current.muted = true;
+        }
+      } else {
+        if (mobileVideoRef.current) {
+          mobileVideoRef.current.muted = isMuted;
+          mobileVideoRef.current.play().catch(() => {});
+        }
+        if (videoRef.current) {
+          videoRef.current.pause();
+          videoRef.current.muted = true;
+        }
+      }
+    };
+
+    playActiveVideo();
 
     // IntersectionObserver — pauzuj wideo gdy sekcja nie jest na ekranie
     let observer: IntersectionObserver | null = null;
@@ -123,14 +168,11 @@ export default function BreederSection({
       observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            const v = videoRef.current;
-            const mv = mobileVideoRef.current;
             if (entry.isIntersecting) {
-              if (v && v.src) v.play().catch(() => {});
-              if (mv && mv.src) mv.play().catch(() => {});
+              playActiveVideo();
             } else {
-              if (v) v.pause();
-              if (mv) mv.pause();
+              if (videoRef.current) videoRef.current.pause();
+              if (mobileVideoRef.current) mobileVideoRef.current.pause();
             }
           });
         },
@@ -548,9 +590,8 @@ export default function BreederSection({
                 <div className="relative w-full aspect-[9/16] rounded-[40px] overflow-hidden bg-black">
                   <video
                     ref={videoRef}
-                    src="/video/breeder-short.mp4"
+                    src={isDesktopDevice === false ? undefined : "/video/breeder-short.mp4"}
                     poster="/video/breeder-poster.webp"
-                    autoPlay
                     loop
                     muted={isMuted}
                     playsInline
@@ -628,9 +669,8 @@ export default function BreederSection({
             <div className="relative w-full aspect-[9/16] rounded-[32px] overflow-hidden bg-black max-h-[380px]">
               <video
                 ref={mobileVideoRef}
-                src="/video/breeder-short.mp4"
+                src={isDesktopDevice === true ? undefined : "/video/breeder-short.mp4"}
                 poster="/video/breeder-poster.webp"
-                autoPlay
                 loop
                 muted={isMuted}
                 playsInline

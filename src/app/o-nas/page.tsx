@@ -35,28 +35,6 @@ export default function AboutPage() {
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [selectedGalleryCategory, setSelectedGalleryCategory] = useState<string>("all");
-  const wybiegVideoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = wybiegVideoRef.current;
-    if (!video || typeof IntersectionObserver === "undefined") return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            video.play().catch(() => {});
-          } else {
-            video.pause();
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-
-    observer.observe(video);
-    return () => observer.disconnect();
-  }, []);
 
   const wybiegPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "wybieg"), []);
   const domPhotos = useMemo(
@@ -413,26 +391,26 @@ export default function AboutPage() {
             </div>
 
             {/* Right side iPhone Mockup */}
-            <div className="lg:w-1/2 flex justify-center">
-              <div className="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[3rem] border-[10px] border-[#18181B] bg-black shadow-2xl ring-1 ring-white/10 overflow-hidden select-none">
+            <div className="lg:w-1/2 flex justify-center perspective-1000">
+              <div className="relative w-full max-w-[320px] aspect-[9/19.5] rounded-[3rem] border-[12px] border-[#18181B] bg-black shadow-2xl ring-1 ring-white/10 overflow-hidden transform-gpu hover:-translate-y-2 hover:rotate-y-2 transition-all duration-700 ease-out animate-in fade-in slide-in-from-bottom-10">
                 {/* Dynamic Island */}
-                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-20 flex items-center justify-center pointer-events-none">
+                <div className="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-7 bg-black rounded-full z-20 flex items-center justify-center">
                    <div className="w-2 h-2 rounded-full bg-white/10 absolute right-2" />
                 </div>
                 
                 <video
-                  ref={wybiegVideoRef}
                   src="/video/film2.mp4"
                   poster="/images/gallery/wybieg/wybieg_001.webp"
+                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="none"
+                  preload="metadata"
                   controlsList="nodownload nofullscreen noremoteplayback"
                   disablePictureInPicture
                   disableRemotePlayback
                   onContextMenu={(e) => e.preventDefault()}
-                  className="w-full h-full object-cover pointer-events-none select-none"
+                  className="w-full h-full object-cover scale-105 pointer-events-none select-none"
                 />
                 
                 {/* Overlay Gradient */}
