@@ -261,7 +261,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           disablePictureInPicture
           disableRemotePlayback
           onContextMenu={(e) => e.preventDefault()}
-          className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none transition-opacity duration-500 z-[1]"
+          className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none transition-opacity duration-500 z-0"
           style={{
             opacity: 1,
             transform: "scale(1)",
@@ -270,32 +270,33 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         />
 
         {/* Ciepły, złocisty odcień filmowy bez obciążania procesora GPU filtrami */}
-        <div className="absolute inset-0 bg-[#3a200a]/25 mix-blend-color pointer-events-none" />
-        <div className="absolute inset-0 bg-black/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-[#3a200a]/25 mix-blend-color pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-black/35 pointer-events-none z-10" />
 
         {/* Dodatkowe przyciemnienie na scroll */}
         <div
           ref={overlayRef}
-          className="absolute inset-0 bg-black pointer-events-none"
+          className="absolute inset-0 bg-black pointer-events-none z-10"
           style={{ opacity: 0 }}
         />
 
-        {/* Boczny gradient dla czytelności */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black via-black/70 to-transparent pointer-events-none" />
-        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/70 via-black/30 to-transparent pointer-events-none" />
+        {/* Boczny i pionowe gradienty dla czytelności napisów */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/25 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-black/75 via-black/30 to-transparent pointer-events-none z-10" />
 
-        {/* Globalna kinowa winieta narożników (przyciemnienie rogów) */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_45%,rgba(0,0,0,0.85)_100%)]" />
+        {/* Globalna kinowa winieta narożników (przyciemnienie rogów kodem CSS) */}
+        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(0,0,0,0.85)_100%)] z-10" />
 
-        {/* Bezpośredni, czysty podgląd wideo w tle bez czarnych bloków i kwadratów */}
+        {/* Dedykowane, głębokie przyciemnienie dolnego prawego rogu kodem CSS (maskowanie loga/gwiazdki z filmu) */}
+        <div className="absolute bottom-0 right-0 w-80 sm:w-[480px] h-56 sm:h-72 pointer-events-none bg-gradient-to-tl from-black via-black/90 to-transparent z-10" />
 
         {/* ============================================================ */}
-        {/* SCENA 0 — Wielkie Logo + Keynote Apple Reveal                */}
+        {/* SCENA 0 — Wielkie Logo + Teksty Hero + Przyciski Akcji       */}
         {/* ============================================================ */}
         <div
           ref={badgeRef}
-          className="absolute inset-0 pt-24 sm:pt-28 md:pt-32 pb-16 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
+          className="absolute inset-0 pt-24 sm:pt-28 md:pt-32 pb-16 flex flex-col items-center justify-center text-center px-6 pointer-events-none z-20"
           style={{ opacity: 1, transform: "translateY(0px) scale(1)", willChange: "opacity, transform" }}
         >
           <div className="flex flex-col items-center pointer-events-auto">
@@ -345,13 +346,39 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
                 Wychowujemy kociaki z miłością · od 10 lat
               </span>
             </p>
+
+            {/* Bezpośrednie przyciski CTA na filmie */}
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6">
+              <Link
+                href="/dostepne-kociaki"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-ui text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.25)] hover:scale-105"
+              >
+                <span>{lang === "PL" ? "Dostępne Kociaki" : "Available Kittens"}</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <button
+                onClick={onOpenReservation}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-ui text-xs sm:text-sm font-semibold border border-white/20 transition-all hover:scale-105 cursor-pointer backdrop-blur-md"
+              >
+                <span>{lang === "PL" ? "Zarezerwuj Kociaka" : "Reserve Kitten"}</span>
+              </button>
+
+              <a
+                href={`tel:${REAL_PHONE_RAW}`}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.05] hover:bg-white/[0.12] text-zinc-300 hover:text-white font-ui text-xs sm:text-sm font-medium border border-white/10 transition-all"
+              >
+                <Phone className="w-4 h-4 text-amber-300" />
+                <span>{REAL_PHONE}</span>
+              </a>
+            </div>
           </div>
         </div>
 
         {/* Scroll hint */}
         <div
           ref={scrollHintRef}
-          className="absolute bottom-8 left-0 right-0 flex justify-center pointer-events-none"
+          className="absolute bottom-8 left-0 right-0 flex justify-center pointer-events-none z-20"
           style={{ opacity: 1, willChange: "opacity" }}
         >
           <div className="flex flex-col items-center gap-2">
@@ -365,7 +392,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={headline1Ref}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -397,7 +424,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={headline2Ref}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -425,7 +452,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={headline3Ref}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -448,7 +475,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={ctaRef}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">

@@ -56,3 +56,16 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
    - **Płynność Galerii 120 FPS**: `FluidBentoCell.tsx` wzbogacony o `useInView` (automatyczne pauzowanie pętli poza widokiem – zero zbędnego obciążenia GPU/CPU), akcelerację sprzętową `translate3d`, asynchroniczne dekodowanie obrazów oraz odchudzenie puli do 6 kadrów na kafelek.
    - **Ochrona Witryny (Anti-Copy / Anti-Download)**: Komponent `SecurityProtection.tsx` blokujący prawy przycisk myszy (z eleganckim powiadomieniem VisionOS), blokada przeciągania (`-webkit-user-drag: none`), blokada zaznaczania tekstu (`user-select: none`), blokada skrótów klawiszowych (F12, Ctrl+U, Ctrl+S, Ctrl+P, Ctrl+Shift+I/J/C), tarcze `media-shield` i znaki wodne w Lightboxie oraz blokada drukowania `@media print`.
    - Wdrożono na produkcję Vercel (`dpl_7o9YBX3TVn9RzYtFXm4n3TxmYw7L`), zsynchronizowano z `Downloads\KOPIA STRONY` oraz wypchnięto na GitHub `main`.
+12. **Optymalizacja Google PageSpeed Insights & Lighthouse (Core Web Vitals)**:
+    - **Narzędzia audytu**: Utworzono automatyczny skrypt `scripts/run_lighthouse_audit.mjs` z emulacją Mobile (dławienie CPU 4x, sieć 4G Moto G) oraz Desktop.
+    - **Wyniki Desktop**: Performance: **97/100**, Accessibility: **96/100**, Best Practices: **100/100**, SEO: **100/100** (FCP: **0.4 s**, LCP: **0.9 s**, TBT: **130 ms**, CLS: **0.019**).
+    - **Wyniki Mobile**: Performance podniesiony z **54/100** do **72/100**, FCP skrócony z **5.1 s** do **1.5 s** (-70%), Speed Index skrócony z **9.4 s** do **3.9 s** (-58%), CLS: **0.015**, Best Practices: **100/100**, SEO: **100/100**, Accessibility: **96/100**.
+    - **Wdrożone techniki**:
+      1. Konwersja 6 zrzutów Facebooka (>3.6 MB) do miniatur WebP (8-13 KB) z lazy loading.
+      2. Odchudzenie logo z 421 KB do 27.4 KB WebP (unoptimized dla bezpośredniego serwowania).
+      3. Kompresja wideo Hero na telefony do 405 KB z ultra-lekkim plakatem 12.7 KB i odroczonym ładowaniem strumienia wideo.
+      4. Usunięcie błędnego priority ze ScaleComparisonSection poniżej linii zgięcia.
+      5. Zastąpienie zewnętrznych fontów Google CDN zoptymalizowanym pojedynczym Cormorant Garamond z next/font/google i natywnym system font stackiem dla UI/Body (eliminacja 280 KB zbędnego transferu fontów i 5 zapytań WOFF2).
+      6. Usunięcie animacji heroLogoEntrance i blur-3xl z Hero (eliminacja layout thrashingu i redukcja czasu głównego wątku).
+      7. Poprawa A11y (aria-label na przyciskach wideo, poprawna hierarchia nagłówków H3).
+      8. Commit be91409 wypchnięty do GitHub origin/main.
