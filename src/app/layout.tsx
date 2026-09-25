@@ -1,30 +1,10 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Raleway, Inter } from "next/font/google";
 import "./globals.css";
 import "./custom.css";
 import StructuredData from "@/components/StructuredData";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/providers/ScrollRevealProvider";
 import SecurityProtection from "@/components/security/SecurityProtection";
-
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-cormorant",
-  weight: ["400", "600", "700"],
-  display: "swap",
-});
-
-const raleway = Raleway({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-raleway",
-  display: "swap",
-});
-
-const inter = Inter({
-  subsets: ["latin", "latin-ext"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kociprzyjaciel.pl"),
@@ -107,7 +87,7 @@ export default function RootLayout({
       lang="pl"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`${cormorant.variable} ${raleway.variable} ${inter.variable}`}
+      className="scroll-smooth"
     >
       <body
         suppressHydrationWarning

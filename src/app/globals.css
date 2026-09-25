@@ -1439,6 +1439,9 @@
   .overflow-y-auto {
     overflow-y: auto;
   }
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
   .rounded {
     border-radius: 0.25rem;
   }
@@ -6487,6 +6490,14 @@ img, video {
 /* ========================================================================== */
 /* KOCI PRZYJACIEL *PL — CUSTOM STYLES, HARDWARE KEYFRAMES & ANTI-THEFT SHIELD */
 /* ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-raleway: 'Raleway', system-ui, -apple-system, sans-serif;
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+}
 
 /* Typografia */
 .font-heading {
