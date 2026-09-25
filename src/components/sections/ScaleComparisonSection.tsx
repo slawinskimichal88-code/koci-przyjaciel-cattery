@@ -48,7 +48,8 @@ export default function ScaleComparisonSection({
               alt="Maine Coon vs Kot Domowy vs Pies Beagle w skali 1:1"
               fill
               className="object-contain"
-              priority
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, 1200px"
             />
 
             {/* Laserowe linie miary HUD */}

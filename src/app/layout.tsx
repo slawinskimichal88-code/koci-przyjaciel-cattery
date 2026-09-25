@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
+import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import "./custom.css";
 import StructuredData from "@/components/StructuredData";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/providers/ScrollRevealProvider";
 import SecurityProtection from "@/components/security/SecurityProtection";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kociprzyjaciel.pl"),
@@ -87,7 +94,7 @@ export default function RootLayout({
       lang="pl"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className="scroll-smooth"
+      className={`scroll-smooth ${cormorant.variable}`}
     >
       <body
         suppressHydrationWarning

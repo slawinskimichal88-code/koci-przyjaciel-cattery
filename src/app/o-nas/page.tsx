@@ -398,7 +398,7 @@ export default function AboutPage() {
                   poster="/images/gallery/wybieg/wybieg_001.webp"
                   autoPlay
                   loop
-                  muted={isMuted}
+                  muted
                   playsInline
                   preload="metadata"
                   controlsList="nodownload nofullscreen noremoteplayback"
@@ -413,7 +413,7 @@ export default function AboutPage() {
 
                 {/* Video Info Overlay */}
                 <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                  <div className="max-w-[75%]">
+                  <div className="max-w-xl">
                     <span className="px-3 py-1 rounded-full bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 text-xs font-mono text-emerald-300 mb-2 inline-block">
                       WOLIERA · WROCŁAW
                     </span>
@@ -421,13 +421,6 @@ export default function AboutPage() {
                       Ciepłe dni na bezklatkowym wybiegu
                     </p>
                   </div>
-                  <button
-                    onClick={() => setIsMuted(!isMuted)}
-                    className="p-3.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all cursor-pointer shadow-lg"
-                    title={isMuted ? "Włącz dźwięk" : "Wycisz dźwięk"}
-                  >
-                    {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 text-emerald-400" />}
-                  </button>
                 </div>
               </div>
             </div>

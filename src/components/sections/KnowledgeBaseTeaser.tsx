@@ -40,24 +40,6 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
         : "Every parent cat in our cattery has certified DNA tests and yearly Doppler echocardiography. See what to look for when choosing a kitten.",
       href: "/baza-wiedzy#zdrowie",
     },
-    {
-      icon: Utensils,
-      tag: lang === "PL" ? "ŻYWIENIE BEZZBOŻOWE" : "SPECIES-APPROPRIATE DIET",
-      title: lang === "PL" ? "Dlaczego 0% zbóż w diecie to klucz?" : "Why 0% grain is the key?",
-      desc: lang === "PL"
-        ? "Koty to bezwzględni mięsożercy. Dowiedz się, dlaczego tanie karmy z marketu niszczą nerki i jak ułożyć prostą dietę wysokomięsną lub BARF."
-        : "Cats are obligate carnivores. Learn why cheap commercial kibble harms kidneys and how to build an easy meat-based or BARF diet.",
-      href: "/kalkulator",
-    },
-    {
-      icon: Coins,
-      tag: lang === "PL" ? "BEZPIECZEŃSTWO DOMU" : "HOME SAFETY & ADAPTATION",
-      title: lang === "PL" ? "Drapaki XXL i siatkowanie balkonu" : "XXL Scratchers & Balcony Netting",
-      desc: lang === "PL"
-        ? "Maine Coon nie zmieści się na standardowym drapaku ze sklepu zoologicznego. Przygotowaliśmy listę sprawdzonych solidnych akcesoriów."
-        : "A Maine Coon won't fit a standard pet shop cat tree. We prepared a checklist of durable, heavy-duty furniture and safety tips.",
-      href: "/baza-wiedzy#faq",
-    },
   ];
 
   return (
@@ -180,7 +162,7 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
           </div>
         </div>
 
-        {/* ── 4 Filary Bazy Wiedzy (iPhone Frosted Glass) ───────────── */}
+        {/* ── 2 Kluczowe Tematy Bazy Wiedzy (iPhone Frosted Glass) ───────────── */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
           {cards.map((c, i) => {
             const Icon = c.icon;

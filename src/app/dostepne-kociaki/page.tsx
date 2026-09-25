@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -20,18 +20,12 @@ import {
   Home,
   Users,
 } from "lucide-react";
-import { ALL_AGA_PHOTOS } from "@/data/agaGalleryData";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL } from "@/data/realCatsData";
-import StaticBentoGrid from "@/components/gallery/StaticBentoGrid";
 
 export default function AvailableKittensPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [reservationKitten, setReservationKitten] = useState("");
-
-  const mlodePhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "mlode"), []);
-  const matkiPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "matki"), []);
-  const kocuryPhotos = useMemo(() => ALL_AGA_PHOTOS.filter((p) => p.category === "kocury"), []);
 
   const handleOpenReservation = (kittenName?: string) => {
     setReservationKitten(kittenName || "");
@@ -198,103 +192,6 @@ export default function AvailableKittensPage() {
               </p>
             </div>
 
-          </div>
-        </section>
-
-        {/* ── ARCHIWUM MIOTÓW: ZDJĘCIA WYCHOWANKÓW W NOWYCH DOMACH ───── */}
-        <section id="archiwum-mlode" className="max-w-6xl mx-auto px-6 sm:px-10 py-12 scroll-mt-28 border-t border-white/10">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-amber-400 font-semibold">
-              {lang === "PL" ? "ARCHIWUM HODOWLI · NASI WYCHOWANKOWIE" : "ARCHIVE · PREVIOUS LITTERS"}
-            </span>
-            <div className="h-[1px] flex-1 bg-white/10" />
-          </div>
-
-          <div className="p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 mb-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-heading font-light text-white mb-2">
-                {lang === "PL" ? "Maluchy z naszych poprzednich miotów" : "Kittens from our previous litters"}
-              </h3>
-              <p className="text-sm text-zinc-300 font-body font-light">
-                {lang === "PL"
-                  ? "Wszystkie kocięta widoczne w tej galerii mieszkają już w swoich nowych, kochających domach. Zobacz, jak pięknie i zdrowo rozwijały się w naszej hodowli."
-                  : "All kittens shown below are happily rehomed with their loving families."}
-              </p>
-            </div>
-            <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-ui text-xs font-semibold uppercase tracking-wider transition-all shrink-0 cursor-pointer"
-            >
-              {lang === "PL" ? "Zapytaj o kolejny miot na Facebooku" : "Inquire on Facebook"}
-            </a>
-          </div>
-
-          {/* Czysta, ultraszybka Siatka Bento ze zdjęciami z archiwum folderu młode */}
-          <StaticBentoGrid
-            photos={mlodePhotos}
-            lang={lang}
-            badge={lang === "PL" ? "🍼 Archiwum Miotów" : "🍼 Litter Archive"}
-            title={
-              <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
-                {lang === "PL" ? (
-                  <>
-                    Wychowankowie <span className="font-semibold italic">Koci Przyjaciel *PL</span>
-                  </>
-                ) : (
-                  <>
-                    Graduates of <span className="font-semibold italic">Koci Przyjaciel *PL</span>
-                  </>
-                )}
-              </h3>
-            }
-          />
-        </section>
-
-        {/* ── KOTKI I KOCURY: RODZICE PRZYSZŁYCH MIOTÓW ───────────────── */}
-        <section id="rodzice" className="max-w-6xl mx-auto px-6 sm:px-10 py-16 scroll-mt-28 border-t border-white/10">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="text-xs font-mono uppercase tracking-[0.3em] text-amber-400 font-semibold">
-              {lang === "PL" ? "KOTY HODOWLANE · RODZICE PRZYSZŁYCH MIOTÓW" : "BREEDING CATS · FUTURE PARENTS"}
-            </span>
-            <div className="h-[1px] flex-1 bg-white/10" />
-          </div>
-
-          <div className="space-y-16">
-            {/* Matki */}
-            <div>
-              <div className="mb-6">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs font-mono mb-2">
-                  🌸 {lang === "PL" ? "Kotki Hodowlane (Matki)" : "Breeding Queens"}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
-                  {lang === "PL" ? "Kotki z naszej hodowli" : "Our Breeding Queens"}
-                </h3>
-              </div>
-              <StaticBentoGrid
-                photos={matkiPhotos}
-                lang={lang}
-                badge={lang === "PL" ? "🌸 Kotki (Matki)" : "🌸 Queens"}
-              />
-            </div>
-
-            {/* Kocury */}
-            <div className="pt-8 border-t border-white/10">
-              <div className="mb-6">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs font-mono mb-2">
-                  🦁 {lang === "PL" ? "Kocury Reproduktory" : "Breeding Studs"}
-                </span>
-                <h3 className="text-2xl sm:text-3xl font-heading font-light text-white">
-                  {lang === "PL" ? "Potężne kocury o łagodnym sercu" : "Majestic Studs"}
-                </h3>
-              </div>
-              <StaticBentoGrid
-                photos={kocuryPhotos}
-                lang={lang}
-                badge={lang === "PL" ? "🦁 Kocury (Reproduktory)" : "🦁 Studs"}
-              />
-            </div>
           </div>
         </section>
 

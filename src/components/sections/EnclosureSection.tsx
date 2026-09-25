@@ -541,13 +541,12 @@ export default function EnclosureSection({
                   <div className="relative w-full aspect-[16/9] rounded-[36px] overflow-hidden bg-black">
                     <video
                       ref={videoRef}
-                      src="/video/film2.mp4"
+                      src={isDesktopDevice ? "/video/film2.mp4" : undefined}
                       poster="/images/gallery/wybieg/wybieg_001.webp"
-                      autoPlay
                       loop
                       muted={isMuted}
                       playsInline
-                      preload="metadata"
+                      preload="none"
                       controlsList="nodownload nofullscreen noremoteplayback"
                       disablePictureInPicture
                       disableRemotePlayback
@@ -556,15 +555,6 @@ export default function EnclosureSection({
                     />
                     <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
                       <div className="w-2 h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
-                    </div>
-                    <div className="absolute bottom-4 right-4 z-30">
-                      <button
-                        onClick={toggleMute}
-                        className="w-8 h-8 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:scale-105 transition-all cursor-pointer"
-                        title={isMuted ? "Włącz dźwięk" : "Wycisz"}
-                      >
-                        {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
-                      </button>
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
                   </div>
@@ -784,13 +774,12 @@ export default function EnclosureSection({
               <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-black">
                 <video
                   ref={mobileVideoRef}
-                  src="/video/film2.mp4"
+                  src={!isDesktopDevice ? "/video/film2.mp4" : undefined}
                   poster="/images/gallery/wybieg/wybieg_001.webp"
-                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   controlsList="nodownload nofullscreen noremoteplayback"
                   disablePictureInPicture
                   disableRemotePlayback
@@ -801,17 +790,6 @@ export default function EnclosureSection({
                 {/* Dynamic Island */}
                 <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2.5 h-8 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#0a1224] border border-blue-500/20" />
-                </div>
-
-                {/* Przycisk dźwięku */}
-                <div className="absolute bottom-2.5 right-2.5 z-30">
-                  <button
-                    onClick={toggleMute}
-                    className="w-7 h-7 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/80 active:scale-95 transition-all cursor-pointer pointer-events-auto"
-                    title={isMuted ? "Włącz dźwięk" : "Wycisz"}
-                  >
-                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
-                  </button>
                 </div>
 
                 {/* Subtelny odblask szkła ekranu */}

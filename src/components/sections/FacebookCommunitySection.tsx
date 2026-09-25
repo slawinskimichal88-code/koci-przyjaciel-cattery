@@ -32,6 +32,7 @@ interface MiniStory {
   likes: string;
   comments: string;
   screenSrc: string;
+  screenThumb: string;
 }
 
 export default function FacebookCommunitySection({ lang }: FacebookCommunitySectionProps) {
@@ -48,7 +49,8 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
       quote: "Codzienne relacje z rozwoju maluchów, transmisje na żywo z salonu i bezpiecznego wybiegu.",
       likes: "26k",
       comments: "3.7k postów",
-      screenSrc: "/images/facebook/fb_screenshot_1.jpg",
+      screenSrc: "/images/facebook/fb_screenshot_1.webp",
+      screenThumb: "/images/facebook/fb_screenshot_1_thumb.webp",
     },
     {
       id: "story-2",
@@ -58,7 +60,8 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
       quote: "„Nasze koty świetnie dogadują się ze zwierzętami, które już mieliśmy. Dziękuję za piękne chwile!”",
       likes: "36",
       comments: "2",
-      screenSrc: "/images/facebook/fb_screenshot_2.jpg",
+      screenSrc: "/images/facebook/fb_screenshot_2.webp",
+      screenThumb: "/images/facebook/fb_screenshot_2_thumb.webp",
     },
     {
       id: "story-3",
@@ -68,7 +71,8 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
       quote: "„Pierwszy spacer na szelkach w koszyku rowerowym. Spokój, ciekawość świata i pełne zaufanie.”",
       likes: "20",
       comments: "2",
-      screenSrc: "/images/facebook/fb_screenshot_5.jpg",
+      screenSrc: "/images/facebook/fb_screenshot_5.webp",
+      screenThumb: "/images/facebook/fb_screenshot_5_thumb.webp",
     },
     {
       id: "story-4",
@@ -78,7 +82,8 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
       quote: "„Niebieskooka piękność i roznooka dziewczynka — duma naszej hodowli i zdrowe linie FIFe.”",
       likes: "222",
       comments: "29",
-      screenSrc: "/images/facebook/fb_screenshot_6.jpg",
+      screenSrc: "/images/facebook/fb_screenshot_6.webp",
+      screenThumb: "/images/facebook/fb_screenshot_6_thumb.webp",
     },
   ];
 
@@ -180,10 +185,12 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
                   <div className="flex items-center gap-3 mb-3">
                     {/* Miniaturka zrzutu ekranu */}
                     <div className="relative w-12 h-16 rounded-xl overflow-hidden border border-zinc-200 shrink-0 bg-zinc-100 shadow-xs group-hover:scale-105 transition-transform">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={item.screenSrc}
+                      <Image
+                        src={item.screenThumb || item.screenSrc}
                         alt={item.author}
+                        width={48}
+                        height={64}
+                        loading="lazy"
                         className="w-full h-full object-cover object-top"
                       />
                     </div>
@@ -191,9 +198,9 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
                       <span className="text-[10px] font-mono uppercase tracking-wider text-blue-800 font-bold block truncate">
                         {item.badge}
                       </span>
-                      <h4 className="text-xs font-semibold text-zinc-900 truncate">
+                      <h3 className="text-xs font-semibold text-zinc-900 truncate">
                         {item.author}
-                      </h4>
+                      </h3>
                       <span className="text-[10px] text-zinc-500 font-mono block">
                         {item.tag}
                       </span>

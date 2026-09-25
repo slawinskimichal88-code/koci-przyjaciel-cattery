@@ -39,15 +39,18 @@ export default function AnimatedBentoGrid({
     return photos.filter((p) => p.category === activeCategory);
   }, [photos, activeCategory]);
 
-  // Rozdzielenie zdjęć na 5 kafelków Bento
+  // Rozdzielenie zdjęć na 8 kafelków Bento
   const cellPools = useMemo(() => {
-    if (filteredPhotos.length === 0) return [[], [], [], [], []];
+    const NUM_CELLS = 8;
+    if (filteredPhotos.length === 0) {
+      return Array.from({ length: NUM_CELLS }, () => [] as BentoImageItem[]);
+    }
 
-    const pools: BentoImageItem[][] = [[], [], [], [], []];
+    const pools: BentoImageItem[][] = Array.from({ length: NUM_CELLS }, () => []);
     // Ograniczamy pulę pojedynczego kafelka do 6 zdjęć dla maksymalnej płynności 120 FPS
     const MAX_CELL_PHOTOS = 6;
     filteredPhotos.forEach((photo, idx) => {
-      const cellIdx = idx % 5;
+      const cellIdx = idx % NUM_CELLS;
       if (pools[cellIdx].length < MAX_CELL_PHOTOS) {
         pools[cellIdx].push({
           id: photo.id,
@@ -182,52 +185,79 @@ export default function AnimatedBentoGrid({
       )}
 
       {/* 
-        BENTO GRID CONTAINER
+        BENTO GRID CONTAINER - BOGATY UKŁAD 8 RUCHOMYCH KAFELKÓW APPLE
         Mobile: 2 kolumny, 180px wysokość wiersza
         Desktop: 4 kolumny, 240px wysokość wiersza
       */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 auto-rows-bento auto-rows-[180px] md:auto-rows-[240px]">
-        {/* 1. Duży kafel - powolny, majestatyczny ruch poziomy */}
+        {/* 1. Duży kafel (Główny) - powolny, majestatyczny ruch poziomy */}
         <FluidBentoCell
           images={cellPools[0]}
           direction="horizontal"
-          speed={70}
+          speed={68}
           className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 2. Pionowy kafel - powolny ruch pionowy w dół */}
+        {/* 2. Pionowy kafel wysoki - ruch pionowy w dół */}
         <FluidBentoCell
           images={cellPools[1]}
           direction="reverse-vertical"
-          speed={60}
+          speed={58}
           className="col-span-1 row-span-2 md:col-span-1 md:row-span-2"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 3. Mały kwadrat 1 - spokojny ruch poziomy */}
+        {/* 3. Kwadrat góra-prawo 1 - ruch pionowy w górę */}
         <FluidBentoCell
           images={cellPools[2]}
+          direction="vertical"
+          speed={52}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
+          onPhotoClick={setSelectedPhoto}
+        />
+
+        {/* 4. Kwadrat środek-prawo 2 - spokojny ruch poziomy */}
+        <FluidBentoCell
+          images={cellPools[3]}
+          direction="horizontal"
+          speed={55}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
+          onPhotoClick={setSelectedPhoto}
+        />
+
+        {/* 5. Szeroki kafel środkowy - płynny ruch w lewo */}
+        <FluidBentoCell
+          images={cellPools[4]}
+          direction="reverse-horizontal"
+          speed={65}
+          className="col-span-2 row-span-1 md:col-span-2 md:row-span-1"
+          onPhotoClick={setSelectedPhoto}
+        />
+
+        {/* 6. Kwadrat dolny lewy - ruch pionowy */}
+        <FluidBentoCell
+          images={cellPools[5]}
+          direction="vertical"
+          speed={48}
+          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
+          onPhotoClick={setSelectedPhoto}
+        />
+
+        {/* 7. Kwadrat dolny prawy - ruch poziomy */}
+        <FluidBentoCell
+          images={cellPools[6]}
           direction="horizontal"
           speed={50}
           className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />
 
-        {/* 4. Mały kwadrat 2 - spokojny ruch pionowy w górę */}
+        {/* 8. Szeroki kafel panoramiczny na dole - majestatyczny ruch */}
         <FluidBentoCell
-          images={cellPools[3]}
-          direction="vertical"
-          speed={55}
-          className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
-          onPhotoClick={setSelectedPhoto}
-        />
-
-        {/* 5. Długi pasek na dole - powolny ruch w lewo (reverse) */}
-        <FluidBentoCell
-          images={cellPools[4]}
+          images={cellPools[7]}
           direction="reverse-horizontal"
-          speed={80}
+          speed={75}
           className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
           onPhotoClick={setSelectedPhoto}
         />

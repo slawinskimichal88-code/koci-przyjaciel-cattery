@@ -1,23 +1,39 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
-import BreederSection from "@/components/sections/BreederSection";
-import EnclosureSection from "@/components/sections/EnclosureSection";
-import BentoShowcaseSection from "@/components/sections/BentoShowcaseSection";
-import ScaleComparisonSection from "@/components/sections/ScaleComparisonSection";
-import KnowledgeBaseTeaser from "@/components/sections/KnowledgeBaseTeaser";
-import TestimonialsSection from "@/components/sections/TestimonialsSection";
-import FacebookCommunitySection from "@/components/sections/FacebookCommunitySection";
-import ContactSection from "@/components/sections/ContactSection";
-import Footer from "@/components/layout/Footer";
-import ReservationModal from "@/components/ui/ReservationModal";
-
-import KittensSection from "@/components/sections/KittensSection";
-import GallerySection from "@/components/sections/GallerySection";
 import { REAL_FACEBOOK_URL } from "@/data/realCatsData";
+
+const BreederSection = dynamic(() => import("@/components/sections/BreederSection"), {
+  loading: () => <div className="min-h-[60vh] bg-black" />,
+});
+const BentoShowcaseSection = dynamic(() => import("@/components/sections/BentoShowcaseSection"), {
+  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+});
+const EnclosureSection = dynamic(() => import("@/components/sections/EnclosureSection"), {
+  loading: () => <div className="min-h-[70vh] bg-black" />,
+});
+const ScaleComparisonSection = dynamic(() => import("@/components/sections/ScaleComparisonSection"), {
+  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+});
+const KnowledgeBaseTeaser = dynamic(() => import("@/components/sections/KnowledgeBaseTeaser"), {
+  loading: () => <div className="min-h-[50vh] bg-[#0A0A0A]" />,
+});
+const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), {
+  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+});
+const FacebookCommunitySection = dynamic(() => import("@/components/sections/FacebookCommunitySection"), {
+  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+});
+const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
+  loading: () => <div className="min-h-[60vh] bg-[#0A0A0A]" />,
+});
+const Footer = dynamic(() => import("@/components/layout/Footer"), {
+  loading: () => <div className="min-h-[30vh] bg-black" />,
+});
 
 export default function Home() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
@@ -56,25 +72,16 @@ export default function Home() {
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ③ NASZE KOCIĘTA: Dostępne maluchy z opcją wyboru */}
-        <KittensSection
-          lang={lang}
-          onOpenReservation={() => handleOpenReservation()}
-        />
-
-        {/* ④ BENTO SHOWCASE: Prawdziwe kadry. Nasz dom to ich dom */}
+        {/* ③ BENTO SHOWCASE: Prawdziwe kadry. Nasz dom to ich dom */}
         <BentoShowcaseSection lang={lang} />
 
-        {/* ⑤ WYBIEG: Scrollytelling Apple iPhone — z filmem z wybiegu */}
+        {/* ④ WYBIEG: Scrollytelling Apple iPhone — z filmem z wybiegu */}
         <EnclosureSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}
         />
 
-        {/* ⑥ GALERIA NASZYCH KOTÓW */}
-        <GallerySection lang={lang} />
-
-        {/* ⑦ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
+        {/* ⑤ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
         <ScaleComparisonSection lang={lang} compact={false} />
 
         {/* ⑧ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Kalkulator kosztów i badania genetyczne */}

@@ -51,18 +51,26 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
 
-          {/* Logo & Nazwa - Wyraźnie powiększone i wyraziste */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0">
+          {/* Logo & Nazwa - Kliknięcie płynnie przewija na samą górę strony głównej */}
+          <Link
+            href="/"
+            onClick={() => {
+              if (pathname === "/") {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }
+            }}
+            className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0 cursor-pointer"
+          >
             <div
               className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.25)] group-hover:border-white group-hover:shadow-[0_0_25px_rgba(255,255,255,0.45)] transition-all duration-300 shrink-0 bg-black"
             >
               <Image
-                src="/logo.png"
+                src="/logo.webp"
                 alt="Koci Przyjaciel PL"
                 width={56}
                 height={56}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                priority
+                unoptimized
               />
             </div>
             <div className="flex flex-col">
@@ -83,6 +91,7 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   className={`relative px-2.5 xl:px-3.5 py-1.5 xl:py-2 rounded-full text-[13px] xl:text-[14px] font-body transition-all duration-200 whitespace-nowrap ${
                     active
                       ? "bg-white text-black font-semibold shadow-sm"
@@ -95,10 +104,10 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             })}
           </nav>
 
-          {/* Prawa strona: Social media + Przełącznik języka + Telefon + Przycisk Facebook */}
+          {/* Prawa strona: Social media + Telefon */}
           <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
             {/* Social Media Loga (Facebook + Instagram) */}
-            <div className="flex items-center gap-1 pr-1 border-r border-white/10">
+            <div className="flex items-center gap-1.5">
               <a
                 href={REAL_FACEBOOK_URL}
                 target="_blank"
@@ -121,38 +130,25 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
               </a>
             </div>
 
-            {/* Język wyłącznie Polski (wersja PL) */}
-
-            {/* Szybki telefon (pokazywany tylko na szerokich ekranach) */}
+            {/* Szybki telefon */}
             <a
               href={`tel:${REAL_PHONE_RAW}`}
-              className="hidden 2xl:flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-body font-medium text-zinc-300 hover:text-white bg-white/5 hover:bg-white/15 border border-white/10 transition-all"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-body font-medium text-zinc-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/15 transition-all"
             >
-              <Phone className="w-3.5 h-3.5 text-zinc-400" />
+              <Phone className="w-3.5 h-3.5 text-amber-300" />
               <span>{REAL_PHONE}</span>
-            </a>
-
-            {/* Przycisk Facebook — perfekcyjnie dopasowany, nie urywa się na żadnym ekranie */}
-            <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative group px-3.5 xl:px-4 py-2 rounded-full bg-white text-black font-body text-xs font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_15px_rgba(255,255,255,0.2)] hover:shadow-[0_6px_20px_rgba(255,255,255,0.35)] transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2 shrink-0 whitespace-nowrap"
-            >
-              <FacebookIcon className="w-3.5 h-3.5 text-[#1877F2]" />
-              <span className="hidden xl:inline">{lang === "PL" ? "Facebook (26k)" : "Facebook"}</span>
-              <span className="inline xl:hidden">{lang === "PL" ? "Facebook" : "Facebook"}</span>
             </a>
           </div>
 
-          {/* Mobilny Przycisk Menu */}
+          {/* Mobilny Przycisk Menu — w 100% responsywny i klikalny */}
           <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
             <button
+              onClick={() => setMenuOpen(!menuOpen)}
               className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer border border-white/20 active:scale-95 shadow-sm"
               aria-label="Menu nawigacyjne"
             >
               <span className="text-xs font-ui font-semibold uppercase tracking-wider">
-                {menuOpen ? (lang === "PL" ? "Zamknij" : "Close") : "Menu"}
+                {menuOpen ? "Zamknij" : "Menu"}
               </span>
               {menuOpen ? <X className="w-4 h-4 text-amber-300" /> : <Menu className="w-4 h-4 text-white" />}
             </button>
@@ -188,6 +184,7 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   onClick={() => setMenuOpen(false)}
                   className={`flex items-center justify-between py-3 px-4 rounded-2xl text-xl sm:text-2xl font-heading transition-all ${
                     active

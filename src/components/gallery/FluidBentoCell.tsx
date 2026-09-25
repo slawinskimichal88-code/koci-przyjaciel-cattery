@@ -97,7 +97,7 @@ export default function FluidBentoCell({
                 src={src}
                 alt={photoObj.title || `Maine Coon slide ${idx}`}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105 pointer-events-none select-none"
-                loading={idx < 2 ? "eager" : "lazy"}
+                loading="lazy"
                 decoding="async"
                 draggable={false}
                 onContextMenu={(e) => e.preventDefault()}

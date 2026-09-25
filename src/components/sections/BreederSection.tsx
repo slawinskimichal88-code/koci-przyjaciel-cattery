@@ -12,42 +12,230 @@ interface BreederSectionProps {
   isAboutPage?: boolean;
 }
 
-const BREEDER_SUBTITLES = {
+interface BreederSubtitleItem {
+  start: number;
+  end: number;
+  badge: string;
+  text: string;
+}
+
+const BREEDER_TIMED_SUBTITLES: Record<"PL" | "EN", BreederSubtitleItem[]> = {
   PL: [
     {
-      badge: "HISTORIA HODOWLI · INTRO",
-      text: "„Powoływanie życia to ogromna odpowiedzialność. Chciałam, żeby koty miały u nas raj.”",
+      start: 0,
+      end: 8.5,
+      badge: "HISTORIA HODOWCY · WYKSZTAŁCENIE",
+      text: "„Jednak ze względów praktycznych nie poszłam na weterynarię. Skończyłam 6 kierunków studiów wyższych...”",
     },
     {
-      badge: "01 · POCZĄTKI I PASJA",
-      text: "„Zaczęło się ponad 10 lat temu od jednego miotu. Szybko zrozumiałam, że to pasja życia.”",
+      start: 8.5,
+      end: 18.0,
+      badge: "HISTORIA HODOWCY · PEDAGOGIKA",
+      text: "„...w tematyce bycia nauczycielem, pedagogiem i terapeutą integracji sensorycznej.”",
     },
     {
-      badge: "02 · GENETYKA & MAINE COON",
-      text: "„Szukałam kotów o łagodnym charakterze psa. Postawiłam na linie z Europy i badania serca Doppler.”",
+      start: 18.0,
+      end: 30.5,
+      badge: "HISTORIA HODOWCY · STUDIA",
+      text: "„Również studia związane z wychowaniem fizycznym i resocjalizacją. Poszłam w innym kierunku, ale kilkanaście lat temu...”",
     },
     {
-      badge: "03 · DOMOWY SALON & WYBIEG",
-      text: "„Koty śpią z nami w salonie, na kanapach i korzystają z woliery. Zero klatek, 100% z rodziną.”",
+      start: 30.5,
+      end: 39.5,
+      badge: "01 · POCZĄTKI HODOWLI",
+      text: "„...zupełnie przez przypadek, nie planując tego wcześniej, założyłam hodowlę.”",
+    },
+    {
+      start: 39.5,
+      end: 49.0,
+      badge: "01 · PIERWSZY MIOT",
+      text: "„Zarejestrowałam ją początkowo tylko po to, żeby kotka miała jeden miot...”",
+    },
+    {
+      start: 49.0,
+      end: 54.0,
+      badge: "01 · WIELKA ODPOWIEDZIALNOŚĆ",
+      text: "„...i żeby zobaczyć, czy ja się w tym odnajdę — bo powoływanie życia to ogromna odpowiedzialność.”",
+    },
+    {
+      start: 54.0,
+      end: 65.0,
+      badge: "01 · PRZEMYŚLANA DECYZJA",
+      text: "„To temat, który trzeba głęboko przemyśleć i rzetelnie zbadać, zanim się w to wejdzie.”",
+    },
+    {
+      start: 65.0,
+      end: 71.0,
+      badge: "01 · MIŁOŚĆ DO ZWIERZĄT",
+      text: "„No i okazało się, że się w tym odnalazłam, bo po prostu kocham dbać o zwierzęta.”",
+    },
+    {
+      start: 71.0,
+      end: 79.0,
+      badge: "01 · TROSKA I WYCHOWANIE",
+      text: "„Uwielbiam się nimi troszczyć i przede wszystkim mądrze wychowywać...”",
+    },
+    {
+      start: 79.0,
+      end: 88.0,
+      badge: "01 · NAJLEPSZA OPINIA",
+      text: "„...tak, aby opiekunowie mieli jak najlepszą opinię na mój temat i polecali nas z dumą dalej.”",
+    },
+    {
+      start: 88.0,
+      end: 97.0,
+      badge: "02 · POSZUKIWANIE RASY",
+      text: "„Swoją historię zaczęłam kilkanaście lat temu. Wcześniej miałam kotka rasy Ragdoll...”",
+    },
+    {
+      start: 97.0,
+      end: 110.0,
+      badge: "02 · CHARAKTER DLA RODZINY",
+      text: "„...ale szukałam przyjaciela, który najbardziej pasowałby do naszej rodziny, do mnie i do moich oczekiwań.”",
+    },
+    {
+      start: 110.0,
+      end: 127.5,
+      badge: "02 · RAGDOLL A MAINE COON",
+      text: "„Ragdoll był kotem bardzo spokojnym, mało kontaktowym. Natomiast Maine Coon...”",
+    },
+    {
+      start: 127.5,
+      end: 135.0,
+      badge: "02 · MAINE COON: PSI CHARAKTER",
+      text: "„...to cudowny psi charakter, przyjaciel każdego domownika!”",
+    },
+    {
+      start: 135.0,
+      end: 142.0,
+      badge: "02 · INTELIGENCJA I MAJESTAT",
+      text: "„Bardzo kontaktowy, wybitnie inteligentny i przede wszystkim niezwykle majestatyczny.”",
+    },
+    {
+      start: 142.0,
+      end: 151.0,
+      badge: "02 · CZYSTA PASJA",
+      text: "„Pierwszy kotek dał mi tyle radości i szczęścia, że stwierdziłam: to jest to, co chcę robić!”",
+    },
+    {
+      start: 151.0,
+      end: 159.0,
+      badge: "02 · LINIE Z CAŁEJ EUROPY",
+      text: "„Inwestowałam przez wiele lat w wybitne kotki. Sprowadzałam z zagranicy bardzo drogie, dostojne linie.”",
+    },
+    {
+      start: 159.0,
+      end: 167.5,
+      badge: "02 · ZDROWIE I BADANIA DNA",
+      text: "„Inwestowałam w certyfikowane badania genetyczne i wszystko, by kotom żyło się najlepiej i najzdrowiej.”",
+    },
+    {
+      start: 167.5,
+      end: 176.0,
+      badge: "03 · WYBIEG I OGRÓD",
+      text: "„Wybudowaliśmy również przestronny wybieg ogrodowy — mają tam wszystko, co potrzebne do szczęścia.”",
+    },
+    {
+      start: 176.0,
+      end: 193.0,
+      badge: "03 · DOMOWE ŻYCIE W SALONIE",
+      text: "„Koty nie są tam cały rok! Zimą i w sezonie kotki oraz maluszki mieszkają z nami w salonie.”",
+    },
+    {
+      start: 193.0,
+      end: 205.0,
+      badge: "03 · ZERO KLATEK & MIŁOŚĆ",
+      text: "„Wszystkie nasze koty żyją z nami w domu, przy rodzinie i dzieciach. Mają wspaniałe, pełne miłości warunki.”",
     },
   ],
   EN: [
     {
-      badge: "CATTERY STORY · INTRO",
-      text: "“Bringing life into this world is an enormous responsibility. I wanted to give our cats paradise.”",
+      start: 0,
+      end: 8.5,
+      badge: "BREEDER STORY · EDUCATION",
+      text: "“Due to practical circumstances, I completed 6 university degrees instead of veterinary medicine...”",
     },
     {
-      badge: "01 · EARLY DAYS & PASSION",
-      text: "“It started over a decade ago with a single litter. I soon realized it was my lifelong passion.”",
+      start: 8.5,
+      end: 18.0,
+      badge: "BREEDER STORY · PEDAGOGY",
+      text: "“...focusing on pedagogy, teaching, and sensory integration therapy.”",
     },
     {
-      badge: "02 · GENETICS & BREED",
-      text: "“I looked for cats with gentle, dog-like traits. Top European bloodlines and Echo Doppler screening.”",
+      start: 18.0,
+      end: 30.5,
+      badge: "BREEDER STORY · EARLY DAYS",
+      text: "“Physical education and rehabilitation degrees followed. Yet over a decade ago...”",
     },
     {
-      badge: "03 · HOME LOUNGE & RUN",
-      text: "“Our cats live freely in the lounge, on sofas, and enjoy the cat run. Zero cages, 100% family life.”",
+      start: 30.5,
+      end: 49.0,
+      badge: "01 · FIRST LITTER",
+      text: "“...quite by chance, without planning it ahead on this scale, I registered for our very first litter.”",
     },
+    {
+      start: 49.0,
+      end: 65.0,
+      badge: "01 · RESPONSIBILITY",
+      text: "“Bringing life into this world is an enormous responsibility. You have to reflect and study deeply before taking this path.”",
+    },
+    {
+      start: 65.0,
+      end: 79.0,
+      badge: "01 · PASSION & REPUTATION",
+      text: "“And I found my true calling. I love caring, nurturing, and raising them with full devotion...”",
+    },
+    {
+      start: 79.0,
+      end: 97.0,
+      badge: "01 · TRUST & RECOMMENDATION",
+      text: "“...so that new families hold us in the highest regard and recommend us proudly.”",
+    },
+    {
+      start: 97.0,
+      end: 127.5,
+      badge: "02 · SEARCH FOR THE IDEAL COMPANION",
+      text: "“I started with a Ragdoll, but longed for a deeper, more expressive bond for our active family.”",
+    },
+    {
+      start: 127.5,
+      end: 142.0,
+      badge: "02 · MAINE COON: DOG-LIKE HEART",
+      text: "“Maine Coons have that wondrous dog-like personality — massively affectionate, brilliant, and majestic.”",
+    },
+    {
+      start: 142.0,
+      end: 159.0,
+      badge: "02 · EUROPEAN BLOODLINES",
+      text: "“That first kitten brought so much pure joy. For years I invested in top European lines and genetic health tests.”",
+    },
+    {
+      start: 159.0,
+      end: 176.0,
+      badge: "03 · ALL-SEASON ENCLOSURE",
+      text: "“We built an expansive outdoor run where our cats enjoy sunshine and fresh air safely.”",
+    },
+    {
+      start: 176.0,
+      end: 205.0,
+      badge: "03 · LIVING ROOM HOME",
+      text: "“Yet they live with us in our lounge. Zero cages — growing alongside our children and pets in absolute warmth.”",
+    },
+  ],
+};
+
+const BREEDER_SUBTITLES = {
+  PL: [
+    BREEDER_TIMED_SUBTITLES.PL[0],
+    BREEDER_TIMED_SUBTITLES.PL[3],
+    BREEDER_TIMED_SUBTITLES.PL[13],
+    BREEDER_TIMED_SUBTITLES.PL[19],
+  ],
+  EN: [
+    BREEDER_TIMED_SUBTITLES.EN[0],
+    BREEDER_TIMED_SUBTITLES.EN[3],
+    BREEDER_TIMED_SUBTITLES.EN[7],
+    BREEDER_TIMED_SUBTITLES.EN[10],
   ],
 };
 
@@ -160,9 +348,7 @@ export default function BreederSection({
       }
     };
 
-    playActiveVideo();
-
-    // IntersectionObserver — pauzuj wideo gdy sekcja nie jest na ekranie
+    // Odtwarzaj wideo tylko wtedy, gdy sekcja jest rzeczywiście widoczna na ekranie (oszczędność sieci i CPU)
     let observer: IntersectionObserver | null = null;
     if (typeof IntersectionObserver !== "undefined") {
       observer = new IntersectionObserver(
@@ -332,10 +518,27 @@ export default function BreederSection({
         }
       }
 
-      // ── DYNAMICZNE NAPISY NA WIDEO (LIVE SUBTITLES) ──────────────
-      const sceneIndex =
-        progress < 0.16 ? 0 : progress < 0.42 ? 1 : progress < 0.68 ? 2 : 3;
-      const currentSub = BREEDER_SUBTITLES[lang || "PL"][sceneIndex];
+      // ── DYNAMICZNE NAPISY NA WIDEO (LIVE SUBTITLES OD POCZĄTKU FILMU) ──────────────
+      const activeVideo = window.innerWidth >= 1024 ? videoRef.current : mobileVideoRef.current;
+      const timedSubs = BREEDER_TIMED_SUBTITLES[lang || "PL"];
+
+      let currentSub = timedSubs[0];
+
+      // Jeśli wideo odtwarza się w czasie, pobierz napisy precyzyjnie według czasu wideo
+      if (activeVideo && !isNaN(activeVideo.currentTime) && activeVideo.currentTime > 0) {
+        const t = activeVideo.currentTime;
+        const found = timedSubs.find((s) => t >= s.start && t < s.end);
+        if (found) {
+          currentSub = found;
+        } else {
+          currentSub = timedSubs[timedSubs.length - 1];
+        }
+      } else {
+        // Fallback na podstawie pozycji scrollowania
+        const sceneIndex =
+          progress < 0.16 ? 0 : progress < 0.42 ? 1 : progress < 0.68 ? 4 : 5;
+        currentSub = timedSubs[sceneIndex] || timedSubs[0];
+      }
 
       if (subtitleOverlayRef.current) {
         const badgeEl = subtitleOverlayRef.current.querySelector(".subtitle-badge");
@@ -360,6 +563,20 @@ export default function BreederSection({
       }
     };
 
+    const updateSubtitlesFromTime = () => {
+      onScroll();
+    };
+
+    const dVideo = videoRef.current;
+    const mVideo = mobileVideoRef.current;
+
+    if (dVideo) {
+      dVideo.addEventListener("timeupdate", updateSubtitlesFromTime, { passive: true });
+    }
+    if (mVideo) {
+      mVideo.addEventListener("timeupdate", updateSubtitlesFromTime, { passive: true });
+    }
+
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(onScroll);
@@ -370,6 +587,8 @@ export default function BreederSection({
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      if (dVideo) dVideo.removeEventListener("timeupdate", updateSubtitlesFromTime);
+      if (mVideo) mVideo.removeEventListener("timeupdate", updateSubtitlesFromTime);
       cancelAnimationFrame(rafId);
       observer?.disconnect();
     };
@@ -590,12 +809,12 @@ export default function BreederSection({
                 <div className="relative w-full aspect-[9/16] rounded-[40px] overflow-hidden bg-black">
                   <video
                     ref={videoRef}
-                    src={isDesktopDevice === false ? undefined : "/video/breeder-short.mp4"}
+                    src={isDesktopDevice ? "/video/breeder-short.mp4" : undefined}
                     poster="/video/breeder-poster.webp"
                     loop
                     muted={isMuted}
                     playsInline
-                    preload="metadata"
+                    preload="none"
                     controlsList="nodownload nofullscreen noremoteplayback"
                     disablePictureInPicture
                     disableRemotePlayback
@@ -608,15 +827,15 @@ export default function BreederSection({
                   {/* Pływające napisy Apple Glass na dole wideo */}
                   <div
                     ref={subtitleOverlayRef}
-                    className="absolute bottom-14 left-3 right-3 z-20 p-3 rounded-2xl bg-black/75 backdrop-blur-xl border border-white/20 text-center shadow-lg transition-all duration-300"
+                    className="absolute bottom-14 left-3 right-3 z-20 p-3 rounded-2xl bg-black/85 backdrop-blur-xl border border-white/20 text-center shadow-lg transition-all duration-300"
                   >
                     <span className="subtitle-badge text-[9px] font-mono uppercase tracking-widest text-amber-300 font-semibold block mb-0.5">
-                      HISTORIA HODOWLI · INTRO
+                      HISTORIA HODOWCY · WYKSZTAŁCENIE
                     </span>
                     <p className="subtitle-text text-xs font-body text-zinc-100 font-light leading-snug">
                       {lang === "PL"
-                        ? "„Powoływanie życia to ogromna odpowiedzialność. Chciałam, żeby koty miały u nas raj.”"
-                        : "“Breeding is an enormous responsibility. I wanted to give our cats paradise.”"}
+                        ? "„Jednak ze względów praktycznych nie poszłam na weterynarię. Skończyłam 6 kierunków studiów wyższych...”"
+                        : "“Due to practical circumstances, I completed 6 university degrees instead of veterinary medicine...”"}
                     </p>
                   </div>
 
@@ -665,12 +884,12 @@ export default function BreederSection({
             <div className="relative w-full aspect-[9/16] rounded-[32px] overflow-hidden bg-black max-h-[380px]">
               <video
                 ref={mobileVideoRef}
-                src={isDesktopDevice === true ? undefined : "/video/breeder-short.mp4"}
+                src={!isDesktopDevice ? "/video/breeder-short.mp4" : undefined}
                 poster="/video/breeder-poster.webp"
                 loop
                 muted={isMuted}
                 playsInline
-                preload="metadata"
+                preload="none"
                 controlsList="nodownload nofullscreen noremoteplayback"
                 disablePictureInPicture
                 disableRemotePlayback
@@ -682,15 +901,15 @@ export default function BreederSection({
               {/* Pływające napisy Mobile */}
               <div
                 ref={mobileSubtitleRef}
-                className="absolute bottom-11 left-2.5 right-2.5 z-20 p-2 rounded-xl bg-black/80 backdrop-blur-md border border-white/20 text-center shadow-md pointer-events-none transition-all duration-300"
+                className="absolute bottom-11 left-2.5 right-2.5 z-20 p-2 rounded-xl bg-black/85 backdrop-blur-md border border-white/20 text-center shadow-md pointer-events-none transition-all duration-300"
               >
                 <span className="subtitle-badge text-[8px] font-mono uppercase tracking-widest text-amber-300 font-semibold block mb-0.5">
-                  HISTORIA HODOWLI · INTRO
+                  HISTORIA HODOWCY · WYKSZTAŁCENIE
                 </span>
                 <p className="subtitle-text text-[10px] font-body text-zinc-100 font-light leading-snug">
                   {lang === "PL"
-                    ? "„Powoływanie życia to ogromna odpowiedzialność. Chciałam, żeby koty miały u nas raj.”"
-                    : "“Breeding is an enormous responsibility. I wanted to give our cats paradise.”"}
+                    ? "„Jednak ze względów praktycznych nie poszłam na weterynarię. Skończyłam 6 kierunków studiów wyższych...”"
+                    : "“Due to practical circumstances, I completed 6 university degrees instead of veterinary medicine...”"}
                 </p>
               </div>
 
@@ -698,6 +917,7 @@ export default function BreederSection({
               <div className="absolute bottom-2 right-2 z-30">
                 <button
                   onClick={toggleMute}
+                  aria-label={isMuted ? "Włącz dźwięk wideo z hodowcą" : "Wycisz dźwięk wideo z hodowcą"}
                   className="w-8 h-8 rounded-full bg-black/70 border border-white/25 flex items-center justify-center text-white"
                 >
                   {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-amber-400" />}
