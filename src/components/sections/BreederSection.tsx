@@ -274,7 +274,7 @@ export default function BreederSection({
 
   const [isMuted, setIsMuted] = useState<boolean>(true);
   const [isDesktopDevice, setIsDesktopDevice] = useState<boolean | null>(null);
-  const [sectionHeight, setSectionHeight] = useState<string>("380vh");
+  const [sectionHeight, setSectionHeight] = useState<string>("490vh");
 
   const toggleMute = () => {
     const nextMuted = !isMuted;
@@ -298,12 +298,12 @@ export default function BreederSection({
   useEffect(() => {
     const isDesk = window.innerWidth >= 1024;
     setIsDesktopDevice(isDesk);
-    setSectionHeight(isDesk ? "380vh" : "290vh");
+    setSectionHeight(isDesk ? "490vh" : "380vh");
 
     const onResize = () => {
       const d = window.innerWidth >= 1024;
       setIsDesktopDevice(d);
-      setSectionHeight(d ? "380vh" : "290vh");
+      setSectionHeight(d ? "490vh" : "380vh");
       if (d) {
         if (mobileVideoRef.current) {
           mobileVideoRef.current.pause();

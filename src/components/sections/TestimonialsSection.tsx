@@ -129,38 +129,38 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
   };
 
   return (
-    <section id="opinie" className="py-14 sm:py-18 bg-[#0C0C0E] text-white border-t border-white/10 relative overflow-hidden">
+    <section id="opinie" className="py-16 sm:py-24 bg-black text-[#f5f5f7] border-t border-white/[0.08] relative overflow-hidden">
       
       {/* Subtelny ambient glow */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-amber-500/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-white/[0.02] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
 
-        {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
+        {/* ── Nagłówek Sekcji (Apple Keynote Style) ────────────────────────── */}
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.12] bg-white/[0.06] mb-5">
             <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/30" />
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/80 font-semibold">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium">
               {lang === "PL" ? "HISTORIE Z NOWYCH DOMÓW" : "STORIES FROM ADOPTIVE HOMES"}
             </span>
           </div>
 
           <h2
-            className="font-heading font-light text-white leading-[0.95] tracking-tight mb-6"
-            style={{ fontSize: "clamp(2.6rem, 6vw, 4.8rem)" }}
+            className="font-heading font-light text-[#f5f5f7] leading-[1.02] tracking-tight mb-5"
+            style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)" }}
           >
             {lang === "PL" ? (
               <>
-                Koty, które zmieniają <span className="font-semibold italic">całe domy</span>.
+                Koty, które zmieniają <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f5f5f7] to-[#86868b]">całe domy.</span>
               </>
             ) : (
               <>
-                Cats that change <span className="font-semibold italic">entire lives</span>.
+                Cats that change <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f5f5f7] to-[#86868b]">entire lives.</span>
               </>
             )}
           </h2>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-body font-light leading-relaxed">
+          <p className="text-base sm:text-lg text-[#86868b] font-body font-light leading-relaxed">
             {lang === "PL"
               ? "Autentyczne opinie i zdjęcia kotów z naszej hodowli po 1-4 latach od adopcji. Zobacz jak potężne wyrastają i jak żyją nasi wychowankowie."
               : "Authentic reviews and photos from adoptive families 1-4 years after adoption. See how majestic our cats grow."}
@@ -168,34 +168,34 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
         </div>
 
         {/* ── PASEK METRYK ZAUFANIA (APPLE KPI STRIP) ───────────────── */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-white/[0.02] border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur-xl">
-          <div className="text-center border-r border-white/10 last:border-none">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 bg-[#161617] border border-white/[0.08] rounded-[24px] p-6 sm:p-8">
+          <div className="text-center border-r border-white/[0.08] last:border-none">
             <div className="flex items-center justify-center gap-1 text-amber-400 mb-1">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
               ))}
             </div>
-            <div className="text-2xl sm:text-3xl font-heading font-light text-white">5.0 / 5.0</div>
-            <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mt-0.5">Ocena Opiekunów</div>
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7]">5.0 / 5.0</div>
+            <div className="text-[11px] font-mono text-[#86868b] uppercase tracking-wider mt-0.5">Ocena Opiekunów</div>
           </div>
 
-          <div className="text-center border-r border-white/10 last:border-none">
-            <div className="text-2xl sm:text-3xl font-heading font-light text-amber-300">10.4 kg</div>
-            <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Średnia waga kocurów</div>
+          <div className="text-center border-r border-white/[0.08] last:border-none">
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7]">10.4 kg</div>
+            <div className="text-[11px] font-mono text-[#86868b] uppercase tracking-wider mt-1">Średnia waga kocurów</div>
           </div>
 
-          <div className="text-center border-r border-white/10 last:border-none">
-            <div className="text-2xl sm:text-3xl font-heading font-light text-emerald-400">100%</div>
-            <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Czyste badania DNA</div>
+          <div className="text-center border-r border-white/[0.08] last:border-none">
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-emerald-400">100%</div>
+            <div className="text-[11px] font-mono text-[#86868b] uppercase tracking-wider mt-1">Czyste badania DNA</div>
           </div>
 
           <div className="text-center">
-            <div className="text-2xl sm:text-3xl font-heading font-light text-white">10+ lat</div>
-            <div className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider mt-1">Wsparcie po adopcji</div>
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7]">10+ lat</div>
+            <div className="text-[11px] font-mono text-[#86868b] uppercase tracking-wider mt-1">Wsparcie po adopcji</div>
           </div>
         </div>
 
-        {/* ── FILTRY KATEGORII OPINII ───────────────────────────────── */}
+        {/* ── FILTRY KATEGORII OPINII (Apple Pills) ───────────────────────────────── */}
         <div className="flex items-center justify-center flex-wrap gap-2 mb-12">
           {[
             { id: "all", label: lang === "PL" ? "Wszystkie relacje (6)" : "All Stories (6)" },
@@ -206,10 +206,10 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id as typeof activeCategory)}
-              className={`text-xs font-ui uppercase tracking-wider px-4 py-2 rounded-full transition-all cursor-pointer font-medium ${
+              className={`text-[12px] font-ui tracking-tight px-4 py-1.5 rounded-full transition-all cursor-pointer font-medium ${
                 activeCategory === cat.id
-                  ? "bg-white text-black shadow-lg"
-                  : "bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10"
+                  ? "bg-white text-black shadow-sm"
+                  : "bg-white/[0.06] text-[#86868b] hover:text-white hover:bg-white/[0.12]"
               }`}
             >
               {cat.label}
@@ -225,7 +225,7 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
             return (
               <div
                 key={item.id}
-                className="group rounded-3xl bg-[#131316] border border-white/10 hover:border-white/25 transition-all duration-300 overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-2xl hover:-translate-y-1"
+                className="group rounded-[28px] bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
                 <div>
                   {/* Zdjęcie kota w nowym domu */}
@@ -333,7 +333,7 @@ export default function TestimonialsSection({ lang }: TestimonialsSectionProps) 
           <p className="text-xs sm:text-sm text-zinc-400 font-body">
             Więcej relacji i nagrań wideo od nowych opiekunów publikujemy na bieżąco w naszej społeczności na{" "}
             <a
-              href="https://www.facebook.com/profile.php?id=100063684877717"
+              href="https://www.facebook.com/kociprzyjaciel"
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-amber-300 underline underline-offset-4 font-medium transition-colors"

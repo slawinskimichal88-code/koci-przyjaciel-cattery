@@ -1,19 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import {
   ArrowRight,
   BookOpen,
   HeartPulse,
   Scale,
-  Utensils,
   Coins,
-  ShieldCheck,
-  Sparkles,
-  Info,
   CheckCircle2,
-  Sliders,
 } from "lucide-react";
 
 interface KnowledgeBaseTeaserProps {
@@ -43,50 +38,50 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
   ];
 
   return (
-    <section id="baza-wiedzy" className="relative bg-[#FBFBFD] text-zinc-900 py-16 sm:py-20 overflow-hidden border-t border-zinc-200">
+    <section id="baza-wiedzy" className="relative bg-black text-[#f5f5f7] py-16 sm:py-24 overflow-hidden border-t border-white/[0.08]">
       
       {/* Ambient background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-amber-400/10 via-white/50 to-transparent rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-white/[0.02] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-5 sm:px-10 lg:px-12 relative z-10">
 
-        {/* ── Nagłówek Sekcji ────────────────────────────────────────── */}
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-300/80 bg-amber-50 mb-6 shadow-sm">
-            <BookOpen className="w-3.5 h-3.5 text-amber-700" />
-            <span className="text-[11px] font-ui uppercase tracking-[0.3em] text-amber-950 font-semibold">
-              {lang === "PL" ? "WIRTUALNE CENTRUM WIEDZY I FELINOLOGII" : "INTERACTIVE KNOWLEDGE & FELINOLOGY"}
+        {/* ── Nagłówek Sekcji (Apple Keynote Style) ────────────────────────── */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.12] bg-white/[0.06] mb-5">
+            <BookOpen className="w-3.5 h-3.5 text-[#2997ff]" />
+            <span className="text-[11px] font-ui uppercase tracking-[0.25em] text-[#86868b] font-medium">
+              {lang === "PL" ? "WIRTUALNE CENTRUM WIEDZY" : "FELINOLOGY KNOWLEDGE"}
             </span>
           </div>
 
           <h2
-            className="font-heading font-light text-zinc-950 leading-[0.92] tracking-tight mb-6"
-            style={{ fontSize: "clamp(2.6rem, 6vw, 5rem)" }}
+            className="font-heading font-light text-[#f5f5f7] leading-[1.02] tracking-tight mb-5"
+            style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)" }}
           >
             Wszystko, co musisz wiedzieć<br />
-            <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-700 via-amber-800 to-zinc-900">
-              przed adopcją kota.
+            <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f5f5f7] to-[#86868b]">
+              przed wyborem kota.
             </span>
           </h2>
 
-          <p className="text-base sm:text-lg text-zinc-600 font-body leading-relaxed max-w-2xl mx-auto font-light">
+          <p className="text-base sm:text-lg text-[#86868b] font-body leading-relaxed max-w-2xl mx-auto font-light">
             {lang === "PL"
               ? "Przejrzyste fakty zamiast mitów. Sprawdź realne miesięczne koszty, wymogi zdrowotne i standardy opieki nad największym kotem domowym."
               : "Clear facts instead of myths. Calculate real monthly expenses, genetic health standards, and care guidelines for the gentle giant."}
           </p>
         </div>
 
-        {/* ── WZMIANKA O KOSZTACH (APPLE IPHONE FROSTED GLASS BANNER) ──── */}
-        <div className="mb-14 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-amber-500/[0.08] via-amber-500/[0.03] to-white border border-amber-300/60 backdrop-blur-xl shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        {/* ── WZMIANKA O KOSZTACH (APPLE DARK CARD) ──── */}
+        <div className="mb-14 p-6 sm:p-8 rounded-[28px] bg-[#161617] border border-white/[0.08] flex flex-col md:flex-row items-start md:items-center justify-between gap-6 hover:border-white/20 transition-all duration-300">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100/90 border border-amber-300 text-amber-900 text-xs font-mono font-semibold mb-3">
-              <Coins className="w-3.5 h-3.5 text-amber-700" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.08] border border-white/[0.12] text-xs font-mono font-medium mb-3 text-[#f5f5f7]">
+              <Coins className="w-3.5 h-3.5 text-[#2997ff]" />
               <span>{lang === "PL" ? "KALKULATOR FINANSOWY 2026" : "2026 FINANCIAL SIMULATOR"}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-heading font-medium text-zinc-950 mb-2">
+            <h3 className="text-xl sm:text-2xl font-heading font-medium text-[#f5f5f7] mb-2 tracking-tight">
               {lang === "PL" ? "Ile realnie kosztuje utrzymanie kota Maine Coon?" : "How much does keeping a Maine Coon really cost?"}
             </h3>
-            <p className="text-sm text-zinc-600 font-body font-light leading-relaxed">
+            <p className="text-sm text-[#86868b] font-body font-light leading-relaxed">
               {lang === "PL"
                 ? "Dieta wysokomięsna 0% zbóż, podłoże w kuwecie XXL, solidne drapaki sufitowe i coroczna profilaktyka serca Echo Doppler. Oblicz comiesięczne wydatki i sprawdź pełną wyprawkę w naszym symulatorze."
                 : "Grain-free species-appropriate diet, XXL litter, sturdy scratchers, and yearly heart ultrasound. Calculate live monthly expenses in our interactive tool."}
@@ -95,20 +90,20 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
 
           <Link
             href="/kalkulator"
-            className="px-7 py-4 rounded-full bg-zinc-950 text-white font-ui text-xs font-bold uppercase tracking-wider hover:bg-zinc-800 transition-all flex items-center gap-2 shadow-lg hover:scale-105 shrink-0 cursor-pointer"
+            className="px-6 py-3 rounded-full bg-white text-black font-ui text-[13px] font-medium tracking-tight hover:bg-[#f5f5f7] transition-all flex items-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] shrink-0 cursor-pointer"
           >
-            <span>{lang === "PL" ? "Sprawdź koszty utrzymania kota" : "Calculate Living Costs"}</span>
-            <ArrowRight className="w-4 h-4 text-amber-400" />
+            <span>{lang === "PL" ? "Oblicz koszty utrzymania" : "Calculate living costs"}</span>
+            <ArrowRight className="w-3.5 h-3.5 text-black" />
           </Link>
         </div>
 
         {/* ── INTERAKTYWNA RZECZ #2: CERTYFIKOWANY STANDARD BADAŃ GENETYCZNYCH ── */}
-        <div className="mb-16">
+        <div className="mb-14">
           <div className="text-center mb-8">
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-emerald-700 font-semibold block mb-2">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium block mb-2">
               100% Transparentności Zdrowotnej
             </span>
-            <h3 className="text-2xl sm:text-3xl font-heading font-normal text-zinc-950">
+            <h3 className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7] tracking-tight">
               Badania genetyczne, które wykonujemy każdemu rodzicowi
             </h3>
           </div>
@@ -142,58 +137,58 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
             ].map((test, idx) => (
               <div
                 key={idx}
-                className="p-5 rounded-2xl bg-white/75 backdrop-blur-xl border border-white/90 shadow-[0_8px_24px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:bg-white/95 hover:border-emerald-500/40 hover:shadow-[0_12px_32px_rgba(0,0,0,0.07)] transition-all flex flex-col justify-between"
+                className="p-5 rounded-[22px] bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[11px] font-mono font-bold text-amber-800 uppercase tracking-wider">
+                    <span className="text-[11px] font-mono font-medium text-[#86868b] uppercase tracking-wider">
                       {test.badge}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-900 bg-emerald-100/90 px-2.5 py-0.5 rounded-full border border-emerald-300 font-semibold shadow-xs">
-                      <CheckCircle2 className="w-3 h-3 text-emerald-700" />
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20 font-medium">
+                      <CheckCircle2 className="w-3 h-3 text-emerald-400" />
                       <span>{test.result}</span>
                     </span>
                   </div>
-                  <h4 className="text-base font-heading font-medium text-zinc-950 mb-2">{test.name}</h4>
-                  <p className="text-xs text-zinc-600 font-body font-light leading-relaxed">{test.desc}</p>
+                  <h4 className="text-sm sm:text-base font-heading font-medium text-[#f5f5f7] mb-2">{test.name}</h4>
+                  <p className="text-xs text-[#86868b] font-body font-light leading-relaxed">{test.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* ── 2 Kluczowe Tematy Bazy Wiedzy (iPhone Frosted Glass) ───────────── */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        {/* ── 2 Kluczowe Tematy Bazy Wiedzy (Apple Bento Cards) ───────────── */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-12">
           {cards.map((c, i) => {
             const Icon = c.icon;
             return (
               <Link
                 key={i}
                 href={c.href}
-                className="group relative p-7 sm:p-8 rounded-3xl bg-white/75 hover:bg-white/95 border border-white/90 hover:border-amber-400/50 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.04),inset_0_1px_2px_rgba(255,255,255,0.95)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] hover:-translate-y-1 backdrop-blur-2xl"
+                className="group relative p-6 sm:p-8 rounded-[28px] bg-[#161617] hover:bg-[#1d1d1f] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-5">
-                    <span className="text-[11px] font-mono tracking-widest text-amber-800 uppercase font-semibold">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[11px] font-mono tracking-widest text-[#86868b] uppercase font-medium">
                       {c.tag}
                     </span>
-                    <div className="w-10 h-10 rounded-2xl bg-white/90 border border-zinc-200/80 shadow-xs flex items-center justify-center text-zinc-800 group-hover:bg-zinc-950 group-hover:text-white transition-all">
-                      <Icon className="w-5 h-5" />
+                    <div className="w-9 h-9 rounded-xl bg-white/[0.06] border border-white/[0.1] flex items-center justify-center text-[#f5f5f7] group-hover:scale-105 transition-all">
+                      <Icon className="w-4 h-4 text-[#2997ff]" />
                     </div>
                   </div>
 
-                  <h3 className="text-xl sm:text-2xl font-heading font-normal text-zinc-950 group-hover:text-amber-800 transition-colors mb-3">
+                  <h3 className="text-lg sm:text-xl font-heading font-medium text-[#f5f5f7] group-hover:text-white transition-colors mb-2 tracking-tight">
                     {c.title}
                   </h3>
 
-                  <p className="text-sm text-zinc-600 font-body leading-relaxed font-light">
+                  <p className="text-sm text-[#86868b] font-body leading-relaxed font-light">
                     {c.desc}
                   </p>
                 </div>
 
-                <div className="pt-5 mt-5 border-t border-zinc-200/60 flex items-center gap-2 text-xs font-ui uppercase tracking-widest text-zinc-600 group-hover:text-zinc-950 transition-colors font-semibold">
+                <div className="pt-4 mt-5 border-t border-white/[0.08] flex items-center gap-2 text-xs font-ui text-[#86868b] group-hover:text-[#f5f5f7] transition-colors">
                   <span>{lang === "PL" ? "Czytaj artykuł w Bazie Wiedzy" : "Read in Knowledge Base"}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform text-amber-600" />
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform text-[#2997ff]" />
                 </div>
               </Link>
             );
@@ -204,10 +199,10 @@ export default function KnowledgeBaseTeaser({ lang = "PL" }: KnowledgeBaseTeaser
         <div className="text-center">
           <Link
             href="/baza-wiedzy"
-            className="inline-flex items-center gap-3 px-9 py-4 rounded-full bg-zinc-950 text-white font-body text-xs sm:text-sm font-semibold uppercase tracking-wider hover:bg-zinc-800 transition-all transform hover:-translate-y-1 shadow-[0_10px_30px_rgba(0,0,0,0.15)]"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-white/10 hover:bg-white/15 text-[#f5f5f7] font-body text-[13px] font-medium tracking-tight border border-white/15 transition-all hover:scale-[1.02] active:scale-[0.98] backdrop-blur-md"
           >
-            <span>{lang === "PL" ? "Otwórz pełne Kompendium Wiedzy (FAQ, Wzrost, Kalkulatory)" : "Open Complete Knowledge Compendium"}</span>
-            <ArrowRight className="w-4 h-4 text-amber-400" />
+            <span>{lang === "PL" ? "Otwórz pełne kompendium wiedzy" : "Open complete knowledge compendium"}</span>
+            <ArrowRight className="w-3.5 h-3.5 text-white" />
           </Link>
         </div>
 

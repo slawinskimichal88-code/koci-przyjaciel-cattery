@@ -33,7 +33,7 @@ export default function AvailableKittensPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen bg-black text-[#f5f5f7] selection:bg-[#2997ff] selection:text-white">
       <ScrollProgress />
 
       <Navbar
@@ -46,9 +46,9 @@ export default function AvailableKittensPage() {
         
         {/* ── BANNER GŁÓWNY: Dostępne Kociaki ─────────────────────────── */}
         <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-10 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-400/20 bg-amber-400/5 mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-md mb-6 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-amber-300 font-semibold">
+            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-[#86868b] font-semibold">
               {lang === "PL" ? "HODOWLA KOCI PRZYJACIEL *PL · WROCŁAW" : "CATTERY KOCI PRZYJACIEL *PL · WROCLAW"}
             </span>
           </div>
@@ -59,16 +59,16 @@ export default function AvailableKittensPage() {
           >
             {lang === "PL" ? (
               <>
-                Dostępne <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Kociaki</span>.
+                Dostępne <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">Kociaki</span>.
               </>
             ) : (
               <>
-                Available <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600">Kittens</span>.
+                Available <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">Kittens</span>.
               </>
             )}
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-body max-w-2xl mx-auto font-light leading-relaxed mb-8">
+          <p className="text-base sm:text-lg text-[#86868b] font-body max-w-2xl mx-auto font-light leading-relaxed mb-8">
             {lang === "PL"
               ? "Certyfikowana, domowa hodowla kotów rasy Maine Coon (FIFe / Felis Polonia). Transparentność zdrowotna, badania genetyczne HCM, PKD, SMA N/N i 100% miłości w domowym salonie."
               : "Certified cattery of Maine Coon cats (FIFe/FPL). DNA health screenings, domestic cage-free living and family socialization."}
@@ -77,7 +77,7 @@ export default function AvailableKittensPage() {
 
         {/* ── GŁÓWNA KARTA KOMUNIKATU: OBECNIE BRAK DOSTĘPNYCH MIOTÓW ──── */}
         <section className="max-w-5xl mx-auto px-6 sm:px-10 mb-16 sm:mb-20">
-          <div className="relative rounded-3xl p-8 sm:p-12 bg-gradient-to-b from-[#16161A] to-[#0E0E12] border border-amber-400/20 shadow-[0_20px_60px_rgba(0,0,0,0.7)] overflow-hidden">
+          <div className="relative rounded-3xl p-8 sm:p-12 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.7)] overflow-hidden">
             
             {/* Tło świetlne */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" />

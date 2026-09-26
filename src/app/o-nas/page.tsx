@@ -150,7 +150,7 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen bg-black text-[#f5f5f7] selection:bg-[#2997ff] selection:text-white">
       <ScrollProgress />
 
       <Navbar
@@ -163,9 +163,9 @@ export default function AboutPage() {
 
         {/* ── HERO BANNER O NAS ────────────────────────────────────────── */}
         <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-12 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-md mb-6 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-md mb-6 shadow-sm">
             <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/40" />
-            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-white/80 font-semibold">
+            <span className="text-[11px] font-mono uppercase tracking-[0.3em] text-[#86868b] font-semibold">
               {lang === "PL" ? "DOMOWA HODOWLA Z PASJĄ · WROCŁAW" : "PASSIONATE FAMILY CATTERY · WROCLAW"}
             </span>
           </div>
@@ -176,16 +176,16 @@ export default function AboutPage() {
           >
             {lang === "PL" ? (
               <>
-                Poznaj <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">Koci Przyjaciel *PL</span>.
+                Poznaj <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">Koci Przyjaciel *PL</span>.
               </>
             ) : (
               <>
-                About <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">Koci Przyjaciel *PL</span>.
+                About <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">Koci Przyjaciel *PL</span>.
               </>
             )}
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-body max-w-3xl mx-auto font-light leading-relaxed mb-8">
+          <p className="text-base sm:text-lg text-[#86868b] font-body max-w-3xl mx-auto font-light leading-relaxed mb-8">
             {lang === "PL"
               ? "Nie prowadzimy masowej produkcji kociąt. Jesteśmy małą, domową hodowlą — nasze Maine Coony to pełnoprawni członkowie rodziny, którzy od pierwszego oddechu dorastają przy dzieciach, psie i codziennych domowych dźwiękach."
               : "We are a small, family home cattery. Our Maine Coons are cherished family members raised from day one with children, dogs, and everyday household warmth."}

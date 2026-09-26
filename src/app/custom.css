@@ -3,21 +3,29 @@
 /* ========================================================================== */
 
 :root {
+  --font-apple: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   --font-cormorant: 'Cormorant Garamond', Georgia, serif;
-  --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-system: var(--font-inter), -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
 }
 
-/* Typografia */
+/* Typografia Apple Pro */
 .font-heading {
-  font-family: var(--font-cormorant), Georgia, serif;
+  font-family: var(--font-apple);
+  letter-spacing: -0.028em;
 }
 
 .font-ui {
-  font-family: var(--font-system);
+  font-family: var(--font-apple);
+  letter-spacing: -0.01em;
 }
 
 .font-body {
   font-family: var(--font-system);
+  letter-spacing: -0.012em;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
 }
 
 /* Bento Grid auto rows */
@@ -53,57 +61,58 @@
   }
 }
 
-/* Przyciski — biel i czerń */
+/* Przyciski w stylu Apple Pill */
 .btn-gold-primary {
-  background-color: #FFFFFF;
-  color: #0A0A0A;
-  border: 2px solid transparent;
-  border-radius: 2px;
-  padding: 14px 36px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-family: var(--font-raleway), sans-serif;
-  font-weight: 700;
-  font-size: 13px;
+  background-color: #F5F5F7;
+  color: #1D1D1F;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 980px;
+  padding: 12px 28px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  font-family: var(--font-apple);
+  font-weight: 500;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
   cursor: pointer;
 }
 
 .btn-gold-primary:hover {
-  background-color: #E0E0E0;
-  box-shadow: 0 6px 28px rgba(255, 255, 255, 0.3);
-  transform: translateY(-2px);
+  background-color: #FFFFFF;
+  box-shadow: 0 8px 30px rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
 }
 
 .btn-gold-secondary {
-  background-color: transparent;
-  color: #FFFFFF;
-  border: 2px solid #FFFFFF;
-  border-radius: 2px;
-  padding: 14px 36px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-family: var(--font-raleway), sans-serif;
-  font-weight: 700;
-  font-size: 13px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #F5F5F7;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 980px;
+  padding: 12px 28px;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  font-family: var(--font-apple);
+  font-weight: 500;
+  font-size: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(16px);
   cursor: pointer;
 }
 
 .btn-gold-secondary:hover {
-  background-color: #FFFFFF;
-  color: #0A0A0A;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
 }
 
 .btn-ghost-dark {
@@ -128,6 +137,32 @@
   background-color: #1A1A1A;
   color: #FFFFFF;
   transform: translateY(-2px);
+}
+
+/* Kinowa animacja Apple letter-by-letter reveal */
+@keyframes appleLetterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.88);
+    filter: blur(10px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.02);
+    filter: blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0px);
+  }
+}
+
+.apple-char {
+  display: inline-block;
+  opacity: 0;
+  animation: appleLetterReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity, filter;
 }
 
 /* Animacje wejścia przy scrollu */

@@ -11,25 +11,22 @@ const BreederSection = dynamic(() => import("@/components/sections/BreederSectio
   loading: () => <div className="min-h-[60vh] bg-black" />,
 });
 const BentoShowcaseSection = dynamic(() => import("@/components/sections/BentoShowcaseSection"), {
-  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+  loading: () => <div className="min-h-[50vh] bg-black" />,
 });
 const EnclosureSection = dynamic(() => import("@/components/sections/EnclosureSection"), {
   loading: () => <div className="min-h-[70vh] bg-black" />,
 });
 const ScaleComparisonSection = dynamic(() => import("@/components/sections/ScaleComparisonSection"), {
-  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+  loading: () => <div className="min-h-[50vh] bg-black" />,
 });
 const KnowledgeBaseTeaser = dynamic(() => import("@/components/sections/KnowledgeBaseTeaser"), {
-  loading: () => <div className="min-h-[50vh] bg-[#0A0A0A]" />,
+  loading: () => <div className="min-h-[50vh] bg-black" />,
 });
 const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), {
-  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
-});
-const FacebookCommunitySection = dynamic(() => import("@/components/sections/FacebookCommunitySection"), {
-  loading: () => <div className="min-h-[50vh] bg-[#FBFBFD]" />,
+  loading: () => <div className="min-h-[50vh] bg-black" />,
 });
 const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
-  loading: () => <div className="min-h-[60vh] bg-[#0A0A0A]" />,
+  loading: () => <div className="min-h-[60vh] bg-black" />,
 });
 const Footer = dynamic(() => import("@/components/layout/Footer"), {
   loading: () => <div className="min-h-[30vh] bg-black" />,
@@ -45,7 +42,7 @@ export default function Home() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#0A0A0A] text-white">
+    <div className="relative min-h-screen bg-black text-[#f5f5f7] selection:bg-[#2997ff] selection:text-white">
       
       {/* Pasek postępu scrollowania na samej górze */}
       <ScrollProgress />
@@ -87,13 +84,10 @@ export default function Home() {
         {/* ⑧ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Kalkulator kosztów i badania genetyczne */}
         <KnowledgeBaseTeaser lang={lang} />
 
-        {/* ⑨ OPINIE OPIEKUNÓW: Oceny 5.0, metryki, notatki głosowe */}
+        {/* ⑧ OPINIE OPIEKUNÓW: Oceny 5.0, metryki, notatki głosowe */}
         <TestimonialsSection lang={lang} />
 
-        {/* ⑩ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API */}
-        <FacebookCommunitySection lang={lang} />
-
-        {/* ⑪ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
+        {/* ⑨ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
         <ContactSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}

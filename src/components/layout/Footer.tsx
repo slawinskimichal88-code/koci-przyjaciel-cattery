@@ -3,7 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_INSTAGRAM_URL, REAL_LOCATION } from "@/data/realCatsData";
+import {
+  REAL_LOGO,
+  REAL_PHONE,
+  REAL_PHONE_RAW,
+  REAL_FACEBOOK_URL,
+  REAL_INSTAGRAM_URL,
+  REAL_LOCATION,
+} from "@/data/realCatsData";
 
 interface FooterProps {
   lang?: "PL" | "EN";
@@ -13,111 +20,137 @@ interface FooterProps {
 export default function Footer({ lang = "PL" }: FooterProps) {
   const year = new Date().getFullYear();
 
-  const footerNav = [
+  const footerDirectory = [
     {
-      title: lang === "PL" ? "Główne Zakładki" : "Main Navigation",
-      items: [
+      title: lang === "PL" ? "Odkryj Hodowlę" : "Explore Cattery",
+      links: [
         { label: "Strona Główna", href: "/" },
-        { label: "O hodowli", href: "/o-nas" },
-        { label: "Galeria kotów", href: "/galeria" },
+        { label: "O nas & Filozofia", href: "/o-nas" },
+        { label: "Galeria kocurów i kotek", href: "/galeria" },
         { label: "Dostępne Kociaki", href: "/dostepne-kociaki" },
-        { label: "Baza Wiedzy", href: "/baza-wiedzy" },
-        { label: "Kontakt & Wizyty", href: "/kontakt" },
+        { label: "Wybieg & Woliera", href: "/#wybieg" },
+        { label: "Baza Wiedzy & Poradnik", href: "/baza-wiedzy" },
+      ],
+    },
+    {
+      title: lang === "PL" ? "Zdrowie & Wzorzec" : "Health & Standards",
+      links: [
+        { label: "Standard rasy Maine Coon", href: "/baza-wiedzy#wzorzec" },
+        { label: "Echo Doppler serca HCM", href: "/baza-wiedzy#zdrowie" },
+        { label: "Testy genetyczne Laboklin", href: "/baza-wiedzy#zdrowie" },
+        { label: "Czystość genetyczna N/N", href: "/baza-wiedzy#zdrowie" },
+        { label: "Certyfikacja FIFe / FPL", href: "/kocieta#rodowod" },
       ],
     },
     {
       title: lang === "PL" ? "Wiedza & Narzędzia" : "Knowledge & Tools",
-      items: [
-        { label: lang === "PL" ? "Kalkulator Kosztów & Wyprawka" : "Cost Calculator", href: "/baza-wiedzy?tab=kalkulator" },
-        { label: lang === "PL" ? "Wzorzec rasy Maine Coon" : "Breed Standard", href: "/baza-wiedzy?tab=wzorzec" },
-        { label: lang === "PL" ? "Porównanie wymiarów (Skala)" : "Scale Comparison", href: "/baza-wiedzy?tab=skala" },
-        { label: lang === "PL" ? "Zdrowie & Badania HCM" : "Heart Health & HCM", href: "/baza-wiedzy?tab=zdrowie" },
-        { label: lang === "PL" ? "Najczęstsze pytania (FAQ)" : "FAQ", href: "/baza-wiedzy?tab=faq" },
+      links: [
+        { label: "Skala porównawcza 1:1", href: "/#porownanie" },
+        { label: "Kalkulator kosztów utrzymania", href: "/kalkulator" },
+        { label: "Wyprawka dla kociaka", href: "/baza-wiedzy" },
+        { label: "Odpowiedzi na pytania (FAQ)", href: "/baza-wiedzy" },
       ],
     },
     {
-      title: lang === "PL" ? "Hodowla & Certyfikaty" : "Cattery & Certs",
-      items: [
-        { label: "FIFe / Felis Polonia (FPL)", href: "/kocieta#rodowod" },
-        { label: "Badania Laboklin N/N", href: "/baza-wiedzy#zdrowie" },
-        { label: "Profilaktyka Echo Doppler", href: "/baza-wiedzy#zdrowie" },
-        { label: "Społeczność Facebook (26k+)", href: REAL_FACEBOOK_URL, isExternal: true },
+      title: lang === "PL" ? "Kontakt & Społeczność" : "Connect & Visit",
+      links: [
+        { label: `Zadzwoń: ${REAL_PHONE}`, href: `tel:${REAL_PHONE_RAW}` },
+        { label: "Facebook (26k+ fanów)", href: REAL_FACEBOOK_URL, isExternal: true },
         { label: "Instagram @koci_przyjaciel_pl", href: REAL_INSTAGRAM_URL, isExternal: true },
+        { label: `Lokalizacja: ${REAL_LOCATION}`, href: "/kontakt" },
+        { label: "Formularz rezerwacji", href: "/kontakt" },
       ],
     },
   ];
 
   return (
-    <footer className="bg-[#0D0D0F] text-white border-t border-white/10 pt-16 pb-12">
-      <div className="max-w-6xl mx-auto px-6 sm:px-10">
+    <footer className="bg-[#111112] text-[#86868b] border-t border-white/[0.08] pt-12 pb-14 text-[12px] font-body selection:bg-[#2997ff] selection:text-white">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10">
 
-        {/* Top row */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
-
-          {/* Kolumna 1: Brand & Logo */}
-          <div className="space-y-4 md:pr-6">
-            <Link href="/" className="flex items-center gap-3.5 group">
-              <div
-                className="relative w-11 h-11 rounded-full overflow-hidden border border-white/30 shrink-0 shadow-md group-hover:border-white transition-all"
-                style={{ position: "relative", width: 44, height: 44 }}
-              >
-                <Image
-                  src={REAL_LOGO}
-                  alt="Koci Przyjaciel PL"
-                  width={44}
-                  height={44}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div>
-                <p className="text-base font-heading font-medium text-white group-hover:text-amber-200 transition-colors">
-                  Koci Przyjaciel <span className="italic text-xs font-serif text-amber-300">*PL</span>
-                </p>
-                <p className="text-[10px] font-mono text-zinc-400 tracking-wider uppercase">
-                  FIFe · FPL · Wrocław
-                </p>
-              </div>
-            </Link>
-
-            <p className="text-xs text-zinc-400 font-body font-light leading-relaxed">
-              {lang === "PL"
-                ? "Certyfikowana domowa hodowla kotów rasy Maine Coon. Życie w salonie z dziećmi i psem, bezpieczny wybieg ogrodowy, 100% czystość genetyczna."
-                : "Certified home cattery of Maine Coon cats in Wrocław. Free home life with kids and dog, outdoor aviary, 100% genetic health."}
-            </p>
-          </div>
-
-          {/* Puste miejsce, aby zachować padding jeśli to konieczne lub usunięto całkowicie nawigację zgodnie z prośbą o sam telefon. */}
-
+        {/* ── SEKCJA 1: APPLE FOOTNOTES (Notatki wyjaśniające i status hodowli) ── */}
+        <div className="pb-8 space-y-2 text-[#86868b] text-[11px] leading-relaxed border-b border-[#2d2d2f]">
+          <p>
+            1. Hodowla Koci Przyjaciel *PL jest w pełni zarejestrowana w Polskiej Federacji Felinologicznej (Felis Polonia – FPL), będącej największym w Polsce członkiem Fédération Internationale Féline (FIFe). Każdy kociak otrzymuje oficjalny 5-pokoleniowy rodowód honorowany na całym świecie.
+          </p>
+          <p>
+            2. Wszystkie koty hodowlane przechodzą regularne badania kardiologiczne (Echo Doppler w kierunku kardiomiopatii przerostowej HCM) oraz certyfikowane testy DNA w laboratorium Laboklin na obecność HCM, PKD i SMA z wynikiem N/N (wolne od mutacji).
+          </p>
+          <p>
+            3. Koty mieszkają w domu razem z naszą rodziną, dziećmi i psem. Mają stały, bezpieczny dostęp do całorocznej woliery ogrodowej. Hodowla wolna od klatek.
+          </p>
         </div>
 
-        {/* Bottom row */}
-        <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-body text-zinc-400">
-          <p>
-            © {year} Koci Przyjaciel *PL. Wszelkie prawa zastrzeżone.
-          </p>
+        {/* ── SEKCJA 2: APPLE DIRECTORY (4 eleganckie kolumny linków) ── */}
+        <nav aria-label="Katalog odnośników" className="grid grid-cols-2 md:grid-cols-4 gap-8 py-10 border-b border-[#2d2d2f]">
+          {footerDirectory.map((col, idx) => (
+            <div key={idx} className="space-y-3">
+              <h3 className="text-[12px] font-semibold text-[#f5f5f7] tracking-[-0.01em]">
+                {col.title}
+              </h3>
+              <ul className="space-y-2">
+                {col.links.map((link, lIdx) => (
+                  <li key={lIdx}>
+                    {link.isExternal ? (
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#86868b] hover:text-[#f5f5f7] transition-colors inline-flex items-center gap-1"
+                      >
+                        <span>{link.label}</span>
+                        <span className="text-[10px] opacity-70">↗</span>
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-[#86868b] hover:text-[#f5f5f7] transition-colors block"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
 
-          <div className="flex flex-wrap items-center gap-6">
-            <a href={`tel:${REAL_PHONE_RAW}`} className="hover:text-white transition-colors font-mono">
-              tel: {REAL_PHONE}
-            </a>
-            <span>{REAL_LOCATION}</span>
-            <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-zinc-300 hover:text-white transition-colors font-medium flex items-center gap-1"
-            >
-              Facebook ↗
-            </a>
-            <a
-              href={REAL_INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-zinc-300 hover:text-white transition-colors font-medium flex items-center gap-1"
-            >
-              Instagram ↗
-            </a>
+        {/* ── SEKCJA 3: PODSUMOWANIE BRANDU I DOLNA LINIA PRAWNA ── */}
+        <div className="pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[11px] text-[#86868b]">
+          
+          <div className="flex items-center gap-3">
+            <div className="relative w-6 h-6 rounded-full overflow-hidden border border-white/20 shrink-0 bg-black">
+              <Image
+                src={REAL_LOGO}
+                alt="Koci Przyjaciel PL"
+                width={24}
+                height={24}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span>
+              Copyright © {year} Koci Przyjaciel *PL. Wszelkie prawa zastrzeżone.
+            </span>
           </div>
+
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            <Link href="/kontakt" className="hover:text-[#f5f5f7] transition-colors">
+              Prywatność i bezpieczeństwo
+            </Link>
+            <span className="text-[#333336]">|</span>
+            <Link href="/kontakt" className="hover:text-[#f5f5f7] transition-colors">
+              Zasady rezerwacji
+            </Link>
+            <span className="text-[#333336]">|</span>
+            <Link href="/baza-wiedzy" className="hover:text-[#f5f5f7] transition-colors">
+              Baza wiedzy felinologicznej
+            </Link>
+            <span className="text-[#333336]">|</span>
+            <span className="text-[#f5f5f7]/90 font-medium">
+              Polska · Wrocław
+            </span>
+          </div>
+
         </div>
 
       </div>

@@ -50,12 +50,12 @@ export default function EnclosureSection({
   useEffect(() => {
     const isDesk = window.innerWidth >= 1024;
     setIsDesktopDevice(isDesk);
-    setSectionHeight(isDesk ? "400vh" : "310vh");
+    setSectionHeight(isDesk ? "520vh" : "410vh");
 
     const onResize = () => {
       const d = window.innerWidth >= 1024;
       setIsDesktopDevice(d);
-      setSectionHeight(d ? "400vh" : "310vh");
+      setSectionHeight(d ? "520vh" : "410vh");
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -564,26 +564,26 @@ export default function EnclosureSection({
 
           </div>
 
-          {/* Dolny segmentowy wskaźnik postępu desktop */}
+          {/* Dolny segmentowy wskaźnik postępu desktop (kolorowy Apple style jak w hodowcy) */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
             <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
               <div
                 ref={desktopBar1Ref}
-                className="h-full bg-white transition-all duration-75 ease-out"
+                className="h-full bg-amber-400 transition-all duration-75 ease-out"
                 style={{ width: "0%" }}
               />
             </div>
             <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
               <div
                 ref={desktopBar2Ref}
-                className="h-full bg-white transition-all duration-75 ease-out"
+                className="h-full bg-blue-400 transition-all duration-75 ease-out"
                 style={{ width: "0%" }}
               />
             </div>
             <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
               <div
                 ref={desktopBar3Ref}
-                className="h-full bg-white transition-all duration-75 ease-out"
+                className="h-full bg-emerald-400 transition-all duration-75 ease-out"
                 style={{ width: "0%" }}
               />
             </div>
@@ -798,26 +798,26 @@ export default function EnclosureSection({
             </div>
           </div>
 
-          {/* D. SUBTELNE WSKAŹNIKI POSTĘPU APPLE (Eleganckie linie bez topornych przycisków) */}
+          {/* D. SUBTELNE WSKAŹNIKI POSTĘPU APPLE (kolorowe jak w hodowcy) */}
           <div className="w-full flex items-center justify-center gap-2 pt-1 pb-1 z-20">
             <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
               <div
                 ref={mobileBar1Ref}
-                className="h-full bg-white will-change-transform"
+                className="h-full bg-amber-400 will-change-transform"
                 style={{ width: "0%" }}
               />
             </div>
             <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
               <div
                 ref={mobileBar2Ref}
-                className="h-full bg-white will-change-transform"
+                className="h-full bg-blue-400 will-change-transform"
                 style={{ width: "0%" }}
               />
             </div>
             <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
               <div
                 ref={mobileBar3Ref}
-                className="h-full bg-white will-change-transform"
+                className="h-full bg-emerald-400 will-change-transform"
                 style={{ width: "0%" }}
               />
             </div>

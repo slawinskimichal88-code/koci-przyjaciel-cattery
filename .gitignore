@@ -40,7 +40,21 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local test scripts
+# local test scripts & audit artifacts
 *.mjs
+*.png
+*.jpg
+*.jpeg
+*.aac
+*.wav
+*.mp3
+*.xlsx
+audit_*.js
+verify_*.js
+take_*.js
+test_*.js
+*_0ab7634.tsx
+scripts/
+scratch/
 
 .vercel

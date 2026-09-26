@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond } from "next/font/google";
+import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import StructuredData from "@/components/StructuredData";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import ScrollRevealProvider from "@/components/providers/ScrollRevealProvider";
 import SecurityProtection from "@/components/security/SecurityProtection";
+
+const inter = Inter({
+  subsets: ["latin", "latin-ext"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -94,11 +101,11 @@ export default function RootLayout({
       lang="pl"
       suppressHydrationWarning
       data-scroll-behavior="smooth"
-      className={`scroll-smooth ${cormorant.variable}`}
+      className={`scroll-smooth ${inter.variable} ${cormorant.variable}`}
     >
       <body
         suppressHydrationWarning
-        className="bg-[#0A0A0A] text-[#F5F5F5] font-body selection:bg-white selection:text-black antialiased"
+        className="bg-black text-[#f5f5f7] font-sans selection:bg-[#2997ff] selection:text-white antialiased"
       >
         <StructuredData />
         <ScrollRevealProvider />

@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Sparkles, Phone } from "lucide-react";
-import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_INSTAGRAM_URL } from "@/data/realCatsData";
+import { FacebookIcon, InstagramIcon, MessengerIcon } from "@/components/ui/SocialIcons";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_MESSENGER_URL, REAL_MESSENGER_APP_URL, REAL_INSTAGRAM_URL } from "@/data/realCatsData";
 
 interface NavbarProps {
   lang: "PL" | "EN";
@@ -18,6 +18,23 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+
+  const handleMessengerClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window === "undefined") return;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (isMobile) {
+      const start = Date.now();
+      window.location.href = REAL_MESSENGER_APP_URL;
+      setTimeout(() => {
+        if (Date.now() - start < 1500) {
+          window.location.href = REAL_MESSENGER_URL;
+        }
+      }, 700);
+    } else {
+      window.open(REAL_MESSENGER_URL, "_blank", "noopener,noreferrer");
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -45,13 +62,13 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "py-2 sm:py-2.5 bg-black/90 backdrop-blur-2xl border-b border-white/12 shadow-[0_8px_30px_rgba(0,0,0,0.85)]"
-            : "py-3 sm:py-4 bg-gradient-to-b from-black/95 via-black/50 to-transparent"
-        }`}
+            ? "h-12 bg-black/80 backdrop-blur-xl border-b border-white/[0.08] shadow-[0_4px_30px_rgba(0,0,0,0.5)]"
+            : "h-14 bg-black/60 backdrop-blur-lg border-b border-white/[0.05]"
+        } flex items-center`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 w-full flex items-center justify-between gap-4">
 
-          {/* Logo & Nazwa - Kliknięcie płynnie przewija na samą górę strony głównej */}
+          {/* Logo & Nazwa Apple Style - Kliknięcie płynnie przewija na samą górę strony głównej */}
           <Link
             href="/"
             onClick={() => {
@@ -59,32 +76,32 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }
             }}
-            className="flex items-center gap-2.5 sm:gap-3.5 group shrink-0 cursor-pointer"
+            className="flex items-center gap-2.5 group shrink-0 cursor-pointer"
           >
             <div
-              className="relative w-10 h-10 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/40 shadow-[0_0_20px_rgba(255,255,255,0.25)] group-hover:border-white group-hover:shadow-[0_0_25px_rgba(255,255,255,0.45)] transition-all duration-300 shrink-0 bg-black"
+              className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-white/20 shadow-sm group-hover:border-white/50 transition-all duration-300 shrink-0 bg-black"
             >
               <Image
                 src="/logo.webp"
                 alt="Koci Przyjaciel PL"
-                width={56}
-                height={56}
+                width={36}
+                height={36}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 unoptimized
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-base sm:text-xl font-heading font-semibold text-white group-hover:text-amber-200 transition-colors tracking-wide leading-tight whitespace-nowrap">
-                Koci Przyjaciel <span className="text-xs sm:text-sm text-amber-300 font-serif font-light italic">*PL</span>
+              <span className="text-sm sm:text-base font-heading font-medium text-[#f5f5f7] group-hover:text-white transition-colors tracking-[-0.02em] leading-tight whitespace-nowrap">
+                Koci Przyjaciel <span className="text-xs text-[#86868b] font-normal">*PL</span>
               </span>
-              <span className="text-[10px] sm:text-[11px] font-ui uppercase tracking-[0.2em] sm:tracking-[0.25em] text-zinc-300 font-medium leading-none mt-0.5 sm:mt-1">
+              <span className="text-[9px] sm:text-[10px] font-ui uppercase tracking-[0.2em] text-[#86868b] font-medium leading-none">
                 FIFe · FPL · Wrocław
               </span>
             </div>
           </Link>
 
-          {/* Desktop Nav: Wyraziste, nowoczesne linki (13-14px, czytelne, z hover pill) */}
-          <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 px-2 py-1 xl:px-2.5 xl:py-1.5 rounded-full bg-[#161618]/80 backdrop-blur-xl border border-white/10 shadow-inner">
+          {/* Desktop Nav: Styl Apple Global Nav (12px, clean, text-[#f5f5f7]/80 hover:text-white) */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
             {navItems.map((item) => {
               const active = isLinkActive(item.href);
               return (
@@ -92,10 +109,10 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
                   key={item.href}
                   href={item.href}
                   prefetch={false}
-                  className={`relative px-2.5 xl:px-3.5 py-1.5 xl:py-2 rounded-full text-[13px] xl:text-[14px] font-body transition-all duration-200 whitespace-nowrap ${
+                  className={`px-3 py-1.5 rounded-full text-[12px] font-normal tracking-[-0.01em] transition-all duration-200 whitespace-nowrap ${
                     active
-                      ? "bg-white text-black font-semibold shadow-sm"
-                      : "text-zinc-300 hover:text-white hover:bg-white/10 font-medium"
+                      ? "text-white bg-white/10 font-medium"
+                      : "text-[#f5f5f7]/70 hover:text-white hover:bg-white/[0.06]"
                   }`}
                 >
                   {item.label}
@@ -104,53 +121,78 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
             })}
           </nav>
 
-          {/* Prawa strona: Social media + Telefon */}
-          <div className="hidden lg:flex items-center gap-2 xl:gap-3 shrink-0">
-            {/* Social Media Loga (Facebook + Instagram) */}
-            <div className="flex items-center gap-1.5">
+          {/* Prawa strona: Social media + Messenger + Telefon */}
+          <div className="hidden lg:flex items-center gap-2.5 shrink-0">
+            {/* Social Media Loga (Facebook + Instagram) Apple style */}
+            <div className="flex items-center gap-1">
               <a
                 href={REAL_FACEBOOK_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 xl:p-2 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition-all group"
+                className="p-1.5 rounded-full text-[#86868b] hover:text-[#f5f5f7] hover:bg-white/[0.08] transition-all group"
                 aria-label="Facebook Koci Przyjaciel *PL"
                 title="Facebook (26k+ fanów)"
               >
-                <FacebookIcon className="w-4 h-4 text-[#1877F2] group-hover:scale-110 transition-transform" />
+                <FacebookIcon className="w-3.5 h-3.5 group-hover:scale-105 transition-transform" />
               </a>
               <a
                 href={REAL_INSTAGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-1.5 xl:p-2 rounded-full text-zinc-300 hover:text-white hover:bg-white/10 transition-all group"
+                className="p-1.5 rounded-full text-[#86868b] hover:text-[#f5f5f7] hover:bg-white/[0.08] transition-all group"
                 aria-label="Instagram Koci Przyjaciel *PL"
                 title="Instagram"
               >
-                <InstagramIcon className="w-4 h-4 text-[#E4405F] group-hover:scale-110 transition-transform" />
+                <InstagramIcon className="w-3.5 h-3.5 group-hover:scale-105 transition-transform" />
               </a>
             </div>
 
-            {/* Szybki telefon */}
+            {/* Bezpośredni przycisk Messenger (Desktop: nowa karta / Smartphone: aplikacja) */}
+            <a
+              href={REAL_MESSENGER_URL}
+              onClick={handleMessengerClick}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-medium text-white bg-[#0084FF]/20 hover:bg-[#0084FF]/30 border border-[#0084FF]/40 transition-all active:scale-95 group shadow-[0_0_12px_rgba(0,132,255,0.25)] cursor-pointer"
+              title="Napisz do nas na Messengerze"
+              aria-label="Messenger Koci Przyjaciel"
+            >
+              <MessengerIcon className="w-3.5 h-3.5 text-[#0084FF] group-hover:scale-110 transition-transform" />
+              <span className="font-ui font-medium">Messenger</span>
+            </a>
+
+            {/* Szybki telefon w stylu pigułki Apple */}
             <a
               href={`tel:${REAL_PHONE_RAW}`}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-body font-medium text-zinc-200 hover:text-white bg-white/10 hover:bg-white/20 border border-white/15 transition-all"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[12px] font-medium text-[#f5f5f7] bg-white/[0.08] hover:bg-white/[0.15] border border-white/[0.12] transition-all active:scale-95"
             >
-              <Phone className="w-3.5 h-3.5 text-amber-300" />
+              <Phone className="w-3 h-3 text-[#2997ff]" />
               <span>{REAL_PHONE}</span>
             </a>
           </div>
 
-          {/* Mobilny Przycisk Menu — w 100% responsywny i klikalny */}
-          <div className="flex lg:hidden items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* Mobilny Przycisk Akcji — Messenger bezpośrednio przypięty + Menu */}
+          <div className="flex lg:hidden items-center gap-2 shrink-0">
+            {/* Przycisk Messenger bezpośrednio na belce mobilnej */}
+            <a
+              href={REAL_MESSENGER_URL}
+              onClick={handleMessengerClick}
+              className="flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#0084FF]/20 hover:bg-[#0084FF]/30 border border-[#0084FF]/40 text-white transition-all cursor-pointer active:scale-95 shadow-[0_0_12px_rgba(0,132,255,0.25)]"
+              aria-label="Otwórz Messenger"
+              title="Napisz do nas na Messengerze"
+            >
+              <MessengerIcon className="w-3.5 h-3.5 text-[#0084FF]" />
+              <span className="text-[11px] font-ui font-medium">Messenger</span>
+            </a>
+
+            {/* Przycisk Menu */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all cursor-pointer border border-white/20 active:scale-95 shadow-sm"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.08] hover:bg-white/[0.15] text-[#f5f5f7] transition-all cursor-pointer border border-white/[0.12] active:scale-95"
               aria-label="Menu nawigacyjne"
             >
-              <span className="text-xs font-ui font-semibold uppercase tracking-wider">
+              <span className="text-[11px] font-ui font-medium uppercase tracking-wider">
                 {menuOpen ? "Zamknij" : "Menu"}
               </span>
-              {menuOpen ? <X className="w-4 h-4 text-amber-300" /> : <Menu className="w-4 h-4 text-white" />}
+              {menuOpen ? <X className="w-3.5 h-3.5 text-white" /> : <Menu className="w-3.5 h-3.5 text-white" />}
             </button>
           </div>
 
@@ -201,14 +243,15 @@ export default function Navbar({ lang, setLang, onOpenReservation }: NavbarProps
 
           <div className="mt-8 pt-6 border-t border-white/10 space-y-3">
             <a
-              href={REAL_FACEBOOK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
-              className="w-full py-4 rounded-2xl bg-[#1877F2] text-white font-body text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer"
+              href={REAL_MESSENGER_URL}
+              onClick={(e) => {
+                setMenuOpen(false);
+                handleMessengerClick(e);
+              }}
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#0084FF] to-[#0099FF] text-white font-body text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2.5 shadow-xl cursor-pointer active:scale-95 transition-transform"
             >
-              <FacebookIcon className="w-4 h-4 fill-current text-white" />
-              <span>{lang === "PL" ? "Napisz na Facebooku (Messenger)" : "Message us on Facebook"}</span>
+              <MessengerIcon className="w-5 h-5 fill-current text-white" />
+              <span>{lang === "PL" ? "Otwórz Messenger" : "Open Messenger"}</span>
             </a>
 
             <a

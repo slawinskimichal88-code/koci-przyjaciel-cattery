@@ -11,7 +11,9 @@ export interface CatPhoto {
 }
 
 export const REAL_LOGO = '/logo.webp';
-export const REAL_FACEBOOK_URL = 'https://www.facebook.com/profile.php?id=100063684877717';
+export const REAL_FACEBOOK_URL = 'https://www.facebook.com/kociprzyjaciel';
+export const REAL_MESSENGER_URL = 'https://m.me/1591521427751158';
+export const REAL_MESSENGER_APP_URL = 'fb-messenger://user-thread/1591521427751158';
 export const REAL_INSTAGRAM_URL = 'https://www.instagram.com/koci_przyjaciel_pl'; // Placeholder gotowy na docelowy link
 export const REAL_PHONE = '698 837 525';
 export const REAL_PHONE_RAW = '+48698837525';

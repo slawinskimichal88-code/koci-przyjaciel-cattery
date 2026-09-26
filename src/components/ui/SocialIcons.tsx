@@ -31,3 +31,16 @@ export function InstagramIcon({ className = "w-4 h-4" }: { className?: string })
     </svg>
   );
 }
+
+export function MessengerIcon({ className = "w-4 h-4" }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M12 2C6.477 2 2 6.145 2 11.258c0 2.914 1.455 5.518 3.735 7.209v3.533l3.39-1.861c.907.252 1.871.388 2.875.388 5.523 0 10-4.145 10-9.258S17.523 2 12 2zm1.07 12.448l-2.56-2.73-5 2.73 5.5-5.84 2.62 2.73 4.94-2.73-5.5 5.84z" />
+    </svg>
+  );
+}

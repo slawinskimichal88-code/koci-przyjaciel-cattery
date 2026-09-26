@@ -10,12 +10,8 @@ import {
   Heart,
   Sparkles,
   ExternalLink,
-  MessageCircle,
-  Share2,
   X,
   Maximize2,
-  CheckCircle2,
-  Users,
 } from "lucide-react";
 import { FacebookIcon, InstagramIcon } from "@/components/ui/SocialIcons";
 
@@ -78,20 +74,19 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
       id: "story-4",
       author: "Miot 2026 · Koci Przyjaciel",
       tag: "Rzadkość genetyczna",
-      badge: "Niebieskie oczy",
-      quote: "„Niebieskooka piękność i roznooka dziewczynka — duma naszej hodowli i zdrowe linie FIFe.”",
-      likes: "222",
-      comments: "29",
-      screenSrc: "/images/facebook/fb_screenshot_6.webp",
-      screenThumb: "/images/facebook/fb_screenshot_6_thumb.webp",
+      badge: "Czarne dymy (Smoke)",
+      quote: "„Majestatyczne umaszczenie black smoke. Maluchy rosną jak na drożdżach pod okiem mamy.”",
+      likes: "84",
+      comments: "14",
+      screenSrc: "/images/facebook/fb_screenshot_3.webp",
+      screenThumb: "/images/facebook/fb_screenshot_3_thumb.webp",
     },
   ];
 
-  // Zdjęcia od opiekunów
   const communityPhotos = [
-    { id: "comm-1", src: "/images/cats/cat_27.webp", title: "Rodzina z synkiem i kotkiem w ogrodzie" },
-    { id: "comm-2", src: "/images/cats/cat_26.webp", title: "Kociak w bezpiecznych ramionach nowego opiekuna" },
-    { id: "comm-3", src: "/images/cats/cat_11.webp", title: "Czuły buziak od nowej rodziny" },
+    { id: "comm-1", src: "/images/cats/cat_21.webp", title: "Maine Coon z dzieckiem na kanapie" },
+    { id: "comm-2", src: "/images/cats/cat_22.webp", title: "Kocur odpoczywający na drapaku" },
+    { id: "comm-3", src: "/images/cats/cat_23.webp", title: "Kociak w ramionach nowej opiekunki" },
     { id: "comm-4", src: "/images/cats/cat_15.webp", title: "Maine Coon na desce SUP — miłość do wody" },
     { id: "comm-5", src: "/images/cats/cat_24.webp", title: "Czułość o zachodzie słońca nad jeziorem" },
     { id: "comm-6", src: "/images/cats/cat_20.webp", title: "Radosna zabawa z maskotką na kanapie" },
@@ -112,51 +107,49 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
   }, []);
 
   return (
-    <section id="spolecznosc" className="bg-[#FAF9F6] text-zinc-900 overflow-hidden border-t border-zinc-200 py-16 sm:py-20">
+    <section id="spolecznosc" className="bg-black text-[#f5f5f7] overflow-hidden border-t border-white/[0.08] py-16 sm:py-24 relative">
       
-      {/* ── Intro ───────────────────────────────────────────────── */}
-      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-10 sm:mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[11px] font-mono uppercase tracking-[0.3em] text-blue-900 mb-5 font-semibold">
+      {/* ── Intro (Apple Keynote Style) ───────────────────────────────────────────────── */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-12 sm:mb-16">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-white/[0.12] text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] mb-5 font-medium">
           <FacebookIcon className="w-3.5 h-3.5 text-[#1877F2]" />
-          <span>
+          <span className="text-[#f5f5f7]">
             {lang === "PL"
-              ? isLive
-                ? "Licznik zsynchronizowany na żywo z Meta API"
-                : "Społeczność Hodowli · Ponad 26 000 Fanów"
-              : "Live Cattery Community · 26k+ Followers"}
+              ? "Społeczność Hodowli na Facebooku"
+              : "Facebook Cattery Community"}
           </span>
         </div>
 
         <h2
-          className="font-heading font-light text-zinc-950 leading-[0.92] tracking-tight mb-5"
-          style={{ fontSize: "clamp(2.6rem, 5.5vw, 4.8rem)" }}
+          className="font-heading font-light text-[#f5f5f7] leading-[1.02] tracking-tight mb-5"
+          style={{ fontSize: "clamp(2.4rem, 5.5vw, 4.5rem)" }}
         >
           {followerCount} fanów.<br />
-          <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-900 to-zinc-900">
+          <span className="font-semibold text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f5f5f7] to-[#86868b]">
             Nasza wielka rodzina na Facebooku.
           </span>
         </h2>
 
-        <p className="text-base sm:text-lg font-body text-zinc-600 max-w-2xl leading-relaxed font-light">
+        <p className="text-base sm:text-lg font-body text-[#86868b] max-w-2xl leading-relaxed font-light">
           {lang === "PL"
             ? "Codzienne relacje z życia hodowli, autentyczne opinie i zdjęcia z nowych domów publikowane bez filtrów w naszej aktywnej społeczności."
             : "Daily life updates, genuine family feedback, and joyful photos from forever homes shared directly with our thriving community."}
         </p>
       </div>
 
-      {/* ── INTERAKTYWNA KOMPAKTOWA BELKA SPOŁECZNOŚCI (Apple Glass Interactive Strip) ── */}
+      {/* ── INTERAKTYWNA KOMPAKTOWA BELKA SPOŁECZNOŚCI (Apple Bento Strip) ── */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-12">
-        <div className="p-6 sm:p-8 rounded-3xl bg-white/90 backdrop-blur-xl border border-zinc-200/90 shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
-          <div className="flex items-center justify-between flex-wrap gap-4 mb-6 pb-5 border-b border-zinc-100">
+        <div className="p-6 sm:p-8 rounded-[28px] bg-[#161617] border border-white/[0.08]">
+          <div className="flex items-center justify-between flex-wrap gap-4 mb-6 pb-5 border-b border-white/[0.08]">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2]">
+              <div className="w-10 h-10 rounded-2xl bg-white/[0.06] border border-white/[0.1] flex items-center justify-center text-[#1877F2]">
                 <FacebookIcon className="w-5 h-5 fill-current" />
               </div>
               <div>
-                <span className="text-xs font-mono uppercase tracking-widest text-zinc-400 block font-semibold">
+                <span className="text-xs font-mono uppercase tracking-widest text-[#86868b] block font-medium">
                   Autentyczne relacje i zrzuty postów
                 </span>
-                <div className="text-sm font-semibold text-zinc-900">
+                <div className="text-sm font-medium text-[#f5f5f7]">
                   Kliknij relację, aby zobaczyć oryginalny wpis z Facebooka
                 </div>
               </div>
@@ -166,25 +159,24 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               href={REAL_FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-ui font-semibold transition-all shadow-sm hover:shadow"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-ui font-medium tracking-tight transition-all shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
               <span>Przejdź na profil Facebook</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* 4 Kompaktowe Kapsuły / Pigułki z miniaturą zrzutu (Subtelne, eleganckie, bez wielkich kloców) */}
+          {/* 4 Kompaktowe Kapsuły / Pigułki ze zrzutami */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {stories.map((item) => (
               <div
                 key={item.id}
                 onClick={() => setActiveStory(item)}
-                className="group relative cursor-pointer p-4 rounded-2xl bg-zinc-50/70 hover:bg-blue-50/50 border border-zinc-200/80 hover:border-blue-300 transition-all duration-300 flex flex-col justify-between"
+                className="group relative cursor-pointer p-4 rounded-[20px] bg-[#1d1d1f] hover:bg-[#242426] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center gap-3 mb-3">
-                    {/* Miniaturka zrzutu ekranu */}
-                    <div className="relative w-12 h-16 rounded-xl overflow-hidden border border-zinc-200 shrink-0 bg-zinc-100 shadow-xs group-hover:scale-105 transition-transform">
+                    <div className="relative w-12 h-16 rounded-xl overflow-hidden border border-white/[0.1] shrink-0 bg-black shadow-xs group-hover:scale-105 transition-transform">
                       <Image
                         src={item.screenThumb || item.screenSrc}
                         alt={item.author}
@@ -195,31 +187,31 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
                       />
                     </div>
                     <div className="min-w-0">
-                      <span className="text-[10px] font-mono uppercase tracking-wider text-blue-800 font-bold block truncate">
+                      <span className="text-[10px] font-mono uppercase tracking-wider text-[#2997ff] font-medium block truncate">
                         {item.badge}
                       </span>
-                      <h3 className="text-xs font-semibold text-zinc-900 truncate">
+                      <h3 className="text-xs font-medium text-[#f5f5f7] truncate">
                         {item.author}
                       </h3>
-                      <span className="text-[10px] text-zinc-500 font-mono block">
+                      <span className="text-[10px] text-[#86868b] font-mono block">
                         {item.tag}
                       </span>
                     </div>
                   </div>
 
-                  <p className="text-[11px] text-zinc-600 font-body line-clamp-2 leading-relaxed italic mb-3 font-light">
+                  <p className="text-[11px] text-[#86868b] font-body line-clamp-2 leading-relaxed italic mb-3 font-light">
                     {item.quote}
                   </p>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-zinc-200/60 text-[10px] text-zinc-500 font-ui">
-                  <span className="flex items-center gap-1 font-semibold text-blue-700">
+                <div className="flex items-center justify-between pt-2 border-t border-white/[0.06] text-[10px] text-[#86868b] font-ui">
+                  <span className="flex items-center gap-1 font-medium text-[#2997ff]">
                     <ThumbsUp className="w-2.5 h-2.5 fill-current" />
                     <span>{item.likes}</span>
                   </span>
-                  <span className="flex items-center gap-1 group-hover:text-blue-600 transition-colors">
+                  <span className="flex items-center gap-1 group-hover:text-white transition-colors">
                     <Maximize2 className="w-2.5 h-2.5" />
-                    <span>Powiększ wpis</span>
+                    <span>Powiększ</span>
                   </span>
                 </div>
               </div>
@@ -228,32 +220,32 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
         </div>
       </div>
 
-      {/* ── 2 KARTY GŁÓWNE: Facebook + Instagram ─────────────────── */}
+      {/* ── 2 KARTY GŁÓWNE: Facebook + Instagram (Apple Dark Cards) ─────────────────── */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12 mb-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {/* KARTA FACEBOOK */}
-          <div className="p-7 sm:p-8 rounded-3xl bg-white border border-zinc-200/90 hover:border-blue-400/50 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(24,119,242,0.1)]">
+          <div className="p-7 sm:p-8 rounded-[28px] bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2] shadow-2xs">
-                  <FacebookIcon className="w-6 h-6 fill-current" />
+                <div className="w-11 h-11 rounded-2xl bg-[#1877F2]/10 border border-[#1877F2]/20 flex items-center justify-center text-[#1877F2]">
+                  <FacebookIcon className="w-5 h-5 fill-current" />
                 </div>
-                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-300 text-[10px] font-mono text-emerald-900 font-semibold shadow-2xs">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-mono text-emerald-400 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                   <span>{isLive ? "LIVE META API" : "AKTYWNA SPOŁECZNOŚĆ"}</span>
                 </div>
               </div>
 
               <div className="mb-3">
-                <span className="font-heading font-medium text-zinc-950 text-3xl sm:text-4xl block">
+                <span className="font-heading font-medium text-[#f5f5f7] text-3xl sm:text-4xl block tracking-tight">
                   {followerCount}
                 </span>
-                <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 font-semibold">
+                <p className="text-xs font-mono uppercase tracking-widest text-[#86868b] font-medium mt-1">
                   Obserwujących profil Koci Przyjaciel *PL
                 </p>
               </div>
 
-              <p className="text-xs sm:text-sm text-zinc-600 font-body mb-6 leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#86868b] font-body mb-6 leading-relaxed font-light">
                 Codzienne transmisje na żywo, relacje z rozwoju maluchów, porady felinologiczne i galeria zdjęć z całego kraju.
               </p>
             </div>
@@ -262,35 +254,35 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               href={REAL_FACEBOOK_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 px-5 rounded-2xl bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-ui font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow group cursor-pointer"
+              className="w-full py-3 px-5 rounded-full bg-[#1877F2] hover:bg-[#166fe5] text-white text-xs font-ui font-medium tracking-tight transition-all flex items-center justify-center gap-2 shadow-sm hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
             >
               <span>{lang === "PL" ? "Dołącz do nas na Facebooku" : "Join on Facebook"}</span>
-              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
 
           {/* KARTA INSTAGRAM */}
-          <div className="p-7 sm:p-8 rounded-3xl bg-white border border-zinc-200/90 hover:border-rose-400/50 transition-all duration-300 flex flex-col justify-between shadow-[0_8px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(228,64,95,0.1)]">
+          <div className="p-7 sm:p-8 rounded-[28px] bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between">
             <div>
               <div className="flex items-center justify-between mb-6">
-                <div className="w-12 h-12 rounded-2xl bg-[#E4405F]/10 border border-[#E4405F]/20 flex items-center justify-center text-[#E4405F] shadow-2xs">
-                  <InstagramIcon className="w-6 h-6" />
+                <div className="w-11 h-11 rounded-2xl bg-[#E4405F]/10 border border-[#E4405F]/20 flex items-center justify-center text-[#E4405F]">
+                  <InstagramIcon className="w-5 h-5" />
                 </div>
-                <div className="px-3 py-1 rounded-full bg-rose-50 border border-rose-300 text-[10px] font-mono text-rose-900 font-semibold shadow-2xs">
+                <div className="px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.1] text-[10px] font-mono text-[#86868b] font-medium">
                   @koci_przyjaciel_pl
                 </div>
               </div>
 
               <div className="mb-3">
-                <span className="font-heading font-medium text-zinc-950 text-3xl sm:text-4xl block">
+                <span className="font-heading font-medium text-[#f5f5f7] text-3xl sm:text-4xl block tracking-tight">
                   Instagram
                 </span>
-                <p className="text-xs font-mono uppercase tracking-widest text-zinc-500 font-semibold">
+                <p className="text-xs font-mono uppercase tracking-widest text-[#86868b] font-medium mt-1">
                   Rolki, Stories & Zdjęcia Makro
                 </p>
               </div>
 
-              <p className="text-xs sm:text-sm text-zinc-600 font-body mb-6 leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#86868b] font-body mb-6 leading-relaxed font-light">
                 Krótkie formy wideo w formacie 4K, zbliżenia na rysiowe pędzle uszu, zabawy na wybiegu i backstage z życia hodowli.
               </p>
             </div>
@@ -299,10 +291,10 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               href={REAL_INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full py-3.5 px-5 rounded-2xl bg-gradient-to-r from-[#833AB4] via-[#FD1D1D] to-[#F77737] hover:opacity-95 text-white text-xs font-ui font-bold uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-2 shadow-sm hover:shadow group cursor-pointer"
+              className="w-full py-3 px-5 rounded-full bg-white/10 hover:bg-white/15 text-[#f5f5f7] text-xs font-ui font-medium tracking-tight border border-white/15 transition-all flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98] group cursor-pointer backdrop-blur-md"
             >
               <span>{lang === "PL" ? "Obserwuj na Instagramie" : "Follow on Instagram"}</span>
-              <ExternalLink className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
+              <ExternalLink className="w-3.5 h-3.5 group-hover:scale-105 transition-transform" />
             </a>
           </div>
         </div>
@@ -310,14 +302,14 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
 
       {/* ── Mini Gallery: Zdjęcia z Nowych Domów ─────────────────── */}
       <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-12">
-        <p className="text-xs font-mono uppercase tracking-[0.25em] text-zinc-500 mb-5 font-semibold">
+        <p className="text-xs font-mono uppercase tracking-[0.25em] text-[#86868b] mb-5 font-medium">
           {lang === "PL" ? "ZDJĘCIA NADESŁANE PRZEZ NASZYCH OPIEKUNÓW:" : "PHOTOS SENT BY ADOPTIVE FAMILIES:"}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {communityPhotos.map((item) => (
             <div
               key={item.id}
-              className="relative aspect-square rounded-2xl overflow-hidden border border-zinc-200 group bg-zinc-100 shadow-2xs"
+              className="relative aspect-square rounded-[18px] overflow-hidden border border-white/[0.08] group bg-[#161617]"
             >
               <Image
                 src={item.src}
@@ -342,7 +334,7 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xl flex items-center justify-center p-4 sm:p-6"
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl flex items-center justify-center p-4 sm:p-6"
             onClick={() => setActiveStory(null)}
           >
             <motion.div
@@ -350,25 +342,25 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="relative max-w-sm w-full bg-white rounded-3xl overflow-hidden shadow-2xl flex flex-col border border-zinc-200"
+              className="relative max-w-sm w-full bg-[#161617] rounded-[28px] overflow-hidden shadow-2xl flex flex-col border border-white/20"
             >
-              <div className="p-4 flex items-center justify-between border-b border-zinc-100 bg-zinc-50">
+              <div className="p-4 flex items-center justify-between border-b border-white/[0.08] bg-[#1c1c1e]">
                 <div className="flex items-center gap-2.5">
                   <div className="w-7 h-7 rounded-full bg-[#1877F2]/10 flex items-center justify-center text-[#1877F2]">
                     <FacebookIcon className="w-3.5 h-3.5 fill-current" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-semibold text-zinc-950">
+                    <h4 className="text-xs font-medium text-[#f5f5f7]">
                       {activeStory.author}
                     </h4>
-                    <span className="text-[10px] text-zinc-500 font-mono">
+                    <span className="text-[10px] text-[#86868b] font-mono">
                       {activeStory.tag}
                     </span>
                   </div>
                 </div>
                 <button
                   onClick={() => setActiveStory(null)}
-                  className="w-7 h-7 rounded-full bg-zinc-200 hover:bg-zinc-300 text-zinc-700 flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-[#f5f5f7] flex items-center justify-center transition-colors cursor-pointer"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
@@ -386,22 +378,22 @@ export default function FacebookCommunitySection({ lang }: FacebookCommunitySect
                 <div className="absolute inset-0 z-10" onContextMenu={(e) => e.preventDefault()} onDragStart={(e) => e.preventDefault()} />
               </div>
 
-              <div className="p-4 border-t border-zinc-100 bg-white">
-                <p className="text-xs text-zinc-700 leading-relaxed font-light italic mb-3">
+              <div className="p-4 border-t border-white/[0.08] bg-[#161617]">
+                <p className="text-xs text-[#86868b] leading-relaxed font-light italic mb-3">
                   {activeStory.quote}
                 </p>
                 <div className="flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-zinc-600 flex items-center gap-1.5">
-                    <ThumbsUp className="w-3 h-3 text-[#1877F2] fill-current" />
+                  <span className="text-[11px] font-medium text-[#2997ff] flex items-center gap-1.5">
+                    <ThumbsUp className="w-3 h-3 fill-current" />
                     <span>{activeStory.likes} polubień</span>
                   </span>
                   <a
                     href={REAL_FACEBOOK_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs font-semibold text-[#1877F2] hover:underline flex items-center gap-1"
+                    className="text-xs font-medium text-[#2997ff] hover:underline flex items-center gap-1"
                   >
-                    <span>Zobacz profil</span>
+                    <span>Zobacz na Facebooku</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>

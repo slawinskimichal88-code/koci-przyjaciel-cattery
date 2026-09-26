@@ -103,11 +103,11 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         let logoOp = 1;
         let logoTy = 0;
         let logoSc = 1;
-        if (scrolled > S * 0.15) {
-          const prog = Math.min(1, (scrolled - S * 0.15) / (S * 0.5));
+        if (scrolled > S * 0.2) {
+          const prog = Math.min(1, (scrolled - S * 0.2) / (S * 0.55));
           logoOp = 1 - prog;
           logoTy = -prog * 50;
-          logoSc = 1 - prog * 0.1;
+          logoSc = 1 - prog * 0.08;
         }
         badge.style.opacity = String(logoOp);
         badge.style.transform = `translateY(${logoTy}px) scale(${logoSc})`;
@@ -116,7 +116,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
       if (scrollHint) {
         let hintOp = 1;
         if (scrolled > S * 0.15) {
-          hintOp = Math.max(0, 1 - (scrolled - S * 0.15) / (S * 0.25));
+          hintOp = Math.max(0, 1 - (scrolled - S * 0.15) / (S * 0.3));
         }
         scrollHint.style.opacity = String(hintOp);
       }
@@ -134,38 +134,38 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
       // === Scena 0: Wideo wyłaniające się z czerni + Wielkie Logo ===
       applyVideoAndLogo(scrolled);
 
-      // === Scena 1: "Łagodny Olbrzym" (0.8S – 2S) ===
+      // === Scena 1: "Łagodny Olbrzym" (płynny crossfade z logo, bez pustki) ===
       const h1 = headline1Ref.current;
       if (h1) {
-        const op = calcOpacity(scrolled, S * 0.8, S * 1.1, S * 1.7, S * 2.1);
-        const ty = calcTranslateY(scrolled, S * 0.8, S * 1.1, S * 1.7, S * 2.1);
+        const op = calcOpacity(scrolled, S * 0.55, S * 0.85, S * 1.85, S * 2.25);
+        const ty = calcTranslateY(scrolled, S * 0.55, S * 0.85, S * 1.85, S * 2.25);
         h1.style.opacity = String(op);
         h1.style.transform = `translateY(${ty}px)`;
       }
 
-      // === Scena 2: "Zero klatek" (2S – 3.2S) ===
+      // === Scena 2: "Zero klatek" ===
       const h2 = headline2Ref.current;
       if (h2) {
-        const op = calcOpacity(scrolled, S * 2.1, S * 2.4, S * 2.9, S * 3.3);
-        const ty = calcTranslateY(scrolled, S * 2.1, S * 2.4, S * 2.9, S * 3.3);
+        const op = calcOpacity(scrolled, S * 2.05, S * 2.35, S * 3.35, S * 3.75);
+        const ty = calcTranslateY(scrolled, S * 2.05, S * 2.35, S * 3.35, S * 3.75);
         h2.style.opacity = String(op);
         h2.style.transform = `translateY(${ty}px)`;
       }
 
-      // === Scena 3: "Certyfikowane DNA" (3.2S – 4.2S) ===
+      // === Scena 3: "Certyfikowane DNA" ===
       const h3 = headline3Ref.current;
       if (h3) {
-        const op = calcOpacity(scrolled, S * 3.3, S * 3.6, S * 4.1, S * 4.5);
-        const ty = calcTranslateY(scrolled, S * 3.3, S * 3.6, S * 4.1, S * 4.5);
+        const op = calcOpacity(scrolled, S * 3.55, S * 3.85, S * 4.85, S * 5.25);
+        const ty = calcTranslateY(scrolled, S * 3.55, S * 3.85, S * 4.85, S * 5.25);
         h3.style.opacity = String(op);
         h3.style.transform = `translateY(${ty}px)`;
       }
 
-      // === Scena 4: CTA (4.5S – koniec) ===
+      // === Scena 4: CTA ===
       const cta = ctaRef.current;
       if (cta) {
-        const op = calcOpacity(scrolled, S * 4.3, S * 4.6, S * 999, S * 999);
-        const ty = calcTranslateY(scrolled, S * 4.3, S * 4.6, S * 999, S * 999);
+        const op = calcOpacity(scrolled, S * 5.05, S * 5.35, S * 999, S * 999);
+        const ty = calcTranslateY(scrolled, S * 5.05, S * 5.35, S * 999, S * 999);
         cta.style.opacity = String(op);
         cta.style.transform = `translateY(${ty}px)`;
       }
@@ -173,8 +173,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
       // === Overlay: przyciemnienie w późniejszych scenach ===
       const overlay = overlayRef.current;
       if (overlay) {
-        // Stopniowo ciemnieje przy CTA
-        const darkness = lerp(0, 0.25, (scrolled - S * 3) / (S * 2));
+        const darkness = lerp(0, 0.25, (scrolled - S * 3.5) / (S * 2.5));
         overlay.style.opacity = String(Math.max(0, Math.min(0.35, darkness)));
       }
     };
@@ -208,11 +207,11 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
       setTimeout(update, 100);
     }
 
-    setWrapperHeight(isMobile ? "350vh" : "550vh");
+    setWrapperHeight(isMobile ? "450vh" : "680vh");
 
     const onResize = () => {
       const mobileNow = window.innerWidth < 1024;
-      setWrapperHeight(mobileNow ? "350vh" : "550vh");
+      setWrapperHeight(mobileNow ? "450vh" : "680vh");
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -330,12 +329,35 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
               </span>
             </div>
 
-            {/* Wielki tytuł Apple style */}
+            {/* Wielki tytuł Apple style — animowany litera po literze */}
             <h1
-              className="font-heading font-light text-white leading-[0.92] tracking-tight mb-3"
+              className="font-heading font-light text-white leading-[0.92] tracking-tight mb-3 select-none"
               style={{ fontSize: "clamp(3rem, 7.5vw, 6.8rem)" }}
+              aria-label="Koci Przyjaciel"
             >
-              Koci <span className="font-semibold italic">Przyjaciel</span>
+              <span className="inline-block whitespace-nowrap">
+                {"Koci".split("").map((ch, i) => (
+                  <span
+                    key={`k-${i}`}
+                    className="apple-char"
+                    style={{ animationDelay: `${0.15 + i * 0.06}s` }}
+                  >
+                    {ch}
+                  </span>
+                ))}
+              </span>
+              <span className="inline-block w-[0.28em]">&nbsp;</span>
+              <span className="inline-block whitespace-nowrap font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">
+                {"Przyjaciel".split("").map((ch, i) => (
+                  <span
+                    key={`p-${i}`}
+                    className="apple-char"
+                    style={{ animationDelay: `${0.45 + i * 0.05}s` }}
+                  >
+                    {ch}
+                  </span>
+                ))}
+              </span>
             </h1>
 
             {/* Podtytuł */}
@@ -347,28 +369,28 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
               </span>
             </p>
 
-            {/* Bezpośrednie przyciski CTA na filmie */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6">
+            {/* Bezpośrednie przyciski CTA na filmie - Apple Pro Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
               <Link
                 href="/dostepne-kociaki"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-ui text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all shadow-[0_4px_20px_rgba(255,255,255,0.25)] hover:scale-105"
+                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black font-ui text-[13px] font-medium tracking-tight hover:bg-[#f5f5f7] transition-all shadow-[0_4px_20px_rgba(255,255,255,0.2)] hover:scale-[1.02] active:scale-[0.98]"
               >
-                <span>{lang === "PL" ? "Dostępne Kociaki" : "Available Kittens"}</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>{lang === "PL" ? "Dostępne kociaki" : "Available kittens"}</span>
+                <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
               <button
                 onClick={onOpenReservation}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-ui text-xs sm:text-sm font-semibold border border-white/20 transition-all hover:scale-105 cursor-pointer backdrop-blur-md"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-[#f5f5f7] font-ui text-[13px] font-medium tracking-tight border border-white/15 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer backdrop-blur-md"
               >
-                <span>{lang === "PL" ? "Zarezerwuj Kociaka" : "Reserve Kitten"}</span>
+                <span>{lang === "PL" ? "Zarezerwuj kociaka" : "Reserve kitten"}</span>
               </button>
 
               <a
                 href={`tel:${REAL_PHONE_RAW}`}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white/[0.05] hover:bg-white/[0.12] text-zinc-300 hover:text-white font-ui text-xs sm:text-sm font-medium border border-white/10 transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-[#f5f5f7]/80 hover:text-white font-ui text-[13px] font-normal border border-white/[0.1] transition-all"
               >
-                <Phone className="w-4 h-4 text-amber-300" />
+                <Phone className="w-3.5 h-3.5 text-[#2997ff]" />
                 <span>{REAL_PHONE}</span>
               </a>
             </div>
@@ -498,27 +520,27 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
             )}
           </h2>
 
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3.5">
             <Link
               href="/dostepne-kociaki"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-400 to-amber-500 text-black text-xs font-ui font-bold uppercase tracking-[0.2em] hover:brightness-110 transition-all duration-200 shadow-lg cursor-pointer"
+              className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black text-[13px] font-medium tracking-tight hover:bg-[#f5f5f7] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_4px_24px_rgba(255,255,255,0.2)] cursor-pointer"
             >
-              <span>{lang === "PL" ? "Zobacz dostępne kociaki" : "View Available Kittens"}</span>
-              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform duration-200" />
+              <span>{lang === "PL" ? "Zobacz dostępne kociaki" : "View available kittens"}</span>
+              <ArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-0.5 transition-transform" />
             </Link>
 
             <a
               href="#kim-jestem"
-              className="inline-flex items-center gap-3 px-8 py-4 border border-white/25 text-white text-xs font-ui font-bold uppercase tracking-[0.2em] hover:border-white/60 transition-colors duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 hover:bg-white/15 text-[#f5f5f7] text-[13px] font-medium tracking-tight border border-white/15 backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] transition-all duration-300"
             >
-              {lang === "PL" ? "O właścicielce ↓" : "About Founder ↓"}
+              {lang === "PL" ? "O hodowli ↓" : "About cattery ↓"}
             </a>
 
             <a
               href={`tel:${REAL_PHONE_RAW}`}
-              className="inline-flex items-center gap-2 text-white/50 hover:text-white/90 text-sm font-ui transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-[#86868b] hover:text-[#f5f5f7] text-[13px] font-ui transition-colors duration-200 ml-1"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-3.5 h-3.5 text-[#2997ff]" />
               <span>{REAL_PHONE}</span>
             </a>
           </div>

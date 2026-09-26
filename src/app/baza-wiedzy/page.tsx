@@ -88,7 +88,7 @@ function KnowledgeBaseContent() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#070709] text-white selection:bg-amber-400 selection:text-black">
+    <div className="min-h-screen bg-black text-[#f5f5f7] selection:bg-[#2997ff] selection:text-white">
       <ScrollProgress />
 
       <Navbar
@@ -101,9 +101,9 @@ function KnowledgeBaseContent() {
 
         {/* ── Hero Banner Bazy Wiedzy ────────────────────────────── */}
         <section className="max-w-6xl mx-auto px-5 sm:px-8 mb-8 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-amber-500/20 bg-amber-500/10 mb-4 shadow-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/10 backdrop-blur-md mb-4 shadow-sm">
             <BookOpen className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-amber-300 font-bold">
+            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] font-semibold">
               {lang === "PL" ? "KOMPENDIUM HODOWLANE · FELINOLOGIA · FIFe" : "BREED COMPENDIUM · FELINOLOGY · FIFe"}
             </span>
           </div>
@@ -114,23 +114,23 @@ function KnowledgeBaseContent() {
           >
             {lang === "PL" ? (
               <>
-                Baza Wiedzy o <span className="font-semibold italic text-zinc-200">Maine Coon</span>
+                Baza Wiedzy o <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">Maine Coon</span>
               </>
             ) : (
               <>
-                Maine Coon <span className="font-semibold italic text-zinc-200">Knowledge Base</span>
+                Maine Coon <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">Knowledge Base</span>
               </>
             )}
           </h1>
 
-          <p className="text-base sm:text-lg text-zinc-300 font-body max-w-3xl mx-auto font-light leading-relaxed mb-8">
+          <p className="text-base sm:text-lg text-[#86868b] font-body max-w-3xl mx-auto font-light leading-relaxed mb-8">
             {lang === "PL"
               ? "Oficjalny przewodnik certyfikowanej hodowli Koci Przyjaciel *PL. Wybierz podzakładkę poniżej, aby natychmiast przejść do kalkulatora, wzorca rasy, porównania skali lub badań."
               : "Official guide by certified cattery Koci Przyjaciel *PL. Select a tab below to explore the cost calculator, breed standard, scale comparison, or certified health tests."}
           </p>
 
           {/* ── Podzakładki Apple Segmented Control (Wysoki Kontrast, Przejrzysty Podział) ── */}
-          <div className="bg-[#121215] border border-white/15 p-2 rounded-2xl sm:rounded-full shadow-2xl max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-2">
+          <div className="bg-white/[0.04] border border-white/[0.08] backdrop-blur-xl p-1.5 rounded-2xl sm:rounded-full shadow-2xl max-w-5xl mx-auto flex flex-wrap items-center justify-center gap-1.5">
             {TABS.map((tab) => {
               const Icon = tab.icon;
               const isActive = activeTab === tab.id;
