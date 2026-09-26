@@ -240,19 +240,19 @@ export default function EnclosureSection({
         // ═══════════════════════════════════════════════════════════════
         const H = window.innerHeight;
 
-        // 1. Film w telefonie: na początku wycentrowany, płynnie schodzi w dół
+        // 1. Film w telefonie: wypełnia górną część ekranu, płynnie adaptuje się do środka
         const mPhone = mobilePhoneWrapRef.current;
         if (mPhone) {
           let targetY = 0;
           let targetScale = 1;
           if (scrolled <= 0) {
-            targetY = -190;
-            targetScale = 1.08;
-          } else if (scrolled < H * 0.65) {
-            const t = scrolled / (H * 0.65);
+            targetY = -70;
+            targetScale = 1.05;
+          } else if (scrolled < H * 0.55) {
+            const t = scrolled / (H * 0.55);
             const ease = t * t * (3 - 2 * t);
-            targetY = lerp(-190, 0, ease);
-            targetScale = lerp(1.08, 1.0, ease);
+            targetY = lerp(-70, 0, ease);
+            targetScale = lerp(1.05, 1.0, ease);
           } else {
             targetY = 0;
             targetScale = 1.0;
@@ -595,17 +595,17 @@ export default function EnclosureSection({
         {/* ── 2. WERSJA MOBILNA (APPLE SCROLLYTELLING — 120 FPS PŁYNNOŚCI) ─ */}
         {/* ═════════════════════════════════════════════════════════════════ */}
         <div
-          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-5 max-w-lg mx-auto"
+          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-4 sm:px-6 max-w-lg mx-auto"
           style={{
-            paddingTop: "76px",
-            paddingBottom: "22px",
+            paddingTop: "68px",
+            paddingBottom: "18px",
             height: "100dvh",
           }}
         >
           {/* A. INTRO NAGŁÓWEK (Na starcie widoczny, płynnie znika w górę) */}
           <div
             ref={mobileIntroRef}
-            className="w-full text-center will-change-transform pt-1 z-20"
+            className="w-full text-center will-change-transform pt-2 z-20"
           >
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -613,10 +613,10 @@ export default function EnclosureSection({
             </div>
             <h2 className="text-2xl sm:text-3xl font-heading font-light text-white tracking-tight leading-tight">
               {lang === "PL" ? (
-                <>Nasz dom <span className="font-normal text-zinc-400">to ich dom.</span></>
-              ) : (
-                <>Our home <span className="font-normal text-zinc-400">is their home.</span></>
-              )}
+                 <>Nasz dom <span className="font-normal text-zinc-400">to ich dom.</span></>
+               ) : (
+                 <>Our home <span className="font-normal text-zinc-400">is their home.</span></>
+               )}
             </h2>
             <div className="flex mt-1.5 items-center justify-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">
               <span>{lang === "PL" ? "Przewiń, aby poznać wybieg" : "Scroll to explore"}</span>
@@ -624,8 +624,8 @@ export default function EnclosureSection({
             </div>
           </div>
 
-          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Karty iPhone Glass z optymalną czytelnością) */}
-          <div className="w-full relative flex-1 min-h-[220px] max-h-[270px] my-auto flex items-center justify-center z-10">
+          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Karty iPhone Glass rozciągnięte w osi pionowej) */}
+          <div className="w-full relative flex-1 min-h-[240px] max-h-[300px] my-auto flex items-center justify-center z-10">
             
             {/* Scena 1: Ogród i Wybieg */}
             <div
@@ -764,13 +764,13 @@ export default function EnclosureSection({
 
           </div>
 
-          {/* C. AUTENTYCZNY IPHONE 16 PRO (Na starcie w centrum, płynnie schodzi w dół!) */}
+          {/* C. AUTENTYCZNY IPHONE 16 PRO (Wypełnia ekran na telefonie bez pustki u góry) */}
           <div
             ref={mobilePhoneWrapRef}
-            className="w-full will-change-transform relative px-1 pb-2 z-20"
-            style={{ transform: "translate3d(0, -190px, 0) scale(1.08)" }}
+            className="w-full will-change-transform relative px-0 pb-1 z-20"
+            style={{ transform: "translate3d(0, -70px, 0) scale(1.05)" }}
           >
-            <div className="relative mx-auto w-full max-w-[340px] p-[5px] rounded-[24px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.12)]">
+            <div className="relative mx-auto w-full max-w-[390px] p-[6px] rounded-[26px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.12)]">
               <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-black">
                 <video
                   ref={mobileVideoRef}
