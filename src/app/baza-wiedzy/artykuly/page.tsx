@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import { REAL_MESSENGER_URL } from "@/data/realCatsData";
 import {
-  BookOpen, ArrowRight, Clock, ChevronRight,
-  DollarSign, Award, HeartPulse, ShoppingBag, Users,
-  TrendingUp, Sparkles
+  ArrowRight, Clock, ChevronRight, DollarSign,
+  Award, HeartPulse, ShoppingBag, Users, TrendingUp
 } from "lucide-react";
 
 const ARTICLES = [
@@ -17,76 +17,76 @@ const ARTICLES = [
     slug: "cena-maine-coon-z-rodowodem",
     number: "01",
     icon: DollarSign,
-    gradient: "from-violet-600/30 via-purple-700/20 to-transparent",
-    accentColor: "text-violet-300",
+    image: "/images/cats/cat_03.webp",
+    imagePos: "50% 25%",
+    accent: "violet",
+    gradient: "from-violet-900/80 via-violet-950/60 to-black/80",
+    accentText: "text-violet-300",
     accentBg: "bg-violet-500/20 border-violet-500/30",
-    dotColor: "bg-violet-400",
     readTime: "8 min",
-    seoTag: "Cena · Rodowód · FIFe",
+    tag: "Cena · Rodowód · FIFe",
     title: "Ile kosztuje kot Maine Coon z rodowodem FIFe/FPL w 2026 roku i skąd bierze się cena?",
-    subtitle: "Od czego zależy cena kociaka, co wchodzi w jej skład i dlaczego różni się między hodowlami",
-    preview: "Cena Maine Coona z rodowodem FIFe/FPL to temat otoczony wieloma mitami. Wbrew pozorom nie jest arbitralna — wynika z konkretnych, weryfikowalnych kosztów, jakie ponosi certyfikowana hodowla.",
-    keywords: ["cena maine coon", "ile kosztuje maine coon z rodowodem", "hodowla maine coon cena"],
+    preview: "Cena nie jest arbitralna — wynika z konkretnych, weryfikowalnych kosztów certyfikowanej hodowli. Poznaj wszystkie czynniki.",
   },
   {
     slug: "rodowod-fife-fpl-legalna-hodowla",
     number: "02",
     icon: Award,
-    gradient: "from-amber-600/30 via-orange-700/20 to-transparent",
-    accentColor: "text-amber-300",
+    image: "/images/matki/matka_07.webp",
+    imagePos: "50% 30%",
+    accent: "amber",
+    gradient: "from-amber-900/80 via-amber-950/60 to-black/80",
+    accentText: "text-amber-300",
     accentBg: "bg-amber-500/20 border-amber-500/30",
-    dotColor: "bg-amber-400",
     readTime: "10 min",
-    seoTag: "Rodowód · FIFe · FPL",
+    tag: "Rodowód · FIFe · FPL",
     title: "Rodowód FIFe / FPL a stowarzyszenia spoza WCC — jak rozpoznać legalną hodowlę Maine Coon?",
-    subtitle: "Różnice między organizacjami felinologicznymi, 5-krokowa weryfikacja i czerwone flagi pseudohodowli",
-    preview: "Na polskim rynku działa kilkanaście różnych organizacji felinologicznych. Tylko część z nich należy do FIFe — najwyższego organu światowego. Jak odróżnić legalną hodowlę od masowej produkcji kociąt?",
-    keywords: ["prawdziwa hodowla maine coon", "rodowód fpl fife", "jak sprawdzić hodowlę kotów"],
+    preview: "Nie każda organizacja felinologiczna ma te same standardy. 5-krokowy weryfikator i czerwone flagi pseudohodowli.",
   },
   {
     slug: "badania-hcm-pkd-sma-maine-coon",
     number: "03",
     icon: HeartPulse,
-    gradient: "from-rose-600/30 via-red-700/20 to-transparent",
-    accentColor: "text-rose-300",
+    image: "/images/matki/matka_04.webp",
+    imagePos: "50% 20%",
+    accent: "rose",
+    gradient: "from-rose-900/80 via-rose-950/60 to-black/80",
+    accentText: "text-rose-300",
     accentBg: "bg-rose-500/20 border-rose-500/30",
-    dotColor: "bg-rose-400",
     readTime: "12 min",
-    seoTag: "HCM · PKD · SMA · Genetyka",
+    tag: "HCM · PKD · SMA · Genetyka",
     title: "Badania HCM (Echo Doppler), PKD i SMA u Maine Coon — dlaczego są kluczowe przed zakupem kociaka?",
-    subtitle: "Kompletny przewodnik po badaniach kardiologicznych i genetycznych w certyfikowanej hodowli",
-    preview: "Maine Coon to rasa o podwyższonym ryzyku kardiomiopatii przerostowej (HCM). Certyfikowane badania Echo Doppler i testy DNA to jedyna gwarancja, że kupujesz zdrowego kociaka.",
-    keywords: ["badania genetyczne maine coon", "hcm u kota", "zdrowa hodowla maine coon"],
+    preview: "Maine Coon jest rasą o podwyższonym ryzyku HCM. Kompletny przewodnik po badaniach kardiologicznych i genetycznych.",
   },
   {
     slug: "wyprawka-dla-maine-coona",
     number: "04",
     icon: ShoppingBag,
-    gradient: "from-green-600/30 via-emerald-700/20 to-transparent",
-    accentColor: "text-green-300",
+    image: "/images/cats/cat_02.webp",
+    imagePos: "50% 30%",
+    accent: "green",
+    gradient: "from-green-900/80 via-green-950/60 to-black/80",
+    accentText: "text-green-300",
     accentBg: "bg-green-500/20 border-green-500/30",
-    dotColor: "bg-green-400",
     readTime: "9 min",
-    seoTag: "Wyprawka · Drapak · Kuweta XXL",
+    tag: "Wyprawka · Drapak · Kuweta XXL",
     title: "Jak przygotować dom na kociaka Maine Coon? Kompletna wyprawka (drapak, kuweta XXL, żywienie)",
-    subtitle: "Interaktywna lista wszystkich akcesoriów, żywienie dużego kota i jak zabezpieczyć mieszkanie",
-    preview: "Maine Coon to niespodziewanie duży kot — i akcesoria muszą być do niego odpowiednio dobrane. Zbyt mała kuweta, słabe drapaki czy nieprawidłowa dieta to najczęstsze błędy nowych opiekunów.",
-    keywords: ["wyprawka dla maine coona", "jaki drapak dla maine coona", "kuweta dla dużego kota"],
+    preview: "MC jest zaskakująco duży — akcesoria muszą być do niego dopasowane. Interaktywna checklista wszystkich zakupów.",
   },
   {
     slug: "maine-coon-dzieci-pies-socjalizacja",
     number: "05",
     icon: Users,
-    gradient: "from-sky-600/30 via-blue-700/20 to-transparent",
-    accentColor: "text-sky-300",
+    image: "/images/cats/cat_05.webp",
+    imagePos: "50% 25%",
+    accent: "sky",
+    gradient: "from-sky-900/80 via-sky-950/60 to-black/80",
+    accentText: "text-sky-300",
     accentBg: "bg-sky-500/20 border-sky-500/30",
-    dotColor: "bg-sky-400",
     readTime: "8 min",
-    seoTag: "Socjalizacja · Dzieci · Pies",
+    tag: "Socjalizacja · Dzieci · Pies",
     title: "Maine Coon a dzieci i pies w domu — jak wygląda socjalizacja w bezklatkowej hodowli?",
-    subtitle: "Etapy socjalizacji kociąt, temperament Maine Coona i praktyczne wskazówki dla rodzin z dziećmi",
-    preview: "Maine Coon jest nazywany 'psem wśród kotów'. To nie przypadek — rasa jest wyjątkowo towarzyska, lojalna i doskonale dogaduje się z dziećmi oraz psami. Kluczem jest socjalizacja od pierwszych tygodni życia.",
-    keywords: ["czy maine coon lubi dzieci", "maine coon a pies", "charakter kota maine coon"],
+    preview: "Rasa wyjątkowo towarzyska, lojalna i doskonale dogaduje się z dziećmi oraz psami. Klucz tkwi w socjalizacji.",
   },
 ];
 
@@ -103,132 +103,182 @@ export default function ArticlesHubPage() {
       <ScrollProgress />
       <Navbar lang={lang} setLang={setLang} onOpenReservation={handleOpenReservation} />
 
-      <main className="pt-24 sm:pt-32 pb-24">
-        {/* ── Hero ─────────────────────────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-5 sm:px-8 text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-md mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-            <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] font-semibold">
-              TOPICAL AUTHORITY · 5 FILAROWYCH ARTYKUŁÓW · SEO EXPERT
-            </span>
+      <main className="pt-20">
+        {/* ── FILMOWY HERO — full-bleed collage ── */}
+        <section className="relative overflow-hidden" style={{ height: "clamp(420px, 60vw, 720px)" }}>
+          {/* 3-kolumnowy collage zdjęć */}
+          <div className="absolute inset-0 grid grid-cols-3">
+            <div className="relative overflow-hidden">
+              <Image src="/images/matki/matka_01.webp" alt="Maine Coon matka hodowla" fill className="object-cover scale-110" sizes="33vw" />
+            </div>
+            <div className="relative overflow-hidden">
+              <Image src="/images/cats/cat_03.webp" alt="Maine Coon kociak" fill className="object-cover object-[50%_25%] scale-110" sizes="33vw" />
+            </div>
+            <div className="relative overflow-hidden">
+              <Image src="/images/matki/matka_06.webp" alt="Maine Coon z kociętami" fill className="object-cover object-[50%_20%] scale-110" sizes="33vw" />
+            </div>
           </div>
 
-          <h1
-            className="font-heading font-light text-white leading-[1.02] tracking-tight mb-5"
-            style={{ fontSize: "clamp(2.2rem, 5vw, 4rem)" }}
-          >
-            Artykuły o rasie{" "}
-            <span className="font-semibold italic text-amber-200 drop-shadow-[0_2px_16px_rgba(245,158,11,0.3)]">
-              Maine Coon
-            </span>
-          </h1>
+          {/* Unified overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-transparent to-black/50" />
 
-          <p className="text-base sm:text-lg text-[#86868b] font-light max-w-2xl mx-auto leading-relaxed mb-10">
-            Kompletne, eksperckie przewodniki opracowane przez certyfikowaną hodowlę Koci Przyjaciel&nbsp;*PL. Wszystko, co musisz wiedzieć przed adopcją.
-          </p>
+          <div className="absolute inset-0 flex flex-col items-center justify-center px-5 sm:px-10 text-center">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.06] backdrop-blur-md mb-6">
+              <span className="text-amber-400 text-xs">✦</span>
+              <span className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b]">
+                TOPICAL AUTHORITY · 5 FILAROWYCH ARTYKUŁÓW
+              </span>
+            </div>
 
-          {/* Stats bar */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-xs font-mono text-white/40">
-            {[
-              { label: "Artykułów", value: "5" },
-              { label: "Całk. czas czytania", value: "~47 min" },
-              { label: "Źródła", value: "FIFe · Laboklin · Weterynaria" },
-              { label: "Aktualizacja", value: "2026" },
-            ].map((s, i) => (
-              <div key={i} className="flex items-center gap-2">
-                {i > 0 && <span className="text-white/20">·</span>}
-                <span className="text-white/70 font-semibold">{s.value}</span>
-                <span>{s.label}</span>
-              </div>
-            ))}
-          </div>
-        </section>
+            <h1
+              className="font-heading font-light text-white leading-[0.97] tracking-tight mb-5"
+              style={{ fontSize: "clamp(2.4rem, 6vw, 5.5rem)" }}
+            >
+              Baza Wiedzy o{" "}
+              <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
+                Maine Coon
+              </span>
+            </h1>
 
-        {/* ── Articles List ─────────────────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-5 sm:px-8 space-y-5">
-          {ARTICLES.map((article, i) => {
-            const Icon = article.icon;
-            const isHovered = hovered === i;
+            <p className="text-[#86868b] text-base sm:text-lg leading-relaxed max-w-2xl mb-8 font-light">
+              Eksperckie przewodniki opracowane przez certyfikowaną hodowlę Koci&nbsp;Przyjaciel&nbsp;*PL. Wszystko, co musisz wiedzieć przed adopcją.
+            </p>
 
-            return (
-              <Link
-                key={article.slug}
-                href={`/baza-wiedzy/artykuly/${article.slug}`}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                className={`block group rounded-3xl border border-white/10 overflow-hidden transition-all duration-300 ${
-                  isHovered ? "border-white/25 shadow-2xl scale-[1.005]" : ""
-                }`}
-              >
-                <div className={`relative p-6 sm:p-8 bg-gradient-to-r ${article.gradient} bg-white/[0.025]`}>
-                  {/* Article Number bg */}
-                  <span className="absolute right-6 top-4 font-black text-white/[0.04] text-8xl leading-none select-none">
-                    {article.number}
-                  </span>
-
-                  <div className="relative flex flex-col sm:flex-row sm:items-start gap-5">
-                    {/* Icon */}
-                    <div className={`shrink-0 w-12 h-12 rounded-2xl border ${article.accentBg} flex items-center justify-center`}>
-                      <Icon className={`w-5 h-5 ${article.accentColor}`} />
-                    </div>
-
-                    <div className="flex-1 min-w-0">
-                      {/* Meta */}
-                      <div className="flex flex-wrap items-center gap-2 mb-3">
-                        <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border ${article.accentBg} ${article.accentColor}`}>
-                          {article.seoTag}
-                        </span>
-                        <span className="flex items-center gap-1 text-[10px] font-mono text-white/30">
-                          <Clock className="w-3 h-3" />
-                          {article.readTime} czytania
-                        </span>
-                      </div>
-
-                      {/* Title */}
-                      <h2 className={`font-semibold text-white text-lg sm:text-xl leading-snug mb-2 transition-colors duration-200 ${isHovered ? article.accentColor : ""}`}>
-                        {article.title}
-                      </h2>
-
-                      <p className="text-sm text-white/50 mb-3 leading-relaxed hidden sm:block">
-                        {article.preview}
-                      </p>
-
-                      {/* Keywords */}
-                      <div className="flex flex-wrap gap-1.5">
-                        {article.keywords.map((kw, j) => (
-                          <span key={j} className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/40">
-                            #{kw}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Arrow */}
-                    <div className={`shrink-0 flex items-center self-center transition-transform duration-300 ${isHovered ? "translate-x-1" : ""}`}>
-                      <ChevronRight className="w-6 h-6 text-white/30" />
-                    </div>
-                  </div>
+            <div className="flex flex-wrap items-center justify-center gap-5 text-xs font-mono text-white/40">
+              {[{ v: "5", l: "Artykułów" }, { v: "~47 min", l: "Łączny czas" }, { v: "FIFe · Laboklin", l: "Źródła" }, { v: "2026", l: "Aktualizacja" }].map((s, i) => (
+                <div key={i} className="flex items-center gap-2">
+                  {i > 0 && <span className="text-white/20">·</span>}
+                  <span className="text-white/70 font-semibold">{s.v}</span>
+                  <span>{s.l}</span>
                 </div>
-              </Link>
-            );
-          })}
+              ))}
+            </div>
+          </div>
         </section>
 
-        {/* ── CTA: Dostępne kocięta ───────────────────────────────────── */}
-        <section className="max-w-5xl mx-auto px-5 sm:px-8 mt-16">
-          <div className="relative rounded-3xl overflow-hidden p-8 sm:p-12 text-center bg-gradient-to-br from-amber-600/20 via-orange-700/15 to-transparent border border-amber-500/20">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(245,158,11,0.08)_0%,_transparent_70%)]" />
-            <div className="relative">
-              <TrendingUp className="w-8 h-8 text-amber-400 mx-auto mb-4" />
-              <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-white mb-3">
-                Gotowy na Maine Coona swojego życia?
-              </h2>
-              <p className="text-[#86868b] text-base max-w-xl mx-auto mb-8">
-                Przeczytałeś wszystko, co warto wiedzieć. Teraz sprawdź, które kocięta z hodowli Koci Przyjaciel&nbsp;*PL są aktualnie dostępne.
-              </p>
+        {/* ── ARTICLES — filmowe karty ── */}
+        <section className="max-w-6xl mx-auto px-5 sm:px-8 py-16 space-y-5">
+
+          {/* Featured Article — large card */}
+          <Link
+            href={`/baza-wiedzy/artykuly/${ARTICLES[0].slug}`}
+            onMouseEnter={() => setHovered(0)}
+            onMouseLeave={() => setHovered(null)}
+            className="block group"
+          >
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-300" style={{ height: "clamp(300px, 40vw, 500px)" }}>
+              <Image
+                src={ARTICLES[0].image}
+                alt={ARTICLES[0].title}
+                fill
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{ objectPosition: ARTICLES[0].imagePos }}
+                sizes="100vw"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-t ${ARTICLES[0].gradient}`} />
+              <div className="absolute inset-0 flex flex-col justify-end p-7 sm:p-10">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className={`text-[10px] font-mono px-3 py-1 rounded-full border ${ARTICLES[0].accentBg} ${ARTICLES[0].accentText}`}>{ARTICLES[0].tag}</span>
+                  <span className="text-[10px] font-mono text-white/30 flex items-center gap-1"><Clock className="w-3 h-3" />{ARTICLES[0].readTime} czytania</span>
+                </div>
+                <h2 className={`font-heading font-semibold text-white leading-snug mb-2 transition-colors duration-300 ${hovered === 0 ? ARTICLES[0].accentText : ""}`}
+                  style={{ fontSize: "clamp(1.3rem, 2.5vw, 2rem)" }}>
+                  {ARTICLES[0].title}
+                </h2>
+                <p className="text-[#86868b] text-sm hidden sm:block max-w-xl">{ARTICLES[0].preview}</p>
+                <div className={`mt-4 flex items-center gap-2 text-sm font-semibold ${ARTICLES[0].accentText} transition-transform duration-300 ${hovered === 0 ? "translate-x-1" : ""}`}>
+                  Czytaj artykuł <ArrowRight className="w-4 h-4" />
+                </div>
+              </div>
+              {/* Article number */}
+              <div className="absolute top-6 right-8 font-black text-white/[0.06] text-7xl leading-none select-none">{ARTICLES[0].number}</div>
+            </div>
+          </Link>
+
+          {/* 2-column grid for articles 2–3 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {ARTICLES.slice(1, 3).map((article, idx) => {
+              const i = idx + 1;
+              const Icon = article.icon;
+              return (
+                <Link
+                  key={article.slug}
+                  href={`/baza-wiedzy/artykuly/${article.slug}`}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="block group"
+                >
+                  <div className="relative rounded-3xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-300" style={{ height: "clamp(260px, 32vw, 400px)" }}>
+                    <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: article.imagePos }} sizes="50vw" />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${article.gradient}`} />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-7">
+                      <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border ${article.accentBg} ${article.accentText} inline-flex mb-2 self-start`}>{article.tag}</span>
+                      <h2 className={`font-semibold text-white leading-snug text-base sm:text-lg mb-1 transition-colors ${hovered === i ? article.accentText : ""}`}>{article.title}</h2>
+                      <div className={`flex items-center gap-1 text-xs font-semibold ${article.accentText} mt-2 transition-transform ${hovered === i ? "translate-x-1" : ""}`}>
+                        <Clock className="w-3 h-3 text-white/30" />
+                        <span className="text-white/30 mr-2">{article.readTime}</span>
+                        Czytaj <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+                    <div className="absolute top-4 right-5 font-black text-white/[0.05] text-6xl leading-none select-none">{article.number}</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* 2-column grid for articles 4–5 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {ARTICLES.slice(3).map((article, idx) => {
+              const i = idx + 3;
+              const Icon = article.icon;
+              return (
+                <Link
+                  key={article.slug}
+                  href={`/baza-wiedzy/artykuly/${article.slug}`}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  className="block group"
+                >
+                  <div className="relative rounded-3xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-300" style={{ height: "clamp(240px, 28vw, 360px)" }}>
+                    <Image src={article.image} alt={article.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" style={{ objectPosition: article.imagePos }} sizes="50vw" />
+                    <div className={`absolute inset-0 bg-gradient-to-t ${article.gradient}`} />
+                    <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-7">
+                      <span className={`text-[10px] font-mono px-2.5 py-0.5 rounded-full border ${article.accentBg} ${article.accentText} inline-flex mb-2 self-start`}>{article.tag}</span>
+                      <h2 className={`font-semibold text-white leading-snug text-base sm:text-lg mb-1 transition-colors ${hovered === i ? article.accentText : ""}`}>{article.title}</h2>
+                      <div className={`flex items-center gap-1 text-xs font-semibold ${article.accentText} mt-2 transition-transform ${hovered === i ? "translate-x-1" : ""}`}>
+                        <Clock className="w-3 h-3 text-white/30" />
+                        <span className="text-white/30 mr-2">{article.readTime}</span>
+                        Czytaj <ArrowRight className="w-3.5 h-3.5" />
+                      </div>
+                    </div>
+                    <div className="absolute top-4 right-5 font-black text-white/[0.05] text-6xl leading-none select-none">{article.number}</div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── Final CTA ── */}
+        <section className="max-w-5xl mx-auto px-5 sm:px-8 pb-20">
+          <div className="relative rounded-3xl overflow-hidden border border-amber-500/20" style={{ minHeight: 280 }}>
+            <Image src="/images/matki/matka_06.webp" alt="Kocięta Maine Coon z hodowli Koci Przyjaciel gotowe do adopcji" fill className="object-cover object-[50%_20%]" sizes="100vw" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/30" />
+            <div className="relative p-8 sm:p-12 flex flex-col sm:flex-row items-center gap-8">
+              <div className="flex-1">
+                <p className="text-xs font-mono text-amber-400 uppercase tracking-widest mb-3">Koci Przyjaciel *PL</p>
+                <h2 className="font-heading font-semibold text-2xl sm:text-3xl text-white mb-3">
+                  Gotowy na Maine Coona swojego życia?
+                </h2>
+                <p className="text-[#86868b] text-sm max-w-md">
+                  Przeczytałeś wszystko. Sprawdź które kocięta z hodowli Koci Przyjaciel *PL są aktualnie dostępne.
+                </p>
+              </div>
               <Link
                 href="/dostepne-kociaki"
-                className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-semibold text-sm transition-all duration-200 hover:scale-105 active:scale-95 shadow-lg shadow-amber-500/20"
+                className="shrink-0 inline-flex items-center gap-2.5 px-8 py-4 rounded-full bg-amber-400 hover:bg-amber-300 text-black font-semibold text-sm transition-all duration-200 hover:scale-105 shadow-lg shadow-amber-500/20"
               >
                 Zobacz aktualnie dostępne kocięta Maine Coon w naszej hodowli
                 <ArrowRight className="w-4 h-4" />

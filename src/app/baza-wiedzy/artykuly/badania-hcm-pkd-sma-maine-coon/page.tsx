@@ -1,149 +1,107 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { ArticleLayout } from "@/components/articles/ArticleLayout";
-import { Article3HealthInteractive } from "@/components/articles/ArticleInteractives";
-import { ArrowRight, CheckCircle2, AlertTriangle, HeartPulse, Dna, Activity } from "lucide-react";
+import { ArticleLayout, SectionHeading, StatCard, PhotoCard, CheckRow, HealthTestsInteractive } from "@/components/articles/ArticleLayout";
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const TOC = [
   { id: "intro", label: "Dlaczego to ważne?" },
   { id: "hcm", label: "HCM — badanie serca" },
-  { id: "interaktywne", label: "Interaktywne testy HCM/PKD/SMA" },
-  { id: "jak-wyglada", label: "Jak wygląda badanie w praktyce?" },
+  { id: "testy", label: "HCM · SMA · PKD — interaktywnie" },
+  { id: "pytania", label: "Pytania do hodowcy" },
   { id: "harmonogram", label: "Harmonogram badań" },
-  { id: "dostepne", label: "Nasze certyfikaty zdrowia" },
+  { id: "cta", label: "Nasze certyfikaty" },
 ];
 
 export default function Article3Page() {
   return (
     <ArticleLayout
-      slug="badania-hcm-pkd-sma-maine-coon"
       number="03"
-      accentClass="text-rose-300"
-      accentGlow="from-rose-500 to-red-400"
+      accent="rose"
+      accentHex="#F43F5E"
       readTime="12 min czytania"
-      seoTag="HCM · PKD · SMA · Genetyka"
+      tag="HCM · PKD · SMA · Genetyka"
       title="Badania HCM (Echo Doppler), PKD i SMA u Maine Coon — dlaczego są kluczowe przed zakupem kociaka?"
       subtitle="Kompletny przewodnik po badaniach kardiologicznych i genetycznych w certyfikowanej hodowli Maine Coon"
+      heroImage="/images/matki/matka_04.webp"
+      heroAlt="Maine Coon matka hodowlana z certyfikatem HCM CLEAR — zdrowie rasy w hodowli Koci Przyjaciel"
+      heroCaption="Echo Doppler HCM · Laboklin N/N · Badania przed każdym miotem"
       toc={TOC}
       prevSlug="rodowod-fife-fpl-legalna-hodowla"
       prevTitle="Rodowód FIFe/FPL — jak rozpoznać legalną hodowlę?"
       nextSlug="wyprawka-dla-maine-coona"
       nextTitle="Kompletna wyprawka dla Maine Coona"
     >
-      <article className="space-y-12">
+      <article className="space-y-16">
 
-        <section id="intro" className="scroll-mt-28">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 bg-rose-500 rounded-full" />
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">Dlaczego badania są tak ważne przy Maine Coonie?</h2>
-          </div>
+        {/* ── SECTION 1 ── */}
+        <section id="intro" className="scroll-mt-8">
+          <SectionHeading accent="rose">Dlaczego badania są tak ważne przy Maine Coonie?</SectionHeading>
 
-          <div className="p-5 rounded-2xl bg-rose-500/10 border border-rose-500/25 flex gap-4 mb-6">
-            <HeartPulse className="w-5 h-5 text-rose-400 shrink-0 mt-0.5" />
-            <p className="text-sm text-white/80 leading-relaxed">
-              Maine Coon jest rasą genetycznie predysponowaną do kardiomiopatii przerostowej (HCM). Szacuje się, że nawet 26% kotów tej rasy może być dotkniętych tą chorobą — jeśli hodowla nie prowadzi regularnych badań i selekcji.
+          <PhotoCard image="/images/matki/matka_05.webp" alt="Zdrowa kotka Maine Coon hodowla" side="right">
+            <p className="text-[#86868b] leading-relaxed mb-4 text-sm sm:text-base">
+              Maine Coon to rasa genetycznie predysponowana do kardiomiopatii przerostowej (HCM). Szacuje się, że nawet <span className="text-rose-300 font-medium">26% kotów tej rasy</span> może być dotkniętych tą chorobą — jeśli hodowla nie prowadzi regularnych badań i selekcji.
             </p>
-          </div>
-
-          <p className="text-white/75 leading-relaxed mb-4">
-            W odpowiedzialnej hodowli FIFe/FPL <span className="text-rose-300 font-medium">każdy kot hodowlany jest regularnie badany na HCM</span> przez kardiologa weterynaryjnego (badanie Echo Doppler), a testy DNA w akredytowanym laboratorium (np. Laboklin w Niemczech lub Langford w UK) eliminują nosicielstwo mutacji genetycznych powodujących SMA i PKD.
-          </p>
-
-          <p className="text-white/75 leading-relaxed">
-            Kociak od hodowcy, który nie ma dokumentów potwierdzających przeprowadzenie tych badań, to inwestycja obarczona realnym ryzykiem zdrowotnym — i finansowym. Leczenie HCM u kota to koszt wieloletni i często nie przynoszący trwałego efektu.
-          </p>
+            <p className="text-[#86868b] leading-relaxed text-sm sm:text-base">
+              W certyfikowanej hodowli FIFe/FPL każdy kot hodowlany jest regularnie badany przez kardiologa weterynaryjnego, a testy DNA w Laboklin eliminują nosicielstwo mutacji genetycznych (SMA, PKD, HCM).
+            </p>
+          </PhotoCard>
         </section>
 
-        <section id="hcm" className="scroll-mt-28">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 bg-rose-500 rounded-full" />
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">HCM u Maine Coona — największe zagrożenie genetyczne rasy</h2>
+        {/* ── SECTION 2 — HCM stats ── */}
+        <section id="hcm" className="scroll-mt-8">
+          <SectionHeading accent="rose">HCM u Maine Coona — największe zagrożenie genetyczne rasy</SectionHeading>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            <StatCard value="~26%" unit="" label="Częstość w rasie" desc="Szacunkowy odsetek kotów Maine Coon z predyspozycją genetyczną do HCM bez selekcji hodowlanej." />
+            <StatCard value="2–6" unit="lat" label="Wiek pierwszych objawów" desc="HCM pojawia się w wieku produkcyjnym kota — stąd konieczność regularnych badań, nie jednorazowych." />
+            <StatCard value="CLEAR" unit="" label="Nasza hodowla" desc="Wszystkie koty hodowlane Koci Przyjaciel *PL — wynik CLEAR w badaniu Echo Doppler HCM." />
           </div>
 
-          <p className="text-white/70 leading-relaxed mb-5">
-            Kardiomiopatia przerostowa (Hypertrophic Cardiomyopathy — HCM) to choroba, w której ściana lewej komory serca ulega patologicznemu pogrubieniu. U kotów jest najczęstszą chorobą serca i może prowadzić do nagłej śmierci lub zastoinowej niewydolności krążenia.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-            {[
-              { icon: "🫀", stat: "~26%", desc: "kotów Maine Coon może mieć predyspozycje genetyczne do HCM", color: "border-rose-500/30 bg-rose-500/10" },
-              { icon: "📅", stat: "2–6 lat", desc: "typowy wiek pojawienia się pierwszych objawów klinicznych", color: "border-amber-500/30 bg-amber-500/10" },
-              { icon: "🏆", stat: "100%", desc: "kotów hodowlanych w Koci Przyjaciel *PL z wynikiem CLEAR (serce zdrowe)", color: "border-green-500/30 bg-green-500/10" },
-            ].map((s, i) => (
-              <div key={i} className={`text-center p-5 rounded-2xl border ${s.color}`}>
-                <span className="text-3xl block mb-2">{s.icon}</span>
-                <p className="text-2xl font-bold text-white mb-1">{s.stat}</p>
-                <p className="text-xs text-white/55 leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
-            <p className="text-xs font-mono text-rose-400 uppercase tracking-widest mb-3">Na czym polega badanie Echo Doppler HCM?</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-white/70">
-              <div>
-                <p className="font-semibold text-white mb-2">Przebieg badania</p>
-                <ul className="space-y-1.5">
-                  {["Wykonywane przez certyfikowanego kardiologa weterynaryjnego", "Trwa ok. 20–30 minut, bez znieczulenia", "Ultrasonograf mierzy grubość ścian serca", "Doppler ocenia przepływ krwi przez zastawki"].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-green-400 shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
+          {/* Hero banner with overlay */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/[0.08]" style={{ height: "clamp(200px, 28vw, 340px)" }}>
+            <Image src="/images/cats/cat_05.webp" alt="Maine Coon z certyfikatem zdrowia serca" fill className="object-cover object-[50%_20%]" sizes="100vw" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+            <div className="absolute inset-0 flex items-center px-6 sm:px-10">
+              <div className="max-w-sm">
+                <p className="text-xs font-mono text-rose-400 uppercase tracking-widest mb-2">Echo Doppler HCM</p>
+                <p className="font-heading font-light text-white text-xl sm:text-2xl leading-snug mb-3">
+                  Badanie echokardiograficzne<br />
+                  <span className="font-semibold italic text-rose-200">serca rodziców przed każdym miotem</span>
+                </p>
+                <div className="flex gap-2">
+                  {["Kardiolog weterynaryjny", "Co 12–18 miesięcy", "Certyfikat ważny 1 rok"].map((t, i) => (
+                    <span key={i} className="text-[10px] font-mono px-2 py-1 rounded-full bg-rose-500/20 border border-rose-500/30 text-rose-300">{t}</span>
                   ))}
-                </ul>
-              </div>
-              <div>
-                <p className="font-semibold text-white mb-2">Częstotliwość</p>
-                <ul className="space-y-1.5">
-                  {["Koty do 5. roku życia: co 12–18 miesięcy", "Koty powyżej 5 lat: co 12 miesięcy", "Przed każdym rozrodem obojga rodziców", "Certyfikat ważny przez rok od badania"].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-rose-400 shrink-0 mt-0.5" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="interaktywne" className="scroll-mt-28">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 bg-rose-500 rounded-full" />
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">HCM, SMA i PKD — interaktywny przewodnik po badaniach</h2>
-          </div>
-
-          <p className="text-white/70 leading-relaxed mb-6">
-            Przełączaj między zakładkami, aby poznać każde z trzech kluczowych badań — czym jest choroba, jak się testuje i co oznaczają wyniki:
+        {/* ── SECTION 3 — Interactive tests ── */}
+        <section id="testy" className="scroll-mt-8">
+          <SectionHeading accent="rose">HCM, SMA i PKD — interaktywny przewodnik po badaniach</SectionHeading>
+          <p className="text-[#86868b] leading-relaxed mb-6 text-sm">
+            Przełączaj między zakładkami, aby poznać każde z trzech kluczowych badań:
           </p>
-
-          <Article3HealthInteractive />
+          <HealthTestsInteractive />
         </section>
 
-        <section id="jak-wyglada" className="scroll-mt-28">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 bg-rose-500 rounded-full" />
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">Jak to wygląda w praktyce — pytania do hodowcy</h2>
-          </div>
-
-          <p className="text-white/70 leading-relaxed mb-5">
-            Zanim zarezerwujesz kociaka, upewnij się, że hodowca potrafi odpowiedzieć na wszystkie poniższe pytania:
-          </p>
-
-          <div className="space-y-3">
+        {/* ── SECTION 4 — Questions ── */}
+        <section id="pytania" className="scroll-mt-8">
+          <SectionHeading accent="rose">Jakie pytania zadać hodowcy?</SectionHeading>
+          <div className="bg-[#161617] rounded-2xl border border-white/[0.08] overflow-hidden divide-y divide-white/[0.06]">
             {[
               { q: "Kiedy ostatnie badanie Echo Doppler serca matki i ojca?", good: "Certyfikat nie starszy niż 12 miesięcy od planowanego miotu" },
-              { q: "W jakim laboratorium wykonano testy DNA?", good: "Laboklin (Niemcy), Langford (UK), Genomia (Czechy) — akredytowane laby" },
-              { q: "Czy certyfikaty DNA są dostępne do wglądu?", good: "Hodowca pokazuje oryginały lub skan z wynikiem N/N" },
-              { q: "Czy oba badania (HCM + DNA) dotyczą obojga rodziców?", good: "Samo jedno badanie jednego rodzica to za mało — oba są niezbędne" },
+              { q: "W jakim laboratorium wykonano testy DNA?", good: "Laboklin (Niemcy), Langford (UK), Genomia (Czechy)" },
+              { q: "Czy certyfikaty DNA są dostępne do wglądu?", good: "Oryginały lub skany z wynikiem N/N" },
+              { q: "Czy oba badania dotyczą obojga rodziców?", good: "Jedno badanie jednego rodzica to za mało" },
             ].map((item, i) => (
-              <div key={i} className="p-4 rounded-xl bg-white/[0.03] border border-white/8">
-                <p className="text-sm font-semibold text-white mb-2 flex items-center gap-2">
-                  <span className="font-mono text-xs text-rose-400">{String(i + 1).padStart(2, "0")}.</span>
-                  {item.q}
-                </p>
+              <div key={i} className="px-5 py-4 hover:bg-white/[0.02] transition-colors">
+                <p className="text-sm font-semibold text-white mb-1.5">{item.q}</p>
                 <p className="text-xs text-green-400 flex items-start gap-2">
                   <CheckCircle2 className="w-3.5 h-3.5 shrink-0 mt-0.5" />
                   Prawidłowa odpowiedź: {item.good}
@@ -153,59 +111,51 @@ export default function Article3Page() {
           </div>
         </section>
 
-        <section id="harmonogram" className="scroll-mt-28">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-1 h-5 bg-rose-500 rounded-full" />
-            <h2 className="text-xl sm:text-2xl font-semibold text-white">Harmonogram profilaktyki zdrowotnej w hodowli</h2>
-          </div>
+        {/* ── SECTION 5 — Timeline ── */}
+        <section id="harmonogram" className="scroll-mt-8">
+          <SectionHeading accent="rose">Harmonogram profilaktyki zdrowotnej — od rozrodu do adopcji</SectionHeading>
 
-          <p className="text-white/70 leading-relaxed mb-5">
-            W hodowli Koci Przyjaciel *PL stosujemy następujący protokół zdrowotny dla każdego miotu:
-          </p>
-
-          <div className="relative">
-            <div className="absolute left-5 top-4 bottom-4 w-px bg-gradient-to-b from-rose-500/50 via-rose-500/20 to-transparent" />
-            <div className="space-y-4 pl-12">
-              {[
-                { phase: "Przed rozrodem", color: "bg-violet-500", items: ["Echo Doppler HCM obojga rodziców (kardiolog wet.)", "Testy DNA SMA + PKD (Laboklin)", "Ocena kondycji i ogólna przed kryciem"] },
-                { phase: "Kociąt: 2. tydzień", color: "bg-blue-500", items: ["Ważenie i kontrola przyrostów", "Pierwsza ocena weterynaryjna miotu", "Delikatna socjalizacja dotykowa"] },
-                { phase: "Kociąt: 6. tydzień", color: "bg-amber-500", items: ["Odrobaczanie kociąt (Drontal lub equiv.)", "Badanie kliniczne każdego kociaka indywidualnie", "Ocena wad wrodzonych (podniebienie, serce)"] },
-                { phase: "Kociąt: 8–9. tydzień", color: "bg-orange-500", items: ["Pierwsze szczepienia (Tricat lub Purevax 3w1)", "Odrobaczanie drugie", "Wystawienie paszportu weterynaryjnego"] },
-                { phase: "Kociąt: 12. tydzień", color: "bg-green-500", items: ["Drugie szczepienie (przypominające)", "Wszczepienie mikrochipa ISO", "Rejestracja w FPL — rodowód miotu", "Adopcja z pełną dokumentacją"] },
-              ].map((phase, i) => (
-                <div key={i} className="relative">
-                  <div className={`absolute -left-7 top-1.5 w-3 h-3 rounded-full ${phase.color} ring-2 ring-black`} />
-                  <p className={`text-xs font-mono uppercase tracking-widest mb-2 ${["text-violet-400","text-blue-400","text-amber-400","text-orange-400","text-green-400"][i]}`}>{phase.phase}</p>
-                  <ul className="space-y-1">
-                    {phase.items.map((item, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-3 h-3 text-white/30 shrink-0" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-3">
+            {[
+              { color: "bg-violet-500", label: "Przed rozrodem", items: ["Echo Doppler HCM", "DNA SMA + PKD", "Ocena ogólna"] },
+              { color: "bg-blue-500", label: "2. tydzień", items: ["Ważenie kociąt", "Kontrola wet.", "Socjalizacja"] },
+              { color: "bg-amber-500", label: "6. tydzień", items: ["Odrobaczanie", "Bad. kliniczne", "Ocena wad"] },
+              { color: "bg-orange-500", label: "8. tydzień", items: ["Szczepienie I", "Odrobaczanie II", "Paszport wet."] },
+              { color: "bg-green-500", label: "12. tydzień", items: ["Szczepienie II", "Mikrochip", "Rodowód FPL"] },
+            ].map((phase, i) => (
+              <div key={i} className="p-4 rounded-2xl bg-[#161617] border border-white/[0.08]">
+                <div className={`w-2 h-2 rounded-full ${phase.color} mb-2`} />
+                <p className="text-[10px] font-mono text-white/40 mb-2">{phase.label}</p>
+                <ul className="space-y-1">
+                  {phase.items.map((item, j) => (
+                    <li key={j} className="text-xs text-white/65 flex items-center gap-1.5">
+                      <span className={`w-1 h-1 rounded-full ${phase.color}`} />{item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section id="dostepne" className="scroll-mt-28">
-          <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-rose-600/20 via-red-700/15 to-transparent border border-rose-500/20 text-center">
-            <HeartPulse className="w-8 h-8 text-rose-400 mx-auto mb-4" />
-            <h3 className="font-semibold text-xl text-white mb-3">
-              Nasze certyfikaty HCM i DNA — do wglądu na życzenie
-            </h3>
-            <p className="text-white/60 text-sm mb-6 max-w-lg mx-auto">
-              Wszystkie koty hodowlane w Koci Przyjaciel *PL mają aktualne badania Echo Doppler HCM oraz certyfikaty DNA Laboklin z wynikiem N/N dla SMA i PKD. Dokumenty udostępniamy przed adopcją.
-            </p>
-            <Link
-              href="/dostepne-kociaki"
-              className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-rose-500 hover:bg-rose-400 text-white font-semibold text-sm transition-all duration-200 hover:scale-105"
-            >
-              Zobacz aktualnie dostępne kocięta Maine Coon w naszej hodowli
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+        {/* ── CTA ── */}
+        <section id="cta" className="scroll-mt-8">
+          <div className="relative rounded-3xl overflow-hidden border border-rose-500/20" style={{ minHeight: 260 }}>
+            <Image src="/images/matki/matka_06.webp" alt="Zdrowe kocięta Maine Coon Koci Przyjaciel certyfikaty HCM" fill className="object-cover object-[50%_25%]" sizes="100vw" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent" />
+            <div className="relative p-8 sm:p-10">
+              <p className="text-xs font-mono text-rose-400 uppercase tracking-widest mb-3">Certyfikowana profilaktyka</p>
+              <h3 className="font-heading font-semibold text-2xl sm:text-3xl text-white mb-3 max-w-md">
+                Echo Doppler HCM + Laboklin N/N — każde kocię
+              </h3>
+              <p className="text-[#86868b] text-sm mb-7 max-w-sm">
+                Dokumenty udostępniamy przed adopcją. Zdrowie rodziców = Twój spokój ducha.
+              </p>
+              <Link href="/dostepne-kociaki" className="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-rose-500 hover:bg-rose-400 text-white font-semibold text-sm transition-all hover:scale-105">
+                Zobacz aktualnie dostępne kocięta Maine Coon w naszej hodowli
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </section>
 
