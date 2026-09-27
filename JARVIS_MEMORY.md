@@ -69,3 +69,9 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
       6. Usunięcie animacji heroLogoEntrance i blur-3xl z Hero (eliminacja layout thrashingu i redukcja czasu głównego wątku).
       7. Poprawa A11y (aria-label na przyciskach wideo, poprawna hierarchia nagłówków H3).
       8. Commit be91409 wypchnięty do GitHub origin/main.
+13. **Przywrócenie Sekcji Facebook, Odblokowanie Bazy Wiedzy i Styl Apple Pro**:
+    - **Sekcja Facebook na Stronie Głównej**: Przywrócono `FacebookCommunitySection` (26 400+ fanów na żywo z Meta API, kafelki z relacjami, zrzuty, opinie, link do FB) pomiędzy Opiniami a Sekcją Kontaktu.
+    - **Odblokowanie Pełnej Bazy Wiedzy (`/baza-wiedzy`)**: Usunięto sztuczne ukrywanie sekcji za pojedynczym tabem kalkulatora. Domyślnie prezentowane jest całe, wyczerpujące kompendium felinologiczne (Wzorzec rasy FIFe -> Skala 1:1 vs Pies -> Badania serca HCM & genetyka -> Rodowód 5 pokoleń -> Kalkulator kosztów & Wyprawka -> FAQ) z płynnym skakaniem do działów.
+    - **Unifikacja Tła Podzakładek**: Działy wewnątrz Bazy Wiedzy (`BreedSection`, `HealthSection`, `PedigreeSection`, `FaqSection`) zostały przeniesione z jasnych teł `#FAF9F6`/`#FAFAF8` do spójnego, ciemnego stylu Apple Pro (`bg-black`, kafelki `#161617`, obramowania `border-white/[0.08]`, szlachetne akcenty złota i szmaragdu).
+    - **Przyciski Telefoniczne i Rezerwacyjne**: Wywołanie natychmiastowego połączenia `tel:+48698837525` oraz bezpośrednie kierowanie akcji rezerwacji do firmowego Messengera hodowli (`https://m.me/1591521427751158`).
+    - Wypchnięto do GitHub `origin/main`.
