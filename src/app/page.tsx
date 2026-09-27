@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
-import { REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { REAL_MESSENGER_URL } from "@/data/realCatsData";
 
 const BreederSection = dynamic(() => import("@/components/sections/BreederSection"), {
   loading: () => <div className="min-h-[60vh] bg-black" />,
@@ -25,6 +25,9 @@ const KnowledgeBaseTeaser = dynamic(() => import("@/components/sections/Knowledg
 const TestimonialsSection = dynamic(() => import("@/components/sections/TestimonialsSection"), {
   loading: () => <div className="min-h-[50vh] bg-black" />,
 });
+const FacebookCommunitySection = dynamic(() => import("@/components/sections/FacebookCommunitySection"), {
+  loading: () => <div className="min-h-[50vh] bg-black" />,
+});
 const ContactSection = dynamic(() => import("@/components/sections/ContactSection"), {
   loading: () => <div className="min-h-[60vh] bg-black" />,
 });
@@ -37,7 +40,7 @@ export default function Home() {
 
   const handleOpenReservation = () => {
     if (typeof window !== "undefined") {
-      window.open(REAL_FACEBOOK_URL, "_blank");
+      window.open(REAL_MESSENGER_URL, "_blank");
     }
   };
 
@@ -87,7 +90,10 @@ export default function Home() {
         {/* ⑧ OPINIE OPIEKUNÓW: Oceny 5.0, metryki, notatki głosowe */}
         <TestimonialsSection lang={lang} />
 
-        {/* ⑨ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
+        {/* ⑨ SPOŁECZNOŚĆ FACEBOOK: 26 400+ fanów na żywo z Meta API */}
+        <FacebookCommunitySection lang={lang} />
+
+        {/* ⑩ KONTAKT: Ścieżka kontaktu, formularz i bezpośrednie kanały */}
         <ContactSection
           lang={lang}
           onOpenReservation={() => handleOpenReservation()}

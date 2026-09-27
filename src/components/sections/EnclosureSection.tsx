@@ -50,12 +50,12 @@ export default function EnclosureSection({
   useEffect(() => {
     const isDesk = window.innerWidth >= 1024;
     setIsDesktopDevice(isDesk);
-    setSectionHeight(isDesk ? "520vh" : "410vh");
+    setSectionHeight(isDesk ? "400vh" : "310vh");
 
     const onResize = () => {
       const d = window.innerWidth >= 1024;
       setIsDesktopDevice(d);
-      setSectionHeight(d ? "520vh" : "410vh");
+      setSectionHeight(d ? "400vh" : "310vh");
     };
     window.addEventListener("resize", onResize, { passive: true });
 
@@ -240,21 +240,21 @@ export default function EnclosureSection({
         // ═══════════════════════════════════════════════════════════════
         const H = window.innerHeight;
 
-        // 1. Film w telefonie: wypełnia górną część ekranu, płynnie adaptuje się do środka
+        // 1. Film w telefonie: na początku wycentrowany, płynnie schodzi w dół (pozycja wyżej, bez czarnej pustki)
         const mPhone = mobilePhoneWrapRef.current;
         if (mPhone) {
-          let targetY = 0;
+          let targetY = -50;
           let targetScale = 1;
           if (scrolled <= 0) {
-            targetY = -70;
-            targetScale = 1.05;
-          } else if (scrolled < H * 0.55) {
-            const t = scrolled / (H * 0.55);
+            targetY = -140;
+            targetScale = 1.08;
+          } else if (scrolled < H * 0.65) {
+            const t = scrolled / (H * 0.65);
             const ease = t * t * (3 - 2 * t);
-            targetY = lerp(-70, 0, ease);
-            targetScale = lerp(1.05, 1.0, ease);
+            targetY = lerp(-140, -50, ease);
+            targetScale = lerp(1.08, 1.0, ease);
           } else {
-            targetY = 0;
+            targetY = -50;
             targetScale = 1.0;
           }
           mPhone.style.transform = `translate3d(0, ${targetY}px, 0) scale(${targetScale})`;
@@ -541,20 +541,26 @@ export default function EnclosureSection({
                   <div className="relative w-full aspect-[16/9] rounded-[36px] overflow-hidden bg-black">
                     <video
                       ref={videoRef}
-                      src={isDesktopDevice ? "/video/film2.mp4" : undefined}
-                      poster="/images/gallery/wybieg/wybieg_001.webp"
+                      src="/video/film2.mp4"
+                      poster="/images/gallery/wybieg/wybieg_001.jpeg"
+                      autoPlay
                       loop
                       muted={isMuted}
                       playsInline
-                      preload="none"
-                      controlsList="nodownload nofullscreen noremoteplayback"
-                      disablePictureInPicture
-                      disableRemotePlayback
-                      onContextMenu={(e) => e.preventDefault()}
-                      className="w-full h-full object-cover pointer-events-none scale-[1.05] select-none"
+                      preload="auto"
+                      className="w-full h-full object-cover pointer-events-none scale-[1.05]"
                     />
                     <div className="absolute left-3.5 top-1/2 -translate-y-1/2 w-3.5 h-11 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
                       <div className="w-2 h-2 rounded-full bg-[#0a1224] border border-blue-500/20" />
+                    </div>
+                    <div className="absolute bottom-4 right-4 z-30">
+                      <button
+                        onClick={toggleMute}
+                        className="w-8 h-8 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/70 hover:text-white hover:scale-105 transition-all cursor-pointer"
+                        title={isMuted ? "Włącz dźwięk" : "Wycisz"}
+                      >
+                        {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
+                      </button>
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent pointer-events-none" />
                   </div>
@@ -564,7 +570,7 @@ export default function EnclosureSection({
 
           </div>
 
-          {/* Dolny segmentowy wskaźnik postępu desktop (kolorowy Apple style jak w hodowcy) */}
+          {/* Dolny segmentowy wskaźnik postępu desktop */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
             <div className="w-24 h-[2px] bg-white/20 rounded-full overflow-hidden">
               <div
@@ -595,17 +601,18 @@ export default function EnclosureSection({
         {/* ── 2. WERSJA MOBILNA (APPLE SCROLLYTELLING — 120 FPS PŁYNNOŚCI) ─ */}
         {/* ═════════════════════════════════════════════════════════════════ */}
         <div
-          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-4 sm:px-6 max-w-lg mx-auto"
+          className="lg:hidden flex flex-col justify-between w-full h-full relative z-10 px-5 max-w-lg mx-auto"
           style={{
-            paddingTop: "68px",
-            paddingBottom: "18px",
+            paddingTop: "32px",
+            paddingBottom: "16px",
             height: "100dvh",
           }}
         >
           {/* A. INTRO NAGŁÓWEK (Na starcie widoczny, płynnie znika w górę) */}
           <div
             ref={mobileIntroRef}
-            className="w-full text-center will-change-transform pt-2 z-20"
+            className="w-full text-center will-change-transform pt-1 z-20"
+            style={{ contain: "paint" }}
           >
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/20 text-[10px] font-mono uppercase tracking-[0.25em] text-white/90 font-medium mb-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)]">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -613,10 +620,10 @@ export default function EnclosureSection({
             </div>
             <h2 className="text-2xl sm:text-3xl font-heading font-light text-white tracking-tight leading-tight">
               {lang === "PL" ? (
-                 <>Nasz dom <span className="font-normal text-zinc-400">to ich dom.</span></>
-               ) : (
-                 <>Our home <span className="font-normal text-zinc-400">is their home.</span></>
-               )}
+                <>Nasz dom <span className="font-normal text-zinc-400">to ich dom.</span></>
+              ) : (
+                <>Our home <span className="font-normal text-zinc-400">is their home.</span></>
+              )}
             </h2>
             <div className="flex mt-1.5 items-center justify-center gap-1.5 text-[10px] font-mono uppercase tracking-[0.2em] text-zinc-400">
               <span>{lang === "PL" ? "Przewiń, aby poznać wybieg" : "Scroll to explore"}</span>
@@ -624,8 +631,8 @@ export default function EnclosureSection({
             </div>
           </div>
 
-          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Karty iPhone Glass rozciągnięte w osi pionowej) */}
-          <div className="w-full relative flex-1 min-h-[240px] max-h-[300px] my-auto flex items-center justify-center z-10">
+          {/* B. OBSZAR TYPOGRAFII SCEN (01, 02, 03 — Karty iPhone Glass z optymalną czytelnością) */}
+          <div className="w-full relative flex-1 min-h-[200px] max-h-[260px] -mt-8 mb-1 flex items-center justify-center z-10">
             
             {/* Scena 1: Ogród i Wybieg */}
             <div
@@ -764,32 +771,40 @@ export default function EnclosureSection({
 
           </div>
 
-          {/* C. AUTENTYCZNY IPHONE 16 PRO (Wypełnia ekran na telefonie bez pustki u góry) */}
+          {/* C. AUTENTYCZNY IPHONE 16 PRO (Na starcie w centrum, płynnie schodzi w dół!) */}
           <div
             ref={mobilePhoneWrapRef}
-            className="w-full will-change-transform relative px-0 pb-1 z-20"
-            style={{ transform: "translate3d(0, -70px, 0) scale(1.05)" }}
+            className="w-full will-change-transform relative px-1 pb-2 z-20"
+            style={{ transform: "translate3d(0, -140px, 0) scale(1.08)" }}
           >
-            <div className="relative mx-auto w-full max-w-[390px] p-[6px] rounded-[26px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.12)]">
+            <div className="relative mx-auto w-full max-w-[365px] p-[5px] rounded-[24px] bg-gradient-to-b from-[#3a393d] via-[#242327] to-[#1a191c] shadow-[0_20px_50px_rgba(0,0,0,0.95),0_0_0_1px_rgba(255,255,255,0.12)]">
               <div className="relative w-full aspect-[16/9] rounded-[20px] overflow-hidden bg-black">
                 <video
                   ref={mobileVideoRef}
-                  src={!isDesktopDevice ? "/video/film2.mp4" : undefined}
-                  poster="/images/gallery/wybieg/wybieg_001.webp"
+                  src="/video/film2.mp4"
+                  poster="/images/gallery/wybieg/wybieg_001.jpeg"
+                  autoPlay
                   loop
                   muted={isMuted}
                   playsInline
-                  preload="none"
-                  controlsList="nodownload nofullscreen noremoteplayback"
-                  disablePictureInPicture
-                  disableRemotePlayback
-                  onContextMenu={(e) => e.preventDefault()}
-                  className="w-full h-full object-cover scale-[1.04] pointer-events-none select-none"
+                  preload="auto"
+                  className="w-full h-full object-cover scale-[1.04]"
                 />
                 
                 {/* Dynamic Island */}
                 <div className="absolute left-2.5 top-1/2 -translate-y-1/2 w-2.5 h-8 bg-black rounded-full z-20 flex items-center justify-center border border-white/10 shadow-sm pointer-events-none">
                   <div className="w-1.5 h-1.5 rounded-full bg-[#0a1224] border border-blue-500/20" />
+                </div>
+
+                {/* Przycisk dźwięku */}
+                <div className="absolute bottom-2.5 right-2.5 z-30">
+                  <button
+                    onClick={toggleMute}
+                    className="w-7 h-7 rounded-full bg-black/60 border border-white/20 backdrop-blur-md flex items-center justify-center text-white/80 active:scale-95 transition-all cursor-pointer pointer-events-auto"
+                    title={isMuted ? "Włącz dźwięk" : "Wycisz"}
+                  >
+                    {isMuted ? <VolumeX className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5 text-white" />}
+                  </button>
                 </div>
 
                 {/* Subtelny odblask szkła ekranu */}
@@ -798,7 +813,7 @@ export default function EnclosureSection({
             </div>
           </div>
 
-          {/* D. SUBTELNE WSKAŹNIKI POSTĘPU APPLE (kolorowe jak w hodowcy) */}
+          {/* D. SUBTELNE WSKAŹNIKI POSTĘPU APPLE (Eleganckie linie bez topornych przycisków) */}
           <div className="w-full flex items-center justify-center gap-2 pt-1 pb-1 z-20">
             <div className="w-16 h-[2px] bg-white/15 rounded-full overflow-hidden">
               <div

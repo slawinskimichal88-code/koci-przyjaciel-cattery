@@ -20,7 +20,7 @@ import {
   Home,
   Users,
 } from "lucide-react";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL, REAL_MESSENGER_URL } from "@/data/realCatsData";
 
 export default function AvailableKittensPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
@@ -246,12 +246,12 @@ export default function AvailableKittensPage() {
 
           <div className="mt-12 text-center">
             <a
-              href={REAL_FACEBOOK_URL}
+              href={REAL_MESSENGER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-8 py-4 rounded-full bg-[#1877F2] text-white font-ui uppercase tracking-wider text-xs font-bold hover:bg-[#166fe5] transition-all shadow-lg inline-flex items-center gap-2 cursor-pointer"
+              className="px-8 py-4 rounded-full bg-[#0084FF] text-white font-ui uppercase tracking-wider text-xs font-bold hover:bg-[#0073E6] transition-all shadow-lg inline-flex items-center gap-2 cursor-pointer"
             >
-              <span>{lang === "PL" ? "Zapisz się na listę na Facebooku" : "Join Waitlist on Facebook"}</span>
+              <span>{lang === "PL" ? "Zapisz się na listę na Messengerze" : "Join Waitlist on Messenger"}</span>
               <ArrowRight className="w-4 h-4 text-white" />
             </a>
           </div>

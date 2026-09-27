@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Check, ShieldCheck, Heart, Award, Info, Phone, Sparkles } from "lucide-react";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
-import { FacebookIcon } from "@/components/ui/SocialIcons";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_MESSENGER_URL } from "@/data/realCatsData";
+import { FacebookIcon, MessengerIcon } from "@/components/ui/SocialIcons";
 
 interface KittensSectionProps {
   lang: "PL" | "EN";
@@ -247,16 +247,16 @@ export default function KittensSection({ lang, onOpenReservation }: KittensSecti
             {/* Przyciski CTA */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-6 border-t border-black/10">
               <a
-                href={REAL_FACEBOOK_URL}
+                href={REAL_MESSENGER_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-1 px-8 py-4 rounded-full bg-black text-white text-xs font-ui font-bold uppercase tracking-[0.2em] hover:bg-black/85 transition-all transform hover:-translate-y-0.5 shadow-xl flex items-center justify-center gap-3 cursor-pointer"
               >
-                <FacebookIcon className="w-4 h-4 fill-current text-white" />
+                <MessengerIcon className="w-4 h-4 fill-current text-[#0084FF]" />
                 <span>
                   {currentKitten.status === "available"
-                    ? (lang === "PL" ? `Zapytaj o ${currentKitten.name} na Facebooku` : `Ask about ${currentKitten.name} on Facebook`)
-                    : (lang === "PL" ? "Zapisz się na listę na Facebooku" : "Join Waitlist on Facebook")}
+                    ? (lang === "PL" ? `Zarezerwuj ${currentKitten.name} (Messenger)` : `Reserve ${currentKitten.name} (Messenger)`)
+                    : (lang === "PL" ? "Zapisz się na Messengerze" : "Join Waitlist on Messenger")}
                 </span>
                 <ArrowRight className="w-4 h-4" />
               </a>

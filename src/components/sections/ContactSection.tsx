@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_LOCATION } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_MESSENGER_URL, REAL_LOCATION } from "@/data/realCatsData";
 import { ArrowRight, Phone, MapPin, Sparkles } from "lucide-react";
-import { FacebookIcon } from "@/components/ui/SocialIcons";
+import { FacebookIcon, MessengerIcon } from "@/components/ui/SocialIcons";
 
 interface ContactSectionProps {
   lang: "PL" | "EN";
@@ -177,12 +177,12 @@ export default function ContactSection({ lang }: ContactSectionProps) {
                 : "We prioritize direct human connection. To discuss kitten adoption or ask questions, message us directly on our Facebook Messenger."}
             </p>
             <a
-              href={REAL_FACEBOOK_URL}
+              href={REAL_MESSENGER_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white text-black font-body text-[13px] font-medium tracking-tight hover:bg-[#f5f5f7] transition-all flex items-center justify-center gap-2.5 shadow-sm hover:scale-[1.02] active:scale-[0.98]"
             >
-              <FacebookIcon className="w-4 h-4 fill-current" />
+              <MessengerIcon className="w-4 h-4 fill-current text-[#0084FF]" />
               <span>{lang === "PL" ? "Napisz na Messengerze" : "Message on Messenger"}</span>
               <ArrowRight className="w-3.5 h-3.5 text-black" />
             </a>

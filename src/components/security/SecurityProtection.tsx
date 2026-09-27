@@ -21,26 +21,28 @@ export default function SecurityProtection() {
   useEffect(() => {
     if (typeof window === "undefined") return;
 
-    // 1. Blokada menu kontekstowego (prawy przycisk myszy)
+    // 1. Blokada menu kontekstowego (prawy przycisk myszy) - z wyłączeniem linków i przycisków
     const handleContextMenu = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.closest("a") || target.closest("button"))) {
         return;
       }
       e.preventDefault();
       showSecurityNotice("Materiały i fotografie są chronione prawem autorskim © Koci Przyjaciel *PL");
     };
 
-    // 2. Blokada przeciągania elementów (Anti-drag)
+    // 2. Blokada przeciągania wyłącznie dla obrazów (nie blokuje kliknięć ani gestów mobilnych)
     const handleDragStart = (e: DragEvent) => {
-      e.preventDefault();
-      return false;
+      const target = e.target as HTMLElement | null;
+      if (target && target.tagName === "IMG") {
+        e.preventDefault();
+      }
     };
 
-    // 3. Blokada kopiowania do schowka
+    // 3. Blokada kopiowania do schowka (z wyłączeniem formularzy, linków i przycisków)
     const handleCopy = (e: ClipboardEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.closest("a") || target.closest("button"))) {
         return;
       }
       e.preventDefault();
@@ -49,7 +51,7 @@ export default function SecurityProtection() {
 
     const handleCut = (e: ClipboardEvent) => {
       const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) {
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA" || target.closest("a") || target.closest("button"))) {
         return;
       }
       e.preventDefault();

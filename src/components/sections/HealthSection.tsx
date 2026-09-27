@@ -78,61 +78,64 @@ const TESTS = [
 
 export default function HealthSection({ lang }: HealthSectionProps) {
   return (
-    <section id="zdrowie" className="bg-[#FAFAF8] text-black overflow-hidden border-t border-black/10">
+    <section id="zdrowie" className="bg-black text-[#f5f5f7] overflow-hidden border-b border-white/[0.08] scroll-mt-24">
       
       {/* ── Intro ───────────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-28 pb-16 reveal">
-        <p className="text-[10px] sm:text-xs font-ui uppercase tracking-[0.4em] text-black/35 mb-6">
-          {lang === "PL" ? "Badania i Certyfikaty" : "Health & Genetics"}
-        </p>
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-16 pb-12 reveal">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-white/[0.12] text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-6">
+          <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+          <span className="text-[#f5f5f7]">{lang === "PL" ? "Badania i Certyfikaty · HCM / PKD / SMA" : "Health & Genetics · HCM / PKD / SMA"}</span>
+        </div>
         <h2
-          className="font-heading font-light text-black leading-[0.9] tracking-tight"
-          style={{ fontSize: "clamp(2.8rem, 7vw, 6.5rem)" }}
+          className="font-heading font-light text-[#f5f5f7] leading-[0.95] tracking-tight mb-4"
+          style={{ fontSize: "clamp(2.6rem, 6vw, 5.5rem)" }}
         >
           Zdrowie naszych kotów.<br />
-          <span className="font-semibold italic">Nie zostawiamy nic przypadkowi.</span>
+          <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-white to-zinc-300">
+            Nie zostawiamy nic przypadkowi.
+          </span>
         </h2>
-        <p className="mt-8 text-base sm:text-lg font-body text-black/70 max-w-2xl leading-relaxed">
+        <p className="mt-4 text-base sm:text-lg font-body text-[#86868b] max-w-2xl leading-relaxed font-light">
           {lang === "PL"
-            ? "Zanim kociak trafi do Ciebie, jego rodzice mają za sobą pełne badania — serce, geny, słuch. Pokazujemy wyniki każdemu przyszłemu właścicielowi. Żadnych tajemnic, żadnych niespodzianek."
-            : "Before a kitten comes to you, its parents have undergone full health checks — heart, genes, hearing. We share all results with every future owner. No secrets, no surprises."}
+            ? "Zanim kociak trafi do Ciebie, jego rodzice mają za sobą pełne badania — serce (Echo Doppler), geny (Laboklin N/N), słuch. Pokazujemy wyniki każdemu przyszłemu opiekunowi. Żadnych tajemnic, żadnych niespodzianek."
+            : "Before a kitten comes to you, its parents have undergone full health checks — heart (Doppler Echo), genes (Laboklin N/N), hearing. We share all official certificates. No secrets, no surprises."}
         </p>
       </div>
 
       {/* ── Grid Kart Badań — Apple Minimalist Grid ──────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-20">
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {TESTS.map((test, i) => {
             const IconComponent = test.icon;
             return (
               <div
                 key={test.code}
-                className={`reveal reveal-delay-${(i % 3) + 1} p-8 bg-white border border-black/8 hover:border-black/25 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-md`}
+                className="reveal p-8 rounded-[24px] bg-[#161617] border border-white/[0.08] hover:border-white/20 transition-all duration-300 flex flex-col justify-between group shadow-sm"
               >
                 <div>
-                  <div className="flex items-center justify-between pb-6 mb-6 border-b border-black/8">
-                    <div className="w-10 h-10 rounded-full bg-black/5 flex items-center justify-center text-black group-hover:scale-110 transition-transform">
-                      <IconComponent className="w-5 h-5 text-black/80" />
+                  <div className="flex items-center justify-between pb-5 mb-5 border-b border-white/[0.08]">
+                    <div className="w-10 h-10 rounded-2xl bg-white/[0.06] border border-white/[0.1] flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
+                      <IconComponent className="w-5 h-5" />
                     </div>
-                    <span className="text-[10px] font-ui uppercase tracking-widest px-2.5 py-1 bg-black/5 rounded-full text-black/60 font-semibold">
+                    <span className="text-[10px] font-mono uppercase tracking-widest px-3 py-1 bg-white/[0.06] border border-white/[0.1] rounded-full text-[#86868b] font-medium">
                       {test.badge[lang]}
                     </span>
                   </div>
 
-                  <div className="text-xs font-mono font-bold tracking-widest text-[#C8973B] uppercase mb-1">
+                  <div className="text-xs font-mono font-bold tracking-widest text-[#2997ff] uppercase mb-1">
                     {test.code}
                   </div>
-                  <h3 className="text-xl font-heading font-medium text-black mb-3">
+                  <h3 className="text-xl font-heading font-medium text-[#f5f5f7] mb-3">
                     {test.title[lang]}
                   </h3>
-                  <p className="text-sm font-body text-black/60 leading-relaxed mb-6">
+                  <p className="text-sm font-body text-[#86868b] leading-relaxed mb-6 font-light">
                     {test.desc[lang]}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-black/8 flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-600 shrink-0" />
-                  <span className="text-xs font-ui font-semibold text-emerald-800 tracking-wide">
+                <div className="pt-4 border-t border-white/[0.08] flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse" />
+                  <span className="text-xs font-ui font-semibold text-emerald-400 tracking-wide">
                     {test.status[lang]}
                   </span>
                 </div>
@@ -143,29 +146,29 @@ export default function HealthSection({ lang }: HealthSectionProps) {
       </div>
 
       {/* ── Pasek Zaufania Medycznego ────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-28">
-        <div className="reveal border-t border-black/10 pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-24">
+        <div className="reveal border-t border-white/[0.08] pt-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
-            <div className="text-2xl sm:text-3xl font-heading font-semibold text-black mb-1">
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7] mb-1">
               Laboklin
             </div>
-            <p className="text-xs font-ui uppercase tracking-widest text-black/40">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#86868b] font-medium">
               {lang === "PL" ? "Niemieckie laboratorium genetyczne" : "German genetics laboratory"}
             </p>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-heading font-semibold text-black mb-1">
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7] mb-1">
               Echo serca
             </div>
-            <p className="text-xs font-ui uppercase tracking-widest text-black/40">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#86868b] font-medium">
               {lang === "PL" ? "Regularne badanie kardiologiczne" : "Regular cardiology screening"}
             </p>
           </div>
           <div>
-            <div className="text-2xl sm:text-3xl font-heading font-semibold text-black mb-1">
+            <div className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7] mb-1">
               Zdrowe linie
             </div>
-            <p className="text-xs font-ui uppercase tracking-widest text-black/40">
+            <p className="text-xs font-mono uppercase tracking-widest text-[#86868b] font-medium">
               {lang === "PL" ? "Potwierdzone dokumentami dla każdego" : "Certified documents for everyone"}
             </p>
           </div>

@@ -3,8 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { REAL_PHONE, REAL_PHONE_RAW, REAL_FACEBOOK_URL, REAL_MESSENGER_URL } from "@/data/realCatsData";
 import { Phone, ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
+import { MessengerIcon } from "@/components/ui/SocialIcons";
 
 interface KittenReservationBarProps {
   lang?: "PL" | "EN";
@@ -79,13 +80,13 @@ export default function KittenReservationBar({
           {/* Prawa strona: Przyciski CTA */}
           <div className="flex flex-wrap items-center justify-center gap-3 w-full lg:w-auto">
             <a
-              href={REAL_FACEBOOK_URL}
+              href={REAL_MESSENGER_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 sm:flex-initial px-5 py-3 rounded-full bg-white text-black font-body text-xs sm:text-sm font-bold uppercase tracking-wider hover:bg-zinc-200 transition-all transform hover:-translate-y-0.5 shadow-lg flex items-center justify-center gap-2 cursor-pointer"
             >
-              <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-              <span>{lang === "PL" ? "Zarezerwuj na Facebooku" : "Reserve on Facebook"}</span>
+              <MessengerIcon className="w-4 h-4 fill-current text-[#0084FF] shrink-0" />
+              <span>{lang === "PL" ? "Zarezerwuj na Messengerze" : "Reserve on Messenger"}</span>
             </a>
 
             <a

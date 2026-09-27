@@ -3,7 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW } from "@/data/realCatsData";
+import { REAL_LOGO, REAL_PHONE, REAL_PHONE_RAW, REAL_MESSENGER_URL } from "@/data/realCatsData";
 import { ArrowRight, Phone } from "lucide-react";
 
 interface HeroSectionProps {
@@ -25,17 +25,15 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
 
   const [wrapperHeight, setWrapperHeight] = useState<string>("550vh");
   const [isMobileDevice, setIsMobileDevice] = useState<boolean>(false);
-  const [videoSrc, setVideoSrc] = useState<string | undefined>(undefined);
-  const videoSrcRef = useRef<string | undefined>(undefined);
 
   // Video overlay — zmienia opacity/tint w zależności od sekcji
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (videoSrc && videoRef.current) {
+    if (videoRef.current) {
       videoRef.current.play().catch(() => {});
     }
-  }, [videoSrc]);
+  }, []);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
@@ -111,6 +109,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         }
         badge.style.opacity = String(logoOp);
         badge.style.transform = `translateY(${logoTy}px) scale(${logoSc})`;
+        badge.style.pointerEvents = logoOp > 0.1 ? "auto" : "none";
       }
 
       if (scrollHint) {
@@ -141,6 +140,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         const ty = calcTranslateY(scrolled, S * 0.55, S * 0.85, S * 1.85, S * 2.25);
         h1.style.opacity = String(op);
         h1.style.transform = `translateY(${ty}px)`;
+        h1.style.pointerEvents = op > 0.1 ? "auto" : "none";
       }
 
       // === Scena 2: "Zero klatek" ===
@@ -150,6 +150,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         const ty = calcTranslateY(scrolled, S * 2.05, S * 2.35, S * 3.35, S * 3.75);
         h2.style.opacity = String(op);
         h2.style.transform = `translateY(${ty}px)`;
+        h2.style.pointerEvents = op > 0.1 ? "auto" : "none";
       }
 
       // === Scena 3: "Certyfikowane DNA" ===
@@ -159,6 +160,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         const ty = calcTranslateY(scrolled, S * 3.55, S * 3.85, S * 4.85, S * 5.25);
         h3.style.opacity = String(op);
         h3.style.transform = `translateY(${ty}px)`;
+        h3.style.pointerEvents = op > 0.1 ? "auto" : "none";
       }
 
       // === Scena 4: CTA ===
@@ -168,6 +170,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         const ty = calcTranslateY(scrolled, S * 5.05, S * 5.35, S * 999, S * 999);
         cta.style.opacity = String(op);
         cta.style.transform = `translateY(${ty}px)`;
+        cta.style.pointerEvents = op > 0.1 ? "auto" : "none";
       }
 
       // === Overlay: przyciemnienie w późniejszych scenach ===
@@ -178,22 +181,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
       }
     };
 
-    let mobileTimer: ReturnType<typeof setTimeout> | null = null;
-    if (isMobile) {
-      mobileTimer = setTimeout(() => {
-        setVideoSrc("/video/hero-cat-mobile.mp4");
-        videoSrcRef.current = "/video/hero-cat-mobile.mp4";
-      }, 1000);
-    } else {
-      setVideoSrc("/video/hero-cat.mp4");
-      videoSrcRef.current = "/video/hero-cat.mp4";
-    }
-
     const onScroll = () => {
-      if (isMobile && !videoSrcRef.current) {
-        videoSrcRef.current = "/video/hero-cat-mobile.mp4";
-        setVideoSrc("/video/hero-cat-mobile.mp4");
-      }
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(update);
     };
@@ -216,7 +204,6 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
     window.addEventListener("resize", onResize, { passive: true });
 
     return () => {
-      if (mobileTimer) clearTimeout(mobileTimer);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(rafId);
@@ -246,30 +233,31 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
           className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none z-0"
         />
 
-        {/* Wideo — widoczne od razu (plakat natychmiast, wideo po buforowaniu) */}
+        {/* Wideo — widoczne od razu (plakat natychmiast, wideo ładuje się z natywnego źródła) */}
         <video
           ref={videoRef}
-          src={videoSrc}
           poster="/video/hero-poster.webp"
           autoPlay
           muted
           loop
           playsInline
-          preload="none"
+          preload="auto"
           controlsList="nodownload nofullscreen noremoteplayback"
           disablePictureInPicture
           disableRemotePlayback
           onContextMenu={(e) => e.preventDefault()}
-          className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none transition-opacity duration-500 z-0"
+          className="absolute inset-0 w-full h-full object-cover object-[60%_center] pointer-events-none select-none z-0"
           style={{
             opacity: 1,
-            transform: "scale(1)",
-            willChange: "opacity, transform",
+            transform: "translate3d(0, 0, 0)",
           }}
-        />
+        >
+          <source src="/video/hero-cat-mobile.mp4" media="(max-width: 1023px)" type="video/mp4" />
+          <source src="/video/hero-cat.mp4" type="video/mp4" />
+        </video>
 
         {/* Ciepły, złocisty odcień filmowy bez obciążania procesora GPU filtrami */}
-        <div className="absolute inset-0 bg-[#3a200a]/25 mix-blend-color pointer-events-none z-10" />
+        <div className="absolute inset-0 bg-amber-950/20 pointer-events-none z-10" />
         <div className="absolute inset-0 bg-black/35 pointer-events-none z-10" />
 
         {/* Dodatkowe przyciemnienie na scroll */}
@@ -322,14 +310,14 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
             </div>
 
             {/* Subtelny certyfikat */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/20 bg-white/10 backdrop-blur-md mb-4 shadow-sm">
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-white/20 bg-black/40 mb-4 shadow-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-[10px] sm:text-xs font-ui uppercase tracking-[0.35em] text-white/80 font-semibold">
                 FIFe · FPL · WROCŁAW
               </span>
             </div>
 
-            {/* Wielki tytuł Apple style — animowany litera po literze */}
+            {/* Wielki tytuł Apple style — animowany nałożony na film */}
             <h1
               className="font-heading font-light text-white leading-[0.92] tracking-tight mb-3 select-none"
               style={{ fontSize: "clamp(3rem, 7.5vw, 6.8rem)" }}
@@ -340,19 +328,19 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
                   <span
                     key={`k-${i}`}
                     className="apple-char"
-                    style={{ animationDelay: `${0.15 + i * 0.06}s` }}
+                    style={{ animationDelay: `${0.25 + i * 0.04}s` }}
                   >
                     {ch}
                   </span>
                 ))}
               </span>
               <span className="inline-block w-[0.28em]">&nbsp;</span>
-              <span className="inline-block whitespace-nowrap font-semibold italic text-amber-200 drop-shadow-[0_2px_12px_rgba(245,158,11,0.25)]">
+              <span className="inline-block whitespace-nowrap font-semibold italic text-amber-200">
                 {"Przyjaciel".split("").map((ch, i) => (
                   <span
                     key={`p-${i}`}
                     className="apple-char"
-                    style={{ animationDelay: `${0.45 + i * 0.05}s` }}
+                    style={{ animationDelay: `${0.45 + i * 0.035}s` }}
                   >
                     {ch}
                   </span>
@@ -379,16 +367,18 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
 
-              <button
-                onClick={onOpenReservation}
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-[#f5f5f7] font-ui text-[13px] font-medium tracking-tight border border-white/15 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer backdrop-blur-md"
+              <a
+                href={REAL_MESSENGER_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-[#f5f5f7] font-ui text-[13px] font-medium tracking-tight border border-white/15 transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               >
                 <span>{lang === "PL" ? "Zarezerwuj kociaka" : "Reserve kitten"}</span>
-              </button>
+              </a>
 
               <a
                 href={`tel:${REAL_PHONE_RAW}`}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-[#f5f5f7]/80 hover:text-white font-ui text-[13px] font-normal border border-white/[0.1] transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] text-[#f5f5f7]/80 hover:text-white font-ui text-[13px] font-normal border border-white/[0.1] transition-all cursor-pointer"
               >
                 <Phone className="w-3.5 h-3.5 text-[#2997ff]" />
                 <span>{REAL_PHONE}</span>
@@ -414,7 +404,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={headline1Ref}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20 pointer-events-none"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -446,7 +436,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={headline2Ref}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20 pointer-events-none"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -474,7 +464,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={headline3Ref}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20 pointer-events-none"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -497,7 +487,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
         {/* ============================================================ */}
         <div
           ref={ctaRef}
-          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20"
+          className="absolute inset-0 flex flex-col justify-center px-8 sm:px-16 md:px-24 z-20 pointer-events-none"
           style={{ opacity: 0, transform: "translateY(60px)", willChange: "opacity, transform" }}
         >
           <span className="text-[10px] font-ui uppercase tracking-[0.4em] text-white/35 mb-5 block">
@@ -520,7 +510,7 @@ export default function HeroSection({ lang, onOpenReservation }: HeroSectionProp
             )}
           </h2>
 
-          <div className="flex flex-wrap items-center gap-3.5">
+          <div className="flex flex-wrap items-center gap-3.5 pointer-events-auto">
             <Link
               href="/dostepne-kociaki"
               className="group inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white text-black text-[13px] font-medium tracking-tight hover:bg-[#f5f5f7] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 shadow-[0_4px_24px_rgba(255,255,255,0.2)] cursor-pointer"

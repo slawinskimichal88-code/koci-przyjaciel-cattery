@@ -83,24 +83,24 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
   const current = ANCESTORS.find((a) => a.id === selectedId) || ANCESTORS[0];
 
   return (
-    <section id="rodowod" className="bg-[#FAF9F6] text-zinc-900 overflow-hidden border-b border-zinc-200/80">
+    <section id="rodowod" className="bg-black text-[#f5f5f7] overflow-hidden border-b border-white/[0.08] scroll-mt-24">
       
       {/* ── Intro ───────────────────────────────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-20 pb-12 reveal">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-600/20 text-amber-800 text-[11px] font-mono uppercase tracking-[0.25em] font-semibold mb-6">
-          <Award className="w-3.5 h-3.5 text-amber-700" />
-          <span>{lang === "PL" ? "Drzewo Genealogiczne · FIFe" : "FIFe Pedigree & Bloodlines"}</span>
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pt-16 pb-12 reveal">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.08] border border-white/[0.12] text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] font-medium mb-6">
+          <Award className="w-3.5 h-3.5 text-amber-400" />
+          <span className="text-[#f5f5f7]">{lang === "PL" ? "Drzewo Genealogiczne · FIFe" : "FIFe Pedigree & Bloodlines"}</span>
         </div>
         <h2
-          className="font-heading font-light text-zinc-950 leading-[0.92] tracking-tight"
+          className="font-heading font-light text-[#f5f5f7] leading-[0.95] tracking-tight mb-4"
           style={{ fontSize: "clamp(2.6rem, 6vw, 5.5rem)" }}
         >
           Czyste linie.<br />
-          <span className="font-semibold italic text-zinc-900">
+          <span className="font-semibold italic text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-white to-zinc-300">
             {lang === "PL" ? "Pokolenia championów." : "Generations of champions."}
           </span>
         </h2>
-        <p className="mt-6 text-base sm:text-lg font-body text-zinc-600 max-w-2xl leading-relaxed">
+        <p className="mt-4 text-base sm:text-lg font-body text-[#86868b] max-w-2xl leading-relaxed font-light">
           {lang === "PL"
             ? "Prawdziwy rodowód FPL/FIFe to pewność charakteru, wielkości i zdrowia. Brak przypadkowych kryć, czyste linie genetyczne i przodkowie z najwyższymi tytułami światowymi."
             : "An authentic FPL/FIFe pedigree certifies temperament, majestic stature, and verified health. Zero undocumented crossings and generations of Supreme and World Champions."}
@@ -113,7 +113,7 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
           
           {/* Lewo: Drzewo / Lista przodków */}
           <div className="lg:col-span-6 space-y-3">
-            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-zinc-500 mb-4 font-bold">
+            <p className="text-[11px] font-mono uppercase tracking-[0.25em] text-[#86868b] mb-4 font-medium">
               {lang === "PL" ? "Wybierz przodka, aby sprawdzić metrykę:" : "Select an ancestor to view pedigree sheet:"}
             </p>
 
@@ -123,14 +123,14 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
                 <button
                   key={item.id}
                   onClick={() => setSelectedId(item.id)}
-                  className={`w-full text-left p-4 sm:p-5 border transition-all duration-300 rounded-xl cursor-pointer flex items-center justify-between group shadow-sm ${
+                  className={`w-full text-left p-4 sm:p-5 border transition-all duration-300 rounded-[20px] cursor-pointer flex items-center justify-between group shadow-sm ${
                     isSelected
-                      ? "bg-zinc-900 text-white border-zinc-900 shadow-md ring-2 ring-zinc-900/10"
-                      : "bg-white text-zinc-800 border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50"
+                      ? "bg-white text-black border-white shadow-lg ring-2 ring-white/40"
+                      : "bg-[#161617] text-[#f5f5f7] border-white/[0.08] hover:border-white/20 hover:bg-[#1d1d1f]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
-                    <div className="relative w-12 h-12 rounded-full overflow-hidden border border-zinc-200 shrink-0">
+                    <div className="relative w-12 h-12 rounded-full overflow-hidden border border-white/20 shrink-0">
                       <Image
                         src={item.image}
                         alt={item.name}
@@ -139,18 +139,18 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
                       />
                     </div>
                     <div>
-                      <span className={`text-[10px] font-mono uppercase tracking-wider block font-bold ${
-                        isSelected ? "text-amber-400" : "text-amber-700"
+                      <span className={`text-[10px] font-mono uppercase tracking-wider block font-semibold ${
+                        isSelected ? "text-amber-600" : "text-amber-400"
                       }`}>
                         {item.role[lang]} · Gen {item.generation}
                       </span>
                       <h4 className={`text-base sm:text-lg font-heading font-medium leading-snug ${
-                        isSelected ? "text-white font-semibold" : "text-zinc-900"
+                        isSelected ? "text-black font-semibold" : "text-[#f5f5f7]"
                       }`}>
                         {item.name}
                       </h4>
                       <p className={`text-xs font-body ${
-                        isSelected ? "text-zinc-300" : "text-zinc-500"
+                        isSelected ? "text-zinc-600" : "text-[#86868b]"
                       }`}>
                         {item.title}
                       </p>
@@ -158,7 +158,7 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
                   </div>
 
                   <ChevronRight className={`w-5 h-5 shrink-0 transition-transform ${
-                    isSelected ? "text-white translate-x-1" : "text-zinc-400 group-hover:translate-x-1 group-hover:text-zinc-700"
+                    isSelected ? "text-black translate-x-1" : "text-[#86868b] group-hover:translate-x-1 group-hover:text-white"
                   }`} />
                 </button>
               );
@@ -166,8 +166,8 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
           </div>
 
           {/* Prawo: Wizytówka przodka / Karta Certyfikatu */}
-          <div className="lg:col-span-6 bg-white border border-zinc-200 p-6 sm:p-8 rounded-2xl shadow-xl">
-            <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-200 mb-6 bg-zinc-100">
+          <div className="lg:col-span-6 bg-[#161617] border border-white/[0.08] p-6 sm:p-8 rounded-[28px] shadow-xl">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-white/[0.08] mb-6 bg-black">
               <Image
                 src={current.image}
                 alt={current.name}
@@ -176,7 +176,7 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
               <div className="absolute top-4 left-4">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900/85 border border-white/20 text-[10px] font-ui uppercase tracking-widest text-white backdrop-blur-md">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/80 border border-white/20 text-[10px] font-mono uppercase tracking-widest text-white backdrop-blur-md">
                   <Award className="w-3 h-3 text-amber-400" />
                   <span>{current.title}</span>
                 </span>
@@ -185,46 +185,46 @@ export default function PedigreeSection({ lang }: PedigreeSectionProps) {
 
             <div className="space-y-4">
               <div>
-                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-700 font-bold block mb-1">
+                <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-amber-400 font-semibold block mb-1">
                   {current.role[lang]}
                 </span>
-                <h3 className="text-2xl sm:text-3xl font-heading font-normal text-zinc-950">
+                <h3 className="text-2xl sm:text-3xl font-heading font-medium text-[#f5f5f7]">
                   {current.name}
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-zinc-200 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4 border-t border-white/[0.08] text-sm">
                 <div>
-                  <p className="text-[11px] font-ui uppercase tracking-wider text-zinc-500 mb-0.5 font-semibold">
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-[#86868b] mb-0.5 font-medium">
                     {lang === "PL" ? "Kod EMS (Umaszczenie)" : "EMS Code (Coat)"}
                   </p>
-                  <p className="font-mono text-zinc-900 text-xs font-semibold">{current.ems}</p>
+                  <p className="font-mono text-[#f5f5f7] text-xs font-semibold">{current.ems}</p>
                 </div>
                 {current.weight && (
                   <div>
-                    <p className="text-[11px] font-ui uppercase tracking-wider text-zinc-500 mb-0.5 font-semibold">
+                    <p className="text-[11px] font-mono uppercase tracking-wider text-[#86868b] mb-0.5 font-medium">
                       {lang === "PL" ? "Masa ciała" : "Weight"}
                     </p>
-                    <p className="font-heading text-lg font-light text-zinc-900">{current.weight}</p>
+                    <p className="font-heading text-lg font-light text-[#f5f5f7]">{current.weight}</p>
                   </div>
                 )}
                 <div className="sm:col-span-2">
-                  <p className="text-[11px] font-ui uppercase tracking-wider text-zinc-500 mb-0.5 font-semibold">
+                  <p className="text-[11px] font-mono uppercase tracking-wider text-[#86868b] mb-0.5 font-medium">
                     {lang === "PL" ? "Profil Kardiologiczny & DNA" : "Cardiology & DNA Panel"}
                   </p>
-                  <div className="flex items-center gap-2 text-xs font-ui text-emerald-700 font-semibold mt-1">
+                  <div className="flex items-center gap-2 text-xs font-ui text-emerald-400 font-semibold mt-1">
                     <CheckCircle2 className="w-4 h-4 shrink-0" />
                     <span>{current.hcm}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="p-4 bg-zinc-50 border border-zinc-200 rounded-xl mt-6">
-                <div className="flex items-center gap-2 text-xs font-ui uppercase tracking-widest text-zinc-900 font-bold mb-1">
-                  <ShieldCheck className="w-4 h-4 text-amber-600" />
+              <div className="p-4 bg-white/[0.04] border border-white/[0.08] rounded-2xl mt-6">
+                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#f5f5f7] font-semibold mb-1">
+                  <ShieldCheck className="w-4 h-4 text-amber-400" />
                   <span>{lang === "PL" ? "Standard Felis Polonia (FPL / FIFe)" : "Felis Polonia Standard (FPL / FIFe)"}</span>
                 </div>
-                <p className="text-xs text-zinc-600 font-body leading-relaxed">
+                <p className="text-xs text-[#86868b] font-body leading-relaxed font-light">
                   {lang === "PL"
                     ? "Wszystkie kojarzenia w hodowli Koci Przyjaciel są planowane z wyprzedzeniem pod kątem zachowania unikatowego typu rasy oraz zerowego współczynnika pokrewieństwa."
                     : "All matings at Koci Przyjaciel are planned with mathematical care to ensure breed standard perfection and complete genetic diversity."}

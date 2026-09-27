@@ -13,6 +13,7 @@ import FaqSection from "@/components/sections/FaqSection";
 import CostCalculator from "@/components/calculator/CostCalculator";
 import ReservationModal from "@/components/ui/ReservationModal";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import { REAL_MESSENGER_URL } from "@/data/realCatsData";
 import {
   BookOpen,
   Scale,
@@ -34,7 +35,13 @@ function KnowledgeBaseContent() {
   const searchParams = useSearchParams();
   const requestedTab = searchParams.get("tab") as TabKey | null;
 
-  const [activeTab, setActiveTab] = useState<TabKey>("kalkulator");
+  const handleOpenReservation = () => {
+    if (typeof window !== "undefined") {
+      window.open(REAL_MESSENGER_URL, "_blank");
+    }
+  };
+
+  const [activeTab, setActiveTab] = useState<TabKey>("all");
 
   useEffect(() => {
     if (requestedTab && ["kalkulator", "wzorzec", "skala", "zdrowie", "rodowod", "faq", "all"].includes(requestedTab)) {
@@ -44,10 +51,10 @@ function KnowledgeBaseContent() {
 
   const TABS = [
     {
-      id: "kalkulator" as TabKey,
-      icon: Calculator,
-      label: { PL: "Kalkulator Kosztów & Wyprawka", EN: "Cost Calculator" },
-      desc: { PL: "Interaktywny symulator miesięcznych i jednorazowych wydatków na Maine Coona", EN: "Interactive expense & starter kit simulator" },
+      id: "all" as TabKey,
+      icon: Layers,
+      label: { PL: "Wszystkie działy", EN: "All Topics" },
+      desc: { PL: "Pełne, kompletne kompendium felinologiczne hodowli", EN: "Full cattery felinology compendium on one page" },
     },
     {
       id: "wzorzec" as TabKey,
@@ -74,16 +81,16 @@ function KnowledgeBaseContent() {
       desc: { PL: "5 pokoleń czystych linii hodowlanych, wolnych od wad", EN: "5-generation certified clean bloodlines" },
     },
     {
+      id: "kalkulator" as TabKey,
+      icon: Calculator,
+      label: { PL: "Kalkulator Kosztów & Wyprawka", EN: "Cost Calculator" },
+      desc: { PL: "Interaktywny symulator miesięcznych i jednorazowych wydatków na Maine Coona", EN: "Interactive expense & starter kit simulator" },
+    },
+    {
       id: "faq" as TabKey,
       icon: HelpCircle,
       label: { PL: "FAQ & Poradnik", EN: "FAQ Guide" },
       desc: { PL: "Kompendium najczęstszych pytań i odpowiedzi przed adopcją", EN: "Answers to the most frequent questions before adoption" },
-    },
-    {
-      id: "all" as TabKey,
-      icon: Layers,
-      label: { PL: "Wszystkie działy", EN: "All Topics" },
-      desc: { PL: "Pełne kompendium felinologiczne hodowli na jednej stronie", EN: "Full cattery felinology compendium on one page" },
     },
   ];
 
@@ -94,7 +101,7 @@ function KnowledgeBaseContent() {
       <Navbar
         lang={lang}
         setLang={setLang}
-        onOpenReservation={() => setIsReservationOpen(true)}
+        onOpenReservation={() => handleOpenReservation()}
       />
 
       <main className="pt-24 sm:pt-32">
@@ -162,41 +169,41 @@ function KnowledgeBaseContent() {
         {/* ── SEKCJE DEDYKOWANE WYBRANYM PODZAKŁADKOM ─────────────────── */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
-          {/* 1. Kalkulator Kosztów & Wyprawka */}
-          {(activeTab === "all" || activeTab === "kalkulator") && (
-            <section id="kalkulator" className="py-6 transition-all duration-300 scroll-mt-24">
-              <CostCalculator
-                lang={lang}
-                onOpenReservation={() => setIsReservationOpen(true)}
-              />
-            </section>
-          )}
-
-          {/* 2. Wzorzec rasy i anatomia */}
+          {/* 1. Wzorzec rasy i anatomia */}
           {(activeTab === "all" || activeTab === "wzorzec") && (
             <section id="wzorzec" className="py-6 transition-all duration-300 scroll-mt-24">
               <BreedSection lang={lang} />
             </section>
           )}
 
-          {/* 3. Interaktywna skala i porównanie wymiarów (zawsze DARK THEME dla spójności czerni i bieli!) */}
+          {/* 2. Interaktywna skala i porównanie wymiarów */}
           {(activeTab === "all" || activeTab === "skala") && (
             <section id="skala" className="py-6 transition-all duration-300 scroll-mt-24">
               <ScaleComparisonSection lang={lang} theme="dark" />
             </section>
           )}
 
-          {/* 4. Zdrowie, badania serca HCM i genetyka */}
+          {/* 3. Zdrowie, badania serca HCM i genetyka */}
           {(activeTab === "all" || activeTab === "zdrowie") && (
             <section id="zdrowie" className="py-6 transition-all duration-300 scroll-mt-24">
               <HealthSection lang={lang} />
             </section>
           )}
 
-          {/* 5. Rodowód i 5 pokoleń championów */}
+          {/* 4. Rodowód i 5 pokoleń championów */}
           {(activeTab === "all" || activeTab === "rodowod") && (
             <section id="rodowod" className="py-6 transition-all duration-300 scroll-mt-24">
               <PedigreeSection lang={lang} />
+            </section>
+          )}
+
+          {/* 5. Kalkulator Kosztów & Wyprawka */}
+          {(activeTab === "all" || activeTab === "kalkulator") && (
+            <section id="kalkulator" className="py-6 transition-all duration-300 scroll-mt-24">
+              <CostCalculator
+                lang={lang}
+                onOpenReservation={() => handleOpenReservation()}
+              />
             </section>
           )}
 
@@ -205,7 +212,7 @@ function KnowledgeBaseContent() {
             <section id="faq" className="py-6 transition-all duration-300 scroll-mt-24">
               <FaqSection
                 lang={lang}
-                onOpenReservation={() => setIsReservationOpen(true)}
+                onOpenReservation={() => handleOpenReservation()}
               />
             </section>
           )}
