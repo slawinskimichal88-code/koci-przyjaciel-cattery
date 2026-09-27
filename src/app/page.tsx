@@ -82,7 +82,7 @@ export default function Home() {
         />
 
         {/* ⑤ BAZA WIEDZY #1 (PORÓWNANIE KOTY VS PSY): Skala 1:1 z psem */}
-        <ScaleComparisonSection lang={lang} compact={false} />
+        <ScaleComparisonSection lang={lang} compact={true} />
 
         {/* ⑧ BAZA WIEDZY #2 (KOMPENDIUM & SYMULATOR): Kalkulator kosztów i badania genetyczne */}
         <KnowledgeBaseTeaser lang={lang} />

@@ -108,19 +108,19 @@ export default function BreedSection({ lang }: BreedSectionProps) {
       </div>
 
       {/* ── Cechy rasy — Apple Clean Cards Grid ────────────────────── */}
-      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-24">
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-16">
         <div className="border-t border-white/[0.08] pt-10">
           <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-[#86868b] font-medium mb-8">
             {lang === "PL" ? "CHARAKTER I PREDYSPOZYCJE" : "TEMPERAMENT & TRAITS"}
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { pl: "Kocha ludzi jak pies", en: "Loves people like a dog", desc: "Towarzyszy domownikom w każdym pokoju." },
-              { pl: "Świetny z dziećmi", en: "Great with children", desc: "Wysoka cierpliwość i brak agresji." },
-              { pl: "Tolerancyjny wobec psów", en: "Dog-friendly", desc: "Szybko odnajduje się w stadzie ze zwierzętami." },
-              { pl: "Bardzo bystry i mądry", en: "Highly intelligent", desc: "Błyskawicznie uczy się komend i rutyn." },
+              { pl: "Kocha ludzi jak pies", en: "Loves people like a dog", desc: "Towarzyszy domownikom w każdym pokoju, witając w drzwiach." },
+              { pl: "Świetny z dziećmi", en: "Great with children", desc: "Wysoka cierpliwość, delikatność i zupełny brak agresji." },
+              { pl: "Tolerancyjny wobec psów", en: "Dog-friendly", desc: "Szybko odnajduje się w stadzie z psami i innymi kotami." },
+              { pl: "Bardzo bystry i mądry", en: "Highly intelligent", desc: "Błyskawicznie uczy się komend, rutyn i reaguje na imię." },
               { pl: "Niezwykła łagodność", en: "Gentle nature", desc: "Zasłużone miano łagodnego olbrzyma (Gentle Giant)." },
-              { pl: "Przynosi zabawki", en: "Fetches toys", desc: "Aportuje ulubione piłeczki i wędki." },
+              { pl: "Przynosi zabawki", en: "Fetches toys", desc: "Samorzutnie aportuje ulubione piłeczki i wędki jak retriever." },
             ].map((trait, i) => (
               <div
                 key={i}
@@ -137,6 +137,65 @@ export default function BreedSection({ lang }: BreedSectionProps) {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Oficjalny Standard Anatomiczny FIFe ────────────────────── */}
+      <div className="max-w-5xl mx-auto px-6 sm:px-10 lg:px-16 pb-24">
+        <div className="border-t border-white/[0.08] pt-10">
+          <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-[#86868b] font-medium mb-8">
+            {lang === "PL" ? "OFICJALNY STANDARD ANATOMICZNY FIFE (MCO)" : "OFFICIAL FIFE ANATOMY STANDARD (MCO)"}
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-6 rounded-[24px] bg-[#161617] border border-white/[0.08]">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-amber-300 block mb-1">
+                Głowa & Profil
+              </span>
+              <h4 className="text-base font-heading font-medium text-[#f5f5f7] mb-2">
+                Kanciasta kufa i mocna broda
+              </h4>
+              <p className="text-xs text-[#86868b] font-body font-light leading-relaxed">
+                Średniej wielkości głowa o kanciastych zarysach. Wyraźnie zaznaczone poduszeczki z wąsami (tzw. kwadratowa kufa). Profil z delikatnym, wklęsłym zagłębieniem i mocna, pionowa broda tworząca prostą linię z górną wargą i nosem.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-[24px] bg-[#161617] border border-white/[0.08]">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-amber-300 block mb-1">
+                Uszy & Pędzle
+              </span>
+              <h4 className="text-base font-heading font-medium text-[#f5f5f7] mb-2">
+                Rysiowe pędzelki do 12 cm
+              </h4>
+              <p className="text-xs text-[#86868b] font-body font-light leading-relaxed">
+                Duże, szerokie u nasady, wysoko osadzone na czubku głowy z lekkim odchyleniem na zewnątrz. Zakończone charakterystycznymi, obfitymi pędzlami rysiowymi (lynx tips) oraz gęstymi kępkami futra wewnątrz małżowiny.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-[24px] bg-[#161617] border border-white/[0.08]">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-amber-300 block mb-1">
+                Tułów & Kościec
+              </span>
+              <h4 className="text-base font-heading font-medium text-[#f5f5f7] mb-2">
+                Masywny prostokąt i mocne łapy
+              </h4>
+              <p className="text-xs text-[#86868b] font-body font-light leading-relaxed">
+                Długi, muskularny tułów z szeroką klatką piersiową dający wrażenie potęgi i solidności. Kościec bardzo ciężki i mocny. Łapy duże, okrągłe z gęstymi kępkami futra między palcami (tzw. rakiety śnieżne), dające stabilność.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-[24px] bg-[#161617] border border-white/[0.08]">
+              <span className="text-[10px] font-mono uppercase tracking-wider text-amber-300 block mb-1">
+                Szata & Ogon
+              </span>
+              <h4 className="text-base font-heading font-medium text-[#f5f5f7] mb-2">
+                Jedwabna kryza i ogon pióropusz
+              </h4>
+              <p className="text-xs text-[#86868b] font-body font-light leading-relaxed">
+                Półdługa, lejąca szata dostosowana do każdych warunków pogodowych. Krótsza na łopatkach, stopniowo wydłużająca się ku tyłowi, z okazałą kryzą na szyi i portkami na udach. Ogon sięgający co najmniej do łopatek, puszysty jak lisia kita.
+              </p>
+            </div>
           </div>
         </div>
       </div>
