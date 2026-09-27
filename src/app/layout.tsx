@@ -23,7 +23,7 @@ const cormorant = Cormorant_Garamond({
 export const metadata: Metadata = {
   metadataBase: new URL("https://kociprzyjaciel.pl"),
   title: {
-    default: "Hodowla Kotów Maine Coon Wrocław | Koci Przyjaciel *PL",
+    default: "Koci Przyjaciel *PL | Domowa Hodowla Kotów Maine Coon Wrocław (FIFe / FPL)",
     template: "%s | Koci Przyjaciel *PL",
   },
   description:

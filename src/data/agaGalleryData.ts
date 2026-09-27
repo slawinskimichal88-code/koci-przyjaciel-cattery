@@ -6,6 +6,7 @@ export interface GalleryPhotoItem {
   categoryLabel: string;
   title: string;
   caption: string;
+  altText?: string;
   bentoSpan?: string;
   editorialDesc?: string;
   badge?: string;
@@ -29,6 +30,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🌿 Wybieg i Ogród",
     "title": "Całoroczny Wybieg i Ogród",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Wybieg i Ogród)",
+    "altText": "Bezpieczna woliera ogrodowa dla kotów Maine Coon w domowej hodowli Koci Przyjaciel *PL Wrocław",
     "bentoSpan": "col-span-2 row-span-2 sm:col-span-2 sm:row-span-2 lg:col-span-2 lg:row-span-2",
     "editorialDesc": "Bezpieczna, całoroczna woliera ogrodowa z bezpośrednim przejściem z salonu.",
     "badge": "🌿 WOLIERA 365 DNI"
@@ -40,6 +42,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🦁 Kocury Hodowlane",
     "title": "Majestatyczne Kocury",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Kocur Hodowlany)",
+    "altText": "Potężny kocur reproduktor Maine Coon o wadze 11 kg w hodowli Koci Przyjaciel *PL Wrocław",
     "bentoSpan": "col-span-1 row-span-2 sm:col-span-1 sm:row-span-2 lg:col-span-1 lg:row-span-2",
     "editorialDesc": "Potężne reproduktory o wadze dochodzącej do 12 kg i łagodnym, ufnym sercu.",
     "badge": "🦁 POTĘŻNY SAMIEC"
@@ -51,6 +54,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🍼 Młode i Maluchy",
     "title": "Maluchy z Miotów 2026",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Kocię Maine Coon)",
+    "altText": "Kociak Maine Coon z miotu 2026 w domowej hodowli Koci Przyjaciel *PL Wrocław",
     "bentoSpan": "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1",
     "editorialDesc": "Wychowane na kolanach i przyzwyczajone do obecności dzieci od pierwszych dni.",
     "badge": "🍼 MIOTY 2026"
@@ -62,6 +66,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🌸 Matki Hodowlane",
     "title": "Czułe Matki Hodowlane",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Kotka Hodowlana)",
+    "altText": "Kotka hodowlana Maine Coon z rodowodem FIFe i badaniem Echo Doppler HCM Wrocław",
     "bentoSpan": "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1",
     "editorialDesc": "Zdrowe kotki z pełnym profilem DNA Laboklin i badaniem Echo Doppler HCM.",
     "badge": "🌸 NASZE KRÓLOWE"
@@ -73,6 +78,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🏡 Życie w Domu",
     "title": "Życie w Sercu Domu",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Życie w Domu)",
+    "altText": "Kot Maine Coon odpoczywający na kanapie w salonie — bezklatkowa hodowla Koci Przyjaciel *PL",
     "bentoSpan": "col-span-2 row-span-1 sm:col-span-2 sm:row-span-1 lg:col-span-2 lg:row-span-1",
     "editorialDesc": "Koty śpią w naszych łóżkach i spędzają całe dnie na salonowych kanapach.",
     "badge": "🏡 BEZ KLATEK"
@@ -84,6 +90,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🍼 Młode i Maluchy",
     "title": "Ciekawość Świata",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Kocię Maine Coon)",
+    "altText": "Kociak Maine Coon czarny klasycznie pręgowany z rysiowymi pędzlami uszu Wrocław",
     "bentoSpan": "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1",
     "editorialDesc": "Rysie pędzle na uszach i wspaniała, ufna osobowość małego olbrzyma.",
     "badge": "🐾 SREBRZYSTY KLASYK"
@@ -95,6 +102,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🏡 Życie w Domu",
     "title": "Więź z Dziećmi i Psem",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Życie w Domu)",
+    "altText": "Kot Maine Coon socjalizowany z dziećmi i psem w hodowli Koci Przyjaciel *PL Wrocław",
     "bentoSpan": "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1",
     "editorialDesc": "Zero lęku, 100% zaufania. Pełna socjalizacja z domowymi zwierzętami i hałasem.",
     "badge": "❤️ SOCJALIZACJA"
@@ -106,6 +114,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🦁 Kocury Hodowlane",
     "title": "Dostojne Spojrzenie",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Kocur Hodowlany)",
+    "altText": "Duży kocur Maine Coon z mocną kufą i bursztynowymi oczami — reproduktor Wrocław",
     "bentoSpan": "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1",
     "editorialDesc": "Głęboki profil, mocna broda i bursztynowe, hipnotyzujące spojrzenie.",
     "badge": "👑 PROFIL WZORCA"
@@ -117,6 +126,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🎁 Wyprawka",
     "title": "Luksusowa Wyprawka",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Luksusowa Wyprawka)",
+    "altText": "Kompletna luksusowa wyprawka dla kociaka Maine Coon opuszczającego hodowlę Koci Przyjaciel *PL",
     "bentoSpan": "col-span-1 row-span-1 sm:col-span-1 sm:row-span-1 lg:col-span-1 lg:row-span-1",
     "editorialDesc": "Kompletna karma, legowisko z zapachem mamy, zabawki i dokumenty rodowodowe.",
     "badge": "🎁 NA START"
@@ -128,6 +138,7 @@ export const HOMEPAGE_SHOWCASE_PHOTOS: GalleryPhotoItem[] = [
     "categoryLabel": "🌿 Wybieg i Ogród",
     "title": "Zadaszona Strefa Relaksu",
     "caption": "Autentyczne zdjęcie z życia hodowli Koci Przyjaciel *PL (Wybieg i Ogród)",
+    "altText": "Zadaszony wybieg dla kotów Maine Coon w ogrodzie hodowli Koci Przyjaciel *PL Wrocław",
     "bentoSpan": "col-span-2 row-span-1 sm:col-span-2 sm:row-span-1 lg:col-span-2 lg:row-span-1",
     "editorialDesc": "Natura, śpiew ptaków i świeże wrocławskie powietrze każdego dnia.",
     "badge": "🌲 PRZESTRZEŃ"

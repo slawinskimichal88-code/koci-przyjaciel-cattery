@@ -8,6 +8,8 @@ export interface BentoImageItem {
   id?: string;
   src: string;
   title?: string;
+  caption?: string;
+  altText?: string;
   categoryLabel?: string;
 }
 
@@ -95,7 +97,11 @@ export default function FluidBentoCell({
             >
               <img
                 src={src}
-                alt={photoObj.title || `Maine Coon slide ${idx}`}
+                alt={
+                  photoObj.altText ||
+                  photoObj.caption ||
+                  `${photoObj.title || "Kot Maine Coon"} — certyfikowana domowa hodowla Koci Przyjaciel *PL Wrocław`
+                }
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 hover:scale-105 pointer-events-none select-none"
                 loading="lazy"
                 decoding="async"

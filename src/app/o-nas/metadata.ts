@@ -1,14 +1,32 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "O nas — Koci Przyjaciel *PL Wrocław",
+  title: "O Naszej Hodowli — 15+ Lat Pasji, Bez Klatek | Maine Coon Koci Przyjaciel *PL",
   description:
-    "Poznaj nas — małą, rodzinną hodowlę kotów Maine Coon z Wrocławia. Od ponad 10 lat wychowujemy kocięta w domu, z dziećmi i psem. Zarejestrowana hodowla FPL/FIFe.",
-  keywords: ["hodowla maine coon wrocław", "koci przyjaciel hodowla", "maine coon rodzinna hodowla", "fpl fife wrocław"],
-  openGraph: {
-    title: "O nas — Hodowla Maine Coon Koci Przyjaciel *PL",
-    description: "Mała, rodzinna hodowla kotów Maine Coon z Wrocławia. Od 10 lat wychowujemy kocięta w domu z miłością.",
-    images: [{ url: "/images/cats/cat_01.webp", width: 1200, height: 630, alt: "Hodowla Maine Coon Koci Przyjaciel Wrocław" }],
+    "Poznaj historię naszej rodzinnej hodowli Koci Przyjaciel *PL we Wrocławiu. Ponad 15 lat doświadczenia, życie kotów bez klatek w salonie, całoroczny wybieg ogrodowy i badania Echo Doppler HCM.",
+  keywords: [
+    "o hodowli maine coon",
+    "domowa hodowla kotów",
+    "maine coon bez klatek",
+    "hodowla kotów wrocław",
+    "koci przyjaciel pl",
+    "certyfikowana hodowla fpl fife",
+  ],
+  alternates: {
+    canonical: "https://kociprzyjaciel.pl/o-nas",
   },
-  alternates: { canonical: "https://kociprzyjaciel.pl/o-nas" },
+  openGraph: {
+    title: "O Naszej Hodowli — 15+ Lat Pasji, Bez Klatek | Maine Coon Koci Przyjaciel *PL",
+    description:
+      "Historia hodowli Koci Przyjaciel *PL. Obejrzyj film, poznaj nasze wartości, wolierę ogrodową i domowe warunki wychowywania kotów.",
+    url: "https://kociprzyjaciel.pl/o-nas",
+    images: [
+      {
+        url: "/images/cats/cat_07.webp",
+        width: 1200,
+        height: 630,
+        alt: "Właścicielka hodowli Koci Przyjaciel *PL z kotem Maine Coon",
+      },
+    ],
+  },
 };

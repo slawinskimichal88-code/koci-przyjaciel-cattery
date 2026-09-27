@@ -1,23 +1,32 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Baza Wiedzy o Maine Coon — Rasa, Zdrowie, Koszty",
+  title: "Baza Wiedzy o Rasie Maine Coon: Zdrowie, Żywienie, Charakter | Koci Przyjaciel *PL",
   description:
-    "Wszystko o kocie Maine Coon w jednym miejscu — jak duże wyrastają, co jedzą, ile kosztuje utrzymanie, jakie badania powinny mieć. Przewodnik dla przyszłych właścicieli.",
+    "Kompendium wiedzy o rasie Maine Coon: badania serca Echo Doppler HCM, testy genetyczne SMA/PKD, interaktywne porównanie z psem, oficjalny wzorzec FIFe oraz kalkulator kosztów utrzymania.",
   keywords: [
-    "maine coon rasa",
-    "maine coon wielkość",
-    "maine coon ile kosztuje",
-    "maine coon żywienie",
-    "maine coon zdrowie",
-    "maine coon badania",
-    "jak duży maine coon",
-    "maine coon dla dzieci",
+    "baza wiedzy maine coon",
+    "wzorzec rasy maine coon",
+    "zdrowie maine coon hcm",
+    "badania genetyczne kotów",
+    "kalkulator kosztów maine coon",
+    "maine coon vs pies",
   ],
-  openGraph: {
-    title: "Baza Wiedzy o Maine Coon — Koci Przyjaciel *PL",
-    description: "Przewodnik dla przyszłych właścicieli Maine Coon. Rasa, zdrowie, żywienie, koszty — wszystko wyjaśnione po ludzku.",
-    images: [{ url: "/images/cats/cat_03.webp", width: 1200, height: 630, alt: "Maine Coon — baza wiedzy o rasie" }],
+  alternates: {
+    canonical: "https://kociprzyjaciel.pl/baza-wiedzy",
   },
-  alternates: { canonical: "https://kociprzyjaciel.pl/baza-wiedzy" },
+  openGraph: {
+    title: "Baza Wiedzy o Rasie Maine Coon: Zdrowie, Żywienie, Charakter | Koci Przyjaciel *PL",
+    description:
+      "Oficjalne kompendium hodowlane. Sprawdź wzorzec rasy, badania genetyczne, kalkulator kosztów i porównanie skali 1:1 z psem.",
+    url: "https://kociprzyjaciel.pl/baza-wiedzy",
+    images: [
+      {
+        url: "/images/cats/cat_23.webp",
+        width: 1200,
+        height: 630,
+        alt: "Baza Wiedzy o Maine Coon — Koci Przyjaciel *PL Wrocław",
+      },
+    ],
+  },
 };

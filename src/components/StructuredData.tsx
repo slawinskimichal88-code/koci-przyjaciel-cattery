@@ -50,7 +50,49 @@ export default function StructuredData() {
     },
   };
 
-  // ── 2. FAQPage — pomaga Google i AI pokazać odpowiedzi bezpośrednio ───
+  // ── 2. VideoObject — przejęcie sekcji Wideo w Google z klipami (Key Moments) ─
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: "Historia hodowli Koci Przyjaciel *PL — Domowa hodowla Maine Coon Wrocław",
+    description:
+      "Poznaj kulisy bezklatkowej hodowli kotów Maine Coon Koci Przyjaciel *PL we Wrocławiu. Pełnometrażowy wywiad z założycielką o pasji, genetyce, badaniach Echo Doppler HCM i codziennym życiu z kotami na wybiegu.",
+    thumbnailUrl: [
+      "https://kociprzyjaciel.pl/video/breeder-full-poster.webp",
+      "https://kociprzyjaciel.pl/video/breeder-poster.webp",
+      "https://kociprzyjaciel.pl/video/hero-poster.webp",
+    ],
+    uploadDate: "2026-09-27T12:00:00+02:00",
+    duration: "PT9M00S",
+    contentUrl: "https://kociprzyjaciel.pl/video/breeder-full.mp4",
+    embedUrl: "https://kociprzyjaciel.pl/o-nas#pelny-film",
+    inLanguage: "pl-PL",
+    hasPart: [
+      {
+        "@type": "Clip",
+        name: "Początki hodowli i pierwszy miot",
+        startOffset: 0,
+        endOffset: 120,
+        url: "https://kociprzyjaciel.pl/o-nas?t=0",
+      },
+      {
+        "@type": "Clip",
+        name: "Dlaczego rasa Maine Coon i linie zagraniczne",
+        startOffset: 120,
+        endOffset: 300,
+        url: "https://kociprzyjaciel.pl/o-nas?t=120",
+      },
+      {
+        "@type": "Clip",
+        name: "Życie bez klatek, socjalizacja z dziećmi i wybieg ogrodowy",
+        startOffset: 300,
+        endOffset: 540,
+        url: "https://kociprzyjaciel.pl/o-nas?t=300",
+      },
+    ],
+  };
+
+  // ── 3. FAQPage — pomaga Google i AI pokazać odpowiedzi bezpośrednio ───
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -64,7 +106,7 @@ export default function StructuredData() {
     })),
   };
 
-  // ── 3. BreadcrumbList — pomaga Google wyświetlić ścieżki w wynikach ───
+  // ── 4. BreadcrumbList — pomaga Google wyświetlić ścieżki w wynikach ───
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -78,8 +120,8 @@ export default function StructuredData() {
       {
         "@type": "ListItem",
         position: 2,
-        name: "Kocięta",
-        item: "https://kociprzyjaciel.pl/kocieta",
+        name: "Dostępne Kocięta",
+        item: "https://kociprzyjaciel.pl/dostepne-kociaki",
       },
       {
         "@type": "ListItem",
@@ -90,19 +132,25 @@ export default function StructuredData() {
       {
         "@type": "ListItem",
         position: 4,
+        name: "Galeria",
+        item: "https://kociprzyjaciel.pl/galeria",
+      },
+      {
+        "@type": "ListItem",
+        position: 5,
         name: "Baza Wiedzy o Maine Coon",
         item: "https://kociprzyjaciel.pl/baza-wiedzy",
       },
       {
         "@type": "ListItem",
-        position: 5,
+        position: 6,
         name: "Kontakt",
         item: "https://kociprzyjaciel.pl/kontakt",
       },
     ],
   };
 
-  // ── 4. WebSite z SearchAction — pozwala Google dodać pole wyszukiwania ─
+  // ── 5. WebSite z SearchAction — pozwala Google dodać pole wyszukiwania ─
   const websiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -120,7 +168,7 @@ export default function StructuredData() {
     },
   };
 
-  // ── 5. ItemList kociaków — widoczność w wyszukiwarkach AI ─────────────
+  // ── 6. ItemList kociaków — widoczność w wyszukiwarkach AI ─────────────
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -132,8 +180,8 @@ export default function StructuredData() {
         position: 1,
         item: {
           "@type": "Product",
-          name: "Kocurek Maine Coon — czarny srebrzysty (Arthur)",
-          description: "Kocurek Maine Coon z rodowódem FPL/FIFe. Badania serca i genetyczne zaliczone. Wrocław.",
+          name: "Kocurek Maine Coon — czarny srebrzysty klasycznie pręgowany",
+          description: "Kocurek Maine Coon z rodowodem FPL/FIFe. Badania serca i genetyczne zaliczone. Wrocław.",
           offers: {
             "@type": "Offer",
             price: "4500",
@@ -151,8 +199,8 @@ export default function StructuredData() {
         position: 2,
         item: {
           "@type": "Product",
-          name: "Kotka Maine Coon — ruda pręgowana (Amber)",
-          description: "Kotka Maine Coon z rodowódem FPL/FIFe. Idealna do domu z dziećmi. Wrocław.",
+          name: "Kotka Maine Coon — ruda pręgowana",
+          description: "Kotka Maine Coon z rodowodem FPL/FIFe. Idealna do domu z dziećmi. Wrocław.",
           offers: {
             "@type": "Offer",
             price: "4500",
@@ -173,6 +221,10 @@ export default function StructuredData() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
       />
       <script
         type="application/ld+json"

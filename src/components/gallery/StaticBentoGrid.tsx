@@ -120,7 +120,11 @@ export default function StaticBentoGrid({
           >
             <img
               src={photo.src}
-              alt={photo.title || `Fotografia Maine Coon ${idx + 1}`}
+              alt={
+                photo.altText ||
+                photo.caption ||
+                `${photo.title || "Kot Maine Coon"} — domowa hodowla Koci Przyjaciel *PL Wrocław`
+              }
               loading={idx < 2 ? "eager" : "lazy"}
               decoding="async"
               draggable={false}
