@@ -1,44 +1,29 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://kociprzyjaciel.pl";
+  const lastModified = new Date();
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/dostepne-kociaki`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.95,
-    },
-    {
-      url: `${baseUrl}/kocieta`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/o-nas`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/baza-wiedzy`,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/kontakt`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.85,
-    },
+  const staticRoutes = [
+    { path: "", priority: 1.0, changeFrequency: "weekly" as const },
+    { path: "/dostepne-kociaki", priority: 0.9, changeFrequency: "daily" as const },
+    { path: "/kocieta", priority: 0.9, changeFrequency: "daily" as const },
+    { path: "/o-nas", priority: 0.8, changeFrequency: "monthly" as const },
+    { path: "/galeria", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/baza-wiedzy", priority: 0.8, changeFrequency: "weekly" as const },
+    { path: "/kontakt", priority: 0.7, changeFrequency: "monthly" as const },
   ];
+
+  return staticRoutes.map((route) => ({
+    url: `${baseUrl}${route.path}`,
+    lastModified,
+    changeFrequency: route.changeFrequency,
+    priority: route.priority,
+    alternates: {
+      languages: {
+        pl: `${baseUrl}${route.path}`,
+        en: `${baseUrl}${route.path}?lang=EN`,
+      },
+    },
+  }));
 }
