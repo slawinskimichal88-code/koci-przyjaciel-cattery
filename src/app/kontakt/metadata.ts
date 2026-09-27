@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Kontakt i Rezerwacja Kociąt — Hodowla Maine Coon Wrocław | Koci Przyjaciel *PL",
@@ -12,13 +13,13 @@ export const metadata: Metadata = {
     "odwiedziny hodowli kotów",
   ],
   alternates: {
-    canonical: "https://kociprzyjaciel.pl/kontakt",
+    canonical: `${SITE_URL}/kontakt`,
   },
   openGraph: {
     title: "Kontakt i Rezerwacja Kociąt — Hodowla Maine Coon Wrocław | Koci Przyjaciel *PL",
     description:
       "Bezpośredni kontakt z hodowlą Koci Przyjaciel *PL we Wrocławiu. Porozmawiajmy o rezerwacji wymarzonego kociaka.",
-    url: "https://kociprzyjaciel.pl/kontakt",
+    url: `${SITE_URL}/kontakt`,
     images: [
       {
         url: "/images/cats/cat_01.webp",

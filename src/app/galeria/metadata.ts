@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Galeria Kotów Maine Coon: Kocury, Kotki, Kocięta i Woliera | Koci Przyjaciel *PL",
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
     "hodowla maine coon wrocław",
   ],
   alternates: {
-    canonical: "https://kociprzyjaciel.pl/galeria",
+    canonical: `${SITE_URL}/galeria`,
   },
   openGraph: {
     title: "Galeria Kotów Maine Coon: Kocury, Kotki, Kocięta i Woliera | Koci Przyjaciel *PL",
     description:
       "Archiwum fotograficzne hodowli Koci Przyjaciel *PL. Obejrzyj autentyczne ujęcia naszych kotów, salonu i całorocznej woliery.",
-    url: "https://kociprzyjaciel.pl/galeria",
+    url: `${SITE_URL}/galeria`,
     images: [
       {
         url: "/images/cats/cat_23.webp",

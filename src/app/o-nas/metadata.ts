@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "O Naszej Hodowli — 15+ Lat Pasji, Bez Klatek | Maine Coon Koci Przyjaciel *PL",
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
     "certyfikowana hodowla fpl fife",
   ],
   alternates: {
-    canonical: "https://kociprzyjaciel.pl/o-nas",
+    canonical: `${SITE_URL}/o-nas`,
   },
   openGraph: {
     title: "O Naszej Hodowli — 15+ Lat Pasji, Bez Klatek | Maine Coon Koci Przyjaciel *PL",
     description:
       "Historia hodowli Koci Przyjaciel *PL. Obejrzyj film, poznaj nasze wartości, wolierę ogrodową i domowe warunki wychowywania kotów.",
-    url: "https://kociprzyjaciel.pl/o-nas",
+    url: `${SITE_URL}/o-nas`,
     images: [
       {
         url: "/images/cats/cat_07.webp",

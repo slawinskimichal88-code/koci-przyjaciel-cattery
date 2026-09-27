@@ -20,8 +20,10 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+import { SITE_URL } from "@/lib/siteConfig";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://kociprzyjaciel.pl"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Koci Przyjaciel *PL | Domowa Hodowla Kotów Maine Coon Wrocław (FIFe / FPL)",
     template: "%s | Koci Przyjaciel *PL",
@@ -44,10 +46,10 @@ export const metadata: Metadata = {
   creator: "Koci Przyjaciel *PL",
   publisher: "Koci Przyjaciel *PL",
   alternates: {
-    canonical: "https://kociprzyjaciel.pl",
+    canonical: SITE_URL,
     languages: {
-      "pl-PL": "https://kociprzyjaciel.pl",
-      "en-US": "https://kociprzyjaciel.pl?lang=EN",
+      "pl-PL": SITE_URL,
+      "en-US": `${SITE_URL}?lang=EN`,
     },
   },
   icons: {
@@ -59,7 +61,7 @@ export const metadata: Metadata = {
     title: "Hodowla Maine Coon Wrocław | Koci Przyjaciel *PL",
     description:
       "Domowa hodowla kotów Maine Coon we Wrocławiu. Kocięta wychowywane w rodzinie z dziećmi i psem. Badania serca, genetyczne, rodówód FIFe/FPL. Ponad 26 000 obserwujących na Facebooku.",
-    url: "https://kociprzyjaciel.pl",
+    url: SITE_URL,
     siteName: "Koci Przyjaciel *PL – Hodowla Kotów Maine Coon",
     images: [
       {

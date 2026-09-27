@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://kociprzyjaciel.pl";
+  const baseUrl = SITE_URL;
   const lastModified = new Date();
 
   const staticRoutes = [

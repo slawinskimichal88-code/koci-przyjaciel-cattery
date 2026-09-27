@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Dostępne Kocięta Maine Coon i Planowane Mioty | Hodowla Koci Przyjaciel *PL Wrocław",
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
     "maine coon z rodowodem fife",
   ],
   alternates: {
-    canonical: "https://kociprzyjaciel.pl/dostepne-kociaki",
+    canonical: `${SITE_URL}/dostepne-kociaki`,
   },
   openGraph: {
     title: "Dostępne Kocięta Maine Coon i Planowane Mioty | Koci Przyjaciel *PL",
     description:
       "Zobacz dostępne kocięta i zapowiedzi miotów 2026. Zdrowe, socjalizowane kocięta Maine Coon z certyfikowanej hodowli we Wrocławiu.",
-    url: "https://kociprzyjaciel.pl/dostepne-kociaki",
+    url: `${SITE_URL}/dostepne-kociaki`,
     images: [
       {
         url: "/images/cats/cat_01.webp",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export const metadata: Metadata = {
   title: "Baza Wiedzy o Rasie Maine Coon: Zdrowie, Żywienie, Charakter | Koci Przyjaciel *PL",
@@ -13,13 +14,13 @@ export const metadata: Metadata = {
     "maine coon vs pies",
   ],
   alternates: {
-    canonical: "https://kociprzyjaciel.pl/baza-wiedzy",
+    canonical: `${SITE_URL}/baza-wiedzy`,
   },
   openGraph: {
     title: "Baza Wiedzy o Rasie Maine Coon: Zdrowie, Żywienie, Charakter | Koci Przyjaciel *PL",
     description:
       "Oficjalne kompendium hodowlane. Sprawdź wzorzec rasy, badania genetyczne, kalkulator kosztów i porównanie skali 1:1 z psem.",
-    url: "https://kociprzyjaciel.pl/baza-wiedzy",
+    url: `${SITE_URL}/baza-wiedzy`,
     images: [
       {
         url: "/images/cats/cat_23.webp",

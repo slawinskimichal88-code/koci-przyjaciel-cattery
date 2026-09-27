@@ -1,6 +1,7 @@
 import React from "react";
 import { FAQS } from "@/data/faqs";
 import { REAL_PHONE_RAW, REAL_FACEBOOK_URL } from "@/data/realCatsData";
+import { SITE_URL } from "@/lib/siteConfig";
 
 export default function StructuredData() {
   // ── 1. LocalBusiness — poprawny typ: hodowla kotów, nie sklep ──────────
@@ -12,7 +13,7 @@ export default function StructuredData() {
     additionalType: "https://schema.org/LocalBusiness",
     description:
       "Domowa, certyfikowana hodowla kotów rasy Maine Coon we Wrocławiu. Zarejestrowana w Polskiej Federacji Felinologicznej (FPL) pod auspicjami FIFe. Kocięta wychowywane w rodzinie, z badaniami serca (echo) i genetycznymi.",
-    url: "https://kociprzyjaciel.pl",
+    url: SITE_URL,
     telephone: REAL_PHONE_RAW,
     address: {
       "@type": "PostalAddress",
@@ -58,14 +59,14 @@ export default function StructuredData() {
     description:
       "Poznaj kulisy bezklatkowej hodowli kotów Maine Coon Koci Przyjaciel *PL we Wrocławiu. Pełnometrażowy wywiad z założycielką o pasji, genetyce, badaniach Echo Doppler HCM i codziennym życiu z kotami na wybiegu.",
     thumbnailUrl: [
-      "https://kociprzyjaciel.pl/video/breeder-full-poster.webp",
-      "https://kociprzyjaciel.pl/video/breeder-poster.webp",
-      "https://kociprzyjaciel.pl/video/hero-poster.webp",
+      `${SITE_URL}/video/breeder-full-poster.webp`,
+      `${SITE_URL}/video/breeder-poster.webp`,
+      `${SITE_URL}/video/hero-poster.webp`,
     ],
     uploadDate: "2026-09-27T12:00:00+02:00",
     duration: "PT9M00S",
-    contentUrl: "https://kociprzyjaciel.pl/video/breeder-full.mp4",
-    embedUrl: "https://kociprzyjaciel.pl/o-nas#pelny-film",
+    contentUrl: `${SITE_URL}/video/breeder-full.mp4`,
+    embedUrl: `${SITE_URL}/o-nas#pelny-film`,
     inLanguage: "pl-PL",
     hasPart: [
       {
@@ -73,21 +74,21 @@ export default function StructuredData() {
         name: "Początki hodowli i pierwszy miot",
         startOffset: 0,
         endOffset: 120,
-        url: "https://kociprzyjaciel.pl/o-nas?t=0",
+        url: `${SITE_URL}/o-nas?t=0`,
       },
       {
         "@type": "Clip",
         name: "Dlaczego rasa Maine Coon i linie zagraniczne",
         startOffset: 120,
         endOffset: 300,
-        url: "https://kociprzyjaciel.pl/o-nas?t=120",
+        url: `${SITE_URL}/o-nas?t=120`,
       },
       {
         "@type": "Clip",
         name: "Życie bez klatek, socjalizacja z dziećmi i wybieg ogrodowy",
         startOffset: 300,
         endOffset: 540,
-        url: "https://kociprzyjaciel.pl/o-nas?t=300",
+        url: `${SITE_URL}/o-nas?t=300`,
       },
     ],
   };
@@ -115,37 +116,37 @@ export default function StructuredData() {
         "@type": "ListItem",
         position: 1,
         name: "Strona główna",
-        item: "https://kociprzyjaciel.pl",
+        item: SITE_URL,
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Dostępne Kocięta",
-        item: "https://kociprzyjaciel.pl/dostepne-kociaki",
+        item: `${SITE_URL}/dostepne-kociaki`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: "O nas",
-        item: "https://kociprzyjaciel.pl/o-nas",
+        item: `${SITE_URL}/o-nas`,
       },
       {
         "@type": "ListItem",
         position: 4,
         name: "Galeria",
-        item: "https://kociprzyjaciel.pl/galeria",
+        item: `${SITE_URL}/galeria`,
       },
       {
         "@type": "ListItem",
         position: 5,
         name: "Baza Wiedzy o Maine Coon",
-        item: "https://kociprzyjaciel.pl/baza-wiedzy",
+        item: `${SITE_URL}/baza-wiedzy`,
       },
       {
         "@type": "ListItem",
         position: 6,
         name: "Kontakt",
-        item: "https://kociprzyjaciel.pl/kontakt",
+        item: `${SITE_URL}/kontakt`,
       },
     ],
   };
@@ -155,7 +156,7 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Koci Przyjaciel *PL",
-    url: "https://kociprzyjaciel.pl",
+    url: SITE_URL,
     inLanguage: "pl",
     description: "Certyfikowana hodowla kotów Maine Coon we Wrocławiu — kocięta z badaniami, rodowód FIFe/FPL.",
     publisher: {
@@ -163,7 +164,7 @@ export default function StructuredData() {
       name: "Koci Przyjaciel *PL",
       logo: {
         "@type": "ImageObject",
-        url: "https://kociprzyjaciel.pl/logo.webp",
+        url: `${SITE_URL}/logo.webp`,
       },
     },
   };

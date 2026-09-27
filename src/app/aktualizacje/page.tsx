@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getFacebookFeed } from "@/lib/facebook";
 import UpdatesPageContent from "./UpdatesPageContent";
 
+import { SITE_URL } from "@/lib/siteConfig";
+
 export const revalidate = 1800; // Cache 30 minut (ISR)
 
 export const metadata: Metadata = {
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
     title: "Aktualności i Życie Hodowli | Koci Przyjaciel *PL",
     description:
       "Najświeższe relacje, posty i zdjęcia z życia kotów Maine Coon w hodowli Koci Przyjaciel *PL we Wrocławiu.",
-    url: "https://kociprzyjaciel.pl/aktualizacje",
+    url: `${SITE_URL}/aktualizacje`,
     siteName: "Koci Przyjaciel *PL",
     locale: "pl_PL",
     type: "website",
