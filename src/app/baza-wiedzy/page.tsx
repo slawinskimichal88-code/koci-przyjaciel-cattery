@@ -25,7 +25,21 @@ import {
   Sparkles,
   Layers,
   ChevronRight,
+  DollarSign,
+  ShoppingBag,
+  Users,
+  FileText,
 } from "lucide-react";
+
+const PILLAR_ARTICLES = [
+  { slug: "cena-maine-coon-z-rodowodem", icon: DollarSign, color: "text-violet-300", bg: "bg-violet-500/15 border-violet-500/25", label: "Cena Maine Coona z rodowodem", readTime: "8 min" },
+  { slug: "rodowod-fife-fpl-legalna-hodowla", icon: Award, color: "text-amber-300", bg: "bg-amber-500/15 border-amber-500/25", label: "Jak rozpoznać legalną hodowlę FIFe?", readTime: "10 min" },
+  { slug: "badania-hcm-pkd-sma-maine-coon", icon: HeartPulse, color: "text-rose-300", bg: "bg-rose-500/15 border-rose-500/25", label: "Badania HCM, PKD i SMA — przewodnik", readTime: "12 min" },
+  { slug: "wyprawka-dla-maine-coona", icon: ShoppingBag, color: "text-green-300", bg: "bg-green-500/15 border-green-500/25", label: "Kompletna wyprawka dla Maine Coona", readTime: "9 min" },
+  { slug: "maine-coon-dzieci-pies-socjalizacja", icon: Users, color: "text-sky-300", bg: "bg-sky-500/15 border-sky-500/25", label: "Maine Coon z dziećmi i psem", readTime: "8 min" },
+];
+
+
 
 type TabKey = "kalkulator" | "wzorzec" | "skala" | "zdrowie" | "rodowod" | "faq" | "all";
 
@@ -165,6 +179,51 @@ function KnowledgeBaseContent() {
             {TABS.find((t) => t.id === activeTab)?.desc[lang]}
           </div>
         </section>
+
+        {/* ── ARTYKUŁY EKSPERCKIE — Topical Authority ─────────────── */}
+          <section className="max-w-5xl mx-auto px-5 sm:px-8 mb-12">
+            <div className="flex items-center justify-between mb-5">
+              <div>
+                <p className="text-xs font-mono text-white/30 uppercase tracking-widest mb-1">5 Filarowych Artykułów SEO</p>
+                <h2 className="text-xl font-semibold text-white">Ekspercka baza wiedzy o Maine Coonie</h2>
+              </div>
+              <Link
+                href="/baza-wiedzy/artykuly"
+                className="hidden sm:flex items-center gap-1.5 text-xs font-mono text-white/40 hover:text-white/80 transition-colors"
+              >
+                Wszystkie artykuły <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {PILLAR_ARTICLES.map((article, i) => {
+                const Icon = article.icon;
+                return (
+                  <Link
+                    key={article.slug}
+                    href={`/baza-wiedzy/artykuly/${article.slug}`}
+                    className={`group flex items-center gap-3 p-4 rounded-2xl border ${article.bg} hover:scale-[1.02] transition-all duration-200`}
+                  >
+                    <div className={`shrink-0 w-9 h-9 rounded-xl border ${article.bg} flex items-center justify-center`}>
+                      <Icon className={`w-4 h-4 ${article.color}`} />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-medium text-white leading-snug group-hover:text-white transition-colors line-clamp-2">{article.label}</p>
+                      <p className="text-[10px] font-mono text-white/30 mt-0.5">{article.readTime} czytania</p>
+                    </div>
+                    <ChevronRight className="w-4 h-4 text-white/20 group-hover:text-white/50 shrink-0 transition-colors" />
+                  </Link>
+                );
+              })}
+              <Link
+                href="/baza-wiedzy/artykuly"
+                className="flex items-center justify-center gap-2 p-4 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.07] hover:border-white/20 transition-all text-sm text-white/50 hover:text-white"
+              >
+                <span>Zobacz wszystkie artykuły</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </section>
 
         {/* ── SEKCJE DEDYKOWANE WYBRANYM PODZAKŁADKOM ─────────────────── */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
