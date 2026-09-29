@@ -75,3 +75,13 @@ Koncepcja: Połączenie najwyższej próby estetyki Apple (iPhone 16 Pro / Visio
     - **Unifikacja Tła Podzakładek**: Działy wewnątrz Bazy Wiedzy (`BreedSection`, `HealthSection`, `PedigreeSection`, `FaqSection`) zostały przeniesione z jasnych teł `#FAF9F6`/`#FAFAF8` do spójnego, ciemnego stylu Apple Pro (`bg-black`, kafelki `#161617`, obramowania `border-white/[0.08]`, szlachetne akcenty złota i szmaragdu).
     - **Przyciski Telefoniczne i Rezerwacyjne**: Wywołanie natychmiastowego połączenia `tel:+48698837525` oraz bezpośrednie kierowanie akcji rezerwacji do firmowego Messengera hodowli (`https://m.me/1591521427751158`).
     - Wypchnięto do GitHub `origin/main`.
+14. **Wbudowany Mini-CMS pod adresem `/wariat`**:
+    - **Ścieżka panelu**: `/wariat` (oraz `/wariat/login`).
+    - **Dane uwierzytelniania**: login: `murzynek`, hasło: `AgaMroz12%!`.
+    - **Bezpieczeństwo**: Szyfrowana sesja HMAC w bezpiecznym ciasteczku `cms_session_token` (httpOnly, secure).
+    - **Funkcje CMS**:
+      1. Wskaźnik stanu banera (zielona pulsująca dioda / szara dioda).
+      2. Przełącznik jednym kliknięciem: `DOSTĘPNY (Baner ON)` / `Zarezerwowany (Baner OFF)` – natychmiast zapala lub wygasza pulsujący baner na stronie głównej i w podstronach.
+      3. Prosty formularz dodawania kota z uploadem zdjęć (do `/public/images/cats/`), wyborem płci, miotu, kodu EMS i opisem.
+      4. Edycja i usuwanie kotów z poziomu listy.
+      5. REST API: `/api/cms/auth`, `/api/cms/kittens`, `/api/cms/upload`.

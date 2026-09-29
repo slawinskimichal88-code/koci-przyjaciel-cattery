@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -20,17 +20,49 @@ import {
   Home,
   Users,
 } from "lucide-react";
+import KittenCard from "@/components/ui/KittenCard";
+import AvailableKittensBanner from "@/components/ui/AvailableKittensBanner";
+import { KittenSpec } from "@/data/availableKittensData";
 import { REAL_PHONE, REAL_PHONE_RAW, REAL_LOCATION, REAL_FACEBOOK_URL, REAL_MESSENGER_URL } from "@/data/realCatsData";
 
 export default function AvailableKittensPage() {
   const [lang, setLang] = useState<"PL" | "EN">("PL");
   const [isReservationOpen, setIsReservationOpen] = useState(false);
   const [reservationKitten, setReservationKitten] = useState("");
+  const [kittens, setKittens] = useState<KittenSpec[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Pobieranie na żywo kociąt z API
+  useEffect(() => {
+    let mounted = true;
+    const fetchKittens = async () => {
+      try {
+        const res = await fetch("/api/cms/kittens", { cache: "no-store" });
+        if (res.ok) {
+          const data = await res.json();
+          if (mounted && data.kittens) {
+            setKittens(data.kittens);
+          }
+        }
+      } catch (err) {
+        console.error("Błąd ładowania danych kociąt:", err);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    };
+
+    fetchKittens();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const handleOpenReservation = (kittenName?: string) => {
     setReservationKitten(kittenName || "");
     setIsReservationOpen(true);
   };
+
+  const isAnyAvailable = kittens.some((k) => k.status === "available");
 
   return (
     <div className="min-h-screen bg-black text-[#f5f5f7] selection:bg-[#2997ff] selection:text-white">
@@ -42,7 +74,9 @@ export default function AvailableKittensPage() {
         onOpenReservation={() => handleOpenReservation()}
       />
 
-      <main className="pt-28 sm:pt-36">
+      <main className="pt-16 sm:pt-20">
+        {/* Dynamiczny baner pojawiający się TYLKO gdy jest dostępny kot */}
+        <AvailableKittensBanner lang={lang} onOpenReservation={() => handleOpenReservation()} />
         
         {/* ── BANNER GŁÓWNY: Dostępne Kociaki ─────────────────────────── */}
         <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-10 text-center">
@@ -75,7 +109,52 @@ export default function AvailableKittensPage() {
           </p>
         </section>
 
-        {/* ── GŁÓWNA KARTA KOMUNIKATU: OBECNIE BRAK DOSTĘPNYCH MIOTÓW ──── */}
+        {/* ── GŁÓWNA SEKCJA: AKTUALNIE DOSTĘPNE KOCIAKI (KARTY Z EFEKTEM WOW) ── */}
+        <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-20">
+          
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 pb-4 border-b border-white/10">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-[0.25em] text-amber-400 font-bold block mb-1">
+                {lang === "PL" ? "STATUS HODOWLI · SEZON 2026" : "CATTERY STATUS · SEASON 2026"}
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-heading font-medium text-white tracking-tight">
+                {lang === "PL" ? "Dostępne Maluchy" : "Available Kittens"}
+              </h2>
+            </div>
+            <p className="text-xs font-mono text-zinc-400 max-w-sm sm:text-right">
+              {lang === "PL"
+                ? "Każdy kociak opuszcza hodowlę z rodowodem FIFe, mikrochipem, pakietem badań i wyprawką."
+                : "All kittens leave with full FIFe pedigree, microchip and genetic tests."}
+            </p>
+          </div>
+
+          {/* Siatka kart dostępnych kociąt (tylko koty oznaczone jako dostępne) */}
+          {isLoading ? (
+            <div className="p-12 text-center text-neutral-500 font-mono text-xs">
+              Ładowanie aktualnej oferty kociąt...
+            </div>
+          ) : kittens.filter((k) => k.status === "available").length === 0 ? (
+            <div className="p-12 text-center rounded-2xl bg-white/[0.02] border border-white/10 text-neutral-400">
+              Obecnie brak wystawionych kociąt do bezpośredniej rezerwacji. Zapraszamy do zapisu na listę oczekujących poniżej!
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10">
+              {kittens
+                .filter((k) => k.status === "available")
+                .map((kitten) => (
+                  <KittenCard
+                    key={kitten.id}
+                    kitten={kitten}
+                    lang={lang}
+                    onReserve={(name) => handleOpenReservation(name)}
+                  />
+                ))}
+            </div>
+          )}
+
+        </section>
+
+        {/* ── GŁÓWNA KARTA KOMUNIKATU O ZAPISACH NA PRZYSZŁE MIOTY ──── */}
         <section className="max-w-5xl mx-auto px-6 sm:px-10 mb-16 sm:mb-20">
           <div className="relative rounded-3xl p-8 sm:p-12 bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.7)] overflow-hidden">
             
@@ -89,24 +168,24 @@ export default function AvailableKittensPage() {
               <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-black/60 border border-white/15 text-zinc-300 text-xs font-mono mb-6 shadow-inner">
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
                 <span className="tracking-wider uppercase font-semibold text-amber-200">
-                  {lang === "PL" ? "Aktualizacja Statusu Adopcji · 2026" : "Adoption Status Update · 2026"}
+                  {lang === "PL" ? "Planowane Kolejne Mioty · 2026" : "Upcoming Next Litters · 2026"}
                 </span>
               </div>
 
-              {/* Kluczowy nagłówek zgodnie z wymogiem użytkownika */}
+              {/* Nagłówek planowanych skojarzeń */}
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-medium text-white mb-6 tracking-tight">
                 {lang === "PL" ? (
-                  <>Obecnie <span className="italic text-amber-300">brak dostępnych miotów</span> do adopcji.</>
+                  <>Planowane <span className="italic text-amber-300">kolejne skojarzenia</span> i zapisy.</>
                 ) : (
-                  <>Currently <span className="italic text-amber-300">no litters available</span> for adoption.</>
+                  <>Planned <span className="italic text-amber-300">upcoming litters</span> and waitlist.</>
                 )}
               </h2>
 
               {/* Wyjaśnienie */}
               <p className="text-base sm:text-lg text-zinc-300 font-body font-light leading-relaxed mb-8">
                 {lang === "PL"
-                  ? "Wszystkie maluszki z naszych ostatnich miotów mieszkają już ze swoimi wspaniałymi rodzinami w nowych domach. Dbając o najwyższe standardy dobrostanu, odpoczynek i zdrowie naszych kotek, nie prowadzimy masowej hodowli — każdy miot jest starannie planowany."
-                  : "All kittens from our recent litters have found loving forever homes. We prioritize the health and wellbeing of our queens over quantity. Upcoming litters are planned with the utmost care."}
+                  ? "Dbając o najwyższe standardy dobrostanu, odpoczynek i zdrowie naszych kotek, nie prowadzimy masowej hodowli — każdy miot jest starannie planowany. Osoby zapisane na listę oczekujących otrzymują pierwszeństwo wyboru malucha przed publiczną publikacją."
+                  : "We prioritize the health and wellbeing of our queens over quantity. Upcoming litters are planned with the utmost care. Waitlist families receive early reservation priority."}
               </p>
 
               {/* Przyciski akcji: Zapis na listę oczekujących na Facebooku + telefon */}
@@ -141,55 +220,6 @@ export default function AvailableKittensPage() {
                 </span>
               </div>
 
-            </div>
-
-          </div>
-        </section>
-
-        {/* ── 3 FILARY NASZYCH PRZYSZŁYCH MIOTÓW ──────────────────────── */}
-        <section className="max-w-6xl mx-auto px-6 sm:px-10 mb-16 sm:mb-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div className="p-7 rounded-2xl bg-white/[0.03] border border-white/10 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-heading font-medium text-white">
-                {lang === "PL" ? "100% Certyfikowane Zdrowie" : "100% Certified Health"}
-              </h3>
-              <p className="text-sm text-zinc-400 font-body leading-relaxed font-light">
-                {lang === "PL"
-                  ? "Rodzice wszystkich naszych miotów posiadają komplet badań: echo serca Doppler (HCM), testy DNA PKD, SMA oraz ujemne FIV i FeLV. Badania do wglądu na miejscu."
-                  : "All breeding parents have certified Doppler heart echoes (HCM) and DNA tests for PKD and SMA (N/N)."}
-              </p>
-            </div>
-
-            <div className="p-7 rounded-2xl bg-white/[0.03] border border-white/10 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400">
-                <Heart className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-heading font-medium text-white">
-                {lang === "PL" ? "Wychowanie w Sercu Domu" : "Raised at Home"}
-              </h3>
-              <p className="text-sm text-zinc-400 font-body leading-relaxed font-light">
-                {lang === "PL"
-                  ? "Zero klatek czy izolowanych pomieszczeń. Maluszki dorastają w naszym salonie, przy dzieciach i psie, dzięki czemu są niezwykle ufne i otwarte na ludzi."
-                  : "Zero cages. Raised in our living room around children and a friendly dog for perfect early socialization."}
-              </p>
-            </div>
-
-            <div className="p-7 rounded-2xl bg-white/[0.03] border border-white/10 shadow-sm space-y-3">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
-                <CheckCircle2 className="w-5 h-5" />
-              </div>
-              <h3 className="text-lg font-heading font-medium text-white">
-                {lang === "PL" ? "Rodowód FIFe & Wyprawka" : "Pedigree & Starter Kit"}
-              </h3>
-              <p className="text-sm text-zinc-400 font-body leading-relaxed font-light">
-                {lang === "PL"
-                  ? "Każdy kociak otrzymuje 5-pokoleniowy rodowód FIFe/FPL uznawany na całym świecie, mikrochip Safe-Animal, komplet szczepień, odrobaczeń oraz bogatą wyprawkę."
-                  : "Every kitten comes with a genuine 5-generation FIFe pedigree, microchip, passport, and full starter package."}
-              </p>
             </div>
 
           </div>

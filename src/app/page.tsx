@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import Navbar from "@/components/layout/Navbar";
 import HeroSection from "@/components/sections/HeroSection";
+import AvailableKittensBanner from "@/components/ui/AvailableKittensBanner";
 import { REAL_MESSENGER_URL } from "@/data/realCatsData";
 
 const BreederSection = dynamic(() => import("@/components/sections/BreederSection"), {
@@ -56,6 +57,11 @@ export default function Home() {
         setLang={setLang}
         onOpenReservation={() => handleOpenReservation()}
       />
+
+      {/* Dynamiczny baner dostępnych kotków (pojawia się tylko gdy jest dostępny kot) */}
+      <div className="pt-14 sm:pt-16">
+        <AvailableKittensBanner lang={lang} onOpenReservation={() => handleOpenReservation()} />
+      </div>
 
       {/* Główna sekwencja narracyjna strony głównej */}
       <main className="relative z-10">
